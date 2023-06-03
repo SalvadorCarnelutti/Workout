@@ -14,8 +14,12 @@ protocol WorkoutsViewToPresenterProtocol: UIViewController {
     func viewLoaded()
 }
 
+protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {
+    func onPersistentContainerLoadSuccess()
+    func onPersistentContainerLoadFailure(error: Error) -> ()
+}
+
 final class WorkoutsPresenter: BaseViewController {
-    private var persistentContainer = NSPersistentContainer(name: "Workout")
     var viewWorkouts: WorkoutsPresenterToViewProtocol!
     var interactor: WorkoutsPresenterToInteractorProtocol!
     var router: WorkoutsPresenterToRouterProtocol!
@@ -27,17 +31,7 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkouts
-        persistentContainer.loadPersistentStores { [weak self] (persistentStoreDescription, error) in
-            guard let self = self else { return }
-            if let error = error {
-                print("Unable to Add Persistent Store")
-                print("\(error), \(error.localizedDescription)")
-            } else {
-                print(self.persistentContainer.viewContext)
-                self.viewWorkouts.loadView()
-                self.setupNavigationBar()
-            }
-        }
+
     }
     
     private func setupNavigationBar() {
@@ -45,17 +39,30 @@ final class WorkoutsPresenter: BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
                                                             image: UIImage.add,
                                                             target: self,
-                                                            action: #selector(newWorkoutTapped))
+                                                            action: #selector(addWorkoutTapped))
     }
     
-    @objc private func newWorkoutTapped() {
-//        router.pushWorkoutScreen()
+    @objc private func addWorkoutTapped() {
+        router.pushAddWorkout()
     }
 }
 
 // MARK: - ViewToPresenterProtocol
 extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
     func viewLoaded() {}
+}
+
+extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
+    
+    func onPersistentContainerLoadSuccess() {
+        self.viewWorkouts.loadView()
+        self.setupNavigationBar()
+    }
+    
+    func onPersistentContainerLoadFailure(error: Error) {
+        print("Unable to Add Persistent Store")
+        print("\(error), \(error.localizedDescription)")
+    }
 }
 
 class BaseViewController: UIViewController, BaseViewProtocol {
