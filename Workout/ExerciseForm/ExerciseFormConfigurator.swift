@@ -7,6 +7,7 @@
 //
 //
 import Foundation
+import CoreData
 
 final class ExerciseFormConfigurator {
     static func injectDependencies(view: ExerciseFormPresenterToViewProtocol,
@@ -23,7 +24,7 @@ final class ExerciseFormConfigurator {
         presenter.router = router
     }
     
-    static func resolve() -> ExerciseFormPresenter {
+    static func resolveAdd() -> ExerciseFormPresenter {
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()
         let interactor = ExerciseFormInteractor()
@@ -36,4 +37,19 @@ final class ExerciseFormConfigurator {
 
         return presenter
     }
+    
+    static func resolveEdit(for exercise: Exercise) -> ExerciseFormPresenter {
+        let presenter = ExerciseFormPresenter()
+        let view = ExerciseFormView()
+        let interactor = ExerciseFormInteractor()
+        let router = ExerciseFormRouter()
+
+        Self.injectDependencies(view: view,
+                                interactor: interactor,
+                                presenter: presenter,
+                                router: router)
+
+        return presenter
+    }
+
 }

@@ -12,7 +12,12 @@ import CoreData
 
 protocol AddWorkoutViewToPresenterProtocol: UIViewController {
     var managedObjectContext: NSManagedObjectContext { get }
+    var exercisesCount: Int { get }
     func viewLoaded()
+    func exerciseAt(_ index: Int) -> Exercise
+    func didSelectRowAt(_ index: Int)
+    func deleteExerciseAt(_ index: Int)
+    func moveExerciseAt(from: Int, to: Int)
 }
 
 final class AddWorkoutPresenter: BaseViewController {
@@ -36,7 +41,7 @@ final class AddWorkoutPresenter: BaseViewController {
     }
     
     @objc private func addExerciseTapped() {
-        router.presentExerciseForm()
+        router.presentAddExerciseForm()
     }
 }
 
@@ -46,92 +51,25 @@ extension AddWorkoutPresenter: AddWorkoutViewToPresenterProtocol {
         interactor.managedObjectContext
     }
     
+    var exercisesCount: Int {
+        interactor.exercisesCount
+    }
+    
     func viewLoaded() {}
-}
-
-final class ExerciseTableViewCell: UITableViewCell {
-    private lazy var stackView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [nameLabel, durationLabel, repsLabel, setsLabel])
-        addSubview(stackView)
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        return stackView
-    }()
     
-    private lazy var nameLabel: UILabel = {
-        let label = MultilineLabel()
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        return label
-    }()
-    
-    private lazy var durationLabel: UILabel = {
-        let label = MultilineLabel()
-        label.font = .systemFont(ofSize: 18)
-        return label
-    }()
-    
-    private lazy var repsLabel: UILabel = {
-        let label = MultilineLabel()
-        label.font = .systemFont(ofSize: 18)
-        return label
-    }()
-    
-    private lazy var setsLabel: UILabel = {
-        let label = MultilineLabel()
-        label.font = .systemFont(ofSize: 18)
-        return label
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupConstrains()
+    func didSelectRowAt(_ index: Int) {
+        router.presentEditExerciseForm(for: interactor.exerciseAt(index))
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func exerciseAt(_ index: Int) -> Exercise {
+        interactor.exerciseAt(index)
     }
     
-    private func setupConstrains() {
-        stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(20)
-        }
+    func deleteExerciseAt(_ index: Int) {
+        interactor.deleteExerciseAt(index)
     }
     
-    func configure(with exercise: Exercise) {
-        nameLabel.text = exercise.name
-        durationLabel.text = "• Duration: \(exercise.durationString) min"
-        repsLabel.text = "• Reps: \(exercise.repsString)"
-        setsLabel.text = "• Sets: \(exercise.setsString)"
-    }
-}
-
-extension Exercise {
-    var durationString: String {
-        String(format: "%.0f", duration)
-    }
-    
-    var repsString: String {
-        String(reps)
-    }
-    
-    var setsString: String {
-        String(sets)
-    }
-}
-
-final class MultilineLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        lineBreakMode = .byWordWrapping
-        numberOfLines = 0
+    func moveExerciseAt(from: Int, to: Int) {
+        interactor.moveExerciseAt(from: from, to: to)
     }
 }
