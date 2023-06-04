@@ -31,7 +31,7 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkouts
-
+        interactor.loadPersistentContainer()
     }
     
     private func setupNavigationBar() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		707134253627F437401FF28D /* Pods_Workout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 807C4706EE7DB0999C080974 /* Pods_Workout.framework */; };
 		B48B86CE2A2A5D48007638C0 /* WorkoutsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */; };
 		B48B86CF2A2A5D48007638C0 /* WorkoutsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */; };
 		B48B86D02A2A5D48007638C0 /* WorkoutsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */; };
@@ -20,6 +21,12 @@
 		B48B86E32A2BEDDF007638C0 /* AddWorkoutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86DE2A2BEDDF007638C0 /* AddWorkoutInteractor.swift */; };
 		B48B86E42A2BEDDF007638C0 /* AddWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86DF2A2BEDDF007638C0 /* AddWorkoutView.swift */; };
 		B48B86E52A2BEDDF007638C0 /* AddWorkoutConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86E02A2BEDDF007638C0 /* AddWorkoutConfigurator.swift */; };
+		B48B86EC2A2BF63D007638C0 /* ExerciseFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86E72A2BF63D007638C0 /* ExerciseFormPresenter.swift */; };
+		B48B86ED2A2BF63D007638C0 /* ExerciseFormRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86E82A2BF63D007638C0 /* ExerciseFormRouter.swift */; };
+		B48B86EE2A2BF63D007638C0 /* ExerciseFormInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86E92A2BF63D007638C0 /* ExerciseFormInteractor.swift */; };
+		B48B86EF2A2BF63D007638C0 /* ExerciseFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86EA2A2BF63D007638C0 /* ExerciseFormView.swift */; };
+		B48B86F02A2BF63D007638C0 /* ExerciseFormConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86EB2A2BF63D007638C0 /* ExerciseFormConfigurator.swift */; };
+		B48B86F32A2BF77E007638C0 /* ValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86F22A2BF77E007638C0 /* ValidatedTextField.swift */; };
 		B4B10AC82A2127BF00017AA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10AC72A2127BF00017AA3 /* AppDelegate.swift */; };
 		B4B10ACA2A2127BF00017AA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10AC92A2127BF00017AA3 /* SceneDelegate.swift */; };
 		B4B10AD12A2127BF00017AA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B10AD02A2127BF00017AA3 /* Assets.xcassets */; };
@@ -28,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		76DF92F52EB8EB3C3BDAD51C /* Pods-Workout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.debug.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.debug.xcconfig"; sourceTree = "<group>"; };
+		807C4706EE7DB0999C080974 /* Pods_Workout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsPresenter.swift; sourceTree = "<group>"; };
 		B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsRouter.swift; sourceTree = "<group>"; };
 		B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsInteractor.swift; sourceTree = "<group>"; };
@@ -41,6 +50,12 @@
 		B48B86DE2A2BEDDF007638C0 /* AddWorkoutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutInteractor.swift; sourceTree = "<group>"; };
 		B48B86DF2A2BEDDF007638C0 /* AddWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutView.swift; sourceTree = "<group>"; };
 		B48B86E02A2BEDDF007638C0 /* AddWorkoutConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutConfigurator.swift; sourceTree = "<group>"; };
+		B48B86E72A2BF63D007638C0 /* ExerciseFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormPresenter.swift; sourceTree = "<group>"; };
+		B48B86E82A2BF63D007638C0 /* ExerciseFormRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormRouter.swift; sourceTree = "<group>"; };
+		B48B86E92A2BF63D007638C0 /* ExerciseFormInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormInteractor.swift; sourceTree = "<group>"; };
+		B48B86EA2A2BF63D007638C0 /* ExerciseFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormView.swift; sourceTree = "<group>"; };
+		B48B86EB2A2BF63D007638C0 /* ExerciseFormConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormConfigurator.swift; sourceTree = "<group>"; };
+		B48B86F22A2BF77E007638C0 /* ValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedTextField.swift; sourceTree = "<group>"; };
 		B4B10AC42A2127BF00017AA3 /* Workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B10AC72A2127BF00017AA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B10AC92A2127BF00017AA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +63,7 @@
 		B4B10AD32A2127BF00017AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B10AD52A2127BF00017AA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4B10ADC2A212C1700017AA3 /* Workout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Workout.xcdatamodel; sourceTree = "<group>"; };
+		EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.release.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,15 +71,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				707134253627F437401FF28D /* Pods_Workout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		291B192AA11355DE84B0D787 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				807C4706EE7DB0999C080974 /* Pods_Workout.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B48B86F12A2BF76F007638C0 /* Components */,
 				B48B86D42A2A6B5A007638C0 /* Extensions */,
 			);
 			path = Utilities;
@@ -91,11 +117,33 @@
 			path = AddWorkout;
 			sourceTree = "<group>";
 		};
+		B48B86E62A2BF628007638C0 /* ExerciseForm */ = {
+			isa = PBXGroup;
+			children = (
+				B48B86E72A2BF63D007638C0 /* ExerciseFormPresenter.swift */,
+				B48B86E82A2BF63D007638C0 /* ExerciseFormRouter.swift */,
+				B48B86E92A2BF63D007638C0 /* ExerciseFormInteractor.swift */,
+				B48B86EA2A2BF63D007638C0 /* ExerciseFormView.swift */,
+				B48B86EB2A2BF63D007638C0 /* ExerciseFormConfigurator.swift */,
+			);
+			path = ExerciseForm;
+			sourceTree = "<group>";
+		};
+		B48B86F12A2BF76F007638C0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B48B86F22A2BF77E007638C0 /* ValidatedTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		B4B10ABB2A2127BF00017AA3 = {
 			isa = PBXGroup;
 			children = (
 				B4B10AC62A2127BF00017AA3 /* Workout */,
 				B4B10AC52A2127BF00017AA3 /* Products */,
+				EA77C3472D87BA35CD6BA8ED /* Pods */,
+				291B192AA11355DE84B0D787 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +158,7 @@
 		B4B10AC62A2127BF00017AA3 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
+				B48B86E62A2BF628007638C0 /* ExerciseForm */,
 				B48B86DB2A2BED8D007638C0 /* AddWorkout */,
 				B48B86D32A2A6B53007638C0 /* Utilities */,
 				B4B10ADE2A279DB700017AA3 /* Home */,
@@ -135,6 +184,16 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		EA77C3472D87BA35CD6BA8ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				76DF92F52EB8EB3C3BDAD51C /* Pods-Workout.debug.xcconfig */,
+				EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -142,9 +201,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4B10AD82A2127BF00017AA3 /* Build configuration list for PBXNativeTarget "Workout" */;
 			buildPhases = (
+				20C578982756E0E1D682A888 /* [CP] Check Pods Manifest.lock */,
 				B4B10AC02A2127BF00017AA3 /* Sources */,
 				B4B10AC12A2127BF00017AA3 /* Frameworks */,
 				B4B10AC22A2127BF00017AA3 /* Resources */,
+				BC92471FE3EFF7377D2B9CF2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,6 +261,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		20C578982756E0E1D682A888 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Workout-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC92471FE3EFF7377D2B9CF2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workout/Pods-Workout-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workout/Pods-Workout-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Workout/Pods-Workout-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B4B10AC02A2127BF00017AA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -209,15 +312,21 @@
 				B48B86E42A2BEDDF007638C0 /* AddWorkoutView.swift in Sources */,
 				B48B86D02A2A5D48007638C0 /* WorkoutsInteractor.swift in Sources */,
 				B48B86DA2A2A6E17007638C0 /* UIImage.swift in Sources */,
+				B48B86F02A2BF63D007638C0 /* ExerciseFormConfigurator.swift in Sources */,
 				B48B86CF2A2A5D48007638C0 /* WorkoutsRouter.swift in Sources */,
 				B4B10AC82A2127BF00017AA3 /* AppDelegate.swift in Sources */,
 				B48B86E22A2BEDDF007638C0 /* AddWorkoutRouter.swift in Sources */,
+				B48B86EC2A2BF63D007638C0 /* ExerciseFormPresenter.swift in Sources */,
+				B48B86ED2A2BF63D007638C0 /* ExerciseFormRouter.swift in Sources */,
 				B48B86CE2A2A5D48007638C0 /* WorkoutsPresenter.swift in Sources */,
 				B4B10ACA2A2127BF00017AA3 /* SceneDelegate.swift in Sources */,
 				B48B86D82A2A6C03007638C0 /* UITableViewCell.swift in Sources */,
+				B48B86EF2A2BF63D007638C0 /* ExerciseFormView.swift in Sources */,
 				B48B86D62A2A6B67007638C0 /* UITableView.swift in Sources */,
+				B48B86EE2A2BF63D007638C0 /* ExerciseFormInteractor.swift in Sources */,
 				B48B86E32A2BEDDF007638C0 /* AddWorkoutInteractor.swift in Sources */,
 				B48B86D12A2A5D48007638C0 /* WorkoutsView.swift in Sources */,
+				B48B86F32A2BF77E007638C0 /* ValidatedTextField.swift in Sources */,
 				B48B86D22A2A5D48007638C0 /* WorkoutsConfigurator.swift in Sources */,
 				B48B86E52A2BEDDF007638C0 /* AddWorkoutConfigurator.swift in Sources */,
 				B4B10ADD2A212C1700017AA3 /* Workout.xcdatamodeld in Sources */,
@@ -354,6 +463,7 @@
 		};
 		B4B10AD92A2127BF00017AA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76DF92F52EB8EB3C3BDAD51C /* Pods-Workout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -382,6 +492,7 @@
 		};
 		B4B10ADA2A2127BF00017AA3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

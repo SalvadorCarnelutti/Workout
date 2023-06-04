@@ -6,7 +6,7 @@
 //  Created by Salvador on 6/3/23.
 //
 //
-import Foundation
+import CoreData
 
 final class AddWorkoutConfigurator {
     static func injectDependencies(view: AddWorkoutPresenterToViewProtocol,
@@ -23,10 +23,10 @@ final class AddWorkoutConfigurator {
         presenter.router = router
     }
     
-    static func resolve() -> AddWorkoutPresenter {
+    static func resolve(persistentContainer: NSPersistentContainer) -> AddWorkoutPresenter {
         let presenter = AddWorkoutPresenter()
         let view = AddWorkoutView()
-        let interactor = AddWorkoutInteractor()
+        let interactor = AddWorkoutInteractor(persistentContainer: persistentContainer)
         let router = AddWorkoutRouter()
 
         Self.injectDependencies(view: view,

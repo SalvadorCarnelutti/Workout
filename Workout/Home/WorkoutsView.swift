@@ -19,22 +19,20 @@ final class WorkoutsView: UIView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self)
+//        tableView.register(UITableViewCell.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
     
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            tableView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 8),
-            tableView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-        ])
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(8)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
+            make.bottom.equalTo(safeAreaLayoutGuide)
+        }
     }
 }
 

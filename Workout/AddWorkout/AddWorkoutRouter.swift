@@ -19,7 +19,7 @@ final class AddWorkoutRouter: AddWorkoutPresenterToRouterProtocol {
     weak var viewController: UIViewController?
     
     func presentExerciseForm() {
-        let vc = UIViewController()
+        let vc = ExerciseFormConfigurator.resolve()
         vc.modalPresentationStyle = .popover
         viewController?.present(vc, animated: true)
     }

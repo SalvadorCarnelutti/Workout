@@ -7,6 +7,7 @@
 //
 ////
 import UIKit
+import CoreData
 
 protocol WorkoutsPresenterToRouterProtocol: AnyObject {
     var viewController: UIViewController? { get set }
@@ -19,6 +20,6 @@ final class WorkoutsRouter: WorkoutsPresenterToRouterProtocol {
     weak var viewController: UIViewController?
     
     func pushAddWorkout() {
-        viewController?.navigationController?.pushViewController(AddWorkoutConfigurator.resolve(), animated: true)
+        viewController?.navigationController?.pushViewController(AddWorkoutConfigurator.resolve(persistentContainer: NSPersistentContainer(name: "Workout")), animated: true)
     }
 }

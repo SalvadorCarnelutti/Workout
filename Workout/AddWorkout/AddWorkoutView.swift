@@ -19,22 +19,20 @@ final class AddWorkoutView: UIView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self)
+        tableView.register(ExerciseTableViewCell.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
     
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            tableView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 8),
-            tableView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-        ])
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(8)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
+            make.bottom.equalTo(safeAreaLayoutGuide)
+        }
     }
 }
 
@@ -49,10 +47,22 @@ extension AddWorkoutView: AddWorkoutPresenterToViewProtocol {
 
 extension AddWorkoutView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseTableViewCell.identifier, for: indexPath) as? ExerciseTableViewCell,
+        let presenter = presenter else {
+            ExerciseTableViewCell.assertCellFailure()
+            return UITableViewCell()
+        }
+        
+        let ex = Exercise(context: presenter.managedObjectContext)
+        ex.name = "Dumbbell curls"
+        ex.duration = 20
+        ex.sets = 4
+        ex.reps = 16
+        cell.configure(with: ex)
+        return cell
     }
 }
