@@ -119,6 +119,15 @@ final class ExerciseFormView: UIView {
                       durationTextField,
                       setsTextField,
                       repsTextField]
+        
+        fillTextfieldsIfneeded(formInput: presenter.formInput)
+    }
+    
+    private func fillTextfieldsIfneeded(formInput: FormInput?) {
+        nameTextField.text = formInput?.name
+        durationTextField.text = formInput?.duration
+        setsTextField.text = formInput?.sets
+        repsTextField.text = formInput?.reps
     }
     
     @objc private func textDidChange(_ notification: Notification) {

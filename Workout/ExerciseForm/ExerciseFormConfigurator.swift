@@ -25,9 +25,11 @@ final class ExerciseFormConfigurator {
     }
     
     static func resolveAdd(completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
+        let formModel = FormModel(formInput: nil, formStyle: .add, completionAction: { _ in })
+        
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()
-        let interactor = ExerciseFormInteractor(formStyle: .add, completionAction: completionAction)
+        let interactor = ExerciseFormInteractor(formModel: formModel)
         let router = ExerciseFormRouter()
 
         Self.injectDependencies(view: view,
@@ -39,9 +41,11 @@ final class ExerciseFormConfigurator {
     }
     
     static func resolveEdit(for exercise: Exercise, completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
+        let formModel = FormModel(formInput: FormInput(exercise: exercise), formStyle: .edit, completionAction: { _ in })
+        
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()
-        let interactor = ExerciseFormInteractor(formStyle: .edit, completionAction: completionAction)
+        let interactor = ExerciseFormInteractor(formModel: formModel)
         let router = ExerciseFormRouter()
 
         Self.injectDependencies(view: view,

@@ -10,6 +10,7 @@
 		707134253627F437401FF28D /* Pods_Workout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 807C4706EE7DB0999C080974 /* Pods_Workout.framework */; };
 		B410BFCE2A2D994500899BBC /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCD2A2D994500899BBC /* StyledButton.swift */; };
 		B410BFD02A2E4EB200899BBC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCF2A2E4EB200899BBC /* String.swift */; };
+		B410BFD32A2E8EDF00899BBC /* FormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFD22A2E8EDF00899BBC /* FormModels.swift */; };
 		B48B86CE2A2A5D48007638C0 /* WorkoutsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */; };
 		B48B86CF2A2A5D48007638C0 /* WorkoutsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */; };
 		B48B86D02A2A5D48007638C0 /* WorkoutsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */; };
@@ -44,6 +45,7 @@
 		807C4706EE7DB0999C080974 /* Pods_Workout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B410BFCD2A2D994500899BBC /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		B410BFCF2A2E4EB200899BBC /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		B410BFD22A2E8EDF00899BBC /* FormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormModels.swift; sourceTree = "<group>"; };
 		B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsPresenter.swift; sourceTree = "<group>"; };
 		B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsRouter.swift; sourceTree = "<group>"; };
 		B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsInteractor.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B410BFD12A2E8EC300899BBC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B410BFD22A2E8EDF00899BBC /* FormModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +143,7 @@
 		B48B86E62A2BF628007638C0 /* ExerciseForm */ = {
 			isa = PBXGroup;
 			children = (
+				B410BFD12A2E8EC300899BBC /* Models */,
 				B48B86E72A2BF63D007638C0 /* ExerciseFormPresenter.swift */,
 				B48B86E82A2BF63D007638C0 /* ExerciseFormRouter.swift */,
 				B48B86E92A2BF63D007638C0 /* ExerciseFormInteractor.swift */,
@@ -341,6 +352,7 @@
 				B48B86E12A2BEDDF007638C0 /* AddWorkoutPresenter.swift in Sources */,
 				B48B86E42A2BEDDF007638C0 /* AddWorkoutView.swift in Sources */,
 				B48B86D02A2A5D48007638C0 /* WorkoutsInteractor.swift in Sources */,
+				B410BFD32A2E8EDF00899BBC /* FormModels.swift in Sources */,
 				B48B86DA2A2A6E17007638C0 /* UIImage.swift in Sources */,
 				B410BFD02A2E4EB200899BBC /* String.swift in Sources */,
 				B48B86F02A2BF63D007638C0 /* ExerciseFormConfigurator.swift in Sources */,
