@@ -15,4 +15,13 @@ protocol ExerciseFormPresenterToInteractorProtocol: AnyObject {
 // MARK: - PresenterToInteractorProtocol
 final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
+    
+    static func nameValidationBlock(text: String?) -> Bool {
+        return text?.isNotEmpty ?? false
+    }
+    
+    static func durationValidationBlock(text: String?) -> Bool {
+        guard let text = text, let count = Int(text) else { return false }
+        return count > 0
+    }
 }

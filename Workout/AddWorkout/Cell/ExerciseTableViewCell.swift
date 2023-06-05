@@ -8,11 +8,9 @@
 import UIKit
 
 final class ExerciseTableViewCell: UITableViewCell {
-    private lazy var stackView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [nameLabel, durationLabel, repsLabel, setsLabel])
+    private lazy var stackView: VerticalStack = {
+       let stackView = VerticalStack(arrangedSubviews: [nameLabel, durationLabel, setsLabel, repsLabel])
         addSubview(stackView)
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -59,7 +57,28 @@ final class ExerciseTableViewCell: UITableViewCell {
     func configure(with exercise: Exercise) {
         nameLabel.text = exercise.name
         durationLabel.text = "• Duration: \(exercise.durationString) min"
-        repsLabel.text = "• Reps: \(exercise.repsString)"
-        setsLabel.text = "• Sets: \(exercise.setsString)"
+        setsLabel.text = "• Set count: \(exercise.setsString)"
+        repsLabel.text = "• Rep count: \(exercise.repsString)"
+    }
+}
+
+final class VerticalStack: UIStackView {
+    // MARK: - Initialization
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        // Set stack view properties as needed
+        axis = .vertical
+        spacing = 10
+        alignment = .fill
+        distribution = .fillEqually
     }
 }

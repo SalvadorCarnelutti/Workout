@@ -17,14 +17,18 @@ protocol ExerciseFormPresenterToViewProtocol: UIView {
 final class ExerciseFormView: UIView {
     // MARK: - Properties
     weak var presenter: ExerciseFormViewToPresenterProtocol?
+    private var textFields = [ValidatedTextField]()
+    
+    private lazy var stackView: VerticalStack = {
+       let stackView = VerticalStack(arrangedSubviews: textFields)
+        addSubview(stackView)
+        return stackView
+    }()
     
     private lazy var headerLabel: UILabel = {
-        let label = UILabel()
+        let label = MultilineLabel()
         addSubview(label)
         label.text = "Add exercise to current workout"
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        
         label.font = .systemFont(ofSize: 20, weight: .heavy)
         return label
     }()
@@ -32,18 +36,43 @@ final class ExerciseFormView: UIView {
     private lazy var exerciseNameTextField: ValidatedTextField = {
         let textField = ValidatedTextField()
         addSubview(textField)
-        textField.placeholder = "Exercise name"
+        textField.placeholder = "Name"
         textField.errorMessage = "Name can't be empty"
-        textField.validationBlock = { text in
-            return !text!.isEmpty
-        }
+        textField.validationBlock = ExerciseFormInteractor.nameValidationBlock
         return textField
     }()
     
-    private lazy var addButton: StyledButton = {
+    private lazy var exerciseDurationTextField: ValidatedTextField = {
+        let textField = ValidatedTextField()
+        addSubview(textField)
+        textField.placeholder = "Duration"
+        textField.errorMessage = "Must be greater than zero"
+        textField.validationBlock = ExerciseFormInteractor.durationValidationBlock
+        return textField
+    }()
+    
+    private lazy var exerciseSetsTextField: ValidatedTextField = {
+        let textField = ValidatedTextField()
+        addSubview(textField)
+        textField.placeholder = "Set count"
+        textField.errorMessage = "Must be greater than zero"
+        textField.validationBlock = ExerciseFormInteractor.durationValidationBlock
+        return textField
+    }()
+    
+    private lazy var exerciseRepsTextField: ValidatedTextField = {
+        let textField = ValidatedTextField()
+        addSubview(textField)
+        textField.placeholder = "Rep count"
+        textField.errorMessage = "Must be greater than zero"
+        textField.validationBlock = ExerciseFormInteractor.durationValidationBlock
+        return textField
+    }()
+    
+    private lazy var completionButton: StyledButton = {
         let button = StyledButton(type: .system)
-        button.backgroundColor = .systemBlue
         addSubview(button)
+        button.isEnabled = false
         button.setTitle("Add", for: .normal)
         return button
     }()
@@ -54,16 +83,32 @@ final class ExerciseFormView: UIView {
             make.horizontalEdges.equalToSuperview().offset(20)
         }
         
-        exerciseNameTextField.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { make in
             make.top.equalTo(headerLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
         
-        addButton.snp.makeConstraints { make in
-            make.top.equalTo(exerciseNameTextField.snp.bottom).offset(20)
+        completionButton.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
         }
+    }
+    
+    private func setupTextFields() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(textDidChange(_:)),
+                                               name: UITextField.textDidChangeNotification,
+                                               object: nil)
+        
+        textFields = [exerciseNameTextField,
+                      exerciseDurationTextField,
+                      exerciseSetsTextField,
+                      exerciseRepsTextField]
+    }
+    
+    @objc private func textDidChange(_ notification: Notification) {
+        completionButton.isEnabled = textFields.map { $0.isValid }.allSatisfy { $0 }
     }
 }
 
@@ -71,42 +116,8 @@ final class ExerciseFormView: UIView {
 extension ExerciseFormView: ExerciseFormPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
+        setupTextFields()
         setupConstraints()
         presenter?.viewLoaded()
-    }
-}
-
-import UIKit
-
-class StyledButton: UIButton {
-    // MARK: - Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-
-    private func commonInit() {
-        setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        layer.cornerRadius = 8
-        clipsToBounds = true
-    }
-    
-    // MARK: - Intrinsic Content Size
-    override var intrinsicContentSize: CGSize {
-        let titleSize = titleLabel?.intrinsicContentSize ?? CGSize.zero
-        let width = titleSize.width + safeAreaInsets.left + safeAreaInsets.right
-        let height = bounds.height
-        return CGSize(width: width + 50, height: height)
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        invalidateIntrinsicContentSize()
     }
 }

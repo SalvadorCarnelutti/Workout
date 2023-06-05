@@ -5,5 +5,6 @@ target 'Workout' do
   use_frameworks!
 
   pod 'SnapKit'
+pod 'ReactiveCocoa', '~> 10.1'
 
 end
