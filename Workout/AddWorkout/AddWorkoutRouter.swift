@@ -21,14 +21,16 @@ final class AddWorkoutRouter: AddWorkoutPresenterToRouterProtocol {
     weak var viewController: UIViewController?
     
     func presentAddExerciseForm() {
-        let vc = ExerciseFormConfigurator.resolveAdd()
-        vc.modalPresentationStyle = .popover
-        viewController?.present(vc, animated: true)
+        // TODO: Ask the presenter for the interactor add completion action
+        let addExerciseFormViewController = ExerciseFormConfigurator.resolveAdd(completionAction: { _ in })
+        addExerciseFormViewController.modalPresentationStyle = .popover
+        viewController?.present(addExerciseFormViewController, animated: true)
     }
     
     func presentEditExerciseForm(for exercise: Exercise) {
-        let vc = ExerciseFormConfigurator.resolveEdit(for: exercise)
-        vc.modalPresentationStyle = .popover
-        viewController?.present(vc, animated: true)
+        // TODO: Ask the presenter for the interactor edit completion action
+        let editExerciseFormViewController = ExerciseFormConfigurator.resolveEdit(for: exercise, completionAction: { _ in })
+        editExerciseFormViewController.modalPresentationStyle = .popover
+        viewController?.present(editExerciseFormViewController, animated: true)
     }
 }

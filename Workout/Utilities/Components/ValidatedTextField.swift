@@ -39,6 +39,10 @@ class ValidatedTextField: UITextField {
         errorColor = entity.errorColor
         placeholder = entity.placeholder
     }
+    
+    var unwrappedText: String {
+        return text ?? ""
+    }
 
     private func commonInit() {
         addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)

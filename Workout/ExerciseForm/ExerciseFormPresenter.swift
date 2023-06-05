@@ -16,8 +16,7 @@ protocol ExerciseFormViewToPresenterProtocol: UIViewController {
     var repsEntity: ValidationEntity { get }
     var headerString: String { get }
     var completionString: String { get }
-    func viewLoaded()
-    func completionAction()
+    func completionAction(for formOutput: FormOutput)
 }
 
 final class ExerciseFormPresenter: BaseViewController {
@@ -35,25 +34,25 @@ final class ExerciseFormPresenter: BaseViewController {
 // MARK: - ViewToPresenterProtocol
 extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
     var nameEntity: ValidationEntity {
-        ValidationEntity(validationBlock: ExerciseFormInteractor.nameValidationBlock,
+        ValidationEntity(validationBlock: interactor.nameValidationBlock,
                          errorMessage: "Name can't be empty",
                          placeholder: "Name")
     }
     
     var durationEntity: ValidationEntity {
-        ValidationEntity(validationBlock: ExerciseFormInteractor.durationValidationBlock,
+        ValidationEntity(validationBlock: interactor.durationValidationBlock,
                          errorMessage: "Duration must be not empty and positive",
                          placeholder: "Duration")
     }
     
     var setsEntity: ValidationEntity {
-        ValidationEntity(validationBlock: ExerciseFormInteractor.durationValidationBlock,
+        ValidationEntity(validationBlock: interactor.durationValidationBlock,
                          errorMessage: "Set must be not empty and positive",
                          placeholder: "Set count")
     }
     
     var repsEntity: ValidationEntity {
-        ValidationEntity(validationBlock: ExerciseFormInteractor.durationValidationBlock,
+        ValidationEntity(validationBlock: interactor.durationValidationBlock,
                          errorMessage: "Rep must be not empty and positive",
                          placeholder: "Rep count")
     }
@@ -66,9 +65,9 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
         interactor.formStyle == .add ? "Add" : "Edit"
     }
     
-    func viewLoaded() {}
-    
-    func completionAction() {
-        interactor.completionAction()
+    func completionAction(for formOutput: FormOutput) {
+        dismiss(animated: true) { [weak self] in
+            self?.interactor.completionAction(formOutput)
+        }
     }
 }

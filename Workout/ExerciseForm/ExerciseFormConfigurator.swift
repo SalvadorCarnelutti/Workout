@@ -24,10 +24,10 @@ final class ExerciseFormConfigurator {
         presenter.router = router
     }
     
-    static func resolveAdd() -> ExerciseFormPresenter {
+    static func resolveAdd(completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()
-        let interactor = ExerciseFormInteractor(formStyle: .add)
+        let interactor = ExerciseFormInteractor(formStyle: .add, completionAction: completionAction)
         let router = ExerciseFormRouter()
 
         Self.injectDependencies(view: view,
@@ -38,10 +38,10 @@ final class ExerciseFormConfigurator {
         return presenter
     }
     
-    static func resolveEdit(for exercise: Exercise) -> ExerciseFormPresenter {
+    static func resolveEdit(for exercise: Exercise, completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()
-        let interactor = ExerciseFormInteractor(formStyle: .edit)
+        let interactor = ExerciseFormInteractor(formStyle: .edit, completionAction: completionAction)
         let router = ExerciseFormRouter()
 
         Self.injectDependencies(view: view,

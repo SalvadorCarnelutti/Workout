@@ -65,7 +65,7 @@ final class ExerciseFormView: UIView {
         addSubview(button)
         button.isEnabled = false
         button.setTitle(presenter?.completionString, for: .normal)
-//        button.addTarget(self, action: #selector(presenter!.completionAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
         return button
     }()
     
@@ -85,6 +85,21 @@ final class ExerciseFormView: UIView {
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
         }
+    }
+    
+    @objc private func completionActionTapped() {
+        guard let duration = Int(durationTextField.unwrappedText),
+              let sets = Int(setsTextField.unwrappedText),
+              let reps = Int(repsTextField.unwrappedText) else {
+            return
+        }
+        
+        let formOutput = FormOutput(name: nameTextField.unwrappedText,
+                                    duration: duration,
+                                    sets: sets,
+                                    reps: reps)
+        
+        presenter?.completionAction(for: formOutput)
     }
     
     private func setupTextFields() {
@@ -117,6 +132,5 @@ extension ExerciseFormView: ExerciseFormPresenterToViewProtocol {
         backgroundColor = .white
         setupTextFields()
         setupConstraints()
-        presenter?.viewLoaded()
     }
 }

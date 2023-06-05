@@ -75,7 +75,6 @@ final class VerticalStack: UIStackView {
     }
     
     private func commonInit() {
-        // Set stack view properties as needed
         axis = .vertical
         spacing = 10
         alignment = .fill
