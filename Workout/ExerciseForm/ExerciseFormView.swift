@@ -63,7 +63,7 @@ final class ExerciseFormView: UIView {
     private lazy var completionButton: StyledButton = {
         let button = StyledButton(type: .system)
         addSubview(button)
-        button.isEnabled = false
+        button.isEnabled = presenter?.isbuttonEnabled ?? false
         button.setTitle(presenter?.completionString, for: .normal)
         button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
         return button
@@ -120,14 +120,19 @@ final class ExerciseFormView: UIView {
                       setsTextField,
                       repsTextField]
         
-        fillTextfieldsIfneeded(formInput: presenter.formInput)
+        if let formInput = presenter.formInput {
+            fillTextfields(formInput: formInput)
+        }
     }
     
-    private func fillTextfieldsIfneeded(formInput: FormInput?) {
-        nameTextField.text = formInput?.name
-        durationTextField.text = formInput?.duration
-        setsTextField.text = formInput?.sets
-        repsTextField.text = formInput?.reps
+    private func fillTextfields(formInput: FormInput) {
+        nameTextField.text = formInput.name
+        durationTextField.text = formInput.duration
+        setsTextField.text = formInput.sets
+        repsTextField.text = formInput.reps
+        
+        // isValid needs to be updated appropriately for each textField
+        textFields.forEach { $0.sendActions(for: .editingChanged) }
     }
     
     @objc private func textDidChange(_ notification: Notification) {

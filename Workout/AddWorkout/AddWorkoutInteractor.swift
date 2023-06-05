@@ -32,7 +32,7 @@ final class AddWorkoutInteractor: AddWorkoutPresenterToInteractorProtocol {
         ex.duration = 20
         ex.sets = 4
         
-        for i in 0..<10 {
+        for i in 1..<10 {
             let ex = Exercise(context: managedObjectContext)
             ex.name = "Dumbbell curls"
             ex.duration = 20
