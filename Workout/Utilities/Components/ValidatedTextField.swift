@@ -25,6 +25,13 @@ class ValidatedTextField: UITextField {
         super.init(coder: aDecoder)
         commonInit()
     }
+    
+    func configure(with entity: ValidationEntity) {
+        validationBlock = entity.validationBlock
+        errorMessage = entity.errorMessage
+        errorColor = entity.errorColor
+        placeholder = entity.placeholder
+    }
 
     private func commonInit() {
         addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
@@ -35,7 +42,7 @@ class ValidatedTextField: UITextField {
         validateInput()
     }
 
-    func validateInput() {
+    private func validateInput() {
         isValid = validationBlock?(text) ?? true
         isValid ? resetErrorState() : showErrorState()
     }
@@ -50,7 +57,7 @@ class ValidatedTextField: UITextField {
     }
 }
 
-struct ValidatedTexFieldInput {
+struct ValidationEntity {
     var validationBlock: ((String?) -> Bool)?
     var errorMessage: String = "Invalid input"
     var errorColor: UIColor = UIColor.red

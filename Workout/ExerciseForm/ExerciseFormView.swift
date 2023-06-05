@@ -28,44 +28,35 @@ final class ExerciseFormView: UIView {
     private lazy var headerLabel: UILabel = {
         let label = MultilineLabel()
         addSubview(label)
-        label.text = "Add exercise to current workout"
+        label.text = presenter?.headerString
         label.font = .systemFont(ofSize: 20, weight: .heavy)
         return label
     }()
     
-    private lazy var exerciseNameTextField: ValidatedTextField = {
+    private lazy var nameTextField: ValidatedTextField = {
         let textField = ValidatedTextField()
         addSubview(textField)
-        textField.placeholder = "Name"
-        textField.errorMessage = "Name can't be empty"
-        textField.validationBlock = ExerciseFormInteractor.nameValidationBlock
         return textField
     }()
     
-    private lazy var exerciseDurationTextField: ValidatedTextField = {
+    private lazy var durationTextField: ValidatedTextField = {
         let textField = ValidatedTextField()
         addSubview(textField)
-        textField.placeholder = "Duration"
-        textField.errorMessage = "Must be greater than zero"
-        textField.validationBlock = ExerciseFormInteractor.durationValidationBlock
+        textField.keyboardType = .numberPad
         return textField
     }()
     
-    private lazy var exerciseSetsTextField: ValidatedTextField = {
+    private lazy var setsTextField: ValidatedTextField = {
         let textField = ValidatedTextField()
         addSubview(textField)
-        textField.placeholder = "Set count"
-        textField.errorMessage = "Must be greater than zero"
-        textField.validationBlock = ExerciseFormInteractor.durationValidationBlock
+        textField.keyboardType = .numberPad
         return textField
     }()
     
-    private lazy var exerciseRepsTextField: ValidatedTextField = {
+    private lazy var repsTextField: ValidatedTextField = {
         let textField = ValidatedTextField()
         addSubview(textField)
-        textField.placeholder = "Rep count"
-        textField.errorMessage = "Must be greater than zero"
-        textField.validationBlock = ExerciseFormInteractor.durationValidationBlock
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -73,7 +64,8 @@ final class ExerciseFormView: UIView {
         let button = StyledButton(type: .system)
         addSubview(button)
         button.isEnabled = false
-        button.setTitle("Add", for: .normal)
+        button.setTitle(presenter?.completionString, for: .normal)
+//        button.addTarget(self, action: #selector(presenter!.completionAction), for: .touchUpInside)
         return button
     }()
     
@@ -96,15 +88,22 @@ final class ExerciseFormView: UIView {
     }
     
     private func setupTextFields() {
+        guard let presenter = presenter else { return }
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange(_:)),
                                                name: UITextField.textDidChangeNotification,
                                                object: nil)
         
-        textFields = [exerciseNameTextField,
-                      exerciseDurationTextField,
-                      exerciseSetsTextField,
-                      exerciseRepsTextField]
+        nameTextField.configure(with: presenter.nameEntity)
+        durationTextField.configure(with: presenter.durationEntity)
+        setsTextField.configure(with: presenter.setsEntity)
+        repsTextField.configure(with: presenter.repsEntity)
+        
+        textFields = [nameTextField,
+                      durationTextField,
+                      setsTextField,
+                      repsTextField]
     }
     
     @objc private func textDidChange(_ notification: Notification) {

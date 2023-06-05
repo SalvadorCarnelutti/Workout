@@ -10,7 +10,14 @@
 import UIKit
 
 protocol ExerciseFormViewToPresenterProtocol: UIViewController {
+    var nameEntity: ValidationEntity { get }
+    var durationEntity: ValidationEntity { get }
+    var setsEntity: ValidationEntity { get }
+    var repsEntity: ValidationEntity { get }
+    var headerString: String { get }
+    var completionString: String { get }
     func viewLoaded()
+    func completionAction()
 }
 
 final class ExerciseFormPresenter: BaseViewController {
@@ -27,5 +34,41 @@ final class ExerciseFormPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
+    var nameEntity: ValidationEntity {
+        ValidationEntity(validationBlock: ExerciseFormInteractor.nameValidationBlock,
+                         errorMessage: "Name can't be empty",
+                         placeholder: "Name")
+    }
+    
+    var durationEntity: ValidationEntity {
+        ValidationEntity(validationBlock: ExerciseFormInteractor.durationValidationBlock,
+                         errorMessage: "Duration must be not empty and positive",
+                         placeholder: "Duration")
+    }
+    
+    var setsEntity: ValidationEntity {
+        ValidationEntity(validationBlock: ExerciseFormInteractor.durationValidationBlock,
+                         errorMessage: "Set must be not empty and positive",
+                         placeholder: "Set count")
+    }
+    
+    var repsEntity: ValidationEntity {
+        ValidationEntity(validationBlock: ExerciseFormInteractor.durationValidationBlock,
+                         errorMessage: "Rep must be not empty and positive",
+                         placeholder: "Rep count")
+    }
+    
+    var headerString: String {
+        interactor.formStyle == .add ? "Add exercise to current workout" : "Edit current exercise"
+    }
+    
+    var completionString: String {
+        interactor.formStyle == .add ? "Add" : "Edit"
+    }
+    
     func viewLoaded() {}
+    
+    func completionAction() {
+        interactor.completionAction()
+    }
 }
