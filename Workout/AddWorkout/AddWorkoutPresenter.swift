@@ -11,7 +11,6 @@ import UIKit
 import CoreData
 
 protocol AddWorkoutViewToPresenterProtocol: UIViewController {
-    var managedObjectContext: NSManagedObjectContext { get }
     var exercisesCount: Int { get }
     func viewLoaded()
     func exerciseAt(_ index: Int) -> Exercise
@@ -47,10 +46,6 @@ final class AddWorkoutPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension AddWorkoutPresenter: AddWorkoutViewToPresenterProtocol {
-    var managedObjectContext: NSManagedObjectContext {
-        interactor.managedObjectContext
-    }
-    
     var exercisesCount: Int {
         interactor.exercisesCount
     }

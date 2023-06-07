@@ -10,7 +10,7 @@ import UIKit
 class ValidatedTextField: UITextField {
     // MARK: - Properties
     private(set) var isValid = false
-    var validationBlock: ((String?) -> Bool)?
+    var validationBlock: ((String) -> Bool)?
     var errorMessage: String = "Invalid input"
     var errorColor: UIColor = UIColor.red
 
@@ -54,7 +54,7 @@ class ValidatedTextField: UITextField {
     }
 
     private func validateInput() {
-        isValid = validationBlock?(text) ?? true
+        isValid = validationBlock?(unwrappedText) ?? true
         isValid ? resetErrorState() : showErrorState()
     }
 
@@ -69,7 +69,7 @@ class ValidatedTextField: UITextField {
 }
 
 struct ValidationEntity {
-    var validationBlock: ((String?) -> Bool)?
+    var validationBlock: ((String) -> Bool)
     var errorMessage: String = "Invalid input"
     var errorColor: UIColor = UIColor.red
     var placeholder: String

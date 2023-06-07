@@ -13,10 +13,10 @@ protocol ExerciseFormPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
     var formInput: FormInput? { get }
     var formStyle: FormStyle { get }
-    var nameValidationBlock: ((String?) -> Bool) { get }
-    var durationValidationBlock: ((String?) -> Bool) { get }
-    var setsValidationBlock: ((String?) -> Bool) { get }
-    var repsValidationBlock: ((String?) -> Bool) { get }
+    var nameValidationBlock: ((String) -> Bool) { get }
+    var durationValidationBlock: ((String) -> Bool) { get }
+    var setsValidationBlock: ((String) -> Bool) { get }
+    var repsValidationBlock: ((String) -> Bool) { get }
     var completionAction: ((FormOutput) -> ()) { get }
 }
 
@@ -38,19 +38,19 @@ final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
         formModel.formStyle
     }
     
-    var nameValidationBlock: ((String?) -> Bool) {
+    var nameValidationBlock: ((String) -> Bool) {
         stringValidationBlock
     }
     
-    var durationValidationBlock: ((String?) -> Bool) {
+    var durationValidationBlock: ((String) -> Bool) {
         integerValidationBlock
     }
     
-    var setsValidationBlock: ((String?) -> Bool) {
+    var setsValidationBlock: ((String) -> Bool) {
         integerValidationBlock
     }
     
-    var repsValidationBlock: ((String?) -> Bool) {
+    var repsValidationBlock: ((String) -> Bool) {
         integerValidationBlock
     }
     
@@ -58,12 +58,12 @@ final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
         formModel.completionAction
     }
     
-    private func stringValidationBlock(text: String?) -> Bool {
-        return text?.isNotEmpty ?? false
+    private func stringValidationBlock(text: String) -> Bool {
+        return text.trimmingCharacters(in: .whitespaces).isNotEmpty
     }
     
-    private func integerValidationBlock(text: String?) -> Bool {
-        guard let text = text, let count = Int(text) else { return false }
+    private func integerValidationBlock(text: String) -> Bool {
+        guard let count = Int(text) else { return false }
         return count > 0
     }
 }

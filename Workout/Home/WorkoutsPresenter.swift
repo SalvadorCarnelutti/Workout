@@ -24,6 +24,7 @@ final class WorkoutsPresenter: BaseViewController {
     var interactor: WorkoutsPresenterToInteractorProtocol!
     var router: WorkoutsPresenterToRouterProtocol!
     
+    // TODO: Maybe change VIPER template
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //    }
@@ -43,7 +44,7 @@ final class WorkoutsPresenter: BaseViewController {
     }
     
     @objc private func addWorkoutTapped() {
-        router.pushAddWorkout()
+        router.pushAddWorkout(managedObjectContext: interactor.managedObjectContext)
     }
 }
 
@@ -53,10 +54,9 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
 }
 
 extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
-    
     func onPersistentContainerLoadSuccess() {
-        self.viewWorkouts.loadView()
-        self.setupNavigationBar()
+        viewWorkouts.loadView()
+        setupNavigationBar()
     }
     
     func onPersistentContainerLoadFailure(error: Error) {

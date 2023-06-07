@@ -10,7 +10,6 @@ import CoreData
 
 protocol AddWorkoutPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
-    var managedObjectContext: NSManagedObjectContext { get }
     var exercisesCount: Int { get }
     func exerciseAt(_ index: Int) -> Exercise
     func deleteExerciseAt(_ index: Int)
@@ -20,31 +19,24 @@ protocol AddWorkoutPresenterToInteractorProtocol: AnyObject {
 // MARK: - PresenterToInteractorProtocol
 final class AddWorkoutInteractor: AddWorkoutPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
-    private let persistentContainer: NSPersistentContainer
+    private let workout: Workout
+    
+    init(workout: Workout) {
+        self.workout = workout
+    }
+    
+    init(managedObjectContext: NSManagedObjectContext) {
+        workout = Workout(context: managedObjectContext)
+    }
     
     private var exercises = [Exercise]()
-    
-    init(persistentContainer: NSPersistentContainer) {
-        self.persistentContainer = persistentContainer
         
-        let ex = Exercise(context: managedObjectContext)
-        ex.name = "Dumbbell curls"
-        ex.duration = 20
-        ex.sets = 4
-        
-        for i in 1..<10 {
-            let ex = Exercise(context: managedObjectContext)
-            ex.name = "Dumbbell curls"
-            ex.duration = 20
-            ex.sets = 4
-            ex.reps = Int16(i)
-            exercises.append(ex)
-        }
-    }
-    
-    var managedObjectContext: NSManagedObjectContext {
-        persistentContainer.viewContext
-    }
+    // TODO: Save
+//        do {
+//            try persistentContainer.viewContext.save()
+//        } catch {
+//            print("\(error), \(error.localizedDescription)")
+//        }
     
     var exercisesCount: Int {
         exercises.count
