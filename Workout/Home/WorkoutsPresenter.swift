@@ -46,6 +46,7 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkout
+        // TODO: have to include a loader item in the project.
         interactor.loadPersistentContainer()
     }
     
@@ -59,7 +60,6 @@ final class WorkoutsPresenter: BaseViewController {
     
     @objc private func addWorkoutTapped() {
         router.pushAddWorkout()
-        // TODO: I have to start saving and persisting stuff as well. I have to include a loader item in the project.
     }
     
     private func fetchExercises() {

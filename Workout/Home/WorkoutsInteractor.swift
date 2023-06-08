@@ -32,10 +32,11 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
     func loadPersistentContainer() {
         persistentContainer.loadPersistentStores { [weak self] (persistentStoreDescription, error) in
             guard let self = self else { return }
+            
             if let error = error {
                 self.presenter?.onPersistentContainerLoadFailure(error: error)
             } else {
-                print(self.persistentContainer.viewContext)
+                self.persistentContainer.setupNotificationHandling()
                 self.presenter?.onPersistentContainerLoadSuccess()
             }
         }
