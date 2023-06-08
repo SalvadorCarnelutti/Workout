@@ -100,7 +100,7 @@ final class ExerciseFormView: UIView {
                                     sets: sets,
                                     reps: reps)
         
-        presenter?.completionAction(for: formOutput)
+        presenter?.completionButtonTapped(for: formOutput)
     }
     
     private func setupTextFields() {
@@ -126,6 +126,10 @@ final class ExerciseFormView: UIView {
         }
     }
     
+    @objc private func textDidChange(_ notification: Notification) {
+        completionButton.isEnabled = textFields.map { $0.isValid }.allSatisfy { $0 }
+    }
+    
     private func fillTextfields(formInput: FormInput) {
         nameTextField.text = formInput.name
         durationTextField.text = formInput.duration
@@ -134,10 +138,6 @@ final class ExerciseFormView: UIView {
         
         // isValid needs to be updated appropriately for each textField, we need to notify at beginning of edit
         textFields.forEach { $0.sendActions(for: .editingChanged) }
-    }
-    
-    @objc private func textDidChange(_ notification: Notification) {
-        completionButton.isEnabled = textFields.map { $0.isValid }.allSatisfy { $0 }
     }
 }
 

@@ -23,21 +23,11 @@ final class AddWorkoutConfigurator {
         presenter.router = router
     }
     
-    static func resolve(managedObjectContext: NSManagedObjectContext) -> AddWorkoutPresenter {
-        let presenter = AddWorkoutPresenter()
-        let view = AddWorkoutView()
-        let interactor = AddWorkoutInteractor(managedObjectContext: managedObjectContext)
-        let router = AddWorkoutRouter()
-
-        Self.injectDependencies(view: view,
-                                interactor: interactor,
-                                presenter: presenter,
-                                router: router)
-
-        return presenter
+    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutsFormPresenter {
+        WorkoutsFormConfigurator.resolveAdd(completionAction: completionAction)
     }
     
-    static func resolve(workout: Workout) -> AddWorkoutPresenter {
+    static func resolveEdit(for workout: Workout) -> AddWorkoutPresenter {
         let presenter = AddWorkoutPresenter()
         let view = AddWorkoutView()
         let interactor = AddWorkoutInteractor(workout: workout)

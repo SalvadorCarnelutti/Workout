@@ -18,6 +18,10 @@ protocol ExerciseFormViewToPresenterProtocol: UIViewController {
     var isbuttonEnabled: Bool { get }
     var headerString: String { get }
     var completionString: String { get }
+    func completionButtonTapped(for formOutput: FormOutput)
+}
+
+protocol ExerciseFormRouterToPresenterProtocol: UIViewController {
     func completionAction(for formOutput: FormOutput)
 }
 
@@ -75,9 +79,14 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
         interactor.formStyle == .add ? "Add" : "Edit"
     }
     
+    func completionButtonTapped(for formOutput: FormOutput) {
+        router.dismissView(formOutput: formOutput)
+    }
+}
+
+// MARK: - RouterToPresenterProtocol
+extension ExerciseFormPresenter: ExerciseFormRouterToPresenterProtocol {
     func completionAction(for formOutput: FormOutput) {
-        dismiss(animated: true) { [weak self] in
-            self?.interactor.completionAction(formOutput)
-        }
+        interactor.completionAction(formOutput)
     }
 }

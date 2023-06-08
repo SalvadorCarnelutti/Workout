@@ -20,7 +20,7 @@ final class WorkoutsConfigurator {
         view.presenter = presenter
         presenter.viewWorkouts = view
         
-        router.viewController = presenter
+        router.presenter = presenter
         presenter.router = router
     }
     

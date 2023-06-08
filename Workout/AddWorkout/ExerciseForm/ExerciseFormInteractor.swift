@@ -22,9 +22,9 @@ protocol ExerciseFormPresenterToInteractorProtocol: AnyObject {
 // MARK: - PresenterToInteractorProtocol
 final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
-    private let formModel: FormModel
+    private let formModel: ExerciseFormModel
     
-    init(formModel: FormModel) {
+    init(formModel: ExerciseFormModel) {
         self.formModel = formModel
     }
     

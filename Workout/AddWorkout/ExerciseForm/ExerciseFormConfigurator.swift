@@ -19,12 +19,12 @@ final class ExerciseFormConfigurator {
         view.presenter = presenter
         presenter.viewExerciseForm = view
         
-        router.viewController = presenter
+        router.presenter = presenter
         presenter.router = router
     }
     
     static func resolveAdd(completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
-        let formModel = FormModel(formInput: nil, formStyle: .add, completionAction: completionAction)
+        let formModel = ExerciseFormModel(formInput: nil, formStyle: .add, completionAction: completionAction)
         
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()
@@ -40,7 +40,7 @@ final class ExerciseFormConfigurator {
     }
     
     static func resolveEdit(for exercise: Exercise, completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
-        let formModel = FormModel(formInput: FormInput(exercise: exercise), formStyle: .edit, completionAction: completionAction)
+        let formModel = ExerciseFormModel(formInput: FormInput(exercise: exercise), formStyle: .edit, completionAction: completionAction)
         
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()

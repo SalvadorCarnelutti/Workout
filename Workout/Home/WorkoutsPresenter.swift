@@ -19,6 +19,10 @@ protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {
     func onPersistentContainerLoadFailure(error: Error) -> ()
 }
 
+protocol WorkoutsRouterToPresenterProtocol: UIViewController {
+    func addCompletionAction(name: String)
+}
+
 final class WorkoutsPresenter: BaseViewController {
     var viewWorkouts: WorkoutsPresenterToViewProtocol!
     var interactor: WorkoutsPresenterToInteractorProtocol!
@@ -39,7 +43,7 @@ final class WorkoutsPresenter: BaseViewController {
     }
     
     @objc private func addWorkoutTapped() {
-        router.pushAddWorkout(managedObjectContext: interactor.managedObjectContext)
+        router.pushAddWorkout()
         // TODO: Copy logic of adding vs editing similar to exercises. I have to make a whole screen from sratch for creating a Workout (Ask for name). I have to start saving and persisting stuff as well. I have to implement A Fetcher controller for Workouts. I have to include a loader item in the project.
     }
 }
@@ -49,6 +53,7 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
     func viewLoaded() {}
 }
 
+// MARK: - InteractorToPresenterProtocol
 extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
     func onPersistentContainerLoadSuccess() {
         viewWorkouts.loadView()
@@ -58,6 +63,13 @@ extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
     func onPersistentContainerLoadFailure(error: Error) {
         print("Unable to Add Persistent Store")
         print("\(error), \(error.localizedDescription)")
+    }
+}
+
+// MARK: - RouterToPresenterProtocol
+extension WorkoutsPresenter: WorkoutsRouterToPresenterProtocol {
+    func addCompletionAction(name: String) {
+        interactor.addCompletionAction(name: name)
     }
 }
 

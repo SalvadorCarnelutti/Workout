@@ -12,7 +12,13 @@ enum FormStyle {
     case edit
 }
 
-struct FormModel {
+struct WorkoutFormModel {
+    let formInput: String?
+    let formStyle: FormStyle
+    let completionAction: ((String) -> ())
+}
+
+struct ExerciseFormModel {
     let formInput: FormInput?
     let formStyle: FormStyle
     let completionAction: ((FormOutput) -> ())

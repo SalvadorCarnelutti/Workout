@@ -13,6 +13,7 @@ protocol WorkoutsPresenterToInteractorProtocol: AnyObject {
     var presenter: WorkoutsInteractorToPresenterProtocol? { get set }
     var managedObjectContext: NSManagedObjectContext { get }
     func loadPersistentContainer()
+    func addCompletionAction(name: String)
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -38,5 +39,10 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
                 self.presenter?.onPersistentContainerLoadSuccess()
             }
         }
+    }
+    
+    func addCompletionAction(name: String) {
+        let workout = Workout(context: managedObjectContext)
+        workout.name = name
     }
 }
