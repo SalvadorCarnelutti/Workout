@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutsFormPresenter.swift
+//  WorkoutFormPresenter.swift
 //  Workout
 //
 //  Created by Salvador on 6/8/23.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-protocol WorkoutsFormViewToPresenterProtocol: UIViewController {
+protocol WorkoutFormViewToPresenterProtocol: UIViewController {
     var formInput: String? { get }
     var nameEntity: ValidationEntity { get }
     var isbuttonEnabled: Bool { get }
@@ -18,12 +18,12 @@ protocol WorkoutsFormViewToPresenterProtocol: UIViewController {
     func completionAction(for string: String)
 }
 
-protocol WorkoutsFormRouterToPresenterProtocol: UIViewController {}
+protocol WorkoutFormRouterToPresenterProtocol: UIViewController {}
 
-final class WorkoutsFormPresenter: BaseViewController {
+final class WorkoutFormPresenter: BaseViewController {
     var viewWorkoutsForm: WorkoutsFormPresenterToViewProtocol!
-    var interactor: WorkoutsFormPresenterToInteractorProtocol!
-    var router: WorkoutsFormPresenterToRouterProtocol!
+    var interactor: WorkoutFormPresenterToInteractorProtocol!
+    var router: WorkoutFormPresenterToRouterProtocol!
     
     override func loadView() {
         super.loadView()
@@ -33,7 +33,7 @@ final class WorkoutsFormPresenter: BaseViewController {
 }
 
 // MARK: - ViewToPresenterProtocol
-extension WorkoutsFormPresenter: WorkoutsFormViewToPresenterProtocol {
+extension WorkoutFormPresenter: WorkoutFormViewToPresenterProtocol {
     var formInput: String? {
         interactor.formInput
     }
@@ -64,6 +64,6 @@ extension WorkoutsFormPresenter: WorkoutsFormViewToPresenterProtocol {
 }
 
 // MARK: - RouterToPresenterProtocol
-extension WorkoutsFormPresenter: WorkoutsFormRouterToPresenterProtocol {
+extension WorkoutFormPresenter: WorkoutFormRouterToPresenterProtocol {
     
 }

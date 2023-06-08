@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutsFormConfigurator.swift
+//  WorkoutFormConfigurator.swift
 //  Workout
 //
 //  Created by Salvador on 6/8/23.
@@ -8,11 +8,11 @@
 //
 import Foundation
 
-final class WorkoutsFormConfigurator {
+final class WorkoutFormConfigurator {
     static func injectDependencies(view: WorkoutsFormPresenterToViewProtocol,
-                                   interactor: WorkoutsFormPresenterToInteractorProtocol,
-                                   presenter: WorkoutsFormPresenter,
-                                   router: WorkoutsFormRouter) {
+                                   interactor: WorkoutFormPresenterToInteractorProtocol,
+                                   presenter: WorkoutFormPresenter,
+                                   router: WorkoutFormRouter) {
         presenter.interactor = interactor
         interactor.presenter = presenter
 
@@ -23,13 +23,13 @@ final class WorkoutsFormConfigurator {
         presenter.router = router
     }
     
-    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutsFormPresenter {
+    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
         let formModel = WorkoutFormModel(formInput: nil, formStyle: .add, completionAction: completionAction)
         
-        let presenter = WorkoutsFormPresenter()
-        let view = WorkoutsFormView()
-        let interactor = WorkoutsFormInteractor(formModel: formModel)
-        let router = WorkoutsFormRouter()
+        let presenter = WorkoutFormPresenter()
+        let view = WorkoutFormView()
+        let interactor = WorkoutFormInteractor(formModel: formModel)
+        let router = WorkoutFormRouter()
 
         Self.injectDependencies(view: view,
                                 interactor: interactor,
@@ -39,14 +39,14 @@ final class WorkoutsFormConfigurator {
         return presenter
     }
     
-    static func resolveEdit(completionAction: @escaping ((String) -> Void)) -> WorkoutsFormPresenter {
+    static func resolveEdit(completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
         // TOPDO: Change formInput
         let formModel = WorkoutFormModel(formInput: nil, formStyle: .edit, completionAction: completionAction)
         
-        let presenter = WorkoutsFormPresenter()
-        let view = WorkoutsFormView()
-        let interactor = WorkoutsFormInteractor(formModel: formModel)
-        let router = WorkoutsFormRouter()
+        let presenter = WorkoutFormPresenter()
+        let view = WorkoutFormView()
+        let interactor = WorkoutFormInteractor(formModel: formModel)
+        let router = WorkoutFormRouter()
 
         Self.injectDependencies(view: view,
                                 interactor: interactor,

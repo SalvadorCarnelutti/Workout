@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutsFormInteractor.swift
+//  WorkoutFormInteractor.swift
 //  Workout
 //
 //  Created by Salvador on 6/8/23.
@@ -8,7 +8,7 @@
 //
 import Foundation
 
-protocol WorkoutsFormPresenterToInteractorProtocol: AnyObject {
+protocol WorkoutFormPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
     var formInput: String? { get }
     var formStyle: FormStyle { get }
@@ -17,7 +17,7 @@ protocol WorkoutsFormPresenterToInteractorProtocol: AnyObject {
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class WorkoutsFormInteractor: WorkoutsFormPresenterToInteractorProtocol {
+final class WorkoutFormInteractor: WorkoutFormPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
     private let formModel: WorkoutFormModel
     

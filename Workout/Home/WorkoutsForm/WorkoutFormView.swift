@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutsFormView.swift
+//  WorkoutFormView.swift
 //  Workout
 //
 //  Created by Salvador on 6/8/23.
@@ -9,13 +9,13 @@
 import UIKit
 
 protocol WorkoutsFormPresenterToViewProtocol: UIView {
-    var presenter: WorkoutsFormViewToPresenterProtocol? { get set }
+    var presenter: WorkoutFormViewToPresenterProtocol? { get set }
     func loadView()
 }
 
-final class WorkoutsFormView: UIView {
+final class WorkoutFormView: UIView {
     // MARK: - Properties
-    weak var presenter: WorkoutsFormViewToPresenterProtocol?
+    weak var presenter: WorkoutFormViewToPresenterProtocol?
     
     private lazy var headerLabel: UILabel = {
         let label = MultilineLabel()
@@ -91,7 +91,7 @@ final class WorkoutsFormView: UIView {
 }
 
 // MARK: - PresenterToViewProtocol
-extension WorkoutsFormView: WorkoutsFormPresenterToViewProtocol {
+extension WorkoutFormView: WorkoutsFormPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
         setupTextField()

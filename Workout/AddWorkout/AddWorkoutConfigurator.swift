@@ -23,8 +23,8 @@ final class AddWorkoutConfigurator {
         presenter.router = router
     }
     
-    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutsFormPresenter {
-        WorkoutsFormConfigurator.resolveAdd(completionAction: completionAction)
+    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
+        WorkoutFormConfigurator.resolveAdd(completionAction: completionAction)
     }
     
     static func resolveEdit(for workout: Workout) -> AddWorkoutPresenter {

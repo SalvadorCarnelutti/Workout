@@ -1,5 +1,5 @@
 //
-//  FormModels.swift
+//  ExerciseFormModels.swift
 //  Workout
 //
 //  Created by Salvador on 6/5/23.
@@ -10,12 +10,6 @@ import Foundation
 enum FormStyle {
     case add
     case edit
-}
-
-struct WorkoutFormModel {
-    let formInput: String?
-    let formStyle: FormStyle
-    let completionAction: ((String) -> ())
 }
 
 struct ExerciseFormModel {
