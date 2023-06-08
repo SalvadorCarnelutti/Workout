@@ -39,19 +39,4 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
             }
         }
     }
-    
-//    var workout: Workout {
-//        let work = Workout(context: managedObjectContext)
-//        // TODO: Actually make a Workout core data model object and from there check that Exercise behaviour works as expected (Saving will save the workout and its exercises to the database). And also that the exercise ordering works as expected
-//        for i in 1..<10 {
-//            let ex = Exercise(context: managedObjectContext)
-//            ex.name = "Dumbbell curls"
-//            ex.duration = 20
-//            ex.sets = 4
-//            ex.reps = Int16(i)
-//            ex.workout = work
-//        }
-//
-//        return work
-//    }
 }

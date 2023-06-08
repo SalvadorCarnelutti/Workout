@@ -28,8 +28,9 @@ final class ExerciseFormView: UIView {
     private lazy var headerLabel: UILabel = {
         let label = MultilineLabel()
         addSubview(label)
+        label.textAlignment = .center
         label.text = presenter?.headerString
-        label.font = .systemFont(ofSize: 20, weight: .heavy)
+        label.font = .systemFont(ofSize: 32, weight: .heavy)
         return label
     }()
     
@@ -72,7 +73,7 @@ final class ExerciseFormView: UIView {
     private func setupConstraints() {
         headerLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.horizontalEdges.equalToSuperview().offset(20)
+            make.centerX.equalToSuperview()
         }
         
         stackView.snp.makeConstraints { make in

@@ -31,8 +31,8 @@ final class AddWorkoutRouter: AddWorkoutPresenterToRouterProtocol {
     func presentEditExerciseForm(for exercise: Exercise) {
         guard let presenter = presenter else { return }
         
-        let editExerciseFormViewController = ExerciseFormConfigurator.resolveEdit(for: exercise) { formOutput in
-            presenter.editCompletionAction(for: exercise, formOutput: formOutput)
+        let editExerciseFormViewController = ExerciseFormConfigurator.resolveEdit(for: exercise) { [weak self] formOutput in
+            self?.presenter?.editCompletionAction(for: exercise, formOutput: formOutput)
         }
         
         editExerciseFormViewController.modalPresentationStyle = .popover

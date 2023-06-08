@@ -68,7 +68,7 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
     }
     
     var headerString: String {
-        interactor.formStyle == .add ? "Add exercise to current workout" : "Edit current exercise"
+        "Exercise"
     }
     
     var completionString: String {

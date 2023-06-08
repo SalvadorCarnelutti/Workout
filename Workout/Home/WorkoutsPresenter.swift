@@ -24,11 +24,6 @@ final class WorkoutsPresenter: BaseViewController {
     var interactor: WorkoutsPresenterToInteractorProtocol!
     var router: WorkoutsPresenterToRouterProtocol!
     
-    // TODO: Maybe change VIPER template
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-    
     override func loadView() {
         super.loadView()
         view = viewWorkouts
@@ -45,6 +40,7 @@ final class WorkoutsPresenter: BaseViewController {
     
     @objc private func addWorkoutTapped() {
         router.pushAddWorkout(managedObjectContext: interactor.managedObjectContext)
+        // TODO: Copy logic of adding vs editing similar to exercises. I have to make a whole screen from sratch for creating a Workout (Ask for name). I have to start saving and persisting stuff as well. I have to implement A Fetcher controller for Workouts. I have to include a loader item in the project.
     }
 }
 
