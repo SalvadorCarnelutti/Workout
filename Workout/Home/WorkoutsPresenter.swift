@@ -11,7 +11,10 @@ import UIKit
 import CoreData
 
 protocol WorkoutsViewToPresenterProtocol: UIViewController {
+    var workoutsCount: Int { get }
     func viewLoaded()
+    func workoutAt(indexPath: IndexPath) -> Workout
+    func didSelectRowAt(_ indexPath: IndexPath)
 }
 
 protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {
@@ -24,13 +27,25 @@ protocol WorkoutsRouterToPresenterProtocol: UIViewController {
 }
 
 final class WorkoutsPresenter: BaseViewController {
-    var viewWorkouts: WorkoutsPresenterToViewProtocol!
+    var viewWorkout: WorkoutsPresenterToViewProtocol!
     var interactor: WorkoutsPresenterToInteractorProtocol!
     var router: WorkoutsPresenterToRouterProtocol!
     
+    private lazy var fetchedResultsController: NSFetchedResultsController<Workout> = {
+        let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
+        // TODO: Check later if necessary to see that ordering is preserved
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Workout.name), ascending: false)]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: interactor.managedObjectContext,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        
+        return fetchedResultsController
+    }()
+    
     override func loadView() {
         super.loadView()
-        view = viewWorkouts
+        view = viewWorkout
         interactor.loadPersistentContainer()
     }
     
@@ -44,19 +59,45 @@ final class WorkoutsPresenter: BaseViewController {
     
     @objc private func addWorkoutTapped() {
         router.pushAddWorkout()
-        // TODO: Copy logic of adding vs editing similar to exercises. I have to make a whole screen from sratch for creating a Workout (Ask for name). I have to start saving and persisting stuff as well. I have to implement A Fetcher controller for Workouts. I have to include a loader item in the project.
+        // TODO: I have to start saving and persisting stuff as well. I have to include a loader item in the project.
     }
+    
+    private func fetchExercises() {
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            // TODO: Maybe a modal error meesage
+            print("Unable to Perform Fetch Request")
+            print("\(error), \(error.localizedDescription)")
+        }
+    }
+
 }
 
 // MARK: - ViewToPresenterProtocol
 extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
-    func viewLoaded() {}
+    var workoutsCount: Int {
+        fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+    
+    func viewLoaded() {
+        fetchedResultsController.delegate = viewWorkout
+        fetchExercises()
+    }
+    
+    func workoutAt(indexPath: IndexPath) -> Workout {
+        fetchedResultsController.object(at: indexPath)
+    }
+    
+    func didSelectRowAt(_ indexPath: IndexPath) {
+        router.pushEditWorkout(for: fetchedResultsController.object(at: indexPath))
+    }
 }
 
 // MARK: - InteractorToPresenterProtocol
 extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
     func onPersistentContainerLoadSuccess() {
-        viewWorkouts.loadView()
+        viewWorkout.loadView()
         setupNavigationBar()
     }
     

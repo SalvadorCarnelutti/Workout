@@ -49,7 +49,7 @@ final class WorkoutPresenter: BaseViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Workout"
+        navigationItem.title = interactor.workoutName
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
                                                             image: UIImage.add,
                                                             target: self,

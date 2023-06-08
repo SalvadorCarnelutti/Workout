@@ -18,7 +18,7 @@ final class WorkoutsConfigurator {
         interactor.presenter = presenter
 
         view.presenter = presenter
-        presenter.viewWorkouts = view
+        presenter.viewWorkout = view
         
         router.presenter = presenter
         presenter.router = router

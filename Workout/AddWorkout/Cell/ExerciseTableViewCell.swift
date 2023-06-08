@@ -41,14 +41,14 @@ final class ExerciseTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        setupConstrains()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupConstrains() {
+    private func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(20)
         }
@@ -59,25 +59,5 @@ final class ExerciseTableViewCell: UITableViewCell {
         durationLabel.text = "• Duration: \(exercise.durationString) min"
         setsLabel.text = "• Set count: \(exercise.setsString)"
         repsLabel.text = "• Rep count: \(exercise.repsString)"
-    }
-}
-
-final class VerticalStack: UIStackView {
-    // MARK: - Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        axis = .vertical
-        spacing = 10
-        alignment = .fill
-        distribution = .fillEqually
     }
 }

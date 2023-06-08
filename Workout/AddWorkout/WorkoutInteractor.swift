@@ -10,8 +10,9 @@ import CoreData
 
 protocol WorkoutPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
-    var managedObjectContext: NSManagedObjectContext { get }
     var workout: Workout { get set }
+    var managedObjectContext: NSManagedObjectContext { get }
+    var workoutName: String { get }
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
 }
@@ -31,6 +32,10 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
     
     var managedObjectContext: NSManagedObjectContext {
         workout.managedObjectContext ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    }
+    
+    var workoutName: String {
+        workout.name ?? ""
     }
     
     func addCompletionAction(formOutput: FormOutput) {
