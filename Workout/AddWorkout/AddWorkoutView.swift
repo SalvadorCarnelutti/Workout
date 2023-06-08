@@ -7,8 +7,9 @@
 //
 //
 import UIKit
+import CoreData
 
-protocol AddWorkoutPresenterToViewProtocol: UIView {
+protocol AddWorkoutPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
     var presenter: AddWorkoutViewToPresenterProtocol? { get set }
     func loadView()
 }
@@ -17,7 +18,7 @@ final class AddWorkoutView: UIView {
     // MARK: - Properties
     weak var presenter: AddWorkoutViewToPresenterProtocol?
     
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         addSubview(tableView)
         tableView.delegate = self
@@ -59,26 +60,25 @@ extension AddWorkoutView: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(with: presenter.exerciseAt(indexPath.row))
+        let exercise = presenter.exerciseAt(indexPath: indexPath)
+        cell.configure(with: exercise)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        presenter?.moveExerciseAt(from: sourceIndexPath.row, to: destinationIndexPath.row)
-    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
 }
 
 extension AddWorkoutView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectRowAt(indexPath.row)
+        presenter?.didSelectRowAt(indexPath)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let presenter = presenter else { return }
+        
         if editingStyle == .delete {
-            tableView.beginUpdates()
-            presenter?.deleteExerciseAt(indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.endUpdates()
+            let exercise = presenter.exerciseAt(indexPath: indexPath)
+            exercise.managedObjectContext?.delete(exercise)
         }
     }
 }
@@ -90,7 +90,52 @@ extension AddWorkoutView: UITableViewDragDelegate {
         }
         
         let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = presenter.exerciseAt(indexPath.row)
+        dragItem.localObject = presenter.exerciseAt(indexPath: indexPath)
         return [dragItem]
+    }
+}
+
+extension AddWorkoutView: NSFetchedResultsControllerDelegate {    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        // TODO: Display something for when exercises count is 0
+//        updateView()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        guard let presenter = presenter else { return }
+        
+        switch (type) {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
+                cell.configure(with: presenter.exerciseAt(indexPath: indexPath))
+            }
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+        @unknown default:
+            return
+        }
     }
 }

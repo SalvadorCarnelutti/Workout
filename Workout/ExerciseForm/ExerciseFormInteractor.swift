@@ -7,7 +7,6 @@
 //
 //
 import Foundation
-import CoreData
 
 protocol ExerciseFormPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
@@ -23,7 +22,6 @@ protocol ExerciseFormPresenterToInteractorProtocol: AnyObject {
 // MARK: - PresenterToInteractorProtocol
 final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
-
     private let formModel: FormModel
     
     init(formModel: FormModel) {
@@ -59,11 +57,10 @@ final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
     }
     
     private func stringValidationBlock(text: String) -> Bool {
-        return text.trimmingCharacters(in: .whitespaces).isNotEmpty
+        text.trimmingCharacters(in: .whitespaces).isNotEmpty
     }
     
     private func integerValidationBlock(text: String) -> Bool {
-        guard let count = Int(text) else { return false }
-        return count > 0
+        Int(text) ?? 0 > 0
     }
 }

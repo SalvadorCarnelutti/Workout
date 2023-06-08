@@ -13,16 +13,33 @@ import CoreData
 protocol AddWorkoutViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
     func viewLoaded()
-    func exerciseAt(_ index: Int) -> Exercise
-    func didSelectRowAt(_ index: Int)
-    func deleteExerciseAt(_ index: Int)
-    func moveExerciseAt(from: Int, to: Int)
+    func exerciseAt(indexPath: IndexPath) -> Exercise
+    func didSelectRowAt(_ indexPath: IndexPath)
+}
+
+protocol AddWorkoutRouterToPresenterProtocol: UIViewController {
+    func addCompletionAction(formOutput: FormOutput)
+    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
 }
 
 final class AddWorkoutPresenter: BaseViewController {
     var viewAddWorkout: AddWorkoutPresenterToViewProtocol!
     var interactor: AddWorkoutPresenterToInteractorProtocol!
     var router: AddWorkoutPresenterToRouterProtocol!
+    
+    private lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
+        let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
+        let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        fetchRequest.predicate = predicate
+        // TODO: Check later if necessary to see that ordering is preserved
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Exercise.order), ascending: false)]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: interactor.managedObjectContext,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        
+        return fetchedResultsController
+    }()
     
     override func loadView() {
         super.loadView()
@@ -42,29 +59,42 @@ final class AddWorkoutPresenter: BaseViewController {
     @objc private func addExerciseTapped() {
         router.presentAddExerciseForm()
     }
+    
+    private func fetchExercises() {
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            // TODO: Maybe a modal error meesage
+            print("Unable to Perform Fetch Request")
+            print("\(error), \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: - ViewToPresenterProtocol
 extension AddWorkoutPresenter: AddWorkoutViewToPresenterProtocol {
-    var exercisesCount: Int {
-        interactor.exercisesCount
+    var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
+    
+    func viewLoaded() {
+        fetchedResultsController.delegate = viewAddWorkout
+        fetchExercises()
     }
     
-    func viewLoaded() {}
-    
-    func didSelectRowAt(_ index: Int) {
-        router.presentEditExerciseForm(for: interactor.exerciseAt(index))
+    func exerciseAt(indexPath: IndexPath) -> Exercise {
+        fetchedResultsController.object(at: indexPath)
     }
     
-    func exerciseAt(_ index: Int) -> Exercise {
-        interactor.exerciseAt(index)
+    func didSelectRowAt(_ indexPath: IndexPath) {
+        router.presentEditExerciseForm(for: fetchedResultsController.object(at: indexPath))
+    }
+}
+
+extension AddWorkoutPresenter: AddWorkoutRouterToPresenterProtocol {
+    func addCompletionAction(formOutput: FormOutput) {
+        interactor.addCompletionAction(formOutput: formOutput)
     }
     
-    func deleteExerciseAt(_ index: Int) {
-        interactor.deleteExerciseAt(index)
-    }
-    
-    func moveExerciseAt(from: Int, to: Int) {
-        interactor.moveExerciseAt(from: from, to: to)
+    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
+        interactor.editCompletionAction(for: exercise, formOutput: formOutput)
     }
 }

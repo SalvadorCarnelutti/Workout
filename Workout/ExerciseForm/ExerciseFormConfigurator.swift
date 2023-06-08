@@ -7,7 +7,6 @@
 //
 //
 import Foundation
-import CoreData
 
 final class ExerciseFormConfigurator {
     static func injectDependencies(view: ExerciseFormPresenterToViewProtocol,
@@ -25,7 +24,7 @@ final class ExerciseFormConfigurator {
     }
     
     static func resolveAdd(completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
-        let formModel = FormModel(formInput: nil, formStyle: .add, completionAction: { _ in })
+        let formModel = FormModel(formInput: nil, formStyle: .add, completionAction: completionAction)
         
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()
@@ -41,7 +40,7 @@ final class ExerciseFormConfigurator {
     }
     
     static func resolveEdit(for exercise: Exercise, completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
-        let formModel = FormModel(formInput: FormInput(exercise: exercise), formStyle: .edit, completionAction: { _ in })
+        let formModel = FormModel(formInput: FormInput(exercise: exercise), formStyle: .edit, completionAction: completionAction)
         
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()

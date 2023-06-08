@@ -12,11 +12,18 @@ extension Exercise {
         String(format: "%.0f", duration)
     }
     
+    var setsString: String {
+        String(sets)
+    }
+    
     var repsString: String {
         String(reps)
     }
     
-    var setsString: String {
-        String(sets)
+    func configure(with formOutput: FormOutput) {
+        name = formOutput.name
+        duration = Double(formOutput.duration)
+        sets = Int16(formOutput.sets)
+        reps = Int16(formOutput.reps)
     }
 }

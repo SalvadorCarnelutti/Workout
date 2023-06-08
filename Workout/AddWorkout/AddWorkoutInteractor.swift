@@ -10,16 +10,16 @@ import CoreData
 
 protocol AddWorkoutPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
-    var exercisesCount: Int { get }
-    func exerciseAt(_ index: Int) -> Exercise
-    func deleteExerciseAt(_ index: Int)
-    func moveExerciseAt(from: Int, to: Int)
+    var managedObjectContext: NSManagedObjectContext { get }
+    var workout: Workout { get set }
+    func addCompletionAction(formOutput: FormOutput)
+    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
 }
 
 // MARK: - PresenterToInteractorProtocol
 final class AddWorkoutInteractor: AddWorkoutPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
-    private let workout: Workout
+    var workout: Workout
     
     init(workout: Workout) {
         self.workout = workout
@@ -29,29 +29,17 @@ final class AddWorkoutInteractor: AddWorkoutPresenterToInteractorProtocol {
         workout = Workout(context: managedObjectContext)
     }
     
-    private var exercises = [Exercise]()
-        
-    // TODO: Save
-//        do {
-//            try persistentContainer.viewContext.save()
-//        } catch {
-//            print("\(error), \(error.localizedDescription)")
-//        }
-    
-    var exercisesCount: Int {
-        exercises.count
+    var managedObjectContext: NSManagedObjectContext {
+        workout.managedObjectContext ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     }
     
-    func exerciseAt(_ index: Int) -> Exercise {
-        exercises[index]
+    func addCompletionAction(formOutput: FormOutput) {
+        let exercise = Exercise(context: managedObjectContext)
+        exercise.configure(with: formOutput)
+        exercise.workout = workout
     }
     
-    func deleteExerciseAt(_ index: Int) {
-        exercises.remove(at: index)
-    }
-    
-    func moveExerciseAt(from: Int, to: Int) {
-        let exercise = exercises.remove(at: from)
-        exercises.insert(exercise, at: to)
+    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
+        exercise.configure(with: formOutput)
     }
 }

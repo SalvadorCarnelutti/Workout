@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol AddWorkoutPresenterToRouterProtocol: AnyObject {
-    var viewController: UIViewController? { get set }
+    var presenter: AddWorkoutRouterToPresenterProtocol? { get set }
     func presentAddExerciseForm()
     func presentEditExerciseForm(for exercise: Exercise)
 }
@@ -18,19 +18,24 @@ protocol AddWorkoutPresenterToRouterProtocol: AnyObject {
 // MARK: - PresenterToInteractorProtocol
 final class AddWorkoutRouter: AddWorkoutPresenterToRouterProtocol {
     // MARK: - Properties
-    weak var viewController: UIViewController?
+    weak var presenter: AddWorkoutRouterToPresenterProtocol?
     
     func presentAddExerciseForm() {
-        // TODO: Ask the presenter for the interactor add completion action
-        let addExerciseFormViewController = ExerciseFormConfigurator.resolveAdd(completionAction: { _ in })
+        guard let presenter = presenter else { return }
+        
+        let addExerciseFormViewController = ExerciseFormConfigurator.resolveAdd(completionAction: presenter.addCompletionAction)
         addExerciseFormViewController.modalPresentationStyle = .popover
-        viewController?.present(addExerciseFormViewController, animated: true)
+        presenter.present(addExerciseFormViewController, animated: true)
     }
     
     func presentEditExerciseForm(for exercise: Exercise) {
-        // TODO: Ask the presenter for the interactor edit completion action
-        let editExerciseFormViewController = ExerciseFormConfigurator.resolveEdit(for: exercise, completionAction: { _ in })
+        guard let presenter = presenter else { return }
+        
+        let editExerciseFormViewController = ExerciseFormConfigurator.resolveEdit(for: exercise) { formOutput in
+            presenter.editCompletionAction(for: exercise, formOutput: formOutput)
+        }
+        
         editExerciseFormViewController.modalPresentationStyle = .popover
-        viewController?.present(editExerciseFormViewController, animated: true)
+        presenter.present(editExerciseFormViewController, animated: true)
     }
 }

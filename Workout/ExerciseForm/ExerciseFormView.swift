@@ -131,7 +131,7 @@ final class ExerciseFormView: UIView {
         setsTextField.text = formInput.sets
         repsTextField.text = formInput.reps
         
-        // isValid needs to be updated appropriately for each textField
+        // isValid needs to be updated appropriately for each textField, we need to notify at beginning of edit
         textFields.forEach { $0.sendActions(for: .editingChanged) }
     }
     
