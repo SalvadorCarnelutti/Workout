@@ -1,6 +1,6 @@
 ////
 ////  
-//  AddWorkoutRouter.swift
+//  WorkoutRouter.swift
 //  Workout
 //
 //  Created by Salvador on 6/3/23.
@@ -9,16 +9,16 @@
 import UIKit
 import CoreData
 
-protocol AddWorkoutPresenterToRouterProtocol: AnyObject {
-    var presenter: AddWorkoutRouterToPresenterProtocol? { get set }
+protocol WorkoutPresenterToRouterProtocol: AnyObject {
+    var presenter: WorkoutRouterToPresenterProtocol? { get set }
     func presentAddExerciseForm()
     func presentEditExerciseForm(for exercise: Exercise)
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class AddWorkoutRouter: AddWorkoutPresenterToRouterProtocol {
+final class WorkoutRouter: WorkoutPresenterToRouterProtocol {
     // MARK: - Properties
-    weak var presenter: AddWorkoutRouterToPresenterProtocol?
+    weak var presenter: WorkoutRouterToPresenterProtocol?
     
     func presentAddExerciseForm() {
         guard let presenter = presenter else { return }

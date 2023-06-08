@@ -1,6 +1,6 @@
 //
 //  
-//  AddWorkoutPresenter.swift
+//  WorkoutPresenter.swift
 //  Workout
 //
 //  Created by Salvador on 6/3/23.
@@ -10,22 +10,22 @@
 import UIKit
 import CoreData
 
-protocol AddWorkoutViewToPresenterProtocol: UIViewController {
+protocol WorkoutViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
     func viewLoaded()
     func exerciseAt(indexPath: IndexPath) -> Exercise
     func didSelectRowAt(_ indexPath: IndexPath)
 }
 
-protocol AddWorkoutRouterToPresenterProtocol: UIViewController {
+protocol WorkoutRouterToPresenterProtocol: UIViewController {
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
 }
 
-final class AddWorkoutPresenter: BaseViewController {
-    var viewAddWorkout: AddWorkoutPresenterToViewProtocol!
-    var interactor: AddWorkoutPresenterToInteractorProtocol!
-    var router: AddWorkoutPresenterToRouterProtocol!
+final class WorkoutPresenter: BaseViewController {
+    var viewAddWorkout: WorkoutPresenterToViewProtocol!
+    var interactor: WorkoutPresenterToInteractorProtocol!
+    var router: WorkoutPresenterToRouterProtocol!
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
@@ -72,7 +72,7 @@ final class AddWorkoutPresenter: BaseViewController {
 }
 
 // MARK: - ViewToPresenterProtocol
-extension AddWorkoutPresenter: AddWorkoutViewToPresenterProtocol {
+extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
     func viewLoaded() {
@@ -89,7 +89,7 @@ extension AddWorkoutPresenter: AddWorkoutViewToPresenterProtocol {
     }
 }
 
-extension AddWorkoutPresenter: AddWorkoutRouterToPresenterProtocol {
+extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
     func addCompletionAction(formOutput: FormOutput) {
         interactor.addCompletionAction(formOutput: formOutput)
     }
