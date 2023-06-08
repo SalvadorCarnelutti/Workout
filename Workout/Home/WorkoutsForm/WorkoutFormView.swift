@@ -26,10 +26,10 @@ final class WorkoutFormView: UIView {
         return label
     }()
     
-    private lazy var nameTextField: ValidatedTextField = {
-        let textField = ValidatedTextField()
-        addSubview(textField)
-        return textField
+    private lazy var nameFormField: ValidatedFormField = {
+        let formField = ValidatedFormField()
+        addSubview(formField)
+        return formField
     }()
     
     private lazy var completionButton: StyledButton = {
@@ -47,23 +47,23 @@ final class WorkoutFormView: UIView {
             make.centerX.equalToSuperview()
         }
         
-        nameTextField.snp.makeConstraints { make in
+        nameFormField.snp.makeConstraints { make in
             make.top.equalTo(headerLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
         
         completionButton.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(20)
+            make.top.equalTo(nameFormField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
         }
     }
     
     @objc private func completionActionTapped() {
-        presenter?.completionAction(for: nameTextField.unwrappedText)
+        presenter?.completionAction(for: nameFormField.unwrappedText)
     }
     
-    private func setupTextField() {
+    private func setupFormField() {
         guard let presenter = presenter else { return }
         
         NotificationCenter.default.addObserver(self,
@@ -71,22 +71,22 @@ final class WorkoutFormView: UIView {
                                                name: UITextField.textDidChangeNotification,
                                                object: nil)
         
-        nameTextField.configure(with: presenter.nameEntity)
+        nameFormField.configure(with: presenter.nameEntity)
         
         if let formInput = presenter.formInput {
-            fillTextfield(formInput: formInput)
+            fillFormField(formInput: formInput)
         }
     }
     
     @objc private func textDidChange(_ notification: Notification) {
-        completionButton.isEnabled = nameTextField.isValid
+        completionButton.isEnabled = nameFormField.isValid
     }
     
-    private func fillTextfield(formInput: String) {
-        nameTextField.text = formInput
+    private func fillFormField(formInput: String) {
+        nameFormField.text = formInput
         
-        // isValid needs to be updated appropriately for nameTextField, we need to notify at beginning of edit
-        nameTextField.sendActions(for: .editingChanged)
+        // isValid needs to be updated appropriately for nameFormField, we need to notify at beginning of edit
+        nameFormField.sendActions(for: .editingChanged)
     }
 }
 
@@ -94,7 +94,7 @@ final class WorkoutFormView: UIView {
 extension WorkoutFormView: WorkoutsFormPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
-        setupTextField()
+        setupFormField()
         setupConstraints()
     }
 }

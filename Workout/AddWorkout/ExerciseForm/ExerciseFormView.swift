@@ -17,10 +17,10 @@ protocol ExerciseFormPresenterToViewProtocol: UIView {
 final class ExerciseFormView: UIView {
     // MARK: - Properties
     weak var presenter: ExerciseFormViewToPresenterProtocol?
-    private var textFields = [ValidatedTextField]()
+    private var formFields = [ValidatedFormField]()
     
     private lazy var stackView: VerticalStack = {
-       let stackView = VerticalStack(arrangedSubviews: textFields)
+       let stackView = VerticalStack(arrangedSubviews: formFields)
         addSubview(stackView)
         return stackView
     }()
@@ -34,31 +34,31 @@ final class ExerciseFormView: UIView {
         return label
     }()
     
-    private lazy var nameTextField: ValidatedTextField = {
-        let textField = ValidatedTextField()
-        addSubview(textField)
-        return textField
+    private lazy var nameFormField: ValidatedFormField = {
+        let formField = ValidatedFormField()
+        addSubview(formField)
+        return formField
     }()
     
-    private lazy var durationTextField: ValidatedTextField = {
-        let textField = ValidatedTextField()
-        addSubview(textField)
-        textField.keyboardType = .numberPad
-        return textField
+    private lazy var durationFormField: ValidatedFormField = {
+        let formField = ValidatedFormField()
+        addSubview(formField)
+        formField.keyboardType = .numberPad
+        return formField
     }()
     
-    private lazy var setsTextField: ValidatedTextField = {
-        let textField = ValidatedTextField()
-        addSubview(textField)
-        textField.keyboardType = .numberPad
-        return textField
+    private lazy var setsFormField: ValidatedFormField = {
+        let formField = ValidatedFormField()
+        addSubview(formField)
+        formField.keyboardType = .numberPad
+        return formField
     }()
     
-    private lazy var repsTextField: ValidatedTextField = {
-        let textField = ValidatedTextField()
-        addSubview(textField)
-        textField.keyboardType = .numberPad
-        return textField
+    private lazy var repsFormField: ValidatedFormField = {
+        let formField = ValidatedFormField()
+        addSubview(formField)
+        formField.keyboardType = .numberPad
+        return formField
     }()
     
     private lazy var completionButton: StyledButton = {
@@ -89,13 +89,13 @@ final class ExerciseFormView: UIView {
     }
     
     @objc private func completionActionTapped() {
-        guard let duration = Int(durationTextField.unwrappedText),
-              let sets = Int(setsTextField.unwrappedText),
-              let reps = Int(repsTextField.unwrappedText) else {
+        guard let duration = Int(durationFormField.unwrappedText),
+              let sets = Int(setsFormField.unwrappedText),
+              let reps = Int(repsFormField.unwrappedText) else {
             return
         }
         
-        let formOutput = FormOutput(name: nameTextField.unwrappedText,
+        let formOutput = FormOutput(name: nameFormField.unwrappedText,
                                     duration: duration,
                                     sets: sets,
                                     reps: reps)
@@ -103,7 +103,7 @@ final class ExerciseFormView: UIView {
         presenter?.completionButtonTapped(for: formOutput)
     }
     
-    private func setupTextFields() {
+    private func setupFormFields() {
         guard let presenter = presenter else { return }
         
         NotificationCenter.default.addObserver(self,
@@ -111,33 +111,35 @@ final class ExerciseFormView: UIView {
                                                name: UITextField.textDidChangeNotification,
                                                object: nil)
         
-        nameTextField.configure(with: presenter.nameEntity)
-        durationTextField.configure(with: presenter.durationEntity)
-        setsTextField.configure(with: presenter.setsEntity)
-        repsTextField.configure(with: presenter.repsEntity)
+        nameFormField.configure(with: presenter.nameEntity)
+        durationFormField.configure(with: presenter.durationEntity)
+        setsFormField.configure(with: presenter.setsEntity)
+        repsFormField.configure(with: presenter.repsEntity)
         
-        textFields = [nameTextField,
-                      durationTextField,
-                      setsTextField,
-                      repsTextField]
+        formFields = [nameFormField,
+                      durationFormField,
+                      setsFormField,
+                      repsFormField]
         
         if let formInput = presenter.formInput {
-            fillTextfields(formInput: formInput)
+            fillFormFields(formInput: formInput)
         }
     }
     
     @objc private func textDidChange(_ notification: Notification) {
-        completionButton.isEnabled = textFields.map { $0.isValid }.allSatisfy { $0 }
+        UIView.animate(withDuration: 0.25, animations: {
+            self.completionButton.isEnabled = self.formFields.map { $0.isValid }.allSatisfy { $0 }
+        })
     }
     
-    private func fillTextfields(formInput: FormInput) {
-        nameTextField.text = formInput.name
-        durationTextField.text = formInput.duration
-        setsTextField.text = formInput.sets
-        repsTextField.text = formInput.reps
+    private func fillFormFields(formInput: FormInput) {
+        nameFormField.text = formInput.name
+        durationFormField.text = formInput.duration
+        setsFormField.text = formInput.sets
+        repsFormField.text = formInput.reps
         
-        // isValid needs to be updated appropriately for each textField, we need to notify at beginning of edit
-        textFields.forEach { $0.sendActions(for: .editingChanged) }
+        // isValid needs to be updated appropriately for each formField, we need to notify at beginning of edit
+        formFields.forEach { $0.sendActions(for: .editingChanged) }
     }
 }
 
@@ -145,7 +147,7 @@ final class ExerciseFormView: UIView {
 extension ExerciseFormView: ExerciseFormPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
-        setupTextFields()
+        setupFormFields()
         setupConstraints()
     }
 }

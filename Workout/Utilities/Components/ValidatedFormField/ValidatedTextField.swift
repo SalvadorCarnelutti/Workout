@@ -6,13 +6,11 @@
 //
 
 import UIKit
-
 class ValidatedTextField: UITextField {
     // MARK: - Properties
     private(set) var isValid = false
     var validationBlock: ((String) -> Bool)?
-    var errorMessage: String = "Invalid input"
-    var errorColor: UIColor = UIColor.red
+    weak var validatedTextFieldDelegate: ValidatedTextFieldDelegate?
 
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -30,13 +28,12 @@ class ValidatedTextField: UITextField {
         if action == #selector(UIResponderStandardEditActions.paste(_:)) {
             return false
         }
+        
         return super.canPerformAction(action, withSender: sender)
     }
     
     func configure(with entity: ValidationEntity) {
         validationBlock = entity.validationBlock
-        errorMessage = entity.errorMessage
-        errorColor = entity.errorColor
         placeholder = entity.placeholder
     }
     
@@ -55,22 +52,6 @@ class ValidatedTextField: UITextField {
 
     private func validateInput() {
         isValid = validationBlock?(unwrappedText) ?? true
-        isValid ? resetErrorState() : showErrorState()
+        validatedTextFieldDelegate?.onValidChange(newValue: isValid)
     }
-
-    private func resetErrorState() {
-        layer.borderWidth = 0
-    }
-
-    private func showErrorState() {
-        layer.borderWidth = 1
-        layer.borderColor = errorColor.cgColor
-    }
-}
-
-struct ValidationEntity {
-    var validationBlock: ((String) -> Bool)
-    var errorMessage: String = "Invalid input"
-    var errorColor: UIColor = UIColor.red
-    var placeholder: String
 }

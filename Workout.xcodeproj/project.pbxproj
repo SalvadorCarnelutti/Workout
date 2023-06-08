@@ -20,6 +20,8 @@
 		B440C5C52A3220FB008154CE /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5C42A3220FB008154CE /* WorkoutTableViewCell.swift */; };
 		B440C5C72A3221AC008154CE /* VerticalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5C62A3221AC008154CE /* VerticalStack.swift */; };
 		B440C5CC2A324021008154CE /* NSPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5CB2A324021008154CE /* NSPersistentContainer.swift */; };
+		B440C5CE2A32851B008154CE /* ValidatedFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5CD2A32851B008154CE /* ValidatedFormField.swift */; };
+		B440C5D22A328DA0008154CE /* ValidationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5D12A328DA0008154CE /* ValidationEntity.swift */; };
 		B48B86CE2A2A5D48007638C0 /* WorkoutsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */; };
 		B48B86CF2A2A5D48007638C0 /* WorkoutsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */; };
 		B48B86D02A2A5D48007638C0 /* WorkoutsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */; };
@@ -64,6 +66,8 @@
 		B440C5C42A3220FB008154CE /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		B440C5C62A3221AC008154CE /* VerticalStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStack.swift; sourceTree = "<group>"; };
 		B440C5CB2A324021008154CE /* NSPersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPersistentContainer.swift; sourceTree = "<group>"; };
+		B440C5CD2A32851B008154CE /* ValidatedFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedFormField.swift; sourceTree = "<group>"; };
+		B440C5D12A328DA0008154CE /* ValidationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationEntity.swift; sourceTree = "<group>"; };
 		B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsPresenter.swift; sourceTree = "<group>"; };
 		B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsRouter.swift; sourceTree = "<group>"; };
 		B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsInteractor.swift; sourceTree = "<group>"; };
@@ -154,6 +158,24 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		B440C5CF2A328534008154CE /* ValidatedFormField */ = {
+			isa = PBXGroup;
+			children = (
+				B440C5D02A328D97008154CE /* Models */,
+				B440C5CD2A32851B008154CE /* ValidatedFormField.swift */,
+				B48B86F22A2BF77E007638C0 /* ValidatedTextField.swift */,
+			);
+			path = ValidatedFormField;
+			sourceTree = "<group>";
+		};
+		B440C5D02A328D97008154CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B440C5D12A328DA0008154CE /* ValidationEntity.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +228,7 @@
 		B48B86F12A2BF76F007638C0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				B48B86F22A2BF77E007638C0 /* ValidatedTextField.swift */,
+				B440C5CF2A328534008154CE /* ValidatedFormField */,
 				B410BFCD2A2D994500899BBC /* StyledButton.swift */,
 				B48B86F42A2D326F007638C0 /* MultilineLabel.swift */,
 				B440C5C62A3221AC008154CE /* VerticalStack.swift */,
@@ -403,6 +425,8 @@
 				B410BFE02A32085E00899BBC /* WorkoutFormConfigurator.swift in Sources */,
 				B48B86E12A2BEDDF007638C0 /* WorkoutPresenter.swift in Sources */,
 				B48B86E42A2BEDDF007638C0 /* WorkoutView.swift in Sources */,
+				B440C5D22A328DA0008154CE /* ValidationEntity.swift in Sources */,
+				B440C5CE2A32851B008154CE /* ValidatedFormField.swift in Sources */,
 				B48B86D02A2A5D48007638C0 /* WorkoutsInteractor.swift in Sources */,
 				B410BFD32A2E8EDF00899BBC /* ExerciseFormModels.swift in Sources */,
 				B48B86DA2A2A6E17007638C0 /* UIImage.swift in Sources */,

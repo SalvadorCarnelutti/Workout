@@ -46,7 +46,7 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkout
-        // TODO: have to include a loader item in the project.
+        // TODO: have to include a loader item in the project. I still need to do Workout name editing available. Fix Texfield error messages. Validate entities model values. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
         interactor.loadPersistentContainer()
     }
     
