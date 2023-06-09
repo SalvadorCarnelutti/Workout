@@ -20,6 +20,10 @@ extension Exercise {
         String(reps)
     }
     
+    var orderInt: Int {
+        Int(order)
+    }
+    
     func configure(with formOutput: FormOutput) {
         name = formOutput.name
         duration = Double(formOutput.duration)

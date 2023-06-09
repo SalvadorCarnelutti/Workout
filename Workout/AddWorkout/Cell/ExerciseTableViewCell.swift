@@ -38,6 +38,22 @@ final class ExerciseTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var orderLabel: UILabel = {
+        let label = MultilineLabel()
+        addSubview(label)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        label.textColor = .systemBlue
+        // Set corner radius
+        label.layer.cornerRadius = 5.0
+        label.layer.masksToBounds = true
+
+        // Set border color and width
+        label.layer.borderColor = UIColor.systemBlue.cgColor
+        label.layer.borderWidth = 2.0
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -49,8 +65,15 @@ final class ExerciseTableViewCell: UITableViewCell {
     }
     
     private func setupConstraints() {
+        orderLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(10)
+            make.width.height.equalTo(30)
+        }
+        
         stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(20)
+            make.left.equalTo(orderLabel.snp.right).offset(8)
+            make.top.right.bottom.equalToSuperview().inset(20)
         }
     }
     
@@ -59,5 +82,6 @@ final class ExerciseTableViewCell: UITableViewCell {
         durationLabel.text = "• Duration: \(exercise.durationString) min"
         setsLabel.text = "• Set count: \(exercise.setsString)"
         repsLabel.text = "• Rep count: \(exercise.repsString)"
+        orderLabel.text = "\(exercise.order)"
     }
 }

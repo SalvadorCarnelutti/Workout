@@ -9,17 +9,18 @@
 import CoreData
 
 protocol WorkoutPresenterToInteractorProtocol: AnyObject {
-    var presenter: BaseViewProtocol? { get set }
+    var presenter: WorkoutInteractorToPresenterProtocol? { get set }
     var workout: Workout { get set }
     var managedObjectContext: NSManagedObjectContext { get }
     var workoutName: String { get }
+    func setExercises(exercise: [Exercise])
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
 }
 
 // MARK: - PresenterToInteractorProtocol
 final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
-    weak var presenter: BaseViewProtocol?
+    weak var presenter: WorkoutInteractorToPresenterProtocol?
     var workout: Workout
     
     init(workout: Workout) {
@@ -39,12 +40,20 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
     }
     
     func addCompletionAction(formOutput: FormOutput) {
+        guard let presenter = presenter else { return }
+        
         let exercise = Exercise(context: managedObjectContext)
         exercise.configure(with: formOutput)
+        exercise.order = Int16(presenter.exercisesCount)
+        exercise.uuid = UUID()
         exercise.workout = workout
     }
     
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
         exercise.configure(with: formOutput)
+    }
+    
+    func setExercises(exercise: [Exercise]) {
+        exercise.forEach { $0.workout = workout }
     }
 }

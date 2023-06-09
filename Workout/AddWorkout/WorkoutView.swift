@@ -32,7 +32,7 @@ final class WorkoutView: UIView {
     
     private func setupConstraints() {
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(8)
+            make.top.equalTo(safeAreaLayoutGuide).inset(8)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
@@ -106,6 +106,11 @@ extension WorkoutView: NSFetchedResultsControllerDelegate {
 //        updateView()
     }
     
+    /*
+    The fetched results controller reports changes to its section before changes to the fetch result objects.
+    Changes are reported with the following heuristics:
+    It’s assumed that all objects that come after the affected object are also moved, but these moves are not reported.
+    */
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange anObject: Any,
                     at indexPath: IndexPath?,
@@ -114,6 +119,7 @@ extension WorkoutView: NSFetchedResultsControllerDelegate {
         guard let presenter = presenter else { return }
         
         switch (type) {
+        // On add and remove operations, only the added/removed object is reported.
         case .insert:
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
@@ -121,18 +127,12 @@ extension WorkoutView: NSFetchedResultsControllerDelegate {
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                presenter.didDeleteRowAt(indexPath)
             }
+        // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
                 cell.configure(with: presenter.exerciseAt(indexPath: indexPath))
-            }
-        case .move:
-            if let indexPath = indexPath {
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-
-            if let newIndexPath = newIndexPath {
-                tableView.insertRows(at: [newIndexPath], with: .fade)
             }
         @unknown default:
             return

@@ -15,11 +15,16 @@ protocol WorkoutViewToPresenterProtocol: UIViewController {
     func viewLoaded()
     func exerciseAt(indexPath: IndexPath) -> Exercise
     func didSelectRowAt(_ indexPath: IndexPath)
+    func didDeleteRowAt(_ indexPath: IndexPath)
 }
 
 protocol WorkoutRouterToPresenterProtocol: UIViewController {
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
+}
+
+protocol WorkoutInteractorToPresenterProtocol: BaseViewProtocol {
+    var exercisesCount: Int { get }
 }
 
 final class WorkoutPresenter: BaseViewController {
@@ -87,7 +92,13 @@ extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     func didSelectRowAt(_ indexPath: IndexPath) {
         router.presentEditExerciseForm(for: fetchedResultsController.object(at: indexPath))
     }
+    
+    func didDeleteRowAt(_ indexPath: IndexPath) {
+        Array(0..<indexPath.row).map { exerciseAt(indexPath: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
+    }
 }
+
+extension WorkoutPresenter: WorkoutInteractorToPresenterProtocol {}
 
 extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
     func addCompletionAction(formOutput: FormOutput) {

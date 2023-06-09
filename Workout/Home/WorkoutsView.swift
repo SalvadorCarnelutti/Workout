@@ -90,6 +90,11 @@ extension WorkoutsView: NSFetchedResultsControllerDelegate {
 //        updateView()
     }
     
+    /*
+    The fetched results controller reports changes to its section before changes to the fetch result objects.
+    Changes are reported with the following heuristics:
+    It’s assumed that all objects that come after the affected object are also moved, but these moves are not reported.
+    */
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange anObject: Any,
                     at indexPath: IndexPath?,
@@ -98,6 +103,7 @@ extension WorkoutsView: NSFetchedResultsControllerDelegate {
         guard let presenter = presenter else { return }
         
         switch (type) {
+        // On add and remove operations, only the added/removed object is reported.
         case .insert:
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
@@ -106,10 +112,13 @@ extension WorkoutsView: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
+        // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? WorkoutTableViewCell {
                 cell.configure(with: presenter.workoutAt(indexPath: indexPath))
             }
+        // A move is reported when the changed attribute on the object is one of the sort descriptors used in the fetch request.
+        // An update of the object is assumed in this case, but no separate update message is sent to the delegate.
         case .move:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)

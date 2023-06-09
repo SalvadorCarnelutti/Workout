@@ -34,7 +34,7 @@ final class WorkoutsPresenter: BaseViewController {
     private lazy var fetchedResultsController: NSFetchedResultsController<Workout> = {
         let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
         // TODO: Check later if necessary to see that ordering is preserved
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Workout.name), ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Workout.name), ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
                                                                   sectionNameKeyPath: nil,
@@ -46,7 +46,7 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkout
-        // TODO: have to include a loader item in the project. I still need to do Workout name editing available. Fix Texfield error messages. Validate entities model values. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
+        // TODO: have to include a loader item in the project. I still need to do Workout name editing available. Validate entities model values. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
         interactor.loadPersistentContainer()
     }
     

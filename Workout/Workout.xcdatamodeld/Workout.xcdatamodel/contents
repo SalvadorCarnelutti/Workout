@@ -6,7 +6,7 @@
         <attribute name="order" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="reps" attributeType="Integer 16" minValueString="1" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sets" attributeType="Integer 16" minValueString="1" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="exercises" inverseEntity="Workout"/>
     </entity>
     <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
@@ -16,7 +16,7 @@
     </entity>
     <entity name="Workout" representedClassName="Workout" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String"/>
-        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workout" inverseEntity="Exercise"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="relationship" inverseEntity="Session"/>
     </entity>
