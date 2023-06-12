@@ -20,8 +20,8 @@ extension Exercise {
         String(reps)
     }
     
-    var orderInt: Int {
-        Int(order)
+    var itemOrder: Int {
+        Int(order) + 1
     }
     
     func configure(with formOutput: FormOutput) {

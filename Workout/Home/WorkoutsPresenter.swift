@@ -46,7 +46,8 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkout
-        // TODO: have to include a loader item in the project. I still need to do Workout name editing available. Validate entities model values. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
+        // TODO: I still need to do Workout name editing available. Validate entities model values. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
+        showLoader()
         interactor.loadPersistentContainer()
     }
     
@@ -112,19 +113,4 @@ extension WorkoutsPresenter: WorkoutsRouterToPresenterProtocol {
     func addCompletionAction(name: String) {
         interactor.addCompletionAction(name: name)
     }
-}
-
-class BaseViewController: UIViewController, BaseViewProtocol {
-    func showLoader() {
-        
-    }
-    
-    func hideLoader() {
-        
-    }
-}
-
-protocol BaseViewProtocol: AnyObject {
-    func showLoader()
-    func hideLoader()
 }

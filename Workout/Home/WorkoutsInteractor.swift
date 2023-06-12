@@ -38,6 +38,7 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
             } else {
                 self.persistentContainer.setupNotificationHandling()
                 self.presenter?.onPersistentContainerLoadSuccess()
+                self.presenter?.hideLoader()
             }
         }
     }

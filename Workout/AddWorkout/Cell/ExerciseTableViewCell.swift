@@ -82,6 +82,6 @@ final class ExerciseTableViewCell: UITableViewCell {
         durationLabel.text = "• Duration: \(exercise.durationString) min"
         setsLabel.text = "• Set count: \(exercise.setsString)"
         repsLabel.text = "• Rep count: \(exercise.repsString)"
-        orderLabel.text = "\(exercise.order)"
+        orderLabel.text = "\(exercise.itemOrder)"
     }
 }
