@@ -13,7 +13,7 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
     var workout: Workout { get set }
     var managedObjectContext: NSManagedObjectContext { get }
     var workoutName: String { get }
-    func setExercises(exercise: [Exercise])
+    func editWorkoutName(with newName: String)
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
 }
@@ -39,6 +39,10 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
         workout.name ?? ""
     }
     
+    func editWorkoutName(with newName: String) {
+        workout.name = newName
+    }
+    
     func addCompletionAction(formOutput: FormOutput) {
         guard let presenter = presenter else { return }
         
@@ -51,9 +55,5 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
     
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
         exercise.configure(with: formOutput)
-    }
-    
-    func setExercises(exercise: [Exercise]) {
-        exercise.forEach { $0.workout = workout }
     }
 }

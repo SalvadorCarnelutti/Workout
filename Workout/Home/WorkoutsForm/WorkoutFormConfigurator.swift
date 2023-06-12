@@ -39,9 +39,9 @@ final class WorkoutFormConfigurator {
         return presenter
     }
     
-    static func resolveEdit(completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
+    static func resolveEdit(for workoutName: String, completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
         // TOPDO: Change formInput
-        let formModel = WorkoutFormModel(formInput: nil, formStyle: .edit, completionAction: completionAction)
+        let formModel = WorkoutFormModel(formInput: workoutName, formStyle: .edit, completionAction: completionAction)
         
         let presenter = WorkoutFormPresenter()
         let view = WorkoutFormView()

@@ -13,4 +13,5 @@ extension UIImage {
     }
     
     static var add: UIImage { Self.unwrappedImage("plus") }
+    static var edit: UIImage { Self.unwrappedImage("pencil") }
 }

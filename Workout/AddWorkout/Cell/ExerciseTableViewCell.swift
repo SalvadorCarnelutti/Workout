@@ -44,6 +44,7 @@ final class ExerciseTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
         label.textColor = .systemBlue
+        
         // Set corner radius
         label.layer.cornerRadius = 5.0
         label.layer.masksToBounds = true

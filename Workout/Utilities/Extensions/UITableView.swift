@@ -11,4 +11,8 @@ extension UITableView {
     func register(_ cellClass: UITableViewCell.Type) {
         register(cellClass, forCellReuseIdentifier: cellClass.identifier)
     }
+    
+    func register(_ headerFooterClass: UITableViewHeaderFooterView.Type) {
+        register(headerFooterClass, forHeaderFooterViewReuseIdentifier: headerFooterClass.identifier)
+    }
 }

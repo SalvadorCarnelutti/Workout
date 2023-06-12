@@ -46,7 +46,7 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkout
-        // TODO: I still need to do Workout name editing available. Validate entities model values. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
+        // TODO: Validate entities model values and check if th persistent container can be set for proper versioning. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
         showLoader()
         interactor.loadPersistentContainer()
     }

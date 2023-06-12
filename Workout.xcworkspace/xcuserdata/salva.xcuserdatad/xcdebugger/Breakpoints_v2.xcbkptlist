@@ -86,70 +86,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1280D5C8-D51C-4087-88BD-AA9E773ED519"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Workout/AddWorkout/ExerciseForm/ExerciseFormView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "completionActionTapped()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1280D5C8-D51C-4087-88BD-AA9E773ED519 - 9cd679492c45258b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Workout.ExerciseFormView.completionActionTapped() -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AddWorkout/ExerciseForm/ExerciseFormView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  uuid = "1280D5C8-D51C-4087-88BD-AA9E773ED519 - 9cd679492c45258b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Workout.ExerciseFormView.completionActionTapped() -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AddWorkout/ExerciseForm/ExerciseFormView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "188">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "77C53986-E30B-4F17-81D0-4D86FF7A3C54"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Workout/AddWorkout/ExerciseForm/ExerciseFormView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "completionButton"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C2F8834F-6E90-4E9C-809F-06A69F24D7ED"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -208,6 +144,22 @@
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "189BF7FD-D7F4-4CD3-B4DB-0990E38FEEC1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Workout/Home/WorkoutsForm/WorkoutFormConfigurator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "resolveAdd(completionAction:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

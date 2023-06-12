@@ -12,15 +12,19 @@ import CoreData
 
 protocol WorkoutViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
+    var headerString: String { get }
     func viewLoaded()
     func exerciseAt(indexPath: IndexPath) -> Exercise
     func didSelectRowAt(_ indexPath: IndexPath)
     func didDeleteRowAt(_ indexPath: IndexPath)
+    func setupEditWorkoutNameDelegate(for header: ExerciseTableViewHeader)
 }
 
 protocol WorkoutRouterToPresenterProtocol: UIViewController {
+    var workoutName: String { get }
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
+    func editWorkoutName(with newName: String)
 }
 
 protocol WorkoutInteractorToPresenterProtocol: BaseViewProtocol {
@@ -54,7 +58,7 @@ final class WorkoutPresenter: BaseViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = interactor.workoutName
+        navigationItem.title = "Workout"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
                                                             image: UIImage.add,
                                                             target: self,
@@ -80,6 +84,8 @@ final class WorkoutPresenter: BaseViewController {
 extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
+    var headerString: String { interactor.workoutName }
+    
     func viewLoaded() {
         fetchedResultsController.delegate = viewAddWorkout
         fetchExercises()
@@ -96,16 +102,38 @@ extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     func didDeleteRowAt(_ indexPath: IndexPath) {
         Array(0..<indexPath.row).map { exerciseAt(indexPath: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
     }
+    
+    func setupEditWorkoutNameDelegate(for header: ExerciseTableViewHeader) {
+        header.delegate = self
+    }
 }
 
+// MARK: - InteractorToPresenterProtocol
 extension WorkoutPresenter: WorkoutInteractorToPresenterProtocol {}
 
+// MARK: - RouterToPresenterProtocol
 extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
+    var workoutName: String {
+        interactor.workoutName
+    }
+    
+    func editWorkoutName(with newName: String) {
+        interactor.editWorkoutName(with: newName)
+        viewAddWorkout.updateSections()
+    }
+    
     func addCompletionAction(formOutput: FormOutput) {
         interactor.addCompletionAction(formOutput: formOutput)
     }
     
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
         interactor.editCompletionAction(for: exercise, formOutput: formOutput)
+    }
+}
+
+// MARK: - ExerciseTableViewHeaderDelegate protocol
+extension WorkoutPresenter: ExerciseTableViewHeaderDelegate {
+    func customHeaderViewDidTap() {
+        router.presentEditWorkout()
     }
 }

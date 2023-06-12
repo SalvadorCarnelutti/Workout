@@ -11,6 +11,7 @@ import CoreData
 
 protocol WorkoutPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
     var presenter: WorkoutViewToPresenterProtocol? { get set }
+    func updateSections()
     func loadView()
 }
 
@@ -26,13 +27,14 @@ final class WorkoutView: UIView {
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
         tableView.register(ExerciseTableViewCell.self)
+        tableView.register(ExerciseTableViewHeader.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
     
     private func setupConstraints() {
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).inset(8)
+            make.top.equalTo(safeAreaLayoutGuide).offset(8)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
@@ -45,6 +47,13 @@ extension WorkoutView: WorkoutPresenterToViewProtocol {
         backgroundColor = .white
         setupConstraints()
         presenter?.viewLoaded()
+    }
+    
+    func updateSections() {
+        let sectionToReload = 0
+        let indexSet: IndexSet = [sectionToReload]
+
+        tableView.reloadSections(indexSet, with: .automatic)
     }
 }
 
@@ -63,6 +72,19 @@ extension WorkoutView: UITableViewDataSource {
         let exercise = presenter.exerciseAt(indexPath: indexPath)
         cell.configure(with: exercise)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let presenter = presenter,
+              let header = tableView.dequeueReusableHeaderFooterView(
+                withIdentifier: ExerciseTableViewHeader.identifier) as? ExerciseTableViewHeader else {
+            ExerciseTableViewHeader.assertHeaderFailure()
+            return UITableViewHeaderFooterView()
+        }
+        
+        header.configure(with: presenter.headerString)
+        presenter.setupEditWorkoutNameDelegate(for: header)
+        return header
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
@@ -134,7 +156,7 @@ extension WorkoutView: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
                 cell.configure(with: presenter.exerciseAt(indexPath: indexPath))
             }
-        @unknown default:
+        default:
             return
         }
     }
