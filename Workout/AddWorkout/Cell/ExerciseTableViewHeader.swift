@@ -23,7 +23,7 @@ final class ExerciseTableViewHeader: UITableViewHeaderFooterView {
         return view
     }()
     
-    private lazy var workoutNameLabel: UILabel = {
+    private lazy var workoutNameLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
         label.textAlignment = .left

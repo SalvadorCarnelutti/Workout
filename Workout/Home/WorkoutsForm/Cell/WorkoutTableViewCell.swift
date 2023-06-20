@@ -8,7 +8,7 @@
 import UIKit
 
 final class WorkoutTableViewCell: UITableViewCell {
-    private lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
         label.font = .systemFont(ofSize: 24, weight: .bold)

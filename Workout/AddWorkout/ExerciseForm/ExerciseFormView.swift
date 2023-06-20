@@ -25,7 +25,7 @@ final class ExerciseFormView: UIView {
         return stackView
     }()
     
-    private lazy var headerLabel: UILabel = {
+    private lazy var headerLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
         label.textAlignment = .center

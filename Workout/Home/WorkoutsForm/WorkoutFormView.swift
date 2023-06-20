@@ -17,7 +17,7 @@ final class WorkoutFormView: UIView {
     // MARK: - Properties
     weak var presenter: WorkoutFormViewToPresenterProtocol?
     
-    private lazy var headerLabel: UILabel = {
+    private lazy var headerLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
         label.textAlignment = .center

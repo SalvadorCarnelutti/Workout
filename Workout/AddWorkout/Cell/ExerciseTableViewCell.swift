@@ -14,31 +14,31 @@ final class ExerciseTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: MultilineLabel = {
         let label = MultilineLabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
         return label
     }()
     
-    private lazy var durationLabel: UILabel = {
+    private lazy var durationLabel: MultilineLabel = {
         let label = MultilineLabel()
         label.font = .systemFont(ofSize: 18)
         return label
     }()
     
-    private lazy var repsLabel: UILabel = {
+    private lazy var repsLabel: MultilineLabel = {
         let label = MultilineLabel()
         label.font = .systemFont(ofSize: 18)
         return label
     }()
     
-    private lazy var setsLabel: UILabel = {
+    private lazy var setsLabel: MultilineLabel = {
         let label = MultilineLabel()
         label.font = .systemFont(ofSize: 18)
         return label
     }()
     
-    private lazy var orderLabel: UILabel = {
+    private lazy var orderLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
         label.font = .systemFont(ofSize: 20, weight: .bold)
