@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutPresenter.swift
+//  ExercisesPresenter.swift
 //  Workout
 //
 //  Created by Salvador on 6/3/23.
@@ -10,7 +10,7 @@
 import UIKit
 import CoreData
 
-protocol WorkoutViewToPresenterProtocol: UIViewController {
+protocol ExercisesViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
     var headerString: String { get }
     func viewLoaded()
@@ -20,21 +20,21 @@ protocol WorkoutViewToPresenterProtocol: UIViewController {
     func setupEditWorkoutNameDelegate(for header: ExerciseTableViewHeader)
 }
 
-protocol WorkoutRouterToPresenterProtocol: UIViewController {
+protocol ExercisesRouterToPresenterProtocol: UIViewController {
     var workoutName: String { get }
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
     func editWorkoutName(with newName: String)
 }
 
-protocol WorkoutInteractorToPresenterProtocol: BaseViewProtocol {
+protocol ExercisesInteractorToPresenterProtocol: BaseViewProtocol {
     var exercisesCount: Int { get }
 }
 
-final class WorkoutPresenter: BaseViewController {
-    var viewAddWorkout: WorkoutPresenterToViewProtocol!
-    var interactor: WorkoutPresenterToInteractorProtocol!
-    var router: WorkoutPresenterToRouterProtocol!
+final class ExercisesPresenter: BaseViewController {
+    var viewAddWorkout: ExercisesPresenterToViewProtocol!
+    var interactor: ExercisesPresenterToInteractorProtocol!
+    var router: ExercisesPresenterToRouterProtocol!
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
@@ -81,7 +81,7 @@ final class WorkoutPresenter: BaseViewController {
 }
 
 // MARK: - ViewToPresenterProtocol
-extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
+extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
     var headerString: String { interactor.workoutName }
@@ -109,10 +109,10 @@ extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
 }
 
 // MARK: - InteractorToPresenterProtocol
-extension WorkoutPresenter: WorkoutInteractorToPresenterProtocol {}
+extension ExercisesPresenter: ExercisesInteractorToPresenterProtocol {}
 
 // MARK: - RouterToPresenterProtocol
-extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
+extension ExercisesPresenter: ExercisesRouterToPresenterProtocol {
     var workoutName: String {
         interactor.workoutName
     }
@@ -132,7 +132,7 @@ extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
 }
 
 // MARK: - ExerciseTableViewHeaderDelegate protocol
-extension WorkoutPresenter: ExerciseTableViewHeaderDelegate {
+extension ExercisesPresenter: ExerciseTableViewHeaderDelegate {
     func customHeaderViewDidTap() {
         router.presentEditWorkout()
     }

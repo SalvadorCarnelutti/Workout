@@ -23,7 +23,7 @@ final class WorkoutsRouter: WorkoutsPresenterToRouterProtocol {
     func pushAddWorkout() {
         guard let presenter = presenter else { return }
         
-        let addWorkoutViewController = WorkoutConfigurator.resolveAdd(completionAction: presenter.addCompletionAction)
+        let addWorkoutViewController = ExercisesConfigurator.resolveAdd(completionAction: presenter.addCompletionAction)
         addWorkoutViewController.modalPresentationStyle = .popover
         presenter.present(addWorkoutViewController, animated: true)
     }
@@ -31,7 +31,7 @@ final class WorkoutsRouter: WorkoutsPresenterToRouterProtocol {
     func pushEditWorkout(for workout: Workout) {
         guard let presenter = presenter else { return }
         
-        let editWorkoutViewController = WorkoutConfigurator.resolveEdit(for: workout)
+        let editWorkoutViewController = ExercisesConfigurator.resolveEdit(for: workout)
         presenter.navigationController?.pushViewController(editWorkoutViewController, animated: true)
     }
 }

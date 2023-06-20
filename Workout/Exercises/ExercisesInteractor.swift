@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutInteractor.swift
+//  ExercisesInteractor.swift
 //  Workout
 //
 //  Created by Salvador on 6/3/23.
@@ -8,8 +8,8 @@
 //
 import CoreData
 
-protocol WorkoutPresenterToInteractorProtocol: AnyObject {
-    var presenter: WorkoutInteractorToPresenterProtocol? { get set }
+protocol ExercisesPresenterToInteractorProtocol: AnyObject {
+    var presenter: ExercisesInteractorToPresenterProtocol? { get set }
     var workout: Workout { get set }
     var managedObjectContext: NSManagedObjectContext { get }
     var workoutName: String { get }
@@ -19,8 +19,8 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
-    weak var presenter: WorkoutInteractorToPresenterProtocol?
+final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
+    weak var presenter: ExercisesInteractorToPresenterProtocol?
     var workout: Workout
     
     init(workout: Workout) {

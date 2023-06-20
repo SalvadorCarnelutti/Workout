@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutConfigurator.swift
+//  ExercisesConfigurator.swift
 //  Workout
 //
 //  Created by Salvador on 6/3/23.
@@ -8,11 +8,11 @@
 //
 import CoreData
 
-final class WorkoutConfigurator {
-    static func injectDependencies(view: WorkoutPresenterToViewProtocol,
-                                   interactor: WorkoutPresenterToInteractorProtocol,
-                                   presenter: WorkoutPresenter,
-                                   router: WorkoutRouter) {
+final class ExercisesConfigurator {
+    static func injectDependencies(view: ExercisesPresenterToViewProtocol,
+                                   interactor: ExercisesPresenterToInteractorProtocol,
+                                   presenter: ExercisesPresenter,
+                                   router: ExercisesRouter) {
         presenter.interactor = interactor
         interactor.presenter = presenter
 
@@ -27,11 +27,11 @@ final class WorkoutConfigurator {
         WorkoutFormConfigurator.resolveAdd(completionAction: completionAction)
     }
     
-    static func resolveEdit(for workout: Workout) -> WorkoutPresenter {
-        let presenter = WorkoutPresenter()
-        let view = WorkoutView()
-        let interactor = WorkoutInteractor(workout: workout)
-        let router = WorkoutRouter()
+    static func resolveEdit(for workout: Workout) -> ExercisesPresenter {
+        let presenter = ExercisesPresenter()
+        let view = ExercisesView()
+        let interactor = ExercisesInteractor(workout: workout)
+        let router = ExercisesRouter()
 
         Self.injectDependencies(view: view,
                                 interactor: interactor,

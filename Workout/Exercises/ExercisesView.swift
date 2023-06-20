@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutView.swift
+//  ExercisesView.swift
 //  Workout
 //
 //  Created by Salvador on 6/3/23.
@@ -9,15 +9,15 @@
 import UIKit
 import CoreData
 
-protocol WorkoutPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
-    var presenter: WorkoutViewToPresenterProtocol? { get set }
+protocol ExercisesPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
+    var presenter: ExercisesViewToPresenterProtocol? { get set }
     func updateSections()
     func loadView()
 }
 
-final class WorkoutView: UIView {
+final class ExercisesView: UIView {
     // MARK: - Properties
-    weak var presenter: WorkoutViewToPresenterProtocol?
+    weak var presenter: ExercisesViewToPresenterProtocol?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -42,7 +42,7 @@ final class WorkoutView: UIView {
 }
 
 // MARK: - PresenterToViewProtocol
-extension WorkoutView: WorkoutPresenterToViewProtocol {
+extension ExercisesView: ExercisesPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
         setupConstraints()
@@ -57,7 +57,7 @@ extension WorkoutView: WorkoutPresenterToViewProtocol {
     }
 }
 
-extension WorkoutView: UITableViewDataSource {
+extension ExercisesView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter?.exercisesCount ?? 0
     }
@@ -90,7 +90,7 @@ extension WorkoutView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
 }
 
-extension WorkoutView: UITableViewDelegate {
+extension ExercisesView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didSelectRowAt(indexPath)
     }
@@ -105,7 +105,7 @@ extension WorkoutView: UITableViewDelegate {
     }
 }
 
-extension WorkoutView: UITableViewDragDelegate {
+extension ExercisesView: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let presenter = presenter else {
             return []
@@ -117,7 +117,7 @@ extension WorkoutView: UITableViewDragDelegate {
     }
 }
 
-extension WorkoutView: NSFetchedResultsControllerDelegate {    
+extension ExercisesView: NSFetchedResultsControllerDelegate {    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
