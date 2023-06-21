@@ -12,12 +12,10 @@ import CoreData
 
 protocol ExercisesViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
-    var headerString: String { get }
     func viewLoaded()
     func exerciseAt(indexPath: IndexPath) -> Exercise
     func didSelectRowAt(_ indexPath: IndexPath)
     func didDeleteRowAt(_ indexPath: IndexPath)
-    func setupEditWorkoutNameDelegate(for header: ExerciseTableViewHeader)
 }
 
 protocol ExercisesRouterToPresenterProtocol: UIViewController {
@@ -58,7 +56,7 @@ final class ExercisesPresenter: BaseViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Workout"
+        navigationItem.title = interactor.workoutName
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
                                                             image: UIImage.add,
                                                             target: self,
@@ -84,8 +82,6 @@ final class ExercisesPresenter: BaseViewController {
 extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
-    var headerString: String { interactor.workoutName }
-    
     func viewLoaded() {
         fetchedResultsController.delegate = viewAddWorkout
         fetchExercises()
@@ -101,10 +97,6 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     
     func didDeleteRowAt(_ indexPath: IndexPath) {
         Array(0..<indexPath.row).map { exerciseAt(indexPath: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
-    }
-    
-    func setupEditWorkoutNameDelegate(for header: ExerciseTableViewHeader) {
-        header.delegate = self
     }
 }
 
@@ -128,12 +120,5 @@ extension ExercisesPresenter: ExercisesRouterToPresenterProtocol {
     
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
         interactor.editCompletionAction(for: exercise, formOutput: formOutput)
-    }
-}
-
-// MARK: - ExerciseTableViewHeaderDelegate protocol
-extension ExercisesPresenter: ExerciseTableViewHeaderDelegate {
-    func customHeaderViewDidTap() {
-        router.presentEditWorkout()
     }
 }

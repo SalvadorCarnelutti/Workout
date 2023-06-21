@@ -31,7 +31,7 @@ final class WorkoutsRouter: WorkoutsPresenterToRouterProtocol {
     func pushEditWorkout(for workout: Workout) {
         guard let presenter = presenter else { return }
         
-        let editWorkoutViewController = ExercisesConfigurator.resolveEdit(for: workout)
-        presenter.navigationController?.pushViewController(editWorkoutViewController, animated: true)
+        let workoutViewController = WorkoutConfigurator.resolve(for: workout)
+        presenter.navigationController?.pushViewController(workoutViewController, animated: true)
     }
 }

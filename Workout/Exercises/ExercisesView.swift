@@ -11,8 +11,8 @@ import CoreData
 
 protocol ExercisesPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
     var presenter: ExercisesViewToPresenterProtocol? { get set }
-    func updateSections()
     func loadView()
+    func updateSections()
 }
 
 final class ExercisesView: UIView {
@@ -27,7 +27,6 @@ final class ExercisesView: UIView {
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
         tableView.register(ExerciseTableViewCell.self)
-        tableView.register(ExerciseTableViewHeader.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
@@ -74,18 +73,6 @@ extension ExercisesView: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let presenter = presenter,
-              let header = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: ExerciseTableViewHeader.identifier) as? ExerciseTableViewHeader else {
-            ExerciseTableViewHeader.assertHeaderFailure()
-            return UITableViewHeaderFooterView()
-        }
-        
-        header.configure(with: presenter.headerString)
-        presenter.setupEditWorkoutNameDelegate(for: header)
-        return header
-    }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
 }
