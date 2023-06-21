@@ -39,7 +39,6 @@ enum WorkoutSection {
 
 protocol WorkoutViewToPresenterProtocol: UIViewController {
     var sectionsCount: Int { get }
-    func viewLoaded()
     func workoutSectionAt(section: Int) -> WorkoutSection
     func setupWorkoutSectionDelegate(for header: WorkoutSectionTableViewHeader)
 }
@@ -80,8 +79,6 @@ extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     func workoutSectionAt(section: Int) -> WorkoutSection {
         workoutSections[section]
     }
-    
-    func viewLoaded() {}
     
     func setupWorkoutSectionDelegate(for header: WorkoutSectionTableViewHeader) {
         header.delegate = self

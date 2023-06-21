@@ -11,7 +11,6 @@ import CoreData
 
 protocol ExercisesPresenterToRouterProtocol: AnyObject {
     var presenter: ExercisesRouterToPresenterProtocol? { get set }
-    func presentEditWorkout()
     func presentAddExerciseForm()
     func presentEditExerciseForm(for exercise: Exercise)
 }
@@ -20,14 +19,6 @@ protocol ExercisesPresenterToRouterProtocol: AnyObject {
 final class ExercisesRouter: ExercisesPresenterToRouterProtocol {
     // MARK: - Properties
     weak var presenter: ExercisesRouterToPresenterProtocol?
-    
-    func presentEditWorkout() {
-        guard let presenter = presenter else { return }
-        
-        let editWorkoutFormViewController = WorkoutFormConfigurator.resolveEdit(for: presenter.workoutName, completionAction: presenter.editWorkoutName)
-        editWorkoutFormViewController.modalPresentationStyle = .popover
-        presenter.present(editWorkoutFormViewController, animated: true)
-    }
     
     func presentAddExerciseForm() {
         guard let presenter = presenter else { return }

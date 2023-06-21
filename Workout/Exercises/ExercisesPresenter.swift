@@ -14,15 +14,14 @@ protocol ExercisesViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
     func viewLoaded()
     func exerciseAt(indexPath: IndexPath) -> Exercise
+    func deleteRowAt(indexPath: IndexPath)
     func didSelectRowAt(_ indexPath: IndexPath)
     func didDeleteRowAt(_ indexPath: IndexPath)
 }
 
 protocol ExercisesRouterToPresenterProtocol: UIViewController {
-    var workoutName: String { get }
     func addCompletionAction(formOutput: FormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
-    func editWorkoutName(with newName: String)
 }
 
 protocol ExercisesInteractorToPresenterProtocol: BaseViewProtocol {
@@ -30,7 +29,7 @@ protocol ExercisesInteractorToPresenterProtocol: BaseViewProtocol {
 }
 
 final class ExercisesPresenter: BaseViewController {
-    var viewAddWorkout: ExercisesPresenterToViewProtocol!
+    var viewExercises: ExercisesPresenterToViewProtocol!
     var interactor: ExercisesPresenterToInteractorProtocol!
     var router: ExercisesPresenterToRouterProtocol!
     
@@ -50,8 +49,8 @@ final class ExercisesPresenter: BaseViewController {
     
     override func loadView() {
         super.loadView()
-        view = viewAddWorkout
-        viewAddWorkout.loadView()
+        view = viewExercises
+        viewExercises.loadView()
         setupNavigationBar()
     }
     
@@ -83,12 +82,15 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
     func viewLoaded() {
-        fetchedResultsController.delegate = viewAddWorkout
+        fetchedResultsController.delegate = viewExercises
         fetchExercises()
     }
     
-    func exerciseAt(indexPath: IndexPath) -> Exercise {
-        fetchedResultsController.object(at: indexPath)
+    func exerciseAt(indexPath: IndexPath) -> Exercise { fetchedResultsController.object(at: indexPath) }
+    
+    func deleteRowAt(indexPath: IndexPath) {
+        let exercise = exerciseAt(indexPath: indexPath)
+        exercise.managedObjectContext?.delete(exercise)
     }
     
     func didSelectRowAt(_ indexPath: IndexPath) {
@@ -105,15 +107,6 @@ extension ExercisesPresenter: ExercisesInteractorToPresenterProtocol {}
 
 // MARK: - RouterToPresenterProtocol
 extension ExercisesPresenter: ExercisesRouterToPresenterProtocol {
-    var workoutName: String {
-        interactor.workoutName
-    }
-    
-    func editWorkoutName(with newName: String) {
-        interactor.editWorkoutName(with: newName)
-        viewAddWorkout.updateSections()
-    }
-    
     func addCompletionAction(formOutput: FormOutput) {
         interactor.addCompletionAction(formOutput: formOutput)
     }

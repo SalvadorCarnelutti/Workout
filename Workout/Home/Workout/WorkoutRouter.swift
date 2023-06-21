@@ -19,15 +19,15 @@ final class WorkoutRouter: WorkoutPresenterToRouterProtocol {
     weak var presenter: WorkoutRouterToPresenterProtocol?
     
     func handleSectionRouting(for section: WorkoutSection) {
-        guard let presenter = presenter else { return }
+        guard let workout = presenter?.workout else { return }
         
         switch section {
         case .edit:
             presentEditWorkoutName()
         case .exercises:
-            pushExercises(for: presenter.workout)
+            pushExercises(for: workout)
         case .sessions:
-            pushSessions()
+            pushSessions(for: workout)
         }
     }
     
@@ -42,13 +42,14 @@ final class WorkoutRouter: WorkoutPresenterToRouterProtocol {
     private func pushExercises(for workout: Workout) {
         guard let presenter = presenter else { return }
         
-        let editWorkoutViewController = ExercisesConfigurator.resolveEdit(for: workout)
-        presenter.navigationController?.pushViewController(editWorkoutViewController, animated: true)
+        let exercisesViewController = ExercisesConfigurator.resolveEdit(for: workout)
+        presenter.navigationController?.pushViewController(exercisesViewController, animated: true)
     }
     
-    private func pushSessions() {
+    private func pushSessions(for workout: Workout) {
         guard let presenter = presenter else { return }
 
-        
+        let sessionsViewController = SessionsConfigurator.resolve(for: workout)
+        presenter.navigationController?.pushViewController(sessionsViewController, animated: true)
     }
 }

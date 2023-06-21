@@ -23,7 +23,7 @@ final class WorkoutConfigurator {
         presenter.router = router
     }
     
-    static func resolve(for workout: Workout) -> WorkoutPresenter {
+    static func resolveEdit(for workout: Workout) -> WorkoutPresenter {
         let presenter = WorkoutPresenter()
         let view = WorkoutView()
         let interactor = WorkoutInteractor(workout: workout)

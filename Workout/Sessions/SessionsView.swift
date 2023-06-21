@@ -1,31 +1,28 @@
 //
 //  
-//  ExercisesView.swift
+//  SessionsView.swift
 //  Workout
 //
-//  Created by Salvador on 6/3/23.
+//  Created by Salvador on 6/21/23.
 //
 //
 import UIKit
 import CoreData
 
-protocol ExercisesPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
-    var presenter: ExercisesViewToPresenterProtocol? { get set }
+protocol SessionsPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
+    var presenter: SessionsViewToPresenterProtocol? { get set }
     func loadView()
-    func updateSections()
 }
 
-final class ExercisesView: UIView {
+final class SessionsView: UIView {
     // MARK: - Properties
-    weak var presenter: ExercisesViewToPresenterProtocol?
+    weak var presenter: SessionsViewToPresenterProtocol?
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.dragDelegate = self
-        tableView.dragInteractionEnabled = true
         tableView.register(ExerciseTableViewCell.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
@@ -41,24 +38,17 @@ final class ExercisesView: UIView {
 }
 
 // MARK: - PresenterToViewProtocol
-extension ExercisesView: ExercisesPresenterToViewProtocol {
+extension SessionsView: SessionsPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
         setupConstraints()
         presenter?.viewLoaded()
     }
-    
-    func updateSections() {
-        let sectionToReload = 0
-        let indexSet: IndexSet = [sectionToReload]
-
-        tableView.reloadSections(indexSet, with: .automatic)
-    }
 }
 
-extension ExercisesView: UITableViewDataSource {
+extension SessionsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter?.exercisesCount ?? 0
+        presenter?.sessionsCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,16 +58,13 @@ extension ExercisesView: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let exercise = presenter.exerciseAt(indexPath: indexPath)
-        cell.configure(with: exercise)
+        let session = presenter.sessionAt(indexPath: indexPath)
+//        cell.configure(with: session)
         return cell
     }
-    
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
 }
 
-extension ExercisesView: UITableViewDelegate {
+extension SessionsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didSelectRowAt(indexPath)
     }
@@ -91,19 +78,7 @@ extension ExercisesView: UITableViewDelegate {
     }
 }
 
-extension ExercisesView: UITableViewDragDelegate {
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard let presenter = presenter else {
-            return []
-        }
-        
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = presenter.exerciseAt(indexPath: indexPath)
-        return [dragItem]
-    }
-}
-
-extension ExercisesView: NSFetchedResultsControllerDelegate {    
+extension SessionsView: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
@@ -140,7 +115,7 @@ extension ExercisesView: NSFetchedResultsControllerDelegate {
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
-                cell.configure(with: presenter.exerciseAt(indexPath: indexPath))
+//                cell.configure(with: presenter.sessionAt(indexPath: indexPath))
             }
         default:
             return

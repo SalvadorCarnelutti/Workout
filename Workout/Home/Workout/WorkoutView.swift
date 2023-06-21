@@ -43,7 +43,6 @@ extension WorkoutView: WorkoutPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
         setupConstraints()
-        presenter?.viewLoaded()
     }
     
     func updateSections() {

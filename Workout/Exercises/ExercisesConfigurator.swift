@@ -17,16 +17,12 @@ final class ExercisesConfigurator {
         interactor.presenter = presenter
 
         view.presenter = presenter
-        presenter.viewAddWorkout = view
+        presenter.viewExercises = view
         
         router.presenter = presenter
         presenter.router = router
     }
-    
-    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
-        WorkoutFormConfigurator.resolveAdd(completionAction: completionAction)
-    }
-    
+        
     static func resolveEdit(for workout: Workout) -> ExercisesPresenter {
         let presenter = ExercisesPresenter()
         let view = ExercisesView()
