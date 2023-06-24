@@ -80,7 +80,7 @@ final class SessionsPresenter: BaseViewController {
     }
     
     @objc private func addSessionTapped() {
-//        router.presentAddSessionForm()
+        router.presentAddSessionForm()
     }
     
     private func fetchExercises() {

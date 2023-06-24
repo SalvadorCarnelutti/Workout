@@ -62,7 +62,7 @@ final class ExerciseFormView: UIView {
     }()
     
     private lazy var completionButton: StyledButton = {
-        let button = StyledButton(type: .system)
+        let button = StyledButton()
         addSubview(button)
         button.isEnabled = presenter?.isbuttonEnabled ?? false
         button.setTitle(presenter?.completionString, for: .normal)

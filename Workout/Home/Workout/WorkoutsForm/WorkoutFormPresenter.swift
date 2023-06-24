@@ -12,7 +12,7 @@ import UIKit
 protocol WorkoutFormViewToPresenterProtocol: UIViewController {
     var formInput: String? { get }
     var nameEntity: ValidationEntity { get }
-    var isbuttonEnabled: Bool { get }
+    var isButtonEnabled: Bool { get }
     var headerString: String { get }
     var completionString: String { get }
     func completionAction(for string: String)
@@ -44,7 +44,7 @@ extension WorkoutFormPresenter: WorkoutFormViewToPresenterProtocol {
                          placeholder: "Name")
     }
     
-    var isbuttonEnabled: Bool {
+    var isButtonEnabled: Bool {
         interactor.formStyle == .edit
     }
     

@@ -8,13 +8,6 @@
 import UIKit
 
 class StyledButton: UIButton {
-    override public var isEnabled: Bool {
-        didSet {
-            let alpha: CGFloat = isEnabled ? 1.0 : 0.5
-            backgroundColor = backgroundColor?.withAlphaComponent(alpha)
-        }
-    }
-    
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,23 +20,18 @@ class StyledButton: UIButton {
     }
 
     private func commonInit() {
-        backgroundColor = .systemBlue
-        setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        layer.cornerRadius = 8
-        clipsToBounds = true
-    }
-    
-    // MARK: - Intrinsic Content Size
-    override var intrinsicContentSize: CGSize {
-        let titleSize = titleLabel?.intrinsicContentSize ?? CGSize.zero
-        let width = titleSize.width + safeAreaInsets.left + safeAreaInsets.right
-        let height = bounds.height
-        return CGSize(width: width + 50, height: height)
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        invalidateIntrinsicContentSize()
+        let horizontalPaddingInsets = NSDirectionalEdgeInsets(top: 0, leading: 25, bottom: 0, trailing: 25)
+        
+        var enabledConfig = UIButton.Configuration.filled()
+        enabledConfig.contentInsets = horizontalPaddingInsets
+        
+        var disabledConfig = UIButton.Configuration.gray()
+        disabledConfig.contentInsets = horizontalPaddingInsets
+        
+        configuration = disabledConfig
+        configurationUpdateHandler = { button in
+            button.configuration = button.isEnabled ? enabledConfig : disabledConfig
+            button.configuration?.title = button.title(for: .normal)
+        }        
     }
 }
