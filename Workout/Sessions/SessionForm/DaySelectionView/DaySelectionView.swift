@@ -55,8 +55,22 @@ final class DaySelectionView: UIView {
         return dayButton
     }
     
+    private func selectCurrentDay() {
+        let calendar = Calendar.current
+        let today = Date()
+
+        let weekday = calendar.component(.weekday, from: today)
+
+        // Adjust the weekday value to be in the range 0-6
+        let adjustedWeekday = (weekday - calendar.firstWeekday + 7) % 7
+        
+        let currentDayButton = dayButtons[adjustedWeekday]
+        currentDayButton.isSelected = true
+    }
+    
     private func setupViews() {
         dayButtons.forEach { verticalStack.addArrangedSubview($0) }
+        selectCurrentDay()
         
         verticalStack.snp.makeConstraints { make in
             make.edges.equalToSuperview()

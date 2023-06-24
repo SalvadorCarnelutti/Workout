@@ -15,7 +15,7 @@ protocol ExerciseFormViewToPresenterProtocol: UIViewController {
     var durationEntity: ValidationEntity { get }
     var setsEntity: ValidationEntity { get }
     var repsEntity: ValidationEntity { get }
-    var isbuttonEnabled: Bool { get }
+    var isButtonEnabled: Bool { get }
     var headerString: String { get }
     var completionString: String { get }
     func completionButtonTapped(for formOutput: FormOutput)
@@ -67,7 +67,7 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
                          placeholder: "Rep count")
     }
     
-    var isbuttonEnabled: Bool {
+    var isButtonEnabled: Bool {
         interactor.formStyle == .edit
     }
     

@@ -64,7 +64,7 @@ final class ExerciseFormView: UIView {
     private lazy var completionButton: StyledButton = {
         let button = StyledButton()
         addSubview(button)
-        button.isEnabled = presenter?.isbuttonEnabled ?? false
+        button.isEnabled = presenter?.isButtonEnabled ?? false
         button.setTitle(presenter?.completionString, for: .normal)
         button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
         return button

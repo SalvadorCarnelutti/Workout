@@ -33,6 +33,26 @@ final class SessionFormView: UIView {
         return daySelectionView
     }()
     
+    private lazy var completionButton: StyledButton = {
+        let button = StyledButton()
+        addSubview(button)
+        button.setTitle(presenter?.completionString, for: .normal)
+        button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        addSubview(datePicker)
+        datePicker.preferredDatePickerStyle = .compact
+        datePicker.datePickerMode = .time
+        datePicker.locale = Locale(identifier: "en_US_POSIX")
+        datePicker.timeZone = TimeZone.current
+        datePicker.minuteInterval = 5
+        
+        return datePicker
+    }()
+    
     private func setupConstraints() {
         headerLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
@@ -43,6 +63,21 @@ final class SessionFormView: UIView {
             make.top.equalTo(headerLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(40)
         }
+        
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(daySelectionView.snp.bottom).offset(5)
+            make.right.equalTo(daySelectionView.snp.right)
+            make.height.equalTo(50)
+        }
+        
+        completionButton.snp.makeConstraints { make in
+            make.top.equalTo(datePicker.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+        }
+    }
+    
+    @objc private func completionActionTapped() {
     }
 }
 

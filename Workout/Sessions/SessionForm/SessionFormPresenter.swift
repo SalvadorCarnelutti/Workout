@@ -11,6 +11,7 @@ import UIKit
 
 protocol SessionFormViewToPresenterProtocol: UIViewController {
     var headerString: String { get }
+    var completionString: String { get }
     func viewLoaded()
 }
 
@@ -32,6 +33,11 @@ final class SessionFormPresenter: BaseViewController {
 extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
     var headerString: String {
         "Session"
+    }
+    
+    var completionString: String {
+//        interactor.formStyle == .add ? "Add" : "Edit"
+        "Add"
     }
     
     func viewLoaded() {}
