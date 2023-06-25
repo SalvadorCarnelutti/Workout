@@ -49,7 +49,6 @@ final class SessionFormView: UIView {
         datePicker.locale = Locale(identifier: "en_US_POSIX")
         datePicker.timeZone = TimeZone.current
         datePicker.minuteInterval = 5
-        
         return datePicker
     }()
     
@@ -86,13 +85,22 @@ final class SessionFormView: UIView {
         
         presenter?.completionButtonTapped(for: formOutput)
     }
+    
+    // TODO: View knows something from the interactor, should handle logic better with a presenter method (Do same for Exercise form)
+    private func fillFormFields() {
+        if let formInput = presenter?.formInput,
+           let selectedDayOfWeek = DayOfWeek(rawValue: formInput.day) {
+            datePicker.date = formInput.startsAt
+            daySelectionView.selectDayOfWeek(selectedDayOfWeek)
+        }
+    }
 }
 
 // MARK: - PresenterToViewProtocol
 extension SessionFormView: SessionFormPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
+        fillFormFields()
         setupConstraints()
-        presenter?.viewLoaded()
     }
 }

@@ -10,9 +10,9 @@
 import UIKit
 
 protocol SessionFormViewToPresenterProtocol: UIViewController {
+    var formInput: SessionFormInput? { get }
     var headerString: String { get }
     var completionString: String { get }
-    func viewLoaded()
     func completionButtonTapped(for formOutput: SessionFormOutput)
 }
 
@@ -34,6 +34,10 @@ final class SessionFormPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
+    var formInput: SessionFormInput? {
+        interactor.formInput
+    }
+    
     var headerString: String {
         "Session"
     }
@@ -41,9 +45,7 @@ extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
     var completionString: String {
         interactor.formStyle == .add ? "Add" : "Edit"
     }
-    
-    func viewLoaded() {}
-    
+        
     func completionButtonTapped(for formOutput: SessionFormOutput) {
         router.dismissView(formOutput: formOutput)
     }

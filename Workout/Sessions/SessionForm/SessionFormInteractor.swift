@@ -10,6 +10,7 @@ import Foundation
 
 protocol SessionFormPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
+    var formInput: SessionFormInput? { get }
     var formStyle: FormStyle { get }
     var completionAction: ((SessionFormOutput) -> ()) { get }
 }
@@ -21,6 +22,10 @@ final class SessionFormInteractor: SessionFormPresenterToInteractorProtocol {
     
     init(formModel: SessionFormModel) {
         self.formModel = formModel
+    }
+    
+    var formInput: SessionFormInput? {
+        formModel.formInput
     }
     
     var formStyle: FormStyle {

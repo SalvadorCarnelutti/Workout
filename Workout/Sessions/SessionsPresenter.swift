@@ -58,7 +58,6 @@ protocol SessionsViewToPresenterProtocol: UIViewController {
     func sessionAt(indexPath: IndexPath) -> Session
     func deleteRowAt(indexPath: IndexPath)
     func didSelectRowAt(_ indexPath: IndexPath)
-    func didDeleteRowAt(_ indexPath: IndexPath)
 }
 
 protocol SessionsRouterToPresenterProtocol: UIViewController {
@@ -137,11 +136,7 @@ extension SessionsPresenter: SessionsViewToPresenterProtocol {
     }
     
     func didSelectRowAt(_ indexPath: IndexPath) {
-        
-    }
-    
-    func didDeleteRowAt(_ indexPath: IndexPath) {
-        
+        router.presentEditSessionForm(for: fetchedResultsController.object(at: indexPath))
     }
 }
 

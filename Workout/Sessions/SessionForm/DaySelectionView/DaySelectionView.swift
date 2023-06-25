@@ -32,6 +32,10 @@ final class DaySelectionView: UIView {
         setupViews()
     }
     
+    func selectDayOfWeek(_ dayOfWeek: DayOfWeek) {
+        dayButtons[dayOfWeek.rawValue].sendActions(for: .touchUpInside)
+    }
+    
     private func getDayButton(for day: String) -> UIButton {
         var configuration = UIButton.Configuration.gray()
         configuration.attributedTitle = AttributedString(day, attributes: AttributeContainer([
@@ -65,9 +69,7 @@ final class DaySelectionView: UIView {
         let adjustedWeekday = (weekday - calendar.firstWeekday + 7) % 7
         
         let currentDayButton = dayButtons[adjustedWeekday]
-        currentDayButton.isSelected = true
-        
-        selectedDay = DayOfWeek(rawValue: adjustedWeekday)
+        currentDayButton.sendActions(for: .touchUpInside)
     }
     
     private func setupViews() {
@@ -88,7 +90,5 @@ final class DaySelectionView: UIView {
         for button in dayButtons {
             button.isSelected = button.title(for: .normal) == tappedDay
         }
-        
-        // Maybe set delegate to inform on last selectedDay
     }
 }

@@ -37,7 +37,7 @@ final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
     var workoutName: String {
         workout.name ?? ""
     }
-        
+    
     func addCompletionAction(formOutput: ExerciseFormOutput) {
         guard let presenter = presenter else { return }
         
