@@ -45,7 +45,6 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
     
     func addCompletionAction(name: String) {
         let workout = Workout(context: managedObjectContext)
-        workout.uuid = UUID()
-        workout.name = name
+        workout.setup(with: name)
     }
 }
