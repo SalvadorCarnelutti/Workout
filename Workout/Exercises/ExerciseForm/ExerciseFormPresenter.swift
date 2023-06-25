@@ -10,7 +10,7 @@
 import UIKit
 
 protocol ExerciseFormViewToPresenterProtocol: UIViewController {
-    var formInput: FormInput? { get }
+    var formInput: ExerciseFormInput? { get }
     var nameEntity: ValidationEntity { get }
     var durationEntity: ValidationEntity { get }
     var setsEntity: ValidationEntity { get }
@@ -18,11 +18,11 @@ protocol ExerciseFormViewToPresenterProtocol: UIViewController {
     var isButtonEnabled: Bool { get }
     var headerString: String { get }
     var completionString: String { get }
-    func completionButtonTapped(for formOutput: FormOutput)
+    func completionButtonTapped(for formOutput: ExerciseFormOutput)
 }
 
 protocol ExerciseFormRouterToPresenterProtocol: UIViewController {
-    func completionAction(for formOutput: FormOutput)
+    func completionAction(for formOutput: ExerciseFormOutput)
 }
 
 final class ExerciseFormPresenter: BaseViewController {
@@ -39,7 +39,7 @@ final class ExerciseFormPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
-    var formInput: FormInput? {
+    var formInput: ExerciseFormInput? {
         interactor.formInput
     }
     
@@ -79,14 +79,14 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
         interactor.formStyle == .add ? "Add" : "Edit"
     }
     
-    func completionButtonTapped(for formOutput: FormOutput) {
+    func completionButtonTapped(for formOutput: ExerciseFormOutput) {
         router.dismissView(formOutput: formOutput)
     }
 }
 
 // MARK: - RouterToPresenterProtocol
 extension ExerciseFormPresenter: ExerciseFormRouterToPresenterProtocol {
-    func completionAction(for formOutput: FormOutput) {
+    func completionAction(for formOutput: ExerciseFormOutput) {
         interactor.completionAction(formOutput)
     }
 }

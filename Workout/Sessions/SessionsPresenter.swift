@@ -10,9 +10,8 @@
 import UIKit
 import CoreData
 
-// Will need this and Hor and minute formatted as date to represent cyclic train ing days
-enum DayOfWeek: Int {
-    case sunday = 1
+enum DayOfWeek: Int, CaseIterable {
+    case sunday = 0
     case monday
     case tuesday
     case wednesday
@@ -22,14 +21,33 @@ enum DayOfWeek: Int {
     
     init?(rawValue: Int) {
         switch rawValue {
-        case 1: self = .sunday
-        case 2: self = .monday
-        case 3: self = .tuesday
-        case 4: self = .wednesday
-        case 5: self = .thursday
-        case 6: self = .friday
-        case 7: self = .saturday
+        case 0: self = .sunday
+        case 1: self = .monday
+        case 2: self = .tuesday
+        case 3: self = .wednesday
+        case 4: self = .thursday
+        case 5: self = .friday
+        case 6: self = .saturday
         default: return nil
+        }
+    }
+    
+    var longDescription: String {
+        switch self {
+        case .sunday:
+            return "Sunday"
+        case .monday:
+            return "Monday"
+        case .tuesday:
+            return "Tuesday"
+        case .wednesday:
+            return "Wednesday"
+        case .thursday:
+            return "Thursday"
+        case .friday:
+            return "Friday"
+        case .saturday:
+            return "Saturday"
         }
     }
 }
@@ -43,7 +61,10 @@ protocol SessionsViewToPresenterProtocol: UIViewController {
     func didDeleteRowAt(_ indexPath: IndexPath)
 }
 
-protocol SessionsRouterToPresenterProtocol: UIViewController {}
+protocol SessionsRouterToPresenterProtocol: UIViewController {
+    func addCompletionAction(formOutput: SessionFormOutput)
+    func editCompletionAction(for exercise: Session, formOutput: SessionFormOutput)
+}
 
 final class SessionsPresenter: BaseViewController {
     var viewSessions: SessionsPresenterToViewProtocol!
@@ -55,7 +76,8 @@ final class SessionsPresenter: BaseViewController {
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
         fetchRequest.predicate = predicate
         // TODO: Check later if necessary to see that ordering is preserved
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Session.startsAt), ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Session.day), ascending: true),
+                                        NSSortDescriptor(key: #keyPath(Session.startsAt), ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
                                                                   sectionNameKeyPath: nil,
@@ -124,4 +146,12 @@ extension SessionsPresenter: SessionsViewToPresenterProtocol {
 }
 
 // MARK: - RouterToPresenterProtocol
-extension SessionsPresenter: SessionsRouterToPresenterProtocol {}
+extension SessionsPresenter: SessionsRouterToPresenterProtocol {
+    func addCompletionAction(formOutput: SessionFormOutput) {
+        interactor.addCompletionAction(formOutput: formOutput)
+    }
+    
+    func editCompletionAction(for exercise: Session, formOutput: SessionFormOutput) {
+        interactor.editCompletionAction(for: exercise, formOutput: formOutput)
+    }
+}

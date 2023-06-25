@@ -8,9 +8,9 @@
 import UIKit
 
 final class DaySelectionView: UIView {
-    private var selectedDay: String?
+    private(set) var selectedDay: DayOfWeek?
     
-    private let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    private let daysOfWeek = DayOfWeek.allCases.map { $0.longDescription }
     
     private lazy var dayButtons: [UIButton] = {
         daysOfWeek.map { getDayButton(for: $0) }
@@ -66,6 +66,8 @@ final class DaySelectionView: UIView {
         
         let currentDayButton = dayButtons[adjustedWeekday]
         currentDayButton.isSelected = true
+        
+        selectedDay = DayOfWeek(rawValue: adjustedWeekday)
     }
     
     private func setupViews() {
@@ -78,9 +80,11 @@ final class DaySelectionView: UIView {
     }
     
     @objc private func dayButtonTapped(_ sender: UIButton) {
-        guard let tappedDay = sender.title(for: .normal), tappedDay != selectedDay else { return }
+        guard let tappedDay = sender.title(for: .normal),
+              tappedDay != selectedDay?.longDescription,
+        let buttonIndex = dayButtons.firstIndex(of: sender) else { return }
 
-        selectedDay = tappedDay
+        selectedDay = DayOfWeek(rawValue: buttonIndex)
         for button in dayButtons {
             button.isSelected = button.title(for: .normal) == tappedDay
         }

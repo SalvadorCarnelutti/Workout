@@ -13,12 +13,12 @@ enum FormStyle {
 }
 
 struct ExerciseFormModel {
-    let formInput: FormInput?
+    let formInput: ExerciseFormInput?
     let formStyle: FormStyle
-    let completionAction: ((FormOutput) -> ())
+    let completionAction: ((ExerciseFormOutput) -> ())
 }
 
-struct FormInput {
+struct ExerciseFormInput {
     var name: String?
     var duration: String?
     var sets: String?
@@ -32,7 +32,7 @@ struct FormInput {
     }
 }
 
-struct FormOutput {
+struct ExerciseFormOutput {
     var name: String
     var duration: Int
     var sets: Int

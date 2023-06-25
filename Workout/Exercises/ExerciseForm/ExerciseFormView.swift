@@ -95,10 +95,10 @@ final class ExerciseFormView: UIView {
             return
         }
         
-        let formOutput = FormOutput(name: nameFormField.unwrappedText,
-                                    duration: duration,
-                                    sets: sets,
-                                    reps: reps)
+        let formOutput = ExerciseFormOutput(name: nameFormField.unwrappedText,
+                                            duration: duration,
+                                            sets: sets,
+                                            reps: reps)
         
         presenter?.completionButtonTapped(for: formOutput)
     }
@@ -132,7 +132,7 @@ final class ExerciseFormView: UIView {
         })
     }
     
-    private func fillFormFields(formInput: FormInput) {
+    private func fillFormFields(formInput: ExerciseFormInput) {
         nameFormField.text = formInput.name
         durationFormField.text = formInput.duration
         setsFormField.text = formInput.sets

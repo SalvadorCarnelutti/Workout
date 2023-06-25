@@ -22,7 +22,7 @@ final class SessionsRouter: SessionsPresenterToRouterProtocol {
     func presentAddSessionForm() {
         guard let presenter = presenter else { return }
         
-        let addSessionFormViewController = SessionFormConfigurator.resolve()
+        let addSessionFormViewController = SessionFormConfigurator.resolveAdd(completionAction: presenter.addCompletionAction)
         addSessionFormViewController.modalPresentationStyle = .popover
         presenter.present(addSessionFormViewController, animated: true)
     }

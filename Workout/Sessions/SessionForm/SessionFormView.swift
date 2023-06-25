@@ -78,6 +78,13 @@ final class SessionFormView: UIView {
     }
     
     @objc private func completionActionTapped() {
+        guard let selectedDay = daySelectionView.selectedDay?.rawValue else { return }
+        
+        let startsAt = datePicker.date
+        let formOutput = SessionFormOutput(day: selectedDay,
+                                           startsAt: startsAt)
+        
+        presenter?.completionButtonTapped(for: formOutput)
     }
 }
 

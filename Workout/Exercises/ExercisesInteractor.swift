@@ -13,8 +13,8 @@ protocol ExercisesPresenterToInteractorProtocol: AnyObject {
     var workout: Workout { get set }
     var managedObjectContext: NSManagedObjectContext { get }
     var workoutName: String { get }
-    func addCompletionAction(formOutput: FormOutput)
-    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
+    func addCompletionAction(formOutput: ExerciseFormOutput)
+    func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput)
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -38,17 +38,15 @@ final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
         workout.name ?? ""
     }
         
-    func addCompletionAction(formOutput: FormOutput) {
+    func addCompletionAction(formOutput: ExerciseFormOutput) {
         guard let presenter = presenter else { return }
         
         let exercise = Exercise(context: managedObjectContext)
-        exercise.configure(with: formOutput)
+        exercise.setup(with: formOutput, for: workout)
         exercise.order = Int16(presenter.exercisesCount)
-        exercise.uuid = UUID()
-        exercise.workout = workout
     }
     
-    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
-        exercise.configure(with: formOutput)
+    func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
+        exercise.update(with: formOutput)
     }
 }

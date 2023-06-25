@@ -10,13 +10,13 @@ import Foundation
 
 protocol ExerciseFormPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
-    var formInput: FormInput? { get }
+    var formInput: ExerciseFormInput? { get }
     var formStyle: FormStyle { get }
     var nameValidationBlock: ((String) -> Bool) { get }
     var durationValidationBlock: ((String) -> Bool) { get }
     var setsValidationBlock: ((String) -> Bool) { get }
     var repsValidationBlock: ((String) -> Bool) { get }
-    var completionAction: ((FormOutput) -> ()) { get }
+    var completionAction: ((ExerciseFormOutput) -> ()) { get }
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -28,7 +28,7 @@ final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
         self.formModel = formModel
     }
     
-    var formInput: FormInput? {
+    var formInput: ExerciseFormInput? {
         formModel.formInput
     }
     
@@ -52,7 +52,7 @@ final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
         integerValidationBlock
     }
     
-    var completionAction: ((FormOutput) -> ()) {
+    var completionAction: ((ExerciseFormOutput) -> ()) {
         formModel.completionAction
     }
     

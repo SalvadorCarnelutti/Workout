@@ -23,7 +23,7 @@ final class ExerciseFormConfigurator {
         presenter.router = router
     }
     
-    static func resolveAdd(completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
+    static func resolveAdd(completionAction: @escaping (ExerciseFormOutput) -> ()) -> ExerciseFormPresenter {
         let formModel = ExerciseFormModel(formInput: nil, formStyle: .add, completionAction: completionAction)
         
         let presenter = ExerciseFormPresenter()
@@ -39,8 +39,8 @@ final class ExerciseFormConfigurator {
         return presenter
     }
     
-    static func resolveEdit(for exercise: Exercise, completionAction: @escaping (FormOutput) -> ()) -> ExerciseFormPresenter {
-        let formModel = ExerciseFormModel(formInput: FormInput(exercise: exercise), formStyle: .edit, completionAction: completionAction)
+    static func resolveEdit(for exercise: Exercise, completionAction: @escaping (ExerciseFormOutput) -> ()) -> ExerciseFormPresenter {
+        let formModel = ExerciseFormModel(formInput: ExerciseFormInput(exercise: exercise), formStyle: .edit, completionAction: completionAction)
         
         let presenter = ExerciseFormPresenter()
         let view = ExerciseFormView()

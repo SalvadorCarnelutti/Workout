@@ -24,7 +24,16 @@ extension Exercise {
         Int(order) + 1
     }
     
-    func configure(with formOutput: FormOutput) {
+    func setup(with formOutput: ExerciseFormOutput, for wokout: Workout) {
+        uuid = UUID()
+        name = formOutput.name
+        duration = Double(formOutput.duration)
+        sets = Int16(formOutput.sets)
+        reps = Int16(formOutput.reps)
+        self.workout = workout
+    }
+    
+    func update(with formOutput: ExerciseFormOutput) {
         name = formOutput.name
         duration = Double(formOutput.duration)
         sets = Int16(formOutput.sets)

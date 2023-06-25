@@ -23,7 +23,7 @@ final class SessionsView: UIView {
         addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(ExerciseTableViewCell.self)
+        tableView.register(SessionTableViewCell.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
@@ -52,14 +52,14 @@ extension SessionsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseTableViewCell.identifier, for: indexPath) as? ExerciseTableViewCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SessionTableViewCell.identifier, for: indexPath) as? SessionTableViewCell,
         let presenter = presenter else {
-            ExerciseTableViewCell.assertCellFailure()
+            SessionTableViewCell.assertCellFailure()
             return UITableViewCell()
         }
         
         let session = presenter.sessionAt(indexPath: indexPath)
-//        cell.configure(with: session)
+        cell.configure(with: session)
         return cell
     }
 }
@@ -85,7 +85,7 @@ extension SessionsView: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
-        // TODO: Display something for when exercises count is 0
+        // TODO: Display something for when sessions count is 0
 //        updateView()
     }
     
@@ -114,8 +114,8 @@ extension SessionsView: NSFetchedResultsControllerDelegate {
             }
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
-            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
-//                cell.configure(with: presenter.sessionAt(indexPath: indexPath))
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? SessionTableViewCell {
+                cell.configure(with: presenter.sessionAt(indexPath: indexPath))
             }
         default:
             return

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		707134253627F437401FF28D /* Pods_Workout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 807C4706EE7DB0999C080974 /* Pods_Workout.framework */; };
 		B401E9062A47686C00D5A678 /* DaySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E9052A47686C00D5A678 /* DaySelectionView.swift */; };
+		B401E9092A4773E200D5A678 /* SessionFormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E9082A4773E200D5A678 /* SessionFormModels.swift */; };
+		B401E90B2A47D1D000D5A678 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E90A2A47D1D000D5A678 /* Session.swift */; };
+		B401E90E2A47D6BF00D5A678 /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E90D2A47D6BF00D5A678 /* SessionTableViewCell.swift */; };
 		B410BFCE2A2D994500899BBC /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCD2A2D994500899BBC /* StyledButton.swift */; };
 		B410BFD02A2E4EB200899BBC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCF2A2E4EB200899BBC /* String.swift */; };
 		B410BFD32A2E8EDF00899BBC /* ExerciseFormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFD22A2E8EDF00899BBC /* ExerciseFormModels.swift */; };
@@ -76,6 +79,9 @@
 		76DF92F52EB8EB3C3BDAD51C /* Pods-Workout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.debug.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.debug.xcconfig"; sourceTree = "<group>"; };
 		807C4706EE7DB0999C080974 /* Pods_Workout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B401E9052A47686C00D5A678 /* DaySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySelectionView.swift; sourceTree = "<group>"; };
+		B401E9082A4773E200D5A678 /* SessionFormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFormModels.swift; sourceTree = "<group>"; };
+		B401E90A2A47D1D000D5A678 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		B401E90D2A47D6BF00D5A678 /* SessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
 		B410BFCD2A2D994500899BBC /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		B410BFCF2A2E4EB200899BBC /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B410BFD22A2E8EDF00899BBC /* ExerciseFormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormModels.swift; sourceTree = "<group>"; };
@@ -168,6 +174,22 @@
 				B401E9052A47686C00D5A678 /* DaySelectionView.swift */,
 			);
 			path = DaySelectionView;
+			sourceTree = "<group>";
+		};
+		B401E9072A4773C700D5A678 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B401E9082A4773E200D5A678 /* SessionFormModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B401E90C2A47D6AA00D5A678 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B401E90D2A47D6BF00D5A678 /* SessionTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B410BFD12A2E8EC300899BBC /* Models */ = {
@@ -293,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				B48B86F72A2D32BE007638C0 /* Exercise.swift */,
+				B401E90A2A47D1D000D5A678 /* Session.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -380,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				B4F4E6992A461C9700E91D7C /* SessionForm */,
+				B401E90C2A47D6AA00D5A678 /* Cell */,
 				B4F4E68F2A43B4EE00E91D7C /* SessionsPresenter.swift */,
 				B4F4E6902A43B4EE00E91D7C /* SessionsRouter.swift */,
 				B4F4E6912A43B4EE00E91D7C /* SessionsInteractor.swift */,
@@ -392,6 +416,7 @@
 		B4F4E6992A461C9700E91D7C /* SessionForm */ = {
 			isa = PBXGroup;
 			children = (
+				B401E9072A4773C700D5A678 /* Models */,
 				B401E9042A47686300D5A678 /* DaySelectionView */,
 				B4F4E69A2A461CA600E91D7C /* SessionFormPresenter.swift */,
 				B4F4E69B2A461CA600E91D7C /* SessionFormRouter.swift */,
@@ -561,6 +586,7 @@
 				B4B10ACA2A2127BF00017AA3 /* SceneDelegate.swift in Sources */,
 				B410BFCE2A2D994500899BBC /* StyledButton.swift in Sources */,
 				B410BFDD2A32085E00899BBC /* WorkoutFormRouter.swift in Sources */,
+				B401E90E2A47D6BF00D5A678 /* SessionTableViewCell.swift in Sources */,
 				B48B86D82A2A6C03007638C0 /* UITableViewCell.swift in Sources */,
 				B410BFDE2A32085E00899BBC /* WorkoutFormInteractor.swift in Sources */,
 				B4F4E6A02A461CA600E91D7C /* SessionFormRouter.swift in Sources */,
@@ -575,8 +601,10 @@
 				B4F4E6892A42675A00E91D7C /* WorkoutView.swift in Sources */,
 				B48B86D22A2A5D48007638C0 /* WorkoutsConfigurator.swift in Sources */,
 				B48B86FB2A2D34FC007638C0 /* ExerciseTableViewCell.swift in Sources */,
+				B401E90B2A47D1D000D5A678 /* Session.swift in Sources */,
 				B4F4E6872A42675A00E91D7C /* WorkoutRouter.swift in Sources */,
 				B48B86E52A2BEDDF007638C0 /* ExercisesConfigurator.swift in Sources */,
+				B401E9092A4773E200D5A678 /* SessionFormModels.swift in Sources */,
 				B4A28E4F2A378FA400FB74C3 /* ExerciseTableViewHeader.swift in Sources */,
 				B42BCB2A2A33E106006FCEDE /* ActivityIndicator.swift in Sources */,
 				B4B10ADD2A212C1700017AA3 /* Workout.xcdatamodeld in Sources */,

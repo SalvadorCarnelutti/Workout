@@ -23,10 +23,10 @@ final class SessionFormConfigurator {
         presenter.router = router
     }
     
-    static func resolve() -> SessionFormPresenter {
+    static func resolveAdd(completionAction: @escaping (SessionFormOutput) -> ()) -> SessionFormPresenter {
         let presenter = SessionFormPresenter()
         let view = SessionFormView()
-        let interactor = SessionFormInteractor()
+        let interactor = SessionFormInteractor(formModel: SessionFormModel(formInput: nil, formStyle: .add, completionAction: completionAction))
         let router = SessionFormRouter()
 
         Self.injectDependencies(view: view,

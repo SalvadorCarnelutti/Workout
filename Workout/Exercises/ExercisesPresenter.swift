@@ -20,8 +20,8 @@ protocol ExercisesViewToPresenterProtocol: UIViewController {
 }
 
 protocol ExercisesRouterToPresenterProtocol: UIViewController {
-    func addCompletionAction(formOutput: FormOutput)
-    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput)
+    func addCompletionAction(formOutput: ExerciseFormOutput)
+    func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput)
 }
 
 protocol ExercisesInteractorToPresenterProtocol: BaseViewProtocol {
@@ -107,11 +107,11 @@ extension ExercisesPresenter: ExercisesInteractorToPresenterProtocol {}
 
 // MARK: - RouterToPresenterProtocol
 extension ExercisesPresenter: ExercisesRouterToPresenterProtocol {
-    func addCompletionAction(formOutput: FormOutput) {
+    func addCompletionAction(formOutput: ExerciseFormOutput) {
         interactor.addCompletionAction(formOutput: formOutput)
     }
     
-    func editCompletionAction(for exercise: Exercise, formOutput: FormOutput) {
+    func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
         interactor.editCompletionAction(for: exercise, formOutput: formOutput)
     }
 }

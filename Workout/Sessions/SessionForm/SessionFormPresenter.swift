@@ -13,9 +13,12 @@ protocol SessionFormViewToPresenterProtocol: UIViewController {
     var headerString: String { get }
     var completionString: String { get }
     func viewLoaded()
+    func completionButtonTapped(for formOutput: SessionFormOutput)
 }
 
-protocol SessionFormRouterToPresenterProtocol: UIViewController {}
+protocol SessionFormRouterToPresenterProtocol: UIViewController {
+    func completionAction(for formOutput: SessionFormOutput)
+}
 
 final class SessionFormPresenter: BaseViewController {
     var viewSessionForm: SessionFormPresenterToViewProtocol!
@@ -36,12 +39,19 @@ extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
     }
     
     var completionString: String {
-//        interactor.formStyle == .add ? "Add" : "Edit"
-        "Add"
+        interactor.formStyle == .add ? "Add" : "Edit"
     }
     
     func viewLoaded() {}
+    
+    func completionButtonTapped(for formOutput: SessionFormOutput) {
+        router.dismissView(formOutput: formOutput)
+    }
 }
 
 // MARK: - RouterToPresenterProtocol
-extension SessionFormPresenter: SessionFormRouterToPresenterProtocol {}
+extension SessionFormPresenter: SessionFormRouterToPresenterProtocol {
+    func completionAction(for formOutput: SessionFormOutput) {
+        interactor.completionAction(formOutput)
+    }
+}
