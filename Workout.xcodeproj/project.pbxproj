@@ -194,6 +194,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		B401E9112A48F7E400D5A678 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B4F4E68E2A43B4D500E91D7C /* Sessions */,
+				B48B86DB2A2BED8D007638C0 /* Exercises */,
+				B4B10ADE2A279DB700017AA3 /* Workouts */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B401E9122A48F7EF00D5A678 /* Scheduled Sessions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Scheduled Sessions";
+			sourceTree = "<group>";
+		};
 		B410BFD12A2E8EC300899BBC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,10 +370,9 @@
 		B4B10AC62A2127BF00017AA3 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
-				B4F4E68E2A43B4D500E91D7C /* Sessions */,
-				B48B86DB2A2BED8D007638C0 /* Exercises */,
+				B401E9122A48F7EF00D5A678 /* Scheduled Sessions */,
+				B401E9112A48F7E400D5A678 /* Home */,
 				B48B86D32A2A6B53007638C0 /* Utilities */,
-				B4B10ADE2A279DB700017AA3 /* Home */,
 				B4B10AC72A2127BF00017AA3 /* AppDelegate.swift */,
 				B4B10AC92A2127BF00017AA3 /* SceneDelegate.swift */,
 				B4B10ADB2A212C1700017AA3 /* Workout.xcdatamodeld */,
@@ -367,7 +383,7 @@
 			path = Workout;
 			sourceTree = "<group>";
 		};
-		B4B10ADE2A279DB700017AA3 /* Home */ = {
+		B4B10ADE2A279DB700017AA3 /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
 				B4F4E6802A42673800E91D7C /* Workout */,
@@ -377,7 +393,7 @@
 				B48B86CC2A2A5D48007638C0 /* WorkoutsView.swift */,
 				B48B86CD2A2A5D48007638C0 /* WorkoutsConfigurator.swift */,
 			);
-			path = Home;
+			path = Workouts;
 			sourceTree = "<group>";
 		};
 		B4F4E6802A42673800E91D7C /* Workout */ = {
