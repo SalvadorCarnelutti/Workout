@@ -17,10 +17,7 @@ protocol WorkoutsViewToPresenterProtocol: UIViewController {
     func didSelectRowAt(_ indexPath: IndexPath)
 }
 
-protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {
-    func onPersistentContainerLoadSuccess()
-    func onPersistentContainerLoadFailure(error: Error) -> ()
-}
+protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {}
 
 protocol WorkoutsRouterToPresenterProtocol: UIViewController {
     func addCompletionAction(name: String)
@@ -46,9 +43,8 @@ final class WorkoutsPresenter: BaseViewController {
     override func loadView() {
         super.loadView()
         view = viewWorkout
-        // TODO: Validate entities model values and check if th persistent container can be set for proper versioning. After all of this I could actually look into setting scheduled sessions for for assigned workouts.
-        showLoader()
-        interactor.loadPersistentContainer()
+        viewWorkout.loadView()
+        setupNavigationBar()
     }
     
     private func setupNavigationBar() {
@@ -96,17 +92,7 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
 }
 
 // MARK: - InteractorToPresenterProtocol
-extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
-    func onPersistentContainerLoadSuccess() {
-        viewWorkout.loadView()
-        setupNavigationBar()
-    }
-    
-    func onPersistentContainerLoadFailure(error: Error) {
-        print("Unable to Add Persistent Store")
-        print("\(error), \(error.localizedDescription)")
-    }
-}
+extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {}
 
 // MARK: - RouterToPresenterProtocol
 extension WorkoutsPresenter: WorkoutsRouterToPresenterProtocol {

@@ -24,10 +24,10 @@ final class WorkoutsConfigurator {
         presenter.router = router
     }
     
-    static func resolve() -> WorkoutsPresenter {
+    static func resolveFor(managedObjectContext: NSManagedObjectContext) -> WorkoutsPresenter {
         let presenter = WorkoutsPresenter()
         let view = WorkoutsView()
-        let interactor = WorkoutsInteractor(persistentContainer: NSPersistentContainer(name: "Workout"))
+        let interactor = WorkoutsInteractor(managedObjectContext: managedObjectContext)
         let router = WorkoutsRouter()
 
         Self.injectDependencies(view: view,

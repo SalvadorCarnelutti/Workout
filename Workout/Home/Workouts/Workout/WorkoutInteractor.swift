@@ -29,6 +29,6 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
     }
     
     func editWorkoutName(with newName: String) {
-        workout.name = newName
+        workout.update(with: newName)
     }
 }

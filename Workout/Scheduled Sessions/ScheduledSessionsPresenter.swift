@@ -24,6 +24,11 @@ final class ScheduledSessionsPresenter: BaseViewController {
         super.loadView()
         view = viewScheduledSessions
         viewScheduledSessions.loadView()
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.title = "Scheduled Sessions"
     }
 }
 

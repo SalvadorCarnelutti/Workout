@@ -6,7 +6,7 @@
 //  Created by Salvador on 6/25/23.
 //
 //
-import Foundation
+import CoreData
 
 final class ScheduledSessionsConfigurator {
     static func injectDependencies(view: ScheduledSessionsPresenterToViewProtocol,
@@ -23,10 +23,10 @@ final class ScheduledSessionsConfigurator {
         presenter.router = router
     }
     
-    static func resolve() -> ScheduledSessionsPresenter {
+    static func resolveFor(managedObjectContext: NSManagedObjectContext) -> ScheduledSessionsPresenter {
         let presenter = ScheduledSessionsPresenter()
         let view = ScheduledSessionsView()
-        let interactor = ScheduledSessionsInteractor()
+        let interactor = ScheduledSessionsInteractor(managedObjectContext: managedObjectContext)
         let router = ScheduledSessionsRouter()
 
         Self.injectDependencies(view: view,

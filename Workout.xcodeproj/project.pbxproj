@@ -19,6 +19,7 @@
 		B401E91B2A48F83C00D5A678 /* ScheduledSessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E9162A48F83C00D5A678 /* ScheduledSessionsView.swift */; };
 		B401E91C2A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E9172A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift */; };
 		B401E91E2A48F91A00D5A678 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E91D2A48F91A00D5A678 /* Workout.swift */; };
+		B401E9202A49025D00D5A678 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E91F2A49025D00D5A678 /* CoreDataManager.swift */; };
 		B410BFCE2A2D994500899BBC /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCD2A2D994500899BBC /* StyledButton.swift */; };
 		B410BFD02A2E4EB200899BBC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCF2A2E4EB200899BBC /* String.swift */; };
 		B410BFD32A2E8EDF00899BBC /* ExerciseFormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFD22A2E8EDF00899BBC /* ExerciseFormModels.swift */; };
@@ -32,7 +33,6 @@
 		B42BCB2C2A33E2BE006FCEDE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42BCB2B2A33E2BE006FCEDE /* BaseViewController.swift */; };
 		B440C5C52A3220FB008154CE /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5C42A3220FB008154CE /* WorkoutTableViewCell.swift */; };
 		B440C5C72A3221AC008154CE /* VerticalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5C62A3221AC008154CE /* VerticalStack.swift */; };
-		B440C5CC2A324021008154CE /* NSPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5CB2A324021008154CE /* NSPersistentContainer.swift */; };
 		B440C5CE2A32851B008154CE /* ValidatedFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5CD2A32851B008154CE /* ValidatedFormField.swift */; };
 		B440C5D22A328DA0008154CE /* ValidationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5D12A328DA0008154CE /* ValidationEntity.swift */; };
 		B48B86CE2A2A5D48007638C0 /* WorkoutsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */; };
@@ -96,6 +96,7 @@
 		B401E9162A48F83C00D5A678 /* ScheduledSessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionsView.swift; sourceTree = "<group>"; };
 		B401E9172A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionsConfigurator.swift; sourceTree = "<group>"; };
 		B401E91D2A48F91A00D5A678 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		B401E91F2A49025D00D5A678 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B410BFCD2A2D994500899BBC /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		B410BFCF2A2E4EB200899BBC /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B410BFD22A2E8EDF00899BBC /* ExerciseFormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormModels.swift; sourceTree = "<group>"; };
@@ -109,7 +110,6 @@
 		B42BCB2B2A33E2BE006FCEDE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B440C5C42A3220FB008154CE /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		B440C5C62A3221AC008154CE /* VerticalStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStack.swift; sourceTree = "<group>"; };
-		B440C5CB2A324021008154CE /* NSPersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPersistentContainer.swift; sourceTree = "<group>"; };
 		B440C5CD2A32851B008154CE /* ValidatedFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedFormField.swift; sourceTree = "<group>"; };
 		B440C5D12A328DA0008154CE /* ValidationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationEntity.swift; sourceTree = "<group>"; };
 		B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsPresenter.swift; sourceTree = "<group>"; };
@@ -298,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				B48B86D52A2A6B67007638C0 /* UITableView.swift */,
-				B440C5CB2A324021008154CE /* NSPersistentContainer.swift */,
 				B48B86D92A2A6E17007638C0 /* UIImage.swift */,
 				B48B86D72A2A6C03007638C0 /* UITableViewCell.swift */,
 				B4A28E4C2A37826600FB74C3 /* UITableViewHeaderFooterView.swift */,
@@ -354,6 +353,7 @@
 				B48B86F72A2D32BE007638C0 /* Exercise.swift */,
 				B401E91D2A48F91A00D5A678 /* Workout.swift */,
 				B401E90A2A47D1D000D5A678 /* Session.swift */,
+				B401E91F2A49025D00D5A678 /* CoreDataManager.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -603,7 +603,6 @@
 				B4F4E6972A43B4EF00E91D7C /* SessionsView.swift in Sources */,
 				B4F4E6A12A461CA600E91D7C /* SessionFormInteractor.swift in Sources */,
 				B4F4E68D2A426C0C00E91D7C /* WorkoutSectionTableViewHeader.swift in Sources */,
-				B440C5CC2A324021008154CE /* NSPersistentContainer.swift in Sources */,
 				B401E91B2A48F83C00D5A678 /* ScheduledSessionsView.swift in Sources */,
 				B42BCB2C2A33E2BE006FCEDE /* BaseViewController.swift in Sources */,
 				B410BFD02A2E4EB200899BBC /* String.swift in Sources */,
@@ -656,6 +655,7 @@
 				B4F4E6A32A461CA600E91D7C /* SessionFormConfigurator.swift in Sources */,
 				B440C5C52A3220FB008154CE /* WorkoutTableViewCell.swift in Sources */,
 				B48B86F52A2D326F007638C0 /* MultilineLabel.swift in Sources */,
+				B401E9202A49025D00D5A678 /* CoreDataManager.swift in Sources */,
 				B401E9192A48F83C00D5A678 /* ScheduledSessionsRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,8 @@ extension UIImage {
         return UIImage(systemName: name) ?? UIImage()
     }
     
+    static var list: UIImage { Self.unwrappedImage("list.bullet") }
+    static var calendar: UIImage { Self.unwrappedImage("calendar") }
     static var add: UIImage { Self.unwrappedImage("plus") }
     static var edit: UIImage { Self.unwrappedImage("pencil") }
     static var exercise: UIImage { Self.unwrappedImage("figure.walk") }
