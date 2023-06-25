@@ -42,8 +42,8 @@ final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
         guard let presenter = presenter else { return }
         
         let exercise = Exercise(context: managedObjectContext)
-        exercise.setup(with: formOutput, for: workout)
         exercise.order = Int16(presenter.exercisesCount)
+        exercise.setup(with: formOutput, for: workout)
     }
     
     func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
