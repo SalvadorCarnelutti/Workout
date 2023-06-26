@@ -14,6 +14,7 @@ protocol WorkoutsViewToPresenterProtocol: UIViewController {
     var workoutsCount: Int { get }
     func viewLoaded()
     func workoutAt(indexPath: IndexPath) -> Workout
+    func deleteRowAt(indexPath: IndexPath)
     func didSelectRowAt(_ indexPath: IndexPath)
 }
 
@@ -84,6 +85,11 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
     
     func workoutAt(indexPath: IndexPath) -> Workout {
         fetchedResultsController.object(at: indexPath)
+    }
+    
+    func deleteRowAt(indexPath: IndexPath) {
+        let workout = workoutAt(indexPath: indexPath)
+        workout.managedObjectContext?.delete(workout)
     }
     
     func didSelectRowAt(_ indexPath: IndexPath) {

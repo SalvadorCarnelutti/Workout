@@ -70,12 +70,9 @@ extension WorkoutsView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let presenter = presenter else { return }
+        guard let presenter = presenter, editingStyle == .delete else { return }
         
-        if editingStyle == .delete {
-            let workout = presenter.workoutAt(indexPath: indexPath)
-            workout.managedObjectContext?.delete(workout)
-        }
+        presenter.deleteRowAt(indexPath: indexPath)
     }
 }
 

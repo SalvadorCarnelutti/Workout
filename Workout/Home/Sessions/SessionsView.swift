@@ -70,11 +70,9 @@ extension SessionsView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let presenter = presenter else { return }
+        guard let presenter = presenter, editingStyle == .delete else { return }
         
-        if editingStyle == .delete {
-            presenter.deleteRowAt(indexPath: indexPath)
-        }
+        presenter.deleteRowAt(indexPath: indexPath)
     }
 }
 
