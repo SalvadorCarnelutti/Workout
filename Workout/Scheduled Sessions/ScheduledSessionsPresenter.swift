@@ -32,8 +32,8 @@ final class ScheduledSessionsPresenter: BaseViewController {
         let predicate = NSPredicate(format: "day == %@", NSNumber(value: self.viewScheduledSessions.selectedDay))
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
         fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Session.day), ascending: true),
-                                        NSSortDescriptor(key: #keyPath(Session.startsAt), ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Session.day, ascending: true),
+                                        NSSortDescriptor(keyPath: \Session.startsAt, ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
                                                                   sectionNameKeyPath: nil,
@@ -91,7 +91,7 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
     }
     
     func session(at indexPath: IndexPath) -> Session {
-        fetchedResultsController.object(at: indexPath) as! Session
+        fetchedResultsController.object(at: indexPath)
     }
     
     func deleteRow(at indexPath: IndexPath) {

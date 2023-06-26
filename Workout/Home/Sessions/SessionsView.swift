@@ -113,6 +113,16 @@ extension SessionsView: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? SessionTableViewCell {
                 cell.configure(with: presenter.session(at: indexPath))
             }
+        // A move is reported when the changed attribute on the object is one of the sort descriptors used in the fetch request.
+        // An update of the object is assumed in this case, but no separate update message is sent to the delegate.
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
         default:
             return
         }

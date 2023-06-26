@@ -18,4 +18,13 @@ extension Date {
         let adjustedWeekday = (weekday - calendar.firstWeekday + 7) % 7
         return adjustedWeekday
     }
+    
+    func formatAs(_ format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        
+        let formattedTime = dateFormatter.string(from: self)
+        let formattedDate = dateFormatter.date(from: formattedTime)
+        return formattedDate
+    }
 }
