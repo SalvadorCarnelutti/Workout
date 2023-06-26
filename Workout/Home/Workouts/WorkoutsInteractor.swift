@@ -27,5 +27,7 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
     func addCompletionAction(name: String) {
         let workout = Workout(context: managedObjectContext)
         workout.setup(with: name)
+        
+        presenter?.workoutCreated(workout)
     }
 }

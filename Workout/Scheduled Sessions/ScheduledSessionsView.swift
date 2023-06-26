@@ -71,8 +71,8 @@ extension ScheduledSessionsView: ScheduledSessionsPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
         setupConstraints()
-        presenter?.viewLoaded()
         selectCurrentDay()
+        presenter?.viewLoaded()
     }
     
     func reloadData() {

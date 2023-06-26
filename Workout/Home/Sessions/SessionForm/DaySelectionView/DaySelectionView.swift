@@ -24,12 +24,12 @@ final class DaySelectionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
+        setupConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupViews()
+        setupConstraints()
     }
     
     func selectDayOfWeek(_ dayOfWeek: DayOfWeek) {
@@ -67,7 +67,10 @@ final class DaySelectionView: UIView {
     private func setupViews() {
         dayButtons.forEach { verticalStack.addArrangedSubview($0) }
         selectCurrentDay()
-        
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         verticalStack.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

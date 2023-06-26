@@ -18,7 +18,9 @@ protocol WorkoutsViewToPresenterProtocol: UIViewController {
     func didSelectRow(at indexPath: IndexPath)
 }
 
-protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {}
+protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {
+    func workoutCreated(_ workout: Workout)
+}
 
 protocol WorkoutsRouterToPresenterProtocol: UIViewController {
     func addCompletionAction(name: String)
@@ -93,12 +95,17 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        router.pushEditWorkout(for: fetchedResultsController.object(at: indexPath))
+        let workout = fetchedResultsController.object(at: indexPath)
+        router.pushEditWorkout(for: workout)
     }
 }
 
 // MARK: - InteractorToPresenterProtocol
-extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {}
+extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
+    func workoutCreated(_ workout: Workout) {
+        router.pushEditWorkout(for: workout)
+    }
+}
 
 // MARK: - RouterToPresenterProtocol
 extension WorkoutsPresenter: WorkoutsRouterToPresenterProtocol {
