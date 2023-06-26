@@ -60,15 +60,7 @@ final class DaySelectionView: UIView {
     }
     
     private func selectCurrentDay() {
-        let calendar = Calendar.current
-        let today = Date()
-
-        let weekday = calendar.component(.weekday, from: today)
-
-        // Adjust the weekday value to be in the range 0-6
-        let adjustedWeekday = (weekday - calendar.firstWeekday + 7) % 7
-        
-        let currentDayButton = dayButtons[adjustedWeekday]
+        let currentDayButton = dayButtons[Date.weekday]
         currentDayButton.sendActions(for: .touchUpInside)
     }
     

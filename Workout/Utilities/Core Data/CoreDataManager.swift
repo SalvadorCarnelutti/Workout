@@ -14,11 +14,12 @@ class CoreDataManager {
     private lazy var persistentContainer: NSPersistentContainer = {
         let persistentContainer = NSPersistentContainer(name: "Workout")
         
-        let description = NSPersistentStoreDescription()
-        description.shouldMigrateStoreAutomatically = true
-        description.shouldInferMappingModelAutomatically = true
-        
-        persistentContainer.persistentStoreDescriptions = [description]
+        // TODO: Check why, when set memory is not persisting
+//        let description = NSPersistentStoreDescription()
+//        description.shouldMigrateStoreAutomatically = true
+//        description.shouldInferMappingModelAutomatically = true
+//
+//        persistentContainer.persistentStoreDescriptions = [description]
         
         return persistentContainer
     }()

@@ -20,6 +20,7 @@
 		B401E91C2A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E9172A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift */; };
 		B401E91E2A48F91A00D5A678 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E91D2A48F91A00D5A678 /* Workout.swift */; };
 		B401E9202A49025D00D5A678 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E91F2A49025D00D5A678 /* CoreDataManager.swift */; };
+		B401E9222A4937C500D5A678 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401E9212A4937C500D5A678 /* Date.swift */; };
 		B410BFCE2A2D994500899BBC /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCD2A2D994500899BBC /* StyledButton.swift */; };
 		B410BFD02A2E4EB200899BBC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFCF2A2E4EB200899BBC /* String.swift */; };
 		B410BFD32A2E8EDF00899BBC /* ExerciseFormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFD22A2E8EDF00899BBC /* ExerciseFormModels.swift */; };
@@ -97,6 +98,7 @@
 		B401E9172A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionsConfigurator.swift; sourceTree = "<group>"; };
 		B401E91D2A48F91A00D5A678 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		B401E91F2A49025D00D5A678 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B401E9212A4937C500D5A678 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		B410BFCD2A2D994500899BBC /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		B410BFCF2A2E4EB200899BBC /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B410BFD22A2E8EDF00899BBC /* ExerciseFormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormModels.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				B48B86D72A2A6C03007638C0 /* UITableViewCell.swift */,
 				B4A28E4C2A37826600FB74C3 /* UITableViewHeaderFooterView.swift */,
 				B410BFCF2A2E4EB200899BBC /* String.swift */,
+				B401E9212A4937C500D5A678 /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				B48B86D82A2A6C03007638C0 /* UITableViewCell.swift in Sources */,
 				B410BFDE2A32085E00899BBC /* WorkoutFormInteractor.swift in Sources */,
 				B4F4E6A02A461CA600E91D7C /* SessionFormRouter.swift in Sources */,
+				B401E9222A4937C500D5A678 /* Date.swift in Sources */,
 				B48B86EF2A2BF63D007638C0 /* ExerciseFormView.swift in Sources */,
 				B48B86D62A2A6B67007638C0 /* UITableView.swift in Sources */,
 				B48B86EE2A2BF63D007638C0 /* ExerciseFormInteractor.swift in Sources */,
