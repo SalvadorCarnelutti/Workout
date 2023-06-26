@@ -58,7 +58,7 @@ extension SessionsView: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let session = presenter.sessionAt(indexPath: indexPath)
+        let session = presenter.session(at: indexPath)
         cell.configure(with: session)
         return cell
     }
@@ -66,13 +66,13 @@ extension SessionsView: UITableViewDataSource {
 
 extension SessionsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectRowAt(indexPath)
+        presenter?.didSelectRow(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard let presenter = presenter, editingStyle == .delete else { return }
         
-        presenter.deleteRowAt(indexPath: indexPath)
+        presenter.deleteRow(at: indexPath)
     }
 }
 
@@ -112,7 +112,7 @@ extension SessionsView: NSFetchedResultsControllerDelegate {
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? SessionTableViewCell {
-                cell.configure(with: presenter.sessionAt(indexPath: indexPath))
+                cell.configure(with: presenter.session(at: indexPath))
             }
         default:
             return

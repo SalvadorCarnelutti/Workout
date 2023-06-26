@@ -13,10 +13,10 @@ import CoreData
 protocol ExercisesViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
     func viewLoaded()
-    func exerciseAt(indexPath: IndexPath) -> Exercise
-    func deleteRowAt(indexPath: IndexPath)
-    func didSelectRowAt(_ indexPath: IndexPath)
-    func didDeleteRowAt(_ indexPath: IndexPath)
+    func exercise(at indexPath: IndexPath) -> Exercise
+    func deleteRow(at indexPath: IndexPath)
+    func didSelectRow(at indexPath: IndexPath)
+    func didDeleteRow(at indexPath: IndexPath)
 }
 
 protocol ExercisesRouterToPresenterProtocol: UIViewController {
@@ -86,19 +86,19 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
         fetchExercises()
     }
     
-    func exerciseAt(indexPath: IndexPath) -> Exercise { fetchedResultsController.object(at: indexPath) }
+    func exercise(at indexPath: IndexPath) -> Exercise { fetchedResultsController.object(at: indexPath) }
     
-    func deleteRowAt(indexPath: IndexPath) {
-        let exercise = exerciseAt(indexPath: indexPath)
+    func deleteRow(at indexPath: IndexPath) {
+        let exercise = exercise(at: indexPath)
         exercise.managedObjectContext?.delete(exercise)
     }
     
-    func didSelectRowAt(_ indexPath: IndexPath) {
+    func didSelectRow(at indexPath: IndexPath) {
         router.presentEditExerciseForm(for: fetchedResultsController.object(at: indexPath))
     }
     
-    func didDeleteRowAt(_ indexPath: IndexPath) {
-        Array(0..<indexPath.row).map { exerciseAt(indexPath: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
+    func didDeleteRow(at indexPath: IndexPath) {
+        Array(0..<indexPath.row).map { exercise(at: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
     }
 }
 

@@ -58,7 +58,7 @@ extension WorkoutsView: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let exercise = presenter.workoutAt(indexPath: indexPath)
+        let exercise = presenter.workout(at: indexPath)
         cell.configure(with: exercise)
         return cell
     }
@@ -66,13 +66,13 @@ extension WorkoutsView: UITableViewDataSource {
 
 extension WorkoutsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectRowAt(indexPath)
+        presenter?.didSelectRow(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard let presenter = presenter, editingStyle == .delete else { return }
         
-        presenter.deleteRowAt(indexPath: indexPath)
+        presenter.deleteRow(at: indexPath)
     }
 }
 
@@ -112,7 +112,7 @@ extension WorkoutsView: NSFetchedResultsControllerDelegate {
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? WorkoutTableViewCell {
-                cell.configure(with: presenter.workoutAt(indexPath: indexPath))
+                cell.configure(with: presenter.workout(at: indexPath))
             }
         // A move is reported when the changed attribute on the object is one of the sort descriptors used in the fetch request.
         // An update of the object is assumed in this case, but no separate update message is sent to the delegate.

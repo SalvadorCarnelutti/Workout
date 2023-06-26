@@ -68,7 +68,7 @@ extension ExercisesView: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let exercise = presenter.exerciseAt(indexPath: indexPath)
+        let exercise = presenter.exercise(at: indexPath)
         cell.configure(with: exercise)
         return cell
     }
@@ -79,14 +79,14 @@ extension ExercisesView: UITableViewDataSource {
 
 extension ExercisesView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectRowAt(indexPath)
+        presenter?.didSelectRow(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard let presenter = presenter else { return }
         
         if editingStyle == .delete {
-            presenter.deleteRowAt(indexPath: indexPath)
+            presenter.deleteRow(at: indexPath)
         }
     }
 }
@@ -98,7 +98,7 @@ extension ExercisesView: UITableViewDragDelegate {
         }
         
         let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = presenter.exerciseAt(indexPath: indexPath)
+        dragItem.localObject = presenter.exercise(at: indexPath)
         return [dragItem]
     }
 }
@@ -135,12 +135,12 @@ extension ExercisesView: NSFetchedResultsControllerDelegate {
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                presenter.didDeleteRowAt(indexPath)
+                presenter.didDeleteRow(at: indexPath)
             }
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
-                cell.configure(with: presenter.exerciseAt(indexPath: indexPath))
+                cell.configure(with: presenter.exercise(at: indexPath))
             }
         default:
             return

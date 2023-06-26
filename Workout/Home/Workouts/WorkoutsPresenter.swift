@@ -13,9 +13,9 @@ import CoreData
 protocol WorkoutsViewToPresenterProtocol: UIViewController {
     var workoutsCount: Int { get }
     func viewLoaded()
-    func workoutAt(indexPath: IndexPath) -> Workout
-    func deleteRowAt(indexPath: IndexPath)
-    func didSelectRowAt(_ indexPath: IndexPath)
+    func workout(at indexPath: IndexPath) -> Workout
+    func deleteRow(at indexPath: IndexPath)
+    func didSelectRow(at indexPath: IndexPath)
 }
 
 protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {}
@@ -83,16 +83,16 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
         fetchExercises()
     }
     
-    func workoutAt(indexPath: IndexPath) -> Workout {
+    func workout(at indexPath: IndexPath) -> Workout {
         fetchedResultsController.object(at: indexPath)
     }
     
-    func deleteRowAt(indexPath: IndexPath) {
-        let workout = workoutAt(indexPath: indexPath)
+    func deleteRow(at indexPath: IndexPath) {
+        let workout = workout(at: indexPath)
         workout.managedObjectContext?.delete(workout)
     }
     
-    func didSelectRowAt(_ indexPath: IndexPath) {
+    func didSelectRow(at indexPath: IndexPath) {
         router.pushEditWorkout(for: fetchedResultsController.object(at: indexPath))
     }
 }

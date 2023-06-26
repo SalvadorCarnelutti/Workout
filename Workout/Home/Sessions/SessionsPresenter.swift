@@ -55,9 +55,9 @@ enum DayOfWeek: Int, CaseIterable {
 protocol SessionsViewToPresenterProtocol: UIViewController {
     var sessionsCount: Int { get }
     func viewLoaded()
-    func sessionAt(indexPath: IndexPath) -> Session
-    func deleteRowAt(indexPath: IndexPath)
-    func didSelectRowAt(_ indexPath: IndexPath)
+    func session(at indexPath: IndexPath) -> Session
+    func deleteRow(at indexPath: IndexPath)
+    func didSelectRow(at indexPath: IndexPath)
 }
 
 protocol SessionsRouterToPresenterProtocol: UIViewController {
@@ -126,16 +126,16 @@ extension SessionsPresenter: SessionsViewToPresenterProtocol {
         fetchExercises()
     }
     
-    func sessionAt(indexPath: IndexPath) -> Session {
+    func session(at indexPath: IndexPath) -> Session {
         fetchedResultsController.object(at: indexPath)
     }
     
-    func deleteRowAt(indexPath: IndexPath) {
-        let session = sessionAt(indexPath: indexPath)
+    func deleteRow(at indexPath: IndexPath) {
+        let session = session(at: indexPath)
         session.managedObjectContext?.delete(session)
     }
     
-    func didSelectRowAt(_ indexPath: IndexPath) {
+    func didSelectRow(at indexPath: IndexPath) {
         router.presentEditSessionForm(for: fetchedResultsController.object(at: indexPath))
     }
 }
