@@ -32,7 +32,7 @@ final class ScheduledSessionsView: UIView {
         addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SessionTableViewCell.self)
+        tableView.register(ScheduledSessionTableViewCell.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
@@ -86,9 +86,9 @@ extension ScheduledSessionsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SessionTableViewCell.identifier, for: indexPath) as? SessionTableViewCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduledSessionTableViewCell.identifier, for: indexPath) as? ScheduledSessionTableViewCell,
         let presenter = presenter else {
-            SessionTableViewCell.assertCellFailure()
+            ScheduledSessionTableViewCell.assertCellFailure()
             return UITableViewCell()
         }
         
@@ -145,7 +145,7 @@ extension ScheduledSessionsView: NSFetchedResultsControllerDelegate {
             }
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
-            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? SessionTableViewCell {
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ScheduledSessionTableViewCell {
                 cell.configure(with: presenter.session(at: indexPath))
             }
         default:

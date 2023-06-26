@@ -94,7 +94,7 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        router.presentEditExerciseForm(for: fetchedResultsController.object(at: indexPath))
+        router.presentEditExerciseForm(for: exercise(at: indexPath))
     }
     
     func didDeleteRow(at indexPath: IndexPath) {

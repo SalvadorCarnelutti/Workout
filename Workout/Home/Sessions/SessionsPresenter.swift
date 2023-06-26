@@ -94,8 +94,8 @@ final class SessionsPresenter: BaseViewController {
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
         fetchRequest.predicate = predicate
         // TODO: Check later if necessary to see that ordering is preserved
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Session.day), ascending: true),
-                                        NSSortDescriptor(key: #keyPath(Session.startsAt), ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Session.day, ascending: true),
+                                        NSSortDescriptor(keyPath: \Session.startsAt, ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
                                                                   sectionNameKeyPath: nil,
@@ -155,7 +155,7 @@ extension SessionsPresenter: SessionsViewToPresenterProtocol {
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        router.presentEditSessionForm(for: fetchedResultsController.object(at: indexPath))
+        router.presentEditSessionForm(for: session(at: indexPath))
     }
 }
 

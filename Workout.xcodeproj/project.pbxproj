@@ -36,6 +36,7 @@
 		B440C5C72A3221AC008154CE /* VerticalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5C62A3221AC008154CE /* VerticalStack.swift */; };
 		B440C5CE2A32851B008154CE /* ValidatedFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5CD2A32851B008154CE /* ValidatedFormField.swift */; };
 		B440C5D22A328DA0008154CE /* ValidationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440C5D12A328DA0008154CE /* ValidationEntity.swift */; };
+		B44CD50A2A49F3030070ED15 /* ScheduledSessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44CD5092A49F3030070ED15 /* ScheduledSessionTableViewCell.swift */; };
 		B48B86CE2A2A5D48007638C0 /* WorkoutsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */; };
 		B48B86CF2A2A5D48007638C0 /* WorkoutsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */; };
 		B48B86D02A2A5D48007638C0 /* WorkoutsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */; };
@@ -114,6 +115,7 @@
 		B440C5C62A3221AC008154CE /* VerticalStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStack.swift; sourceTree = "<group>"; };
 		B440C5CD2A32851B008154CE /* ValidatedFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedFormField.swift; sourceTree = "<group>"; };
 		B440C5D12A328DA0008154CE /* ValidationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationEntity.swift; sourceTree = "<group>"; };
+		B44CD5092A49F3030070ED15 /* ScheduledSessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionTableViewCell.swift; sourceTree = "<group>"; };
 		B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsPresenter.swift; sourceTree = "<group>"; };
 		B48B86CA2A2A5D48007638C0 /* WorkoutsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsRouter.swift; sourceTree = "<group>"; };
 		B48B86CB2A2A5D48007638C0 /* WorkoutsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsInteractor.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		B401E9122A48F7EF00D5A678 /* Scheduled Sessions */ = {
 			isa = PBXGroup;
 			children = (
+				B44CD5082A49F2F70070ED15 /* Cell */,
 				B401E9132A48F83C00D5A678 /* ScheduledSessionsPresenter.swift */,
 				B401E9142A48F83C00D5A678 /* ScheduledSessionsRouter.swift */,
 				B401E9152A48F83C00D5A678 /* ScheduledSessionsInteractor.swift */,
@@ -284,6 +287,14 @@
 				B440C5D12A328DA0008154CE /* ValidationEntity.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B44CD5082A49F2F70070ED15 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B44CD5092A49F3030070ED15 /* ScheduledSessionTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
@@ -644,6 +655,7 @@
 				B401E91C2A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift in Sources */,
 				B48B86F32A2BF77E007638C0 /* ValidatedTextField.swift in Sources */,
 				B4F4E6892A42675A00E91D7C /* WorkoutView.swift in Sources */,
+				B44CD50A2A49F3030070ED15 /* ScheduledSessionTableViewCell.swift in Sources */,
 				B48B86D22A2A5D48007638C0 /* WorkoutsConfigurator.swift in Sources */,
 				B48B86FB2A2D34FC007638C0 /* ExerciseTableViewCell.swift in Sources */,
 				B401E90B2A47D1D000D5A678 /* Session.swift in Sources */,

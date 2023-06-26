@@ -24,12 +24,12 @@ final class DaySelectionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupConstraints()
+        setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupConstraints()
+        setupViews()
     }
     
     func selectDayOfWeek(_ dayOfWeek: DayOfWeek) {

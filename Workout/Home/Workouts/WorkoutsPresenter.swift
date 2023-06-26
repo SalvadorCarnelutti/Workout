@@ -34,7 +34,7 @@ final class WorkoutsPresenter: BaseViewController {
     private lazy var fetchedResultsController: NSFetchedResultsController<Workout> = {
         let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
         // TODO: Check later if necessary to see that ordering is preserved
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Workout.name), ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.name, ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
                                                                   sectionNameKeyPath: nil,

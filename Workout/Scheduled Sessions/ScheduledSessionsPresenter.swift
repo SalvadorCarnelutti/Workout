@@ -42,6 +42,13 @@ final class ScheduledSessionsPresenter: BaseViewController {
         return fetchedResultsController
     }()
     
+    // Because NSFetchedResultsController only tracks changes to its non relationship attributes, we must consider Workout's exercises count and time duration updates
+    // This could be really inefficient if we had to update large volumes of data in a table view, but for this app's usage it's fine
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewScheduledSessions.reloadData()
+    }
+    
     override func loadView() {
         super.loadView()
         view = viewScheduledSessions
@@ -84,7 +91,7 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
     }
     
     func session(at indexPath: IndexPath) -> Session {
-        fetchedResultsController.object(at: indexPath)
+        fetchedResultsController.object(at: indexPath) as! Session
     }
     
     func deleteRow(at indexPath: IndexPath) {
@@ -93,7 +100,7 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        router.presentEditSessionForm(for: fetchedResultsController.object(at: indexPath))
+        router.presentEditSessionForm(for: session(at: indexPath))
     }
 }
 
