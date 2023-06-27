@@ -78,7 +78,7 @@ extension ScheduledSessionFormView: ScheduledSessionFormPresenterToViewProtocol 
     
     var sessionFormOutput: SessionFormOutput? {
         guard let selectedDay = daySelectionView.selectedDay?.rawValue,
-        let startsAt = datePicker.date.formatAs("h:mm a") else { return nil }
+              let startsAt = datePicker.date.formatAs("h:mm a") else { return nil }
         
         let formOutput = SessionFormOutput(day: selectedDay,
                                            startsAt: startsAt)
@@ -112,7 +112,11 @@ extension ScheduledSessionFormView: UITableViewDataSource {
     }
     
     
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let presenter = presenter, sourceIndexPath != destinationIndexPath else { return }
+        
+        presenter.move(at: sourceIndexPath, to: destinationIndexPath)
+    }
 }
 
 extension ScheduledSessionFormView: UITableViewDelegate {

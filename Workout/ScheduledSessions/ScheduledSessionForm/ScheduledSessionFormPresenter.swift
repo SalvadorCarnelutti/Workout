@@ -9,6 +9,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
     var formInput: SessionFormInput { get }
@@ -19,6 +20,7 @@ protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
+    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
 }
 
 protocol ScheduledSessionFormRouterToPresenterProtocol: UIViewController {
@@ -34,7 +36,6 @@ final class ScheduledSessionFormPresenter: BaseViewController {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
         fetchRequest.predicate = predicate
-        // TODO: Check later if necessary to see that ordering is preserved
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Exercise.order, ascending: false)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
@@ -101,6 +102,20 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
     
     func didDeleteRow(at indexPath: IndexPath) {
         Array(0..<indexPath.row).map { exercise(at: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
+    }
+    
+    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        var exercises = fetchedResultsController.fetchedObjects ?? []
+        
+        let fromOffsets = IndexSet(integer: sourceIndexPath.row)
+        var toOffset = destinationIndexPath.row
+        if sourceIndexPath.row < destinationIndexPath.row { toOffset += 1 }
+        
+        exercises.move(fromOffsets: fromOffsets, toOffset: toOffset)
+        
+        for (i, exercise) in exercises.enumerated() {
+            exercise.order = Int16(exercises.count - i) - 1
+        }
     }
 }
 

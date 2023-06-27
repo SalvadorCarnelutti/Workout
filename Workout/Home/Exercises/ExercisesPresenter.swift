@@ -9,6 +9,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 protocol ExercisesViewToPresenterProtocol: UIViewController {
     var exercisesCount: Int { get }
@@ -17,6 +18,7 @@ protocol ExercisesViewToPresenterProtocol: UIViewController {
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
+    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
 }
 
 protocol ExercisesRouterToPresenterProtocol: UIViewController {
@@ -99,6 +101,26 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     
     func didDeleteRow(at indexPath: IndexPath) {
         Array(0..<indexPath.row).map { exercise(at: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
+    }
+    
+    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // TODO: Remove prints
+        var exercises = fetchedResultsController.fetchedObjects ?? []
+//        print(exercises.map { "Start: \($0.name!): \($0.order) \n" })
+//        print("From: \(sourceIndexPath.row) to \(destinationIndexPath.row)")
+        
+        let fromOffsets = IndexSet(integer: sourceIndexPath.row)
+        var toOffset = destinationIndexPath.row
+        if sourceIndexPath.row < destinationIndexPath.row { toOffset += 1 }
+        
+        exercises.move(fromOffsets: fromOffsets, toOffset: toOffset)
+        
+//        print(exercises.map { "Before: \($0.name!): \($0.order) \n" })
+        for (i, exercise) in exercises.enumerated() {
+            exercise.order = Int16(exercises.count - i) - 1
+        }
+        
+//        print(exercises.map { "End: \($0.name!): \($0.order) \n" })
     }
 }
 

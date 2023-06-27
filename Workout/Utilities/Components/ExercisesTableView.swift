@@ -89,6 +89,9 @@ extension ExercisesTableView: NSFetchedResultsControllerDelegate {
             if let newIndexPath = newIndexPath {
                 insertRows(at: [newIndexPath], with: .fade)
             }
+            
+            // Moving might also require to update other cells in the tableView
+            reloadData()
         default:
             return
         }

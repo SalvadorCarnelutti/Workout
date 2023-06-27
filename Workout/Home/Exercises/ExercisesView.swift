@@ -13,7 +13,6 @@ protocol ExercisesPresenterToViewProtocol: UIView, NSFetchedResultsControllerDel
     var presenter: ExercisesViewToPresenterProtocol? { get set }
     var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate { get }
     func loadView()
-    func updateSections()
 }
 
 final class ExercisesView: UIView {
@@ -70,8 +69,11 @@ extension ExercisesView: UITableViewDataSource {
         return cell
     }
     
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let presenter = presenter, sourceIndexPath != destinationIndexPath else { return }
+        
+        presenter.move(at: sourceIndexPath, to: destinationIndexPath)
+    }
 }
 
 extension ExercisesView: UITableViewDelegate {
