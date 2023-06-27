@@ -10,7 +10,7 @@ import CoreData
 
 protocol ExercisesPresenterToInteractorProtocol: AnyObject {
     var presenter: ExercisesInteractorToPresenterProtocol? { get set }
-    var workout: Workout { get set }
+    var workout: Workout { get }
     var managedObjectContext: NSManagedObjectContext { get }
     var workoutName: String { get }
     func addCompletionAction(formOutput: ExerciseFormOutput)
@@ -20,7 +20,7 @@ protocol ExercisesPresenterToInteractorProtocol: AnyObject {
 // MARK: - PresenterToInteractorProtocol
 final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
     weak var presenter: ExercisesInteractorToPresenterProtocol?
-    var workout: Workout
+    let workout: Workout
     
     init(workout: Workout) {
         self.workout = workout

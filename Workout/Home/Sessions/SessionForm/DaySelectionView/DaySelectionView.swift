@@ -60,6 +60,12 @@ final class DaySelectionView: UIView {
             button.configuration = button.isSelected ? selectedConfiguration : configuration
         }
         
+        if style == .compact {
+            dayButton.snp.makeConstraints { make in
+                make.width.equalTo(dayButton.snp.height)
+            }
+        }
+        
         dayButton.addTarget(self, action: #selector(dayButtonTapped), for: .touchUpInside)
         
         return dayButton

@@ -10,7 +10,7 @@ import UIKit
 
 protocol ScheduledSessionsPresenterToRouterProtocol: AnyObject {
     var presenter: ScheduledSessionsRouterToPresenterProtocol? { get set }
-    func presentEditSessionForm(for session: Session)
+    func pushEditSessionForm(for session: Session)
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -18,14 +18,11 @@ final class ScheduledSessionsRouter: ScheduledSessionsPresenterToRouterProtocol 
     // MARK: - Properties
     weak var presenter: ScheduledSessionsRouterToPresenterProtocol?
     
-    func presentEditSessionForm(for session: Session) {
+    func pushEditSessionForm(for session: Session) {
         guard let presenter = presenter else { return }
         
-        let editSessionFormViewController = SessionFormConfigurator.resolveEdit(for: session) { [weak self] formOutput in
-            self?.presenter?.editCompletionAction(for: session, formOutput: formOutput)
-        }
+        let editScheduledSessionFormViewController = ScheduledSessionFormConfigurator.resolveEdit(for: session)
         
-        editSessionFormViewController.modalPresentationStyle = .popover
-        presenter.present(editSessionFormViewController, animated: true)
+        presenter.navigationController?.pushViewController(editScheduledSessionFormViewController, animated: true)
     }
 }

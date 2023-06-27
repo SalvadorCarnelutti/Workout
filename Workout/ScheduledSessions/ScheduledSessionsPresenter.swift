@@ -100,7 +100,7 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        router.presentEditSessionForm(for: session(at: indexPath))
+        router.pushEditSessionForm(for: session(at: indexPath))
     }
 }
 

@@ -33,14 +33,6 @@ final class SessionFormView: UIView {
         return daySelectionView
     }()
     
-    private lazy var completionButton: StyledButton = {
-        let button = StyledButton()
-        addSubview(button)
-        button.setTitle(presenter?.completionString, for: .normal)
-        button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
-        return button
-    }()
-    
     private lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         addSubview(datePicker)
@@ -50,6 +42,14 @@ final class SessionFormView: UIView {
         datePicker.timeZone = TimeZone.current
         datePicker.minuteInterval = 5
         return datePicker
+    }()
+    
+    private lazy var completionButton: StyledButton = {
+        let button = StyledButton()
+        addSubview(button)
+        button.setTitle(presenter?.completionString, for: .normal)
+        button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
+        return button
     }()
     
     private func setupConstraints() {
