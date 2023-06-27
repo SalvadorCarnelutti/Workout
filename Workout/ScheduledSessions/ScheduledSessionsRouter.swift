@@ -21,8 +21,7 @@ final class ScheduledSessionsRouter: ScheduledSessionsPresenterToRouterProtocol 
     func pushEditSessionForm(for session: Session) {
         guard let presenter = presenter else { return }
         
-        let editScheduledSessionFormViewController = ScheduledSessionFormConfigurator.resolveEdit(for: session)
-        
+        let editScheduledSessionFormViewController = ScheduledSessionFormConfigurator.resolveEdit(for: session)        
         presenter.navigationController?.pushViewController(editScheduledSessionFormViewController, animated: true)
     }
 }

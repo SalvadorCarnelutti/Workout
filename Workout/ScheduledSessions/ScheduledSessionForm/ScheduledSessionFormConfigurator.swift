@@ -24,9 +24,12 @@ final class ScheduledSessionFormConfigurator {
     }
     
     static func resolveEdit(for session: Session) -> ScheduledSessionFormPresenter {
+        let formModel = ScheduledSessionFormModel(session: session,
+                                                  formInput: SessionFormInput(session: session))
+        
         let presenter = ScheduledSessionFormPresenter()
         let view = ScheduledSessionFormView()
-        let interactor = ScheduledSessionFormInteractor(session: session)
+        let interactor = ScheduledSessionFormInteractor(formModel: formModel)
         let router = ScheduledSessionFormRouter()
 
         Self.injectDependencies(view: view,

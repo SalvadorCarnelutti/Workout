@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
+    var formInput: SessionFormInput { get }
     var exercisesCount: Int { get }
     var completionString: String { get }
     func viewLoaded()
@@ -34,7 +35,7 @@ final class ScheduledSessionFormPresenter: BaseViewController {
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
         fetchRequest.predicate = predicate
         // TODO: Check later if necessary to see that ordering is preserved
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Exercise.order), ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Exercise.order, ascending: false)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
                                                                   sectionNameKeyPath: nil,
@@ -43,10 +44,21 @@ final class ScheduledSessionFormPresenter: BaseViewController {
         return fetchedResultsController
     }()
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let sessionFormOutput = viewScheduledSessionForm.sessionFormOutput else { return }
+        interactor.editSessionCompletionAction(for: sessionFormOutput)
+    }
+    
     override func loadView() {
         super.loadView()
         view = viewScheduledSessionForm
+        setupNavigationBar()
         viewScheduledSessionForm.loadView()
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.title = interactor.workoutName
     }
     
     private func fetchExercises() {
@@ -63,13 +75,16 @@ final class ScheduledSessionFormPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProtocol {
-    var completionString: String { "Edit" }
+    var formInput: SessionFormInput {
+        interactor.formInput
+    }
     
+    var completionString: String { "Edit" }
     
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
     func viewLoaded() {
-        fetchedResultsController.delegate = viewScheduledSessionForm
+        fetchedResultsController.delegate = viewScheduledSessionForm.fetchedResultsControllerDelegate
         fetchExercises()
     }
     
@@ -92,7 +107,6 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
 // MARK: - RouterToPresenterProtocol
 extension ScheduledSessionFormPresenter: ScheduledSessionFormRouterToPresenterProtocol {
     func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
-        interactor.editCompletionAction(for: exercise, formOutput: formOutput)
+        interactor.editExerciseCompletionAction(for: exercise, formOutput: formOutput)
     }
-
 }

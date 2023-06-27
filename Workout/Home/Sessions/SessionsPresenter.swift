@@ -88,7 +88,6 @@ enum DayOfWeek: Int, CaseIterable {
             return "S"
         }
     }
-
 }
 
 protocol SessionsViewToPresenterProtocol: UIViewController {

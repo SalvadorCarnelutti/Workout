@@ -11,12 +11,21 @@ import CoreData
 
 protocol ScheduledSessionFormPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
     var presenter: ScheduledSessionFormViewToPresenterProtocol? { get set }
+    var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate { get }
+    var sessionFormOutput: SessionFormOutput? { get }
     func loadView()
 }
 
 final class ScheduledSessionFormView: UIView {
     // MARK: - Properties
     weak var presenter: ScheduledSessionFormViewToPresenterProtocol?
+    
+    private lazy var tableView: ExercisesTableView = {
+        let tableView = ExercisesTableView()
+        addSubview(tableView)
+        tableView.setDelegate(exerciseTableViewDelegate: self)
+        return tableView
+    }()
     
     private lazy var daySelectionView: DaySelectionView = {
         let daySelectionView = DaySelectionView(style: .compact)
@@ -35,57 +44,109 @@ final class ScheduledSessionFormView: UIView {
         return datePicker
     }()
     
-    private lazy var completionButton: StyledButton = {
-        let button = StyledButton()
-        addSubview(button)
-        button.setTitle(presenter?.completionString, for: .normal)
-        button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
-        return button
-    }()
-    
     private func setupConstraints() {
+        tableView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
+        }
+        
         daySelectionView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
+            make.top.equalTo(tableView.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
         }
         
         datePicker.snp.makeConstraints { make in
             make.top.equalTo(daySelectionView.snp.bottom).offset(5)
             make.right.equalTo(daySelectionView.snp.right)
             make.height.equalTo(50)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-20)
         }
-        
-        completionButton.snp.makeConstraints { make in
-            make.top.equalTo(datePicker.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(50)
-        }
-    }
-    
-    @objc private func completionActionTapped() {
-        guard let selectedDay = daySelectionView.selectedDay?.rawValue,
-        let startsAt = datePicker.date.formatAs("h:mm a") else { return }
-        
-        let formOutput = SessionFormOutput(day: selectedDay,
-                                           startsAt: startsAt)
-        
-//        presenter?.completionButtonTapped(for: formOutput)
     }
     
     // TODO: View knows something from the interactor, should handle logic better with a presenter method (Do same for Exercise form)
-    private func fillFormFields() {
-//        if let formInput = presenter?.formInput,
-//           let selectedDayOfWeek = DayOfWeek(rawValue: formInput.day) {
-//            datePicker.date = formInput.startsAt
-//            daySelectionView.selectDayOfWeek(selectedDayOfWeek)
-//        }
+    private func fillSessionFields() {
+        if let formInput = presenter?.formInput,
+           let selectedDayOfWeek = DayOfWeek(rawValue: formInput.day) {
+            datePicker.date = formInput.startsAt
+            daySelectionView.selectDayOfWeek(selectedDayOfWeek)
+        }
     }
 }
 
 // MARK: - PresenterToViewProtocol
 extension ScheduledSessionFormView: ScheduledSessionFormPresenterToViewProtocol {
+    var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate { tableView }
+    
+    var sessionFormOutput: SessionFormOutput? {
+        guard let selectedDay = daySelectionView.selectedDay?.rawValue,
+        let startsAt = datePicker.date.formatAs("h:mm a") else { return nil }
+        
+        let formOutput = SessionFormOutput(day: selectedDay,
+                                           startsAt: startsAt)
+        
+        return formOutput
+    }
+    
     func loadView() {
         backgroundColor = .white
+        fillSessionFields()
         setupConstraints()
         presenter?.viewLoaded()
+    }
+}
+
+extension ScheduledSessionFormView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter?.exercisesCount ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseTableViewCell.identifier, for: indexPath) as? ExerciseTableViewCell,
+        let presenter = presenter else {
+            ExerciseTableViewCell.assertCellFailure()
+            return UITableViewCell()
+        }
+        
+        let exercise = presenter.exercise(at: indexPath)
+        cell.configure(with: exercise)
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
+}
+
+extension ScheduledSessionFormView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didSelectRow(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let presenter = presenter else { return }
+        
+        if editingStyle == .delete {
+            presenter.deleteRow(at: indexPath)
+        }
+    }
+}
+
+extension ScheduledSessionFormView: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        guard let presenter = presenter else {
+            return []
+        }
+        
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = presenter.exercise(at: indexPath)
+        return [dragItem]
+    }
+}
+
+extension ScheduledSessionFormView: ExerciseTableViewDelegate {
+    func exercise(at indexPath: IndexPath) -> Exercise {
+        (presenter?.exercise(at: indexPath))!
+    }
+    
+    func didDeleteRow(at indexPath: IndexPath) {
+        presenter?.didDeleteRow(at: indexPath)
     }
 }

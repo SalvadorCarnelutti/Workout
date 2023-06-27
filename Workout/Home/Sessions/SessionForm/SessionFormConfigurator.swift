@@ -40,7 +40,9 @@ final class SessionFormConfigurator {
     }
     
     static func resolveEdit(for session: Session, completionAction: @escaping (SessionFormOutput) -> ()) -> SessionFormPresenter {
-        let formModel = SessionFormModel(formInput: SessionFormInput(session: session), formStyle: .edit, completionAction: completionAction)
+        let formModel = SessionFormModel(formInput: SessionFormInput(session: session),
+                                         formStyle: .edit,
+                                         completionAction: completionAction)
         
         let presenter = SessionFormPresenter()
         let view = SessionFormView()
