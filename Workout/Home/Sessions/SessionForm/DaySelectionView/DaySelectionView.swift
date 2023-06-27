@@ -7,54 +7,60 @@
 
 import UIKit
 
+enum DaySelectionViewStyle {
+    case normal
+    case compact
+}
+
 final class DaySelectionView: UIView {
+    private static let daysOfWeek: [DayOfWeek] = DayOfWeek.allCases
     private(set) var selectedDay: DayOfWeek?
-    
-    private let daysOfWeek = DayOfWeek.allCases.map { $0.longDescription }
+    private let style: DaySelectionViewStyle
     
     private lazy var dayButtons: [UIButton] = {
-        daysOfWeek.map { getDayButton(for: $0) }
+        Self.daysOfWeek.map { getDayButton(for: $0) }
     }()
     
-    private lazy var verticalStack: VerticalStack = {
-        let verticalStack = VerticalStack()
-        addSubview(verticalStack)
-        return verticalStack
+    private lazy var stackView: StackView = {
+        let stackView = style == .normal ? VerticalStack() : HorizontalStack()
+        addSubview(stackView)
+        return stackView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(style: DaySelectionViewStyle) {
+        self.style = style
+        super.init(frame: .zero)
         setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupViews()
+        fatalError("init(coder:) has not been implemented")
     }
     
     func selectDayOfWeek(_ dayOfWeek: DayOfWeek) {
         dayButtons[dayOfWeek.rawValue].sendActions(for: .touchUpInside)
     }
     
-    private func getDayButton(for day: String) -> UIButton {
+    private func getDayButton(for day: DayOfWeek) -> UIButton {
+        let dayDescription = style == .normal ? day.longDescription : day.compactDescription
         var configuration = UIButton.Configuration.gray()
-        configuration.attributedTitle = AttributedString(day, attributes: AttributeContainer([
+        configuration.attributedTitle = AttributedString(dayDescription, attributes: AttributeContainer([
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18)
         ]))
 
         var selectedConfiguration = configuration
-        selectedConfiguration.attributedTitle = AttributedString(day, attributes: AttributeContainer([
+        selectedConfiguration.attributedTitle = AttributedString(dayDescription, attributes: AttributeContainer([
             NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)
         ]))
         
         let dayButton = UIButton(configuration: configuration)
+        dayButton.tag = day.rawValue
 
         dayButton.configurationUpdateHandler = { button in
             button.configuration = button.isSelected ? selectedConfiguration : configuration
         }
         
-        dayButton.setTitle(day, for: .normal)
-        dayButton.addTarget(self, action: #selector(dayButtonTapped(_:)), for: .touchUpInside)
+        dayButton.addTarget(self, action: #selector(dayButtonTapped), for: .touchUpInside)
         
         return dayButton
     }
@@ -65,25 +71,23 @@ final class DaySelectionView: UIView {
     }
     
     private func setupViews() {
-        dayButtons.forEach { verticalStack.addArrangedSubview($0) }
+        dayButtons.forEach { stackView.addArrangedSubview($0) }
         selectCurrentDay()
         setupConstraints()
     }
     
     private func setupConstraints() {
-        verticalStack.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
     @objc private func dayButtonTapped(_ sender: UIButton) {
-        guard let tappedDay = sender.title(for: .normal),
-              tappedDay != selectedDay?.longDescription,
-        let buttonIndex = dayButtons.firstIndex(of: sender) else { return }
+        guard sender.tag != selectedDay?.rawValue else { return }
 
-        selectedDay = DayOfWeek(rawValue: buttonIndex)
+        selectedDay = DayOfWeek(rawValue: sender.tag)
         for button in dayButtons {
-            button.isSelected = button.title(for: .normal) == tappedDay
+            button.isSelected = button.tag == sender.tag
         }
     }
 }

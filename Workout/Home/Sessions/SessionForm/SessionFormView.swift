@@ -28,7 +28,7 @@ final class SessionFormView: UIView {
     }()
     
     private lazy var daySelectionView: DaySelectionView = {
-        let daySelectionView = DaySelectionView()
+        let daySelectionView = DaySelectionView(style: .normal)
         addSubview(daySelectionView)
         return daySelectionView
     }()
