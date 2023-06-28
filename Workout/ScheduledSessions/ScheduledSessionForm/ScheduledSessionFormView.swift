@@ -14,6 +14,7 @@ protocol ScheduledSessionFormPresenterToViewProtocol: UIView, NSFetchedResultsCo
     var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate { get }
     var sessionFormOutput: SessionFormOutput? { get }
     func loadView()
+    func fillSessionFields(with sessionFormInput: SessionFormInput)
 }
 
 final class ScheduledSessionFormView: UIView {
@@ -61,15 +62,6 @@ final class ScheduledSessionFormView: UIView {
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-20)
         }
     }
-    
-    // TODO: View knows something from the interactor, should handle logic better with a presenter method (Do same for Exercise form)
-    private func fillSessionFields() {
-        if let formInput = presenter?.formInput,
-           let selectedDayOfWeek = DayOfWeek(rawValue: formInput.day) {
-            datePicker.date = formInput.startsAt
-            daySelectionView.selectDayOfWeek(selectedDayOfWeek)
-        }
-    }
 }
 
 // MARK: - PresenterToViewProtocol
@@ -88,9 +80,15 @@ extension ScheduledSessionFormView: ScheduledSessionFormPresenterToViewProtocol 
     
     func loadView() {
         backgroundColor = .white
-        fillSessionFields()
         setupConstraints()
         presenter?.viewLoaded()
+    }
+    
+    func fillSessionFields(with sessionFormInput: SessionFormInput) {
+        if let selectedDayOfWeek = DayOfWeek(rawValue: sessionFormInput.day) {
+            datePicker.date = sessionFormInput.startsAt
+            daySelectionView.selectDayOfWeek(selectedDayOfWeek)
+        }
     }
 }
 

@@ -21,6 +21,7 @@ This is a fitness application to schedule workout sessions, with the capabilitie
 - Specify how you want to tackle those exercises (Set count, rep count and time)
 - Arrange your desired ordering for all your exercises
 - Schedule recurring days and time of the week to tackle on your workouts through sessions
+- Browse through all your available sessions set for any given day of the week
 	
 ## Technologies
 Project is created with:
@@ -52,6 +53,7 @@ And there are other tech additions I would love to try:
 * Publish on the app store
 * Local notifications if someone wants to be notified when a session is about to start
 * Github Actions + Fastlane
+* GraphQL for downloading premade workouts
 
 ## Known issues
 The drag and drop behavior from the ExercisesTableView class it's not perfect as I just keep reloading the table view each time there is a move NSFetchedResultsChangeType. I wasn't able to find online any proper example for reordering items using CoreData (All the examples I tried behaved and updated the table view in weird ways).

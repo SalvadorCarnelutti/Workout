@@ -12,6 +12,7 @@ import SnapKit
 protocol ExerciseFormPresenterToViewProtocol: UIView {
     var presenter: ExerciseFormViewToPresenterProtocol? { get set }
     func loadView()
+    func fillFormFields(formInput: ExerciseFormInput)
 }
 
 final class ExerciseFormView: UIView {
@@ -120,26 +121,12 @@ final class ExerciseFormView: UIView {
                       durationFormField,
                       setsFormField,
                       repsFormField]
-        
-        if let formInput = presenter.formInput {
-            fillFormFields(formInput: formInput)
-        }
     }
     
     @objc private func textDidChange(_ notification: Notification) {
         UIView.animate(withDuration: 0.25, animations: {
             self.completionButton.isEnabled = self.formFields.map { $0.isValid }.allSatisfy { $0 }
         })
-    }
-    
-    private func fillFormFields(formInput: ExerciseFormInput) {
-        nameFormField.text = formInput.name
-        durationFormField.text = formInput.duration
-        setsFormField.text = formInput.sets
-        repsFormField.text = formInput.reps
-        
-        // isValid needs to be updated appropriately for each formField, we need to notify at beginning of edit
-        formFields.forEach { $0.sendActions(for: .editingChanged) }
     }
 }
 
@@ -149,5 +136,16 @@ extension ExerciseFormView: ExerciseFormPresenterToViewProtocol {
         backgroundColor = .white
         setupFormFields()
         setupConstraints()
+        presenter?.viewLoaded()
+    }
+    
+    func fillFormFields(formInput: ExerciseFormInput) {
+        nameFormField.text = formInput.name
+        durationFormField.text = formInput.duration
+        setsFormField.text = formInput.sets
+        repsFormField.text = formInput.reps
+        
+        // isValid needs to be updated appropriately for each formField, we need to notify at beginning of edit
+        formFields.forEach { $0.sendActions(for: .editingChanged) }
     }
 }

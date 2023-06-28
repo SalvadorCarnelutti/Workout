@@ -12,6 +12,7 @@ import SnapKit
 protocol SessionFormPresenterToViewProtocol: UIView {
     var presenter: SessionFormViewToPresenterProtocol? { get set }
     func loadView()
+    func fillSessionFields(with sessionFormInput: SessionFormInput)
 }
 
 final class SessionFormView: UIView {
@@ -85,22 +86,20 @@ final class SessionFormView: UIView {
         
         presenter?.completionButtonTapped(for: formOutput)
     }
-    
-    // TODO: View knows something from the interactor, should handle logic better with a presenter method (Do same for Exercise form)
-    private func fillFormFields() {
-        if let formInput = presenter?.formInput,
-           let selectedDayOfWeek = DayOfWeek(rawValue: formInput.day) {
-            datePicker.date = formInput.startsAt
-            daySelectionView.selectDayOfWeek(selectedDayOfWeek)
-        }
-    }
 }
 
 // MARK: - PresenterToViewProtocol
 extension SessionFormView: SessionFormPresenterToViewProtocol {
     func loadView() {
         backgroundColor = .white
-        fillFormFields()
         setupConstraints()
+        presenter?.viewLoaded()
+    }
+    
+    func fillSessionFields(with sessionFormInput: SessionFormInput) {
+        if let selectedDayOfWeek = DayOfWeek(rawValue: sessionFormInput.day) {
+            datePicker.date = sessionFormInput.startsAt
+            daySelectionView.selectDayOfWeek(selectedDayOfWeek)
+        }
     }
 }

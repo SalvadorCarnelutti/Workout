@@ -10,11 +10,11 @@
 import UIKit
 
 protocol WorkoutFormViewToPresenterProtocol: UIViewController {
-    var formInput: String? { get }
     var nameEntity: ValidationEntity { get }
     var isButtonEnabled: Bool { get }
     var headerString: String { get }
     var completionString: String { get }
+    func viewLoaded()
     func completionAction(for string: String)
 }
 
@@ -34,10 +34,6 @@ final class WorkoutFormPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension WorkoutFormPresenter: WorkoutFormViewToPresenterProtocol {
-    var formInput: String? {
-        interactor.formInput
-    }
-    
     var nameEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.nameValidationBlock,
                          errorMessage: "Name can't be empty",
@@ -54,6 +50,12 @@ extension WorkoutFormPresenter: WorkoutFormViewToPresenterProtocol {
     
     var completionString: String {
         interactor.formStyle == .add ? "Add" : "Edit"
+    }
+    
+    func viewLoaded() {
+        if let formInput = interactor.formInput {
+            viewWorkoutsForm.fillFormField(formInput: formInput)
+        }
     }
         
     func completionAction(for string: String) {

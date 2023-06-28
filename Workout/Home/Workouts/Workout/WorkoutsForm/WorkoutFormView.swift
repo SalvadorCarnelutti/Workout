@@ -11,6 +11,7 @@ import UIKit
 protocol WorkoutsFormPresenterToViewProtocol: UIView {
     var presenter: WorkoutFormViewToPresenterProtocol? { get set }
     func loadView()
+    func fillFormField(formInput: String)
 }
 
 final class WorkoutFormView: UIView {
@@ -72,21 +73,10 @@ final class WorkoutFormView: UIView {
                                                object: nil)
         
         nameFormField.configure(with: presenter.nameEntity)
-        
-        if let formInput = presenter.formInput {
-            fillFormField(formInput: formInput)
-        }
     }
     
     @objc private func textDidChange(_ notification: Notification) {
         completionButton.isEnabled = nameFormField.isValid
-    }
-    
-    private func fillFormField(formInput: String) {
-        nameFormField.text = formInput
-        
-        // isValid needs to be updated appropriately for nameFormField, we need to notify at beginning of edit
-        nameFormField.sendActions(for: .editingChanged)
     }
 }
 
@@ -96,5 +86,13 @@ extension WorkoutFormView: WorkoutsFormPresenterToViewProtocol {
         backgroundColor = .white
         setupFormField()
         setupConstraints()
+        presenter?.viewLoaded()
+    }
+    
+    func fillFormField(formInput: String) {
+        nameFormField.text = formInput
+        
+        // isValid needs to be updated appropriately for nameFormField, we need to notify at beginning of edit
+        nameFormField.sendActions(for: .editingChanged)
     }
 }

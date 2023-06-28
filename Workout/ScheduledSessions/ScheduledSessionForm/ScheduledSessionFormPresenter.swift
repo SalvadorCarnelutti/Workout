@@ -12,7 +12,6 @@ import CoreData
 import SwiftUI
 
 protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
-    var formInput: SessionFormInput { get }
     var exercisesCount: Int { get }
     var completionString: String { get }
     func viewLoaded()
@@ -76,15 +75,12 @@ final class ScheduledSessionFormPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProtocol {
-    var formInput: SessionFormInput {
-        interactor.formInput
-    }
-    
     var completionString: String { "Edit" }
     
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
     func viewLoaded() {
+        viewScheduledSessionForm.fillSessionFields(with: interactor.formInput)
         fetchedResultsController.delegate = viewScheduledSessionForm.fetchedResultsControllerDelegate
         fetchExercises()
     }
