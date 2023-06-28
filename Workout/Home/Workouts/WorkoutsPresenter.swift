@@ -10,6 +10,33 @@
 import UIKit
 import CoreData
 
+protocol EntityFetcher: BaseViewController {
+    associatedtype Entity: NSManagedObject
+    
+    var fetchedResultsController: NSFetchedResultsController<Entity> { get set }
+}
+
+extension EntityFetcher {
+    var entitiesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
+    var fetchedEntities: [Entity] { fetchedResultsController.fetchedObjects ?? [] }
+    func setFetchRequestPredicate(_ predicate: NSPredicate) { fetchedResultsController.fetchRequest.predicate = predicate }
+    func setFetchedResultsControllerDelegate(_ delegate: NSFetchedResultsControllerDelegate) { fetchedResultsController.delegate = delegate }
+    func entity(at indexPath: IndexPath) -> Entity { fetchedResultsController.object(at: indexPath) }
+    
+    func deleteEntity(at indexPath: IndexPath) {
+        let entity = entity(at: indexPath)
+        entity.managedObjectContext?.delete(entity)
+    }
+    
+    func fetchEntities() {
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            presentOKAlert(title: "Unexpected error occured", message: "There was an error loading your information")
+        }
+    }
+}
+
 protocol WorkoutsViewToPresenterProtocol: UIViewController {
     var workoutsCount: Int { get }
     func viewLoaded()
@@ -26,14 +53,13 @@ protocol WorkoutsRouterToPresenterProtocol: UIViewController {
     func addCompletionAction(name: String)
 }
 
-final class WorkoutsPresenter: BaseViewController {
+final class WorkoutsPresenter: BaseViewController, EntityFetcher {
     var viewWorkout: WorkoutsPresenterToViewProtocol!
     var interactor: WorkoutsPresenterToInteractorProtocol!
     var router: WorkoutsPresenterToRouterProtocol!
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Workout> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<Workout> = {
         let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
-        // TODO: Check later if necessary to see that ordering is preserved
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Workout.name, ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,
@@ -61,17 +87,6 @@ final class WorkoutsPresenter: BaseViewController {
     @objc private func addWorkoutTapped() {
         router.pushAddWorkout()
     }
-    
-    private func fetchExercises() {
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            // TODO: Maybe a modal error meesage
-            print("Unable to Perform Fetch Request")
-            print("\(error), \(error.localizedDescription)")
-        }
-    }
-
 }
 
 // MARK: - ViewToPresenterProtocol
@@ -81,21 +96,20 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
     }
     
     func viewLoaded() {
-        fetchedResultsController.delegate = viewWorkout
-        fetchExercises()
+        setFetchedResultsControllerDelegate(viewWorkout)
+        fetchEntities()
     }
     
     func workout(at indexPath: IndexPath) -> Workout {
-        fetchedResultsController.object(at: indexPath)
+        entity(at: indexPath)
     }
     
     func deleteRow(at indexPath: IndexPath) {
-        let workout = workout(at: indexPath)
-        workout.managedObjectContext?.delete(workout)
+        deleteEntity(at: indexPath)
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        let workout = fetchedResultsController.object(at: indexPath)
+        let workout = workout(at: indexPath)
         router.pushEditWorkout(for: workout)
     }
 }

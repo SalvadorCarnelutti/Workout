@@ -103,12 +103,12 @@ protocol SessionsRouterToPresenterProtocol: UIViewController {
     func editCompletionAction(for exercise: Session, formOutput: SessionFormOutput)
 }
 
-final class SessionsPresenter: BaseViewController {
+final class SessionsPresenter: BaseViewController, EntityFetcher {
     var viewSessions: SessionsPresenterToViewProtocol!
     var interactor: SessionsPresenterToInteractorProtocol!
     var router: SessionsPresenterToRouterProtocol!
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Session> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<Session> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
         fetchRequest.predicate = predicate
@@ -140,36 +140,25 @@ final class SessionsPresenter: BaseViewController {
     @objc private func addSessionTapped() {
         router.presentAddSessionForm()
     }
-    
-    private func fetchExercises() {
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            // TODO: Maybe a modal error meesage
-            print("Unable to Perform Fetch Request")
-            print("\(error), \(error.localizedDescription)")
-        }
-    }
 }
 
 // MARK: - ViewToPresenterProtocol
 extension SessionsPresenter: SessionsViewToPresenterProtocol {
     var sessionsCount: Int {
-        fetchedResultsController.fetchedObjects?.count ?? 0
+        entitiesCount
     }
     
     func viewLoaded() {
-        fetchedResultsController.delegate = viewSessions
-        fetchExercises()
+        setFetchedResultsControllerDelegate(viewSessions)
+        fetchEntities()
     }
     
     func session(at indexPath: IndexPath) -> Session {
-        fetchedResultsController.object(at: indexPath)
+        entity(at: indexPath)
     }
     
     func deleteRow(at indexPath: IndexPath) {
-        let session = session(at: indexPath)
-        session.managedObjectContext?.delete(session)
+        deleteEntity(at: indexPath)
     }
     
     func didSelectRow(at indexPath: IndexPath) {

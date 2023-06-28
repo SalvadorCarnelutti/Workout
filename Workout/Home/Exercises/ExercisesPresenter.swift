@@ -30,12 +30,12 @@ protocol ExercisesInteractorToPresenterProtocol: BaseViewProtocol {
     var exercisesCount: Int { get }
 }
 
-final class ExercisesPresenter: BaseViewController {
+final class ExercisesPresenter: BaseViewController, EntityFetcher {
     var viewExercises: ExercisesPresenterToViewProtocol!
     var interactor: ExercisesPresenterToInteractorProtocol!
     var router: ExercisesPresenterToRouterProtocol!
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
         fetchRequest.predicate = predicate
@@ -66,32 +66,21 @@ final class ExercisesPresenter: BaseViewController {
     @objc private func addExerciseTapped() {
         router.presentAddExerciseForm()
     }
-    
-    private func fetchExercises() {
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            // TODO: Maybe a modal error meesage
-            print("Unable to Perform Fetch Request")
-            print("\(error), \(error.localizedDescription)")
-        }
-    }
 }
 
 // MARK: - ViewToPresenterProtocol
 extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
-    var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
+    var exercisesCount: Int { entitiesCount }
     
     func viewLoaded() {
-        fetchedResultsController.delegate = viewExercises.fetchedResultsControllerDelegate
-        fetchExercises()
+        setFetchedResultsControllerDelegate(viewExercises.fetchedResultsControllerDelegate)
+        fetchEntities()
     }
     
-    func exercise(at indexPath: IndexPath) -> Exercise { fetchedResultsController.object(at: indexPath) }
+    func exercise(at indexPath: IndexPath) -> Exercise { entity(at: indexPath) }
     
     func deleteRow(at indexPath: IndexPath) {
-        let exercise = exercise(at: indexPath)
-        exercise.managedObjectContext?.delete(exercise)
+        deleteEntity(at: indexPath)
     }
     
     func didSelectRow(at indexPath: IndexPath) {
@@ -104,7 +93,7 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     
     func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // TODO: Remove prints
-        var exercises = fetchedResultsController.fetchedObjects ?? []
+        var exercises = fetchedEntities
 //        print(exercises.map { "Start: \($0.name!): \($0.order) \n" })
 //        print("From: \(sourceIndexPath.row) to \(destinationIndexPath.row)")
         
