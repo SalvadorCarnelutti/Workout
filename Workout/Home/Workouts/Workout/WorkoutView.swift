@@ -26,14 +26,14 @@ final class WorkoutView: UIView {
         tableView.register(WorkoutSectionTableViewHeader.self)
         tableView.register(UITableViewCell.self)
         tableView.backgroundColor = .systemBackground
+        tableView.estimatedSectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
     
     private func setupConstraints() {
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(8)
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
     }

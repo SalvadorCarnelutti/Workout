@@ -49,19 +49,21 @@ final class WorkoutSectionTableViewHeader: UITableViewHeaderFooterView {
     
     private func setupConstraints() {
         workoutContainer.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide).inset(8)
+            make.verticalEdges.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(10)
         }
         
         sectionNameLabel.snp.makeConstraints { make in
-            make.top.left.bottom.equalTo(workoutContainer)
+            make.verticalEdges.equalToSuperview()
+            make.left.equalToSuperview().offset(12)
         }
         
         sectionImage.snp.makeConstraints { make in
-            make.left.equalTo(sectionNameLabel.snp.right).offset(10)
-            make.right.lessThanOrEqualToSuperview()
+            make.left.equalTo(sectionNameLabel.snp.right).offset(12)
+            make.right.lessThanOrEqualToSuperview().offset(10)
             make.width.height.equalTo(30)
             make.centerY.equalToSuperview()
-        }
+        }        
     }
     
     private func addGestureRecognizer() {

@@ -14,7 +14,7 @@ class CoreDataManager {
     private lazy var persistentContainer: NSPersistentContainer = {
         let persistentContainer = NSPersistentContainer(name: "Workout")
         
-        // TODO: Check why, when set memory is not persisting
+        // TODO: Check why, when set memory is not persisting, also the loader is never being shown while fetching data
 //        let description = NSPersistentStoreDescription()
 //        description.shouldMigrateStoreAutomatically = true
 //        description.shouldInferMappingModelAutomatically = true

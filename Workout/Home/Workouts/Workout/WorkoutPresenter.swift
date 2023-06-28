@@ -99,7 +99,7 @@ final class WorkoutPresenter: BaseViewController {
         case(0, _):
             return "Add at least one exercise"
         case (_, 0):
-            return "Stard adding sessions"
+            return "Start adding sessions"
         default:
             return "\(interactor.sessionsCount) sessions set"
         }
