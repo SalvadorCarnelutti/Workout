@@ -26,12 +26,12 @@ protocol ScheduledSessionFormRouterToPresenterProtocol: UIViewController {
     func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput)
 }
 
-final class ScheduledSessionFormPresenter: BaseViewController {
+final class ScheduledSessionFormPresenter: BaseViewController, EntityFetcher {
     var viewScheduledSessionForm: ScheduledSessionFormPresenterToViewProtocol!
     var interactor: ScheduledSessionFormPresenterToInteractorProtocol!
     var router: ScheduledSessionFormPresenterToRouterProtocol!
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
         fetchRequest.predicate = predicate
@@ -60,16 +60,6 @@ final class ScheduledSessionFormPresenter: BaseViewController {
     private func setupNavigationBar() {
         navigationItem.title = interactor.workoutName
     }
-    
-    private func fetchExercises() {
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            // TODO: Maybe a modal error meesage
-            print("Unable to Perform Fetch Request")
-            print("\(error), \(error.localizedDescription)")
-        }
-    }
 }
 
 
@@ -81,15 +71,14 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
     
     func viewLoaded() {
         viewScheduledSessionForm.fillSessionFields(with: interactor.formInput)
-        fetchedResultsController.delegate = viewScheduledSessionForm.fetchedResultsControllerDelegate
-        fetchExercises()
+        setFetchedResultsControllerDelegate(viewScheduledSessionForm.fetchedResultsControllerDelegate)
+        fetchEntities()
     }
     
-    func exercise(at indexPath: IndexPath) -> Exercise { fetchedResultsController.object(at: indexPath) }
+    func exercise(at indexPath: IndexPath) -> Exercise { entity(at: indexPath) }
     
     func deleteRow(at indexPath: IndexPath) {
-        let exercise = exercise(at: indexPath)
-        exercise.managedObjectContext?.delete(exercise)
+        deleteEntity(at: indexPath)
     }
     
     func didSelectRow(at indexPath: IndexPath) {
@@ -101,7 +90,7 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
     }
     
     func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        var exercises = fetchedResultsController.fetchedObjects ?? []
+        var exercises = fetchedEntities
         
         let fromOffsets = IndexSet(integer: sourceIndexPath.row)
         var toOffset = destinationIndexPath.row

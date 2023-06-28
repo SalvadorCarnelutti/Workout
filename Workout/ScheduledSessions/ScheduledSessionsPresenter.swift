@@ -68,12 +68,12 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
     }
     
     func viewLoaded() {
-        fetchedResultsController.delegate = viewScheduledSessions
+        setFetchedResultsControllerDelegate(viewScheduledSessions)
         fetchEntities()
     }
     
-    func didSelectDay(at: Int) {
-        let predicate = NSPredicate(format: "day == %@", NSNumber(value: at))
+    func didSelectDay(at day: Int) {
+        let predicate = NSPredicate(format: "day == %@", NSNumber(value: day))
         setFetchRequestPredicate(predicate)
         fetchEntities()
         viewScheduledSessions.reloadData()
