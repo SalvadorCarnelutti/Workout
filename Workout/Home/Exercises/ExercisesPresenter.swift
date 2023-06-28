@@ -39,7 +39,6 @@ final class ExercisesPresenter: BaseViewController {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
         fetchRequest.predicate = predicate
-        // TODO: Check later if necessary to see that ordering is preserved
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Exercise.order, ascending: false)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: interactor.managedObjectContext,

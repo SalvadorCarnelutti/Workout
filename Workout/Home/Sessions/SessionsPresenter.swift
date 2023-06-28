@@ -112,7 +112,6 @@ final class SessionsPresenter: BaseViewController {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
         fetchRequest.predicate = predicate
-        // TODO: Check later if necessary to see that ordering is preserved
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Session.day, ascending: true),
                                         NSSortDescriptor(keyPath: \Session.startsAt, ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
