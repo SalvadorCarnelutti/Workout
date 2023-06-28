@@ -12,6 +12,9 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
     var workout: Workout { get set }
     var workoutName: String { get }
+    var exercisesCount: Int { get }
+    var duration: Int { get }
+    var sessionsCount: Int { get }
     func editWorkoutName(with newName: String)
 }
 
@@ -26,6 +29,18 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
     
     var workoutName: String {
         workout.name ?? ""
+    }
+    
+    var exercisesCount: Int {
+        workout.exercisesCount
+    }
+    
+    var duration: Int {
+        workout.duration
+    }
+    
+    var sessionsCount: Int {
+        workout.sessionsCount
     }
     
     func editWorkoutName(with newName: String) {

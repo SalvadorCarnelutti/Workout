@@ -16,6 +16,10 @@ extension Workout {
         exercises?.compactMap { $0 as? Exercise }.reduce (0, { $0 + Int($1.duration) }) ?? 0
     }
     
+    var sessionsCount: Int {
+        sessions?.count ?? 0
+    }
+    
     func setup(with name: String) {
         uuid = UUID()
         self.name = name

@@ -35,12 +35,23 @@ enum WorkoutSection {
             return .time
         }
     }
+    
+    var rowCount: Int {
+        switch self {
+        case .edit:
+            return 0
+        default:
+            return 1
+        }
+    }
 }
 
 protocol WorkoutViewToPresenterProtocol: UIViewController {
     var sectionsCount: Int { get }
-    func workoutSectionAt(section: Int) -> WorkoutSection
+    func rowCount(at section: Int) -> Int
+    func workoutSection(at section: Int) -> WorkoutSection
     func setupWorkoutSectionDelegate(for header: WorkoutSectionTableViewHeader)
+    func workoutRow(at section: Int) -> String
 }
 
 protocol WorkoutRouterToPresenterProtocol: UIViewController {
@@ -58,6 +69,12 @@ final class WorkoutPresenter: BaseViewController {
                                                           .exercises,
                                                           .sessions]
     
+    // workoutName can change as well as exercisesCount and sessionsCount
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewWorkout.reloadData()
+    }
+    
     override func loadView() {
         super.loadView()
         view = viewWorkout
@@ -68,6 +85,25 @@ final class WorkoutPresenter: BaseViewController {
     private func setupNavigationBar() {
         navigationItem.title = "Workout"
     }
+    
+    private var exerciseRow: String {
+        interactor.exercisesCount > 0 ?
+        "\(interactor.exercisesCount) exercises for a total of \(interactor.duration) minutes" : "Start adding exercises"
+    }
+    
+    private var sessionRow: String {
+        let exercisesCount = interactor.exercisesCount
+        let sessionsCount = interactor.sessionsCount
+        
+        switch (exercisesCount, sessionsCount) {
+        case(0, _):
+            return "Add at least one exercise"
+        case (_, 0):
+            return "Stard adding sessions"
+        default:
+            return "\(interactor.sessionsCount) sessions set"
+        }
+    }
 }
 
 // MARK: - ViewToPresenterProtocol
@@ -76,8 +112,19 @@ extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
         workoutSections.count
     }
     
-    func workoutSectionAt(section: Int) -> WorkoutSection {
+    func workoutSection(at section: Int) -> WorkoutSection {
         workoutSections[section]
+    }
+    
+    func workoutRow(at section: Int) -> String {
+        switch workoutSections[section] {
+        case .exercises:
+            return exerciseRow
+        case .sessions:
+            return sessionRow
+        default:
+            return ""
+        }
     }
     
     func setupWorkoutSectionDelegate(for header: WorkoutSectionTableViewHeader) {
@@ -90,7 +137,10 @@ extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
     func editWorkoutName(with newName: String) {
         interactor.editWorkoutName(with: newName)
         workoutSections[0] = .edit(newName)
-        viewWorkout.updateSections()
+    }
+    
+    func rowCount(at section: Int) -> Int {
+        workoutSections[section].rowCount
     }
     
     var workout: Workout {

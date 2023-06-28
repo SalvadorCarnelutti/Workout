@@ -11,7 +11,7 @@ import UIKit
 protocol WorkoutPresenterToViewProtocol: UIView {
     var presenter: WorkoutViewToPresenterProtocol? { get set }
     func loadView()
-    func updateSections()
+    func reloadData()
 }
 
 final class WorkoutView: UIView {
@@ -24,6 +24,7 @@ final class WorkoutView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WorkoutSectionTableViewHeader.self)
+        tableView.register(UITableViewCell.self)
         tableView.backgroundColor = .systemBackground
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
@@ -45,21 +46,28 @@ extension WorkoutView: WorkoutPresenterToViewProtocol {
         setupConstraints()
     }
     
-    func updateSections() {
-        let sectionToReload = 0
-        let indexSet: IndexSet = [sectionToReload]
-
-        tableView.reloadSections(indexSet, with: .automatic)
+    func reloadData() {
+        tableView.reloadData()
     }
 }
 
 extension WorkoutView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        presenter?.rowCount(at: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let presenter = presenter else { return UITableViewCell() }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifier, for: indexPath)
+        
+        var content = UIListContentConfiguration.cell()
+        content.text = presenter.workoutRow(at: indexPath.section)
+        
+        cell.contentConfiguration = content
+        cell.selectionStyle = .none
+        
+        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -74,7 +82,7 @@ extension WorkoutView: UITableViewDataSource {
             return UITableViewHeaderFooterView()
         }
         
-        header.configure(with: presenter.workoutSectionAt(section: section))
+        header.configure(with: presenter.workoutSection(at: section))
         presenter.setupWorkoutSectionDelegate(for: header)
         return header
     }
