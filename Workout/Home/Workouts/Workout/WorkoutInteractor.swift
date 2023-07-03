@@ -13,7 +13,8 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
     var workout: Workout { get set }
     var workoutName: String { get }
     var exercisesCount: Int { get }
-    var duration: Int { get }
+    var timedExercisesCount: Int { get }
+    var timedExercisesDurationString: String { get }
     var sessionsCount: Int { get }
     func editWorkoutName(with newName: String)
 }
@@ -35,8 +36,12 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
         workout.exercisesCount
     }
     
-    var duration: Int {
-        workout.duration
+    var timedExercisesCount: Int {
+        workout.timedExercisesCount
+    }
+    
+    var timedExercisesDurationString: String {
+        workout.timedExercisesDurationString
     }
     
     var sessionsCount: Int {

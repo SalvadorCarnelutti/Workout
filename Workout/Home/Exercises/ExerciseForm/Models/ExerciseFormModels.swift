@@ -20,13 +20,13 @@ struct ExerciseFormModel {
 
 struct ExerciseFormInput {
     var name: String?
-    var duration: String?
+    var minutesDuration: String?
     var sets: String?
     var reps: String?
     
     init(exercise: Exercise) {
         self.name = exercise.name
-        self.duration = exercise.durationString
+        self.minutesDuration = exercise.durationString
         self.sets = exercise.setsString
         self.reps = exercise.repsString
     }
@@ -34,7 +34,7 @@ struct ExerciseFormInput {
 
 struct ExerciseFormOutput {
     var name: String
-    var duration: Int
+    var minutesDuration: Int?
     var sets: Int
     var reps: Int
 }

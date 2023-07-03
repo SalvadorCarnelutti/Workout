@@ -8,8 +8,10 @@
 import CoreData
 
 extension Exercise {
-    var durationString: String {
-        String(format: "%.0f", duration)
+    var durationString: String? {
+        guard minutesDuration > 0 else { return nil }
+        
+        return String(format: "%.0f", minutesDuration)
     }
     
     var setsString: String {
@@ -27,7 +29,7 @@ extension Exercise {
     func setup(with formOutput: ExerciseFormOutput, for workout: Workout) {
         uuid = UUID()
         name = formOutput.name
-        duration = Double(formOutput.duration)
+        minutesDuration = Double(formOutput.minutesDuration ?? 0)
         sets = Int16(formOutput.sets)
         reps = Int16(formOutput.reps)
         self.workout = workout
@@ -35,7 +37,7 @@ extension Exercise {
     
     func update(with formOutput: ExerciseFormOutput) {
         name = formOutput.name
-        duration = Double(formOutput.duration)
+        minutesDuration = Double(formOutput.minutesDuration ?? 0)
         sets = Int16(formOutput.sets)
         reps = Int16(formOutput.reps)
     }

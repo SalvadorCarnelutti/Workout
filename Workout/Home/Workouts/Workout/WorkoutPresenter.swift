@@ -87,8 +87,18 @@ final class WorkoutPresenter: BaseViewController {
     }
     
     private var exerciseRow: String {
-        interactor.exercisesCount > 0 ?
-        "\(interactor.exercisesCount) exercises for a total of \(interactor.duration) minutes" : "Start adding exercises"
+        let exercisesCount = interactor.exercisesCount
+        let timedExercisesCount = interactor.timedExercisesCount
+        
+        switch (exercisesCount, timedExercisesCount) {
+        case (0, _):
+            return "Start adding exercises"
+        case(_, 0):
+            return "\(exercisesCount) exercises"
+        default:
+            // TODO: Fix singular vs plural cases
+            return "\(exercisesCount) exercises where \(timedExercisesCount) are timed for \(interactor.timedExercisesDurationString) minutes"
+        }
     }
     
     private var sessionRow: String {
@@ -101,7 +111,7 @@ final class WorkoutPresenter: BaseViewController {
         case (_, 0):
             return "Start adding sessions"
         default:
-            return "\(interactor.sessionsCount) sessions set"
+            return "\(sessionsCount) sessions set"
         }
     }
 }

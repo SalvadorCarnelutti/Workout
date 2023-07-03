@@ -41,7 +41,7 @@ final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
     }
     
     var durationValidationBlock: ((String) -> Bool) {
-        integerValidationBlock
+        optionalIntegerValidationBlock
     }
     
     var setsValidationBlock: ((String) -> Bool) {
@@ -62,5 +62,9 @@ final class ExerciseFormInteractor: ExerciseFormPresenterToInteractorProtocol {
     
     private func integerValidationBlock(text: String) -> Bool {
         Int(text) ?? 0 > 0
+    }
+    
+    private func optionalIntegerValidationBlock(text: String) -> Bool {
+        text.isEmpty || integerValidationBlock(text: text)
     }
 }

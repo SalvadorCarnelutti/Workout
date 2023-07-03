@@ -54,9 +54,9 @@ final class WorkoutFormView: UIView {
         }
         
         completionButton.snp.makeConstraints { make in
-            make.top.equalTo(nameFormField.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(50)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-20)
         }
     }
     
@@ -68,7 +68,7 @@ final class WorkoutFormView: UIView {
         guard let presenter = presenter else { return }
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(textDidChange(_:)),
+                                               selector: #selector(textDidChange),
                                                name: UITextField.textDidChangeNotification,
                                                object: nil)
         

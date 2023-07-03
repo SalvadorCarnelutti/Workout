@@ -9,7 +9,7 @@ import UIKit
 
 final class ScheduledSessionTableViewCell: UITableViewCell {
     private lazy var stackView: VerticalStack = {
-       let stackView = VerticalStack(arrangedSubviews: [workoutNameLabel, startsAtLabel, exerciseCountLabel, durationTimeLabel])
+       let stackView = VerticalStack(arrangedSubviews: [workoutNameLabel, startsAtLabel, exerciseCountLabel, timeDurationLabel])
         addSubview(stackView)
         return stackView
     }()
@@ -32,7 +32,7 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var durationTimeLabel: MultilineLabel = {
+    private lazy var timeDurationLabel: MultilineLabel = {
         let label = MultilineLabel()
         label.font = .systemFont(ofSize: 18)
         return label
@@ -54,6 +54,16 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
         }
     }
     
+    private func configureTimeDurationLabel(with workout: Workout) {
+        guard workout.timedExercisesCount > 0 else {
+            timeDurationLabel.isHidden = true
+            return
+        }
+        
+        timeDurationLabel.text = "• Timed exercises duration: \(workout.timedExercisesDurationString) min"
+        timeDurationLabel.isHidden = false
+    }
+    
     func configure(with session: Session) {
         guard let workout = session.workout,
               let workoutName = workout.name else { return }
@@ -61,6 +71,6 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
         workoutNameLabel.text = "\(workoutName):"
         startsAtLabel.text = "• \(session.formattedStartsAt)"
         exerciseCountLabel.text = "• \(workout.exercisesCount) exercise\(workout.exercisesCount > 1 ? "s" : "")"
-        durationTimeLabel.text = "• Total duration: \(workout.duration) min"
+        configureTimeDurationLabel(with: workout)
     }
 }

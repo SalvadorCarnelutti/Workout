@@ -106,4 +106,7 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+*.xcuserstate
+Workout.xcworkspace/xcuserdata/salva.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,cocoapods

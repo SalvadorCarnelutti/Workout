@@ -14,9 +14,9 @@ protocol ExerciseFormViewToPresenterProtocol: UIViewController {
     var durationEntity: ValidationEntity { get }
     var setsEntity: ValidationEntity { get }
     var repsEntity: ValidationEntity { get }
-    var isButtonEnabled: Bool { get }
+    var isCompletionButtonEnabled: Bool { get }
     var headerString: String { get }
-    var completionString: String { get }
+    var completionButtonString: String { get }
     func viewLoaded()
     func completionButtonTapped(for formOutput: ExerciseFormOutput)
 }
@@ -47,23 +47,23 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
     
     var durationEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.durationValidationBlock,
-                         errorMessage: "Duration must be not empty and positive",
-                         placeholder: "Duration")
+                         errorMessage: "Duration must be positive",
+                         placeholder: "Minutes duration (Optional)")
     }
     
     var setsEntity: ValidationEntity {
-        ValidationEntity(validationBlock: interactor.durationValidationBlock,
+        ValidationEntity(validationBlock: interactor.setsValidationBlock,
                          errorMessage: "Set must be not empty and positive",
                          placeholder: "Set count")
     }
     
     var repsEntity: ValidationEntity {
-        ValidationEntity(validationBlock: interactor.durationValidationBlock,
+        ValidationEntity(validationBlock: interactor.repsValidationBlock,
                          errorMessage: "Rep must be not empty and positive",
                          placeholder: "Rep count")
     }
     
-    var isButtonEnabled: Bool {
+    var isCompletionButtonEnabled: Bool {
         interactor.formStyle == .edit
     }
     
@@ -71,7 +71,7 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
         "Exercise"
     }
     
-    var completionString: String {
+    var completionButtonString: String {
         interactor.formStyle == .add ? "Add" : "Edit"
     }
     

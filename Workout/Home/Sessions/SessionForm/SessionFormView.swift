@@ -71,9 +71,9 @@ final class SessionFormView: UIView {
         }
         
         completionButton.snp.makeConstraints { make in
-            make.top.equalTo(datePicker.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(50)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-20)
         }
     }
     

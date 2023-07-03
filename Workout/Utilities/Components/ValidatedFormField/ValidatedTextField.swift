@@ -13,19 +13,18 @@ class ValidatedTextField: UITextField {
     weak var validatedTextFieldDelegate: ValidatedTextFieldDelegate?
 
     // MARK: - Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        borderStyle = .roundedRect
-        commonInit()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    init(isOptional: Bool = false) {
+        isValid = isOptional
+        super.init(frame: .zero)
         commonInit()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+        if action == #selector(UIResponderStandardEditActions.paste) {
             return false
         }
         
@@ -38,10 +37,11 @@ class ValidatedTextField: UITextField {
     }
     
     var unwrappedText: String {
-        return text ?? ""
+        text ?? ""
     }
 
     private func commonInit() {
+        borderStyle = .roundedRect
         addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
     }
 

@@ -15,9 +15,10 @@ class ValidatedFormField: UIView {
     // MARK: - Properties
     private let errorColor: UIColor = UIColor.red.withAlphaComponent(0.65)
     private var errorMessage: String?
+    private let isOptional: Bool
     
     lazy var validatedTextField: ValidatedTextField = {
-        let textField = ValidatedTextField()
+        let textField = ValidatedTextField(isOptional: isOptional)
         addSubview(textField)
         return textField
     }()
@@ -32,14 +33,14 @@ class ValidatedFormField: UIView {
     }()
     
     // MARK: - Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(isOptional: Bool = false) {
+        self.isOptional = isOptional
+        super.init(frame: .zero)
         commonInit()
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     var isValid: Bool {
@@ -63,8 +64,8 @@ class ValidatedFormField: UIView {
         get {
             validatedTextField.keyboardType
         }
-        set(newKeyboardTypr) {
-            validatedTextField.keyboardType = newKeyboardTypr
+        set(newKeyboardType) {
+            validatedTextField.keyboardType = newKeyboardType
         }
     }
     

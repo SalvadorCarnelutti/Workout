@@ -9,7 +9,7 @@ import UIKit
 
 final class ExerciseTableViewCell: UITableViewCell {
     private lazy var stackView: VerticalStack = {
-       let stackView = VerticalStack(arrangedSubviews: [nameLabel, durationLabel, setsLabel, repsLabel])
+       let stackView = VerticalStack(arrangedSubviews: [nameLabel, timeDurationLabel, setsLabel, repsLabel])
         addSubview(stackView)
         return stackView
     }()
@@ -20,7 +20,7 @@ final class ExerciseTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var durationLabel: MultilineLabel = {
+    private lazy var timeDurationLabel: MultilineLabel = {
         let label = MultilineLabel()
         label.font = .systemFont(ofSize: 18)
         return label
@@ -80,9 +80,19 @@ final class ExerciseTableViewCell: UITableViewCell {
     
     func configure(with exercise: Exercise) {
         nameLabel.text = exercise.name
-        durationLabel.text = "• Duration: \(exercise.durationString) min"
+        configureTimeDurationLabel(with: exercise.durationString)
         setsLabel.text = "• Set count: \(exercise.setsString)"
         repsLabel.text = "• Rep count: \(exercise.repsString)"
         orderLabel.text = "\(exercise.itemOrder)"
+    }
+    
+    private func configureTimeDurationLabel(with text: String?) {
+        if let text = text {
+            // TODO: Format as hour, minutes
+            timeDurationLabel.text = "• Duration: \(text) min"
+            timeDurationLabel.isHidden = false
+        } else {
+            timeDurationLabel.isHidden = true
+        }
     }
 }
