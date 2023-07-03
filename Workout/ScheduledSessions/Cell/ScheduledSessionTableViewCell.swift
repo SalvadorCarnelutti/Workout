@@ -60,7 +60,7 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
             return
         }
         
-        timeDurationLabel.text = "• Timed exercises duration: \(workout.timedExercisesDurationString) min"
+        timeDurationLabel.text = "• Timed exercises duration: \(workout.timedExercisesDuration) min"
         timeDurationLabel.isHidden = false
     }
     
@@ -70,7 +70,7 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
         
         workoutNameLabel.text = "\(workoutName):"
         startsAtLabel.text = "• \(session.formattedStartsAt)"
-        exerciseCountLabel.text = "• \(workout.exercisesCount) exercise\(workout.exercisesCount > 1 ? "s" : "")"
+        exerciseCountLabel.text = "• \("exercises_set".localizedWithFormat(workout.exercisesCount))"
         configureTimeDurationLabel(with: workout)
     }
 }

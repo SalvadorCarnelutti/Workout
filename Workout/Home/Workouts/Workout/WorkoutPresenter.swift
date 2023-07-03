@@ -89,29 +89,28 @@ final class WorkoutPresenter: BaseViewController {
     private var exerciseRow: String {
         let exercisesCount = interactor.exercisesCount
         let timedExercisesCount = interactor.timedExercisesCount
-        
+                
         switch (exercisesCount, timedExercisesCount) {
         case (0, _):
             return "Start adding exercises"
         case(_, 0):
-            return "\(exercisesCount) exercises"
+            return "exercises_set".localizedWithFormat(exercisesCount)
         default:
-            // TODO: Fix singular vs plural cases
-            return "\(exercisesCount) exercises where \(timedExercisesCount) are timed for \(interactor.timedExercisesDurationString) minutes"
+            return "exercises_set_description".localizedWithFormat(exercisesCount, timedExercisesCount, interactor.timedExercisesDuration)
         }
     }
     
     private var sessionRow: String {
         let exercisesCount = interactor.exercisesCount
         let sessionsCount = interactor.sessionsCount
-        
+
         switch (exercisesCount, sessionsCount) {
         case(0, _):
             return "Add at least one exercise"
         case (_, 0):
             return "Start adding sessions"
         default:
-            return "\(sessionsCount) sessions set"
+            return "sessions_set".localizedWithFormat(sessionsCount)
         }
     }
 }
