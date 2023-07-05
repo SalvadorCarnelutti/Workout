@@ -213,32 +213,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FE25EA3D-01D7-49CA-84CE-12655AEBAE3B"
+            uuid = "F17318EC-CE69-4C2A-BA3E-C138052E6F0E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Workout/Home/Exercises/Cell/ExerciseTableViewCell.swift"
+            filePath = "Workout/Home/Workouts/Workout/WorkoutsForm/Cell/WorkoutTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "configureTimeDurationLabel(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "23255A34-BA2D-4462-9732-5C3A9300C45F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Workout/Home/Exercises/ExercisesInteractor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "editCompletionAction(for:formOutput:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "configure(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

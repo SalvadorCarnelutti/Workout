@@ -60,7 +60,7 @@ class BaseViewController: UIViewController, BaseViewProtocol {
         // Make the navigation bar's black with white text.
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.8)
+        appearance.backgroundColor = .mainTheme
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance // For iPhone small navigation bar in landscape.

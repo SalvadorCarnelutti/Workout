@@ -10,7 +10,7 @@ import UIKit
 
 protocol WorkoutPresenterToRouterProtocol: AnyObject {
     var presenter: WorkoutRouterToPresenterProtocol? { get set }
-    func handleSectionRouting(for section: WorkoutSection)
+    func handleWorkoutSettingRouting(for workoutSetting: WorkoutSetting)
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -18,11 +18,11 @@ final class WorkoutRouter: WorkoutPresenterToRouterProtocol {
     // MARK: - Properties
     weak var presenter: WorkoutRouterToPresenterProtocol?
     
-    func handleSectionRouting(for section: WorkoutSection) {
+    func handleWorkoutSettingRouting(for workoutSetting: WorkoutSetting) {
         guard let workout = presenter?.workout else { return }
         
-        switch section {
-        case .edit:
+        switch workoutSetting.type {
+        case .editName:
             presentEditWorkoutName()
         case .exercises:
             pushExercises(for: workout)

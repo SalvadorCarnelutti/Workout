@@ -9,49 +9,25 @@
 
 import UIKit
 
-enum WorkoutSection {
-    case edit(String)
+struct WorkoutSetting {
+    let type: WorkoutSettingEnum
+    let image: UIImage
+    var name: String
+    var description: () -> String
+    
+    mutating func updateName(with newName: String) { name = newName }
+}
+
+enum WorkoutSettingEnum {
+    case editName
     case exercises
     case sessions
-    
-    var name: String {
-        switch self {
-        case .edit(let name):
-            return name
-        case .exercises:
-            return "Exercises"
-        case .sessions:
-            return "Sessions"
-        }
-    }
-    
-    var image: UIImage {
-        switch self {
-        case .edit:
-            return .edit
-        case .exercises:
-            return .exercise
-        case .sessions:
-            return .time
-        }
-    }
-    
-    var rowCount: Int {
-        switch self {
-        case .edit:
-            return 0
-        default:
-            return 1
-        }
-    }
 }
 
 protocol WorkoutViewToPresenterProtocol: UIViewController {
-    var sectionsCount: Int { get }
-    func rowCount(at section: Int) -> Int
-    func workoutSection(at section: Int) -> WorkoutSection
-    func setupWorkoutSectionDelegate(for header: WorkoutSectionTableViewHeader)
-    func workoutRow(at section: Int) -> String
+    var workoutSettingsCount: Int { get }
+    func workoutSetting(at indexPath: IndexPath) -> WorkoutSetting
+    func didSelectRow(at indexPath: IndexPath)
 }
 
 protocol WorkoutRouterToPresenterProtocol: UIViewController {
@@ -65,9 +41,18 @@ final class WorkoutPresenter: BaseViewController {
     var interactor: WorkoutPresenterToInteractorProtocol!
     var router: WorkoutPresenterToRouterProtocol!
     
-    private lazy var workoutSections: [WorkoutSection] = [.edit(interactor.workoutName),
-                                                          .exercises,
-                                                          .sessions]
+    private lazy var workoutSettings: [WorkoutSetting] = [WorkoutSetting(type: .editName,
+                                                                         image: .edit,
+                                                                         name: interactor.workoutName,
+                                                                         description: editNameDescription),
+                                                          WorkoutSetting(type: .exercises,
+                                                                         image: .exercise,
+                                                                         name: "Exercises",
+                                                                         description: exerciseDescription),
+                                                          WorkoutSetting(type: .sessions,
+                                                                         image: .time,
+                                                                         name: "Sessions",
+                                                                         description: sessionDescription)]
     
     // workoutName can change as well as exercisesCount and sessionsCount
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +71,11 @@ final class WorkoutPresenter: BaseViewController {
         navigationItem.title = "Workout"
     }
     
-    private var exerciseRow: String {
+    private func editNameDescription() -> String {
+        "Edit workout name"
+    }
+    
+    private func exerciseDescription() -> String {
         let exercisesCount = interactor.exercisesCount
         let timedExercisesCount = interactor.timedExercisesCount
         let timedExercisesDuration = interactor.timedExercisesDuration
@@ -101,7 +90,7 @@ final class WorkoutPresenter: BaseViewController {
         }
     }
     
-    private var sessionRow: String {
+    private func sessionDescription() -> String {
         let exercisesCount = interactor.exercisesCount
         let sessionsCount = interactor.sessionsCount
 
@@ -118,39 +107,19 @@ final class WorkoutPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
-    var sectionsCount: Int {
-        workoutSections.count
-    }
+    var workoutSettingsCount: Int { workoutSettings.count }
     
-    func workoutSection(at section: Int) -> WorkoutSection {
-        workoutSections[section]
-    }
+    func workoutSetting(at indexPath: IndexPath) -> WorkoutSetting { workoutSettings[indexPath.row] }
     
-    func workoutRow(at section: Int) -> String {
-        switch workoutSections[section] {
-        case .exercises:
-            return exerciseRow
-        case .sessions:
-            return sessionRow
-        default:
-            return ""
-        }
-    }
-    
-    func setupWorkoutSectionDelegate(for header: WorkoutSectionTableViewHeader) {
-        header.delegate = self
-    }
+    func didSelectRow(at indexPath: IndexPath) { router.handleWorkoutSettingRouting(for: workoutSetting(at: indexPath)) }
 }
 
 // MARK: - RouterToPresenterProtocol
 extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
     func editWorkoutName(with newName: String) {
         interactor.editWorkoutName(with: newName)
-        workoutSections[0] = .edit(newName)
-    }
-    
-    func rowCount(at section: Int) -> Int {
-        workoutSections[section].rowCount
+        workoutSettings[0].updateName(with: newName)
+        viewWorkout.reloadData()
     }
     
     var workout: Workout {
@@ -159,12 +128,5 @@ extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
     
     var workoutName: String {
         interactor.workoutName
-    }
-}
-
-// MARK: - WorkoutSectionTableViewHeaderDelegate protocol
-extension WorkoutPresenter: WorkoutSectionTableViewHeaderDelegate {
-    func customHeaderViewDidTapSection(at section: WorkoutSection) {
-        router.handleSectionRouting(for: section)
     }
 }

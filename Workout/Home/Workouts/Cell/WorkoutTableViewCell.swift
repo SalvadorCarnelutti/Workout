@@ -27,7 +27,7 @@ final class WorkoutTableViewCell: UITableViewCell {
     
     private func setupConstraints() {
         nameLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(20)
+            make.verticalEdges.equalToSuperview().inset(20)
         }
     }
     

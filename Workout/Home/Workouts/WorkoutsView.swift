@@ -30,9 +30,8 @@ final class WorkoutsView: UIView {
     
     private func setupConstraints() {
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(8)
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.verticalEdges.equalTo(safeAreaLayoutGuide).offset(8)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
         }
     }
 }
