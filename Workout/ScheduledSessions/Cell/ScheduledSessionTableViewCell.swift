@@ -55,12 +55,13 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
     }
     
     private func configureTimeDurationLabel(with workout: Workout) {
-        guard workout.timedExercisesCount > 0 else {
+        guard workout.timedExercisesCount > 0,
+        let timedExercisesDurationString = workout.shortFormattedTimedExercisesDurationString else {
             timeDurationLabel.isHidden = true
             return
         }
         
-        timeDurationLabel.text = "• Timed exercises duration: \(workout.timedExercisesDuration) min"
+        timeDurationLabel.text = "• Timed exercises: \(timedExercisesDurationString)"
         timeDurationLabel.isHidden = false
     }
     

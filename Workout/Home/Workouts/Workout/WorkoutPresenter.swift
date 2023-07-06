@@ -86,7 +86,7 @@ final class WorkoutPresenter: BaseViewController {
         case(_, 0):
             return "exercises_set".localizedWithFormat(exercisesCount)
         default:
-            return "exercises_set_description".localizedWithFormat(exercisesCount, timedExercisesCount, timedExercisesDuration)
+            return "exercises_set_description".localizedWithFormat(exercisesCount, timedExercisesCount, timedExercisesDuration!)
         }
     }
     

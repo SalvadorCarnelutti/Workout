@@ -20,6 +20,14 @@ extension Workout {
         exercises?.compactMap({ $0 as? Exercise }).reduce (0, { $0 + Int($1.minutesDuration) }) ?? 0
     }
     
+    var longFormattedTimedExercisesDurationString: String? {
+        Double(timedExercisesDuration).asLongFormattedDurationString
+    }
+    
+    var shortFormattedTimedExercisesDurationString: String? {
+        Double(timedExercisesDuration).asShortFormattedDurationString
+    }
+    
     var sessionsCount: Int {
         sessions?.count ?? 0
     }

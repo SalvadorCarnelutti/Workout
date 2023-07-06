@@ -80,7 +80,7 @@ final class ExerciseTableViewCell: UITableViewCell {
     
     func configure(with exercise: Exercise) {
         nameLabel.text = exercise.name
-        configureTimeDurationLabel(with: exercise.durationString)
+        configureTimeDurationLabel(with: exercise.formattedDurationString)
         setsLabel.text = "• Set count: \(exercise.setsString)"
         repsLabel.text = "• Rep count: \(exercise.repsString)"
         orderLabel.text = "\(exercise.itemOrder)"
@@ -88,8 +88,7 @@ final class ExerciseTableViewCell: UITableViewCell {
     
     private func configureTimeDurationLabel(with text: String?) {
         if let text = text {
-            // TODO: Format as hour, minutes
-            timeDurationLabel.text = "• Duration: \(text) min"
+            timeDurationLabel.text = "• Duration: \(text)"
             timeDurationLabel.isHidden = false
         } else {
             timeDurationLabel.isHidden = true

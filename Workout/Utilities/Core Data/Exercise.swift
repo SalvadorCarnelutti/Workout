@@ -14,6 +14,12 @@ extension Exercise {
         return String(format: "%.0f", minutesDuration)
     }
     
+    var formattedDurationString: String? {
+        guard minutesDuration > 0 else { return nil }
+        
+        return minutesDuration.asLongFormattedDurationString
+    }
+    
     var setsString: String {
         String(sets)
     }

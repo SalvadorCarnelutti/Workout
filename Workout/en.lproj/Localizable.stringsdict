@@ -37,7 +37,7 @@
 	<key>exercises_set_description</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@exerciseCount@ set, where %#@timedExerciseCount@ timed for %#@minutesDuration@</string>
+		<string>%#@exerciseCount@ set, where %#@timedExerciseCount@ timed for %@</string>
 		<key>exerciseCount</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
@@ -59,17 +59,6 @@
 			<string>%d is</string>
 			<key>other</key>
 			<string>%d are</string>
-		</dict>
-		<key>minutesDuration</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>d</string>
-			<key>one</key>
-			<string>%d minute</string>
-			<key>other</key>
-			<string>%d minutes</string>
 		</dict>
 	</dict>
 </dict>
