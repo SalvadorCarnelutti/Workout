@@ -24,6 +24,7 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupViews()
         setupConstraints()
         loadPersistentContainer()
     }
