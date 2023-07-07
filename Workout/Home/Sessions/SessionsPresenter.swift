@@ -96,6 +96,7 @@ protocol SessionsViewToPresenterProtocol: UIViewController {
     func session(at indexPath: IndexPath) -> Session
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
+    func didChangeSessionCount()
 }
 
 protocol SessionsRouterToPresenterProtocol: UIViewController {
@@ -140,6 +141,18 @@ final class SessionsPresenter: BaseViewController, EntityFetcher {
     @objc private func addSessionTapped() {
         router.presentAddSessionForm()
     }
+    
+    private func showEmptyState() {
+        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
+                                                      text: "No sessions at the moment",
+                                                      secondaryText: "Start adding on the top-right")
+    }
+    
+    private func updateContentUnavailableConfiguration() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
+        })
+    }
 }
 
 // MARK: - ViewToPresenterProtocol
@@ -151,6 +164,7 @@ extension SessionsPresenter: SessionsViewToPresenterProtocol {
     func viewLoaded() {
         setFetchedResultsControllerDelegate(viewSessions)
         fetchEntities()
+        updateContentUnavailableConfiguration()
     }
     
     func session(at indexPath: IndexPath) -> Session {
@@ -163,6 +177,10 @@ extension SessionsPresenter: SessionsViewToPresenterProtocol {
     
     func didSelectRow(at indexPath: IndexPath) {
         router.presentEditSessionForm(for: session(at: indexPath))
+    }
+    
+    func didChangeSessionCount() {
+        updateContentUnavailableConfiguration()
     }
 }
 

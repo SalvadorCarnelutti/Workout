@@ -82,8 +82,6 @@ extension SessionsView: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
-        // TODO: Display something for when sessions count is 0
-//        updateView()
     }
     
     /*
@@ -103,10 +101,12 @@ extension SessionsView: NSFetchedResultsControllerDelegate {
         case .insert:
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
+                presenter.didChangeSessionCount()
             }
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                presenter.didChangeSessionCount()
             }
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:

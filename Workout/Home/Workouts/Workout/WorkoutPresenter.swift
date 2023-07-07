@@ -111,6 +111,7 @@ extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     
     func workoutSetting(at indexPath: IndexPath) -> WorkoutSetting { workoutSettings[indexPath.row] }
     
+    // TODO: Disable add sessions when exercises count is 0 (Also remove sessions if exercises reach count 0)
     func didSelectRow(at indexPath: IndexPath) { router.handleWorkoutSettingRouting(for: workoutSetting(at: indexPath)) }
 }
 

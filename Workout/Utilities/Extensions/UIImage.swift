@@ -23,4 +23,5 @@ extension UIImage {
     static var exercise: UIImage { Self.unwrappedImage("figure.walk.circle.fill") }
     static var time: UIImage { Self.unwrappedImage("clock.circle.fill") }
     static var rightChevron: UIImage { Self.unwrappedImage("chevron.right", withConfiguration: (UIImage.SymbolConfiguration(weight: .bold))) }
+    static var ellipsis: UIImage { Self.unwrappedImage("ellipsis.bubble.fill") }
 }

@@ -19,6 +19,7 @@ protocol ExercisesViewToPresenterProtocol: UIViewController {
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
     func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    func didChangeExerciseCount()
 }
 
 protocol ExercisesRouterToPresenterProtocol: UIViewController {
@@ -66,6 +67,18 @@ final class ExercisesPresenter: BaseViewController, EntityFetcher {
     @objc private func addExerciseTapped() {
         router.presentAddExerciseForm()
     }
+    
+    private func showEmptyState() {
+        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
+                                                      text: "No exercises at the moment",
+                                                      secondaryText: "Start adding on the top-right")
+    }
+    
+    private func updateContentUnavailableConfiguration() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
+        })
+    }
 }
 
 // MARK: - ViewToPresenterProtocol
@@ -75,6 +88,7 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     func viewLoaded() {
         setFetchedResultsControllerDelegate(viewExercises.fetchedResultsControllerDelegate)
         fetchEntities()
+        updateContentUnavailableConfiguration()
     }
     
     func exercise(at indexPath: IndexPath) -> Exercise { entity(at: indexPath) }
@@ -109,6 +123,10 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
         }
         
 //        print(exercises.map { "End: \($0.name!): \($0.order) \n" })
+    }
+    
+    func didChangeExerciseCount() {
+        updateContentUnavailableConfiguration()
     }
 }
 

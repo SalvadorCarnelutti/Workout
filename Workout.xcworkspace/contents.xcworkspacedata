@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/salva/Desktop/Workout/Workout/Utilities/Extensions/UIColor.swift">
-   </FileRef>
-   <FileRef
       location = "group:Workout.xcodeproj">
    </FileRef>
    <FileRef

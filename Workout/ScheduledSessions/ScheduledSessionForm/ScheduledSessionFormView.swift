@@ -151,4 +151,8 @@ extension ScheduledSessionFormView: ExerciseTableViewDelegate {
     func didDeleteRow(at indexPath: IndexPath) {
         presenter?.didDeleteRow(at: indexPath)
     }
+    
+    func didChangeExerciseCount() {
+        presenter?.didChangeExerciseCount()
+    }
 }

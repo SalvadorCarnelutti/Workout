@@ -17,6 +17,7 @@ protocol ScheduledSessionsViewToPresenterProtocol: UIViewController {
     func session(at indexPath: IndexPath) -> Session
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
+    func didChangeSessionCount()
 }
 
 protocol ScheduledSessionsRouterToPresenterProtocol: UIViewController {
@@ -59,6 +60,18 @@ final class ScheduledSessionsPresenter: BaseViewController, EntityFetcher {
     private func setupNavigationBar() {
         navigationItem.title = "Scheduled Sessions"
     }
+    
+    private func showEmptyState() {
+        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
+                                                      text: "No sessions set for \(viewScheduledSessions.selectedDayString)",
+                                                      secondaryText: "Start adding from the Workouts tab")
+    }
+    
+    private func updateContentUnavailableConfiguration() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
+        })
+    }
 }
 
 // MARK: - ViewToPresenterProtocol
@@ -70,6 +83,7 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
     func viewLoaded() {
         setFetchedResultsControllerDelegate(viewScheduledSessions)
         fetchEntities()
+        updateContentUnavailableConfiguration()
     }
     
     func didSelectDay(at day: Int) {
@@ -77,6 +91,7 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
         setFetchRequestPredicate(predicate)
         fetchEntities()
         viewScheduledSessions.reloadData()
+        updateContentUnavailableConfiguration()
     }
     
     func session(at indexPath: IndexPath) -> Session {
@@ -89,6 +104,10 @@ extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
     
     func didSelectRow(at indexPath: IndexPath) {
         router.pushEditSessionForm(for: session(at: indexPath))
+    }
+    
+    func didChangeSessionCount() {
+        updateContentUnavailableConfiguration()
     }
 }
 

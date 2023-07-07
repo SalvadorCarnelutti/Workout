@@ -18,6 +18,7 @@ protocol EntityFetcher: BaseViewController {
 
 extension EntityFetcher {
     var entitiesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
+    var isEmpty: Bool { entitiesCount == 0 }
     var fetchedEntities: [Entity] { fetchedResultsController.fetchedObjects ?? [] }
     func setFetchRequestPredicate(_ predicate: NSPredicate) { fetchedResultsController.fetchRequest.predicate = predicate }
     func setFetchedResultsControllerDelegate(_ delegate: NSFetchedResultsControllerDelegate) { fetchedResultsController.delegate = delegate }
@@ -43,6 +44,7 @@ protocol WorkoutsViewToPresenterProtocol: UIViewController {
     func workout(at indexPath: IndexPath) -> Workout
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
+    func didChangeWorkoutCount()
 }
 
 protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {
@@ -87,6 +89,19 @@ final class WorkoutsPresenter: BaseViewController, EntityFetcher {
     @objc private func addWorkoutTapped() {
         router.pushAddWorkout()
     }
+    
+    private func showEmptyState() {
+        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
+                                                      text: "No workouts at the moment",
+                                                      secondaryText: "Start adding on the top-right")
+    }
+    
+    private func updateContentUnavailableConfiguration() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
+        })
+    }
+
 }
 
 // MARK: - ViewToPresenterProtocol
@@ -98,6 +113,7 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
     func viewLoaded() {
         setFetchedResultsControllerDelegate(viewWorkout)
         fetchEntities()
+        updateContentUnavailableConfiguration()
     }
     
     func workout(at indexPath: IndexPath) -> Workout {
@@ -111,6 +127,10 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
     func didSelectRow(at indexPath: IndexPath) {
         let workout = workout(at: indexPath)
         router.pushEditWorkout(for: workout)
+    }
+    
+    func didChangeWorkoutCount() {
+        updateContentUnavailableConfiguration()
     }
 }
 

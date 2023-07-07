@@ -20,6 +20,7 @@ protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
     func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    func didChangeExerciseCount()
 }
 
 protocol ScheduledSessionFormRouterToPresenterProtocol: UIViewController {
@@ -101,6 +102,10 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
         for (i, exercise) in exercises.enumerated() {
             exercise.order = Int16(exercises.count - i) - 1
         }
+    }
+    
+    func didChangeExerciseCount() {
+        if isEmpty { navigationController?.popViewController(animated: true) }
     }
 }
 

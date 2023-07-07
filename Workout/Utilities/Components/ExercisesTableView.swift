@@ -11,6 +11,7 @@ import CoreData
 protocol ExerciseTableViewDelegate: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate {
     func exercise(at indexPath: IndexPath) -> Exercise
     func didDeleteRow(at indexPath: IndexPath)
+    func didChangeExerciseCount()
 }
 
 final class ExercisesTableView: UITableView {
@@ -47,8 +48,6 @@ extension ExercisesTableView: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         endUpdates()
-        // TODO: Display something for when exercises count is 0
-//        updateView()
     }
     
     /*
@@ -68,11 +67,13 @@ extension ExercisesTableView: NSFetchedResultsControllerDelegate {
         case .insert:
             if let indexPath = newIndexPath {
                 insertRows(at: [indexPath], with: .fade)
+                exerciseTableViewDelegate.didChangeExerciseCount()
             }
         case .delete:
             if let indexPath = indexPath {
                 deleteRows(at: [indexPath], with: .fade)
                 exerciseTableViewDelegate.didDeleteRow(at: indexPath)
+                exerciseTableViewDelegate.didChangeExerciseCount()
             }
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
