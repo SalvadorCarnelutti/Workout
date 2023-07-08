@@ -8,6 +8,8 @@
 import CoreData
 
 extension Session {
+    var weekday: Int { Int(day) }
+    
     var formattedStartsAt: String {
         guard let startsAt = startsAt else { return "" }
         

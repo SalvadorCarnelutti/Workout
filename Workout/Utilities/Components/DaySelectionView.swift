@@ -14,8 +14,10 @@ enum DaySelectionViewStyle {
 
 final class DaySelectionView: UIView {
     private static let daysOfWeek: [DayOfWeek] = DayOfWeek.allCases
-    private(set) var selectedDay: DayOfWeek?
+    private var selectedDay: DayOfWeek?
     private let style: DaySelectionViewStyle
+    
+    var weekday: Int? { selectedDay?.rawValue }
     
     private lazy var dayButtons: [UIButton] = {
         Self.daysOfWeek.map { getDayButton(for: $0) }
@@ -38,7 +40,7 @@ final class DaySelectionView: UIView {
     }
     
     func selectDayOfWeek(_ dayOfWeek: DayOfWeek) {
-        dayButtons[dayOfWeek.rawValue].sendActions(for: .touchUpInside)
+        dayButtons[dayOfWeek.rawValue.advanced(by: -1)].sendActions(for: .touchUpInside)
     }
     
     private func getDayButton(for day: DayOfWeek) -> UIButton {
@@ -72,7 +74,7 @@ final class DaySelectionView: UIView {
     }
     
     private func selectCurrentDay() {
-        let currentDayButton = dayButtons[Date.weekday]
+        let currentDayButton = dayButtons[Date.weekdayIndex]
         currentDayButton.sendActions(for: .touchUpInside)
     }
     

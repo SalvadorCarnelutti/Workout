@@ -11,7 +11,7 @@ import CoreData
 
 protocol ScheduledSessionsPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
     var presenter: ScheduledSessionsViewToPresenterProtocol? { get set }
-    var selectedDay: Int { get }
+    var selectedWeekday: Int { get }
     var selectedDayString: String { get }
     func loadView()
     func reloadData()
@@ -39,15 +39,15 @@ final class ScheduledSessionsView: UIView {
     }()
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        updateTableViewDataSource(for: sender.selectedSegmentIndex)
+        updateTableViewDataSource()
     }
     
-    private func updateTableViewDataSource(for selectedIndex: Int) {
-        presenter?.didSelectDay(at: selectedIndex)
+    private func updateTableViewDataSource() {
+        presenter?.didSelectDay(at: selectedWeekday)
     }
     
     private func selectCurrentDay() {
-        segmentedControl.selectedSegmentIndex = Date.weekday
+        segmentedControl.selectedSegmentIndex = Date.weekdayIndex
     }
     
     private func setupConstraints() {
@@ -61,13 +61,15 @@ final class ScheduledSessionsView: UIView {
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
+    
+    private var selectedWeekdayIndex: Int { segmentedControl.selectedSegmentIndex }
 }
 
 // MARK: - PresenterToViewProtocol
 extension ScheduledSessionsView: ScheduledSessionsPresenterToViewProtocol {
-    var selectedDay: Int { segmentedControl.selectedSegmentIndex }
+    var selectedWeekday: Int { segmentedControl.selectedSegmentIndex.advanced(by: 1) }
     
-    var selectedDayString: String { DayOfWeek.allCases[selectedDay].longDescription }
+    var selectedDayString: String { DayOfWeek.allCases[selectedWeekdayIndex].longDescription }
     
     func loadView() {
         backgroundColor = .white

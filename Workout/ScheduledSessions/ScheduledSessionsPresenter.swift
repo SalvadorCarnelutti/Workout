@@ -30,7 +30,7 @@ final class ScheduledSessionsPresenter: BaseViewController, EntityFetcher {
     var router: ScheduledSessionsPresenterToRouterProtocol!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Session> = {
-        let predicate = NSPredicate(format: "day == %@", NSNumber(value: self.viewScheduledSessions.selectedDay))
+        let predicate = NSPredicate(format: "day == %@", NSNumber(value: self.viewScheduledSessions.selectedWeekday))
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Session.day, ascending: true),

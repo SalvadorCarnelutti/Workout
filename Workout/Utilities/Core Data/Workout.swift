@@ -8,16 +8,23 @@
 import CoreData
 
 extension Workout {
+    private var compactMappedExercises: [Exercise] { exercises?.compactMap { $0 as? Exercise } ?? [] }
+    var compactMappedSessions: [Session] { sessions?.compactMap { $0 as? Session } ?? [] }
+    
     var exercisesCount: Int {
-        exercises?.count ?? 0
+        compactMappedExercises.count
     }
     
+    var sessionsCount: Int {
+        compactMappedSessions.count
+    }
+        
     var timedExercisesCount: Int {
-        exercises?.compactMap({ $0 as? Exercise }).filter { $0.minutesDuration > 0 }.count ?? 0
+        compactMappedExercises.filter { $0.minutesDuration > 0 }.count
     }
     
     var timedExercisesDuration: Int {
-        exercises?.compactMap({ $0 as? Exercise }).reduce (0, { $0 + Int($1.minutesDuration) }) ?? 0
+        compactMappedExercises.reduce (0, { $0 + Int($1.minutesDuration) })
     }
     
     var longFormattedTimedExercisesDurationString: String? {
@@ -26,10 +33,6 @@ extension Workout {
     
     var shortFormattedTimedExercisesDurationString: String? {
         Double(timedExercisesDuration).asShortFormattedDurationString
-    }
-    
-    var sessionsCount: Int {
-        sessions?.count ?? 0
     }
     
     func setup(with name: String) {

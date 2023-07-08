@@ -41,7 +41,7 @@ final class SessionFormView: UIView {
         datePicker.datePickerMode = .time
         datePicker.locale = Locale(identifier: "en_US_POSIX")
         datePicker.timeZone = TimeZone.current
-        datePicker.minuteInterval = 5
+        datePicker.minuteInterval = 1
         return datePicker
     }()
     
@@ -78,7 +78,7 @@ final class SessionFormView: UIView {
     }
     
     @objc private func completionActionTapped() {
-        guard let selectedDay = daySelectionView.selectedDay?.rawValue,
+        guard let selectedDay = daySelectionView.weekday,
         let startsAt = datePicker.date.formatAs("h:mm a") else { return }
         
         let formOutput = SessionFormOutput(day: selectedDay,

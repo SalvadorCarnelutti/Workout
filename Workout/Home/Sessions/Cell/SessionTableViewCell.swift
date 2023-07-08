@@ -43,7 +43,7 @@ final class SessionTableViewCell: UITableViewCell {
     }
     
     func configure(with session: Session) {
-        guard let dayString = DayOfWeek(rawValue: Int(session.day))?.longDescription else { return }
+        guard let dayString = DayOfWeek(rawValue: Int(session.weekday))?.longDescription else { return }
         
         dayLabel.text = "\(dayString):"
         startsAtLabel.text = session.formattedStartsAt

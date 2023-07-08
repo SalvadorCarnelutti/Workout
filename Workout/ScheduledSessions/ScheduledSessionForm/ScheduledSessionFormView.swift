@@ -69,7 +69,7 @@ extension ScheduledSessionFormView: ScheduledSessionFormPresenterToViewProtocol 
     var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate { tableView }
     
     var sessionFormOutput: SessionFormOutput? {
-        guard let selectedDay = daySelectionView.selectedDay?.rawValue,
+        guard let selectedDay = daySelectionView.weekday,
               let startsAt = datePicker.date.formatAs("h:mm a") else { return nil }
         
         let formOutput = SessionFormOutput(day: selectedDay,

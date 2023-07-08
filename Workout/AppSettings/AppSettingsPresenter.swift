@@ -61,7 +61,7 @@ final class AppSettingsPresenter: BaseViewController {
     }
     
     private func toggleNotificationsSetting(_ isOn: Bool) {
-        
+        isOn ? requestNotificationsSettings() : interactor.removeAllPendingNotificationRequests()
     }
     
     private func toggleDarkMode(_ isOn: Bool) {
@@ -86,3 +86,36 @@ extension AppSettingsPresenter: AppSettingsViewToPresenterProtocol {
 
 // MARK: - RouterToPresenterProtocol
 extension AppSettingsPresenter: AppSettingsRouterToPresenterProtocol {}
+
+extension AppSettingsPresenter {
+    private func requestNotificationsSettings() {
+        // Request Notification Settings
+        UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
+            switch notificationSettings.authorizationStatus {
+            case .notDetermined:
+                self.requestAuthorization(completionHandler: { (success) in
+                    guard success else { return }
+
+                    // Schedule Local Notification
+                    self.interactor.scheduleLocalNotifications()
+                })
+            case .authorized:
+                // Schedule Local Notification
+                self.interactor.scheduleLocalNotifications()
+            default:
+                print("Application Not Allowed to Display Notifications")
+            }
+        }
+    }
+    
+    private func requestAuthorization(completionHandler: @escaping (_ success: Bool) -> ()) {
+        // Request Authorization
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
+            if let error = error {
+                print("Request Authorization Failed (\(error), \(error.localizedDescription))")
+            }
+
+            completionHandler(success)
+        }
+    }
+}

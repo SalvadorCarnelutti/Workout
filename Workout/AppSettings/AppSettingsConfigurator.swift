@@ -6,7 +6,7 @@
 //  Created by Salvador on 7/7/23.
 //
 //
-import Foundation
+import CoreData
 
 final class AppSettingsConfigurator {
     static func injectDependencies(view: AppSettingsPresenterToViewProtocol,
@@ -23,10 +23,10 @@ final class AppSettingsConfigurator {
         presenter.router = router
     }
     
-    static func resolve() -> AppSettingsPresenter {
+    static func resolveFor(managedObjectContext: NSManagedObjectContext) -> AppSettingsPresenter {
         let presenter = AppSettingsPresenter()
         let view = AppSettingsView()
-        let interactor = AppSettingsInteractor()
+        let interactor = AppSettingsInteractor(managedObjectContext: managedObjectContext)
         let router = AppSettingsRouter()
 
         Self.injectDependencies(view: view,

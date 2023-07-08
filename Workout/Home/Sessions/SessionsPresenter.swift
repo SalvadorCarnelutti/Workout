@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 enum DayOfWeek: Int, CaseIterable {
-    case sunday = 0
+    case sunday = 1
     case monday
     case tuesday
     case wednesday
@@ -21,13 +21,13 @@ enum DayOfWeek: Int, CaseIterable {
     
     init?(rawValue: Int) {
         switch rawValue {
-        case 0: self = .sunday
-        case 1: self = .monday
-        case 2: self = .tuesday
-        case 3: self = .wednesday
-        case 4: self = .thursday
-        case 5: self = .friday
-        case 6: self = .saturday
+        case 1: self = .sunday
+        case 2: self = .monday
+        case 3: self = .tuesday
+        case 4: self = .wednesday
+        case 5: self = .thursday
+        case 6: self = .friday
+        case 7: self = .saturday
         default: return nil
         }
     }

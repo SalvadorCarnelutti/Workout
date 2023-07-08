@@ -18,8 +18,8 @@ struct SessionFormInput {
     var startsAt: Date
     
     init(session: Session) {
-        day = Int(session.day)
-        startsAt = session.startsAt!
+        day = Int(session.weekday)
+        startsAt = session.startsAt ?? Date()
     }
 }
 
