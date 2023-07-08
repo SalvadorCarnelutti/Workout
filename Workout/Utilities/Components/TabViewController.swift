@@ -32,10 +32,12 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
     private func setupTabs(managedObjectContext: NSManagedObjectContext) {
         let firstTab = WorkoutsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
         let secondTab = ScheduledSessionsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
+        let thirdTab = AppSettingsConfigurator.resolve()
         
         viewControllers = [
             getNavigationController(for: firstTab, title: "Workouts", image: .list),
             getNavigationController(for: secondTab, title: "Scheduled", image: .calendar),
+            getNavigationController(for: thirdTab, title: "Settings", image: .settings)
         ]
     }
     

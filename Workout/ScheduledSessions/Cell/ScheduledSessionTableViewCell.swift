@@ -10,7 +10,7 @@ import UIKit
 final class ScheduledSessionTableViewCell: UITableViewCell {
     private lazy var stackView: VerticalStack = {
        let stackView = VerticalStack(arrangedSubviews: [workoutNameLabel, startsAtLabel, exerciseCountLabel, timeDurationLabel])
-        addSubview(stackView)
+        contentView.addSubview(stackView)
         return stackView
     }()
     

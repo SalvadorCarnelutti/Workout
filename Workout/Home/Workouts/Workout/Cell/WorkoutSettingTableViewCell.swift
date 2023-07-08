@@ -14,7 +14,7 @@ final class WorkoutSettingTableViewCell: UITableViewCell {
                                                           headerLabel,
                                                           subheaderLabel,
                                                           chevronImageView])
-        addSubview(shadowedRoundedView)
+        contentView.addSubview(shadowedRoundedView)
         return shadowedRoundedView
     }()
     

@@ -10,7 +10,7 @@ import UIKit
 final class ExerciseTableViewCell: UITableViewCell {
     private lazy var stackView: VerticalStack = {
        let stackView = VerticalStack(arrangedSubviews: [nameLabel, timeDurationLabel, setsLabel, repsLabel])
-        addSubview(stackView)
+        contentView.addSubview(stackView)
         return stackView
     }()
     

@@ -10,7 +10,7 @@ import UIKit
 final class SessionTableViewCell: UITableViewCell {
     private lazy var stackView: VerticalStack = {
        let stackView = VerticalStack(arrangedSubviews: [dayLabel, startsAtLabel])
-        addSubview(stackView)
+        contentView.addSubview(stackView)
         return stackView
     }()
     

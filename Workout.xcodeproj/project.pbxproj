@@ -30,6 +30,12 @@
 		B410BFDF2A32085E00899BBC /* WorkoutFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFDA2A32085D00899BBC /* WorkoutFormView.swift */; };
 		B410BFE02A32085E00899BBC /* WorkoutFormConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFDB2A32085D00899BBC /* WorkoutFormConfigurator.swift */; };
 		B410BFE32A321D2D00899BBC /* WorkoutFormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B410BFE22A321D2D00899BBC /* WorkoutFormModels.swift */; };
+		B4157A422A58747E0068B641 /* AppSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A3D2A58747E0068B641 /* AppSettingsPresenter.swift */; };
+		B4157A432A58747E0068B641 /* AppSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A3E2A58747E0068B641 /* AppSettingsRouter.swift */; };
+		B4157A442A58747E0068B641 /* AppSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A3F2A58747E0068B641 /* AppSettingsInteractor.swift */; };
+		B4157A452A58747E0068B641 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A402A58747E0068B641 /* AppSettingsView.swift */; };
+		B4157A462A58747E0068B641 /* AppSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */; };
+		B4157A482A58749C0068B641 /* AppSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A472A58749C0068B641 /* AppSettingTableViewCell.swift */; };
 		B42BCB2A2A33E106006FCEDE /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42BCB292A33E106006FCEDE /* ActivityIndicator.swift */; };
 		B42BCB2C2A33E2BE006FCEDE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42BCB2B2A33E2BE006FCEDE /* BaseViewController.swift */; };
 		B43332462A57A9CD00A8F2DF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43332452A57A9CD00A8F2DF /* UIViewController.swift */; };
@@ -119,6 +125,12 @@
 		B410BFDA2A32085D00899BBC /* WorkoutFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFormView.swift; sourceTree = "<group>"; };
 		B410BFDB2A32085D00899BBC /* WorkoutFormConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFormConfigurator.swift; sourceTree = "<group>"; };
 		B410BFE22A321D2D00899BBC /* WorkoutFormModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFormModels.swift; sourceTree = "<group>"; };
+		B4157A3D2A58747E0068B641 /* AppSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsPresenter.swift; sourceTree = "<group>"; };
+		B4157A3E2A58747E0068B641 /* AppSettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsRouter.swift; sourceTree = "<group>"; };
+		B4157A3F2A58747E0068B641 /* AppSettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsInteractor.swift; sourceTree = "<group>"; };
+		B4157A402A58747E0068B641 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
+		B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsConfigurator.swift; sourceTree = "<group>"; };
+		B4157A472A58749C0068B641 /* AppSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingTableViewCell.swift; sourceTree = "<group>"; };
 		B42BCB292A33E106006FCEDE /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B42BCB2B2A33E2BE006FCEDE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B43332452A57A9CD00A8F2DF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +285,27 @@
 				B410BFE22A321D2D00899BBC /* WorkoutFormModels.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B4157A3C2A5874490068B641 /* AppSettings */ = {
+			isa = PBXGroup;
+			children = (
+				B4157A492A5876480068B641 /* Cell */,
+				B4157A3D2A58747E0068B641 /* AppSettingsPresenter.swift */,
+				B4157A3E2A58747E0068B641 /* AppSettingsRouter.swift */,
+				B4157A3F2A58747E0068B641 /* AppSettingsInteractor.swift */,
+				B4157A402A58747E0068B641 /* AppSettingsView.swift */,
+				B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */,
+			);
+			path = AppSettings;
+			sourceTree = "<group>";
+		};
+		B4157A492A5876480068B641 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B4157A472A58749C0068B641 /* AppSettingTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B440C5C32A3220DE008154CE /* Cell */ = {
@@ -431,8 +464,9 @@
 		B4B10AC62A2127BF00017AA3 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
-				B401E9122A48F7EF00D5A678 /* ScheduledSessions */,
 				B401E9112A48F7E400D5A678 /* Home */,
+				B401E9122A48F7EF00D5A678 /* ScheduledSessions */,
+				B4157A3C2A5874490068B641 /* AppSettings */,
 				B48B86D32A2A6B53007638C0 /* Utilities */,
 				B4B10AC72A2127BF00017AA3 /* AppDelegate.swift */,
 				B4B10AC92A2127BF00017AA3 /* SceneDelegate.swift */,
@@ -661,6 +695,8 @@
 				B4F4E6A22A461CA600E91D7C /* SessionFormView.swift in Sources */,
 				B410BFE32A321D2D00899BBC /* WorkoutFormModels.swift in Sources */,
 				B44CD5112A4B2FE30070ED15 /* ScheduledSessionFormPresenter.swift in Sources */,
+				B4157A462A58747E0068B641 /* AppSettingsConfigurator.swift in Sources */,
+				B4157A482A58749C0068B641 /* AppSettingTableViewCell.swift in Sources */,
 				B48B86CF2A2A5D48007638C0 /* WorkoutsRouter.swift in Sources */,
 				B4B10AC82A2127BF00017AA3 /* AppDelegate.swift in Sources */,
 				B48B86E22A2BEDDF007638C0 /* ExercisesRouter.swift in Sources */,
@@ -680,6 +716,7 @@
 				B4F4E6A02A461CA600E91D7C /* SessionFormRouter.swift in Sources */,
 				B401E9222A4937C500D5A678 /* Date.swift in Sources */,
 				B48B86EF2A2BF63D007638C0 /* ExerciseFormView.swift in Sources */,
+				B4157A452A58747E0068B641 /* AppSettingsView.swift in Sources */,
 				B48B86D62A2A6B67007638C0 /* UITableView.swift in Sources */,
 				B44CD5122A4B2FE30070ED15 /* ScheduledSessionFormRouter.swift in Sources */,
 				B48B86EE2A2BF63D007638C0 /* ExerciseFormInteractor.swift in Sources */,
@@ -689,13 +726,16 @@
 				B48B86D12A2A5D48007638C0 /* WorkoutsView.swift in Sources */,
 				B44CD5152A4B2FE30070ED15 /* ScheduledSessionFormConfigurator.swift in Sources */,
 				B43332462A57A9CD00A8F2DF /* UIViewController.swift in Sources */,
+				B4157A422A58747E0068B641 /* AppSettingsPresenter.swift in Sources */,
 				B401E9182A48F83C00D5A678 /* ScheduledSessionsPresenter.swift in Sources */,
+				B4157A442A58747E0068B641 /* AppSettingsInteractor.swift in Sources */,
 				B401E91C2A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift in Sources */,
 				B44CD5132A4B2FE30070ED15 /* ScheduledSessionFormInteractor.swift in Sources */,
 				B48B86F32A2BF77E007638C0 /* ValidatedTextField.swift in Sources */,
 				B4F4E6892A42675A00E91D7C /* WorkoutView.swift in Sources */,
 				B44CD50A2A49F3030070ED15 /* ScheduledSessionTableViewCell.swift in Sources */,
 				B48B86D22A2A5D48007638C0 /* WorkoutsConfigurator.swift in Sources */,
+				B4157A432A58747E0068B641 /* AppSettingsRouter.swift in Sources */,
 				B4B20EAC2A5631CF00314E1E /* UIColor.swift in Sources */,
 				B48B86FB2A2D34FC007638C0 /* ExerciseTableViewCell.swift in Sources */,
 				B401E90B2A47D1D000D5A678 /* Session.swift in Sources */,

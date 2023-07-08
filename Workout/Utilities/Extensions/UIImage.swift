@@ -13,7 +13,7 @@ extension UIImage {
     }
     
     private static func unwrappedImage(_ name: String, withConfiguration configuration: UIImage.Configuration) -> UIImage {
-        return UIImage(systemName: name, withConfiguration: configuration)?.withTintColor(.black.withAlphaComponent(0.8), renderingMode: .alwaysOriginal) ?? UIImage()
+        return UIImage(systemName: name, withConfiguration: configuration) ?? UIImage()
     }
     
     static var list: UIImage { Self.unwrappedImage("list.bullet") }
@@ -22,6 +22,15 @@ extension UIImage {
     static var edit: UIImage { Self.unwrappedImage("pencil.circle.fill") }
     static var exercise: UIImage { Self.unwrappedImage("figure.walk.circle.fill") }
     static var time: UIImage { Self.unwrappedImage("clock.circle.fill") }
-    static var rightChevron: UIImage { Self.unwrappedImage("chevron.right", withConfiguration: (UIImage.SymbolConfiguration(weight: .bold))) }
+    static var rightChevron: UIImage {
+        Self.unwrappedImage("chevron.right", withConfiguration: (UIImage.SymbolConfiguration(weight: .bold)))
+            .withTintColor(.black.withAlphaComponent(0.8), renderingMode: .alwaysOriginal)
+    }
     static var ellipsis: UIImage { Self.unwrappedImage("ellipsis.bubble.fill") }
+    static var settings: UIImage { Self.unwrappedImage("gear") }
+    static var notifications: UIImage { Self.unwrappedImage("bell.square.fill").withTintColor(.systemRed, renderingMode: .alwaysOriginal) }
+    static var notificationsOff: UIImage { Self.unwrappedImage("bell.fill").withTintColor(.systemRed, renderingMode: .alwaysOriginal) }
+    static var notificationsOn: UIImage { Self.unwrappedImage("bell.badge.fill").withTintColor(.systemRed, renderingMode: .alwaysOriginal) }
+    static var darkModeOff: UIImage { Self.unwrappedImage("moon.fill").withTintColor(.black.withAlphaComponent(0.8), renderingMode: .alwaysOriginal) }
+    static var darkModeOn: UIImage { Self.unwrappedImage("sun.max.fill").withTintColor(.systemYellow.withAlphaComponent(0.8), renderingMode: .alwaysOriginal) }
 }

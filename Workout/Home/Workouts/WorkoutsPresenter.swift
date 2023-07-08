@@ -101,7 +101,6 @@ final class WorkoutsPresenter: BaseViewController, EntityFetcher {
             self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
         })
     }
-
 }
 
 // MARK: - ViewToPresenterProtocol
