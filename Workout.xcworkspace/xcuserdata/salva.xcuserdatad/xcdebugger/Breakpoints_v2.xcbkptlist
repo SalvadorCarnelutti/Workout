@@ -309,55 +309,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5F1AF064-1DEC-4847-9E17-0441CD73896A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Workout/AppSettings/AppSettingsInteractor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "scheduleLocalNotifications()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5F1AF064-1DEC-4847-9E17-0441CD73896A - 221404d4cbc98d1a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Workout.AppSettingsInteractor.scheduleLocalNotifications() -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AppSettings/AppSettingsInteractor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "228">
-               </Location>
-               <Location
-                  uuid = "5F1AF064-1DEC-4847-9E17-0441CD73896A - 221404d4cbc98efb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Workout.AppSettingsInteractor.scheduleLocalNotifications() -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AppSettings/AppSettingsInteractor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "456">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7ACE53BC-61D5-4554-8D98-D750B46CCC0E"
+            uuid = "00242BB7-E00D-4492-83D1-55521D3AFE01"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -368,6 +320,53 @@
             endingLineNumber = "44"
             landmarkName = "scheduleLocalNotifications()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "00242BB7-E00D-4492-83D1-55521D3AFE01 - 221404d4cbc98e9e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Workout.AppSettingsInteractor.scheduleLocalNotifications() -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AppSettings/AppSettingsInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "240">
+               </Location>
+               <Location
+                  uuid = "00242BB7-E00D-4492-83D1-55521D3AFE01 - 3e75f6843cc70b41"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Workout.Workout) -&gt; () in closure #1 () -&gt; () in Workout.AppSettingsInteractor.scheduleLocalNotifications() -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AppSettings/AppSettingsInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "00242BB7-E00D-4492-83D1-55521D3AFE01 - 221404d4cbc98e9e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Workout.AppSettingsInteractor.scheduleLocalNotifications() -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AppSettings/AppSettingsInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
