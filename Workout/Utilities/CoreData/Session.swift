@@ -9,6 +9,10 @@ import CoreData
 
 extension Session {
     var weekday: Int { Int(day) }
+    var uuidString: String? { uuid?.uuidString }
+    var workoutName: String? { workout?.name }
+    var longFormattedTimedExercisesDurationString: String? { workout?.longFormattedTimedExercisesDurationString }
+    
     
     var formattedStartsAt: String {
         guard let startsAt = startsAt else { return "" }

@@ -98,6 +98,8 @@
 		B4F4E6A12A461CA600E91D7C /* SessionFormInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E69C2A461CA600E91D7C /* SessionFormInteractor.swift */; };
 		B4F4E6A22A461CA600E91D7C /* SessionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E69D2A461CA600E91D7C /* SessionFormView.swift */; };
 		B4F4E6A32A461CA600E91D7C /* SessionFormConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E69E2A461CA600E91D7C /* SessionFormConfigurator.swift */; };
+		B4FB81502A59E8670081F29C /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB814F2A59E8670081F29C /* NotificationManager.swift */; };
+		B4FB81522A5BA9C30081F29C /* SessionToNotificationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +197,8 @@
 		B4F4E69C2A461CA600E91D7C /* SessionFormInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFormInteractor.swift; sourceTree = "<group>"; };
 		B4F4E69D2A461CA600E91D7C /* SessionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFormView.swift; sourceTree = "<group>"; };
 		B4F4E69E2A461CA600E91D7C /* SessionFormConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFormConfigurator.swift; sourceTree = "<group>"; };
+		B4FB814F2A59E8670081F29C /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionToNotificationMapper.swift; sourceTree = "<group>"; };
 		EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.release.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -357,7 +361,8 @@
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B48B86F62A2D32B5007638C0 /* Core Data */,
+				B4FB814E2A59E8490081F29C /* NotificationManager */,
+				B48B86F62A2D32B5007638C0 /* CoreData */,
 				B48B86F12A2BF76F007638C0 /* Components */,
 				B48B86D42A2A6B5A007638C0 /* Extensions */,
 			);
@@ -424,15 +429,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		B48B86F62A2D32B5007638C0 /* Core Data */ = {
+		B48B86F62A2D32B5007638C0 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B401E91F2A49025D00D5A678 /* CoreDataManager.swift */,
 				B48B86F72A2D32BE007638C0 /* Exercise.swift */,
 				B401E91D2A48F91A00D5A678 /* Workout.swift */,
 				B401E90A2A47D1D000D5A678 /* Session.swift */,
-				B401E91F2A49025D00D5A678 /* CoreDataManager.swift */,
 			);
-			path = "Core Data";
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		B48B86F92A2D34F0007638C0 /* Cell */ = {
@@ -540,6 +545,15 @@
 				B4F4E69E2A461CA600E91D7C /* SessionFormConfigurator.swift */,
 			);
 			path = SessionForm;
+			sourceTree = "<group>";
+		};
+		B4FB814E2A59E8490081F29C /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				B4FB814F2A59E8670081F29C /* NotificationManager.swift */,
+				B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */,
+			);
+			path = NotificationManager;
 			sourceTree = "<group>";
 		};
 		EA77C3472D87BA35CD6BA8ED /* Pods */ = {
@@ -708,6 +722,7 @@
 				B410BFDF2A32085E00899BBC /* WorkoutFormView.swift in Sources */,
 				B4A28E4D2A37826600FB74C3 /* UITableViewHeaderFooterView.swift in Sources */,
 				B4B10ACA2A2127BF00017AA3 /* SceneDelegate.swift in Sources */,
+				B4FB81522A5BA9C30081F29C /* SessionToNotificationMapper.swift in Sources */,
 				B410BFCE2A2D994500899BBC /* StyledButton.swift in Sources */,
 				B410BFDD2A32085E00899BBC /* WorkoutFormRouter.swift in Sources */,
 				B401E90E2A47D6BF00D5A678 /* SessionTableViewCell.swift in Sources */,
@@ -736,6 +751,7 @@
 				B44CD50A2A49F3030070ED15 /* ScheduledSessionTableViewCell.swift in Sources */,
 				B48B86D22A2A5D48007638C0 /* WorkoutsConfigurator.swift in Sources */,
 				B4157A432A58747E0068B641 /* AppSettingsRouter.swift in Sources */,
+				B4FB81502A59E8670081F29C /* NotificationManager.swift in Sources */,
 				B4B20EAC2A5631CF00314E1E /* UIColor.swift in Sources */,
 				B48B86FB2A2D34FC007638C0 /* ExerciseTableViewCell.swift in Sources */,
 				B401E90B2A47D1D000D5A678 /* Session.swift in Sources */,

@@ -11,6 +11,7 @@ protocol BaseViewProtocol: UIViewController {
     func showLoader()
     func hideLoader()
     func presentOKAlert(title: String, message: String)
+    func presentErrorMessage()
 }
 
 class BaseViewController: UIViewController, BaseViewProtocol {
@@ -45,6 +46,10 @@ class BaseViewController: UIViewController, BaseViewProtocol {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func presentErrorMessage() {
+        presentOKAlert(title: "Unexpected error occured", message: "There was an error loading your information")
     }
     
     private func setupViews() {

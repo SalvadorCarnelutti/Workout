@@ -33,7 +33,7 @@ extension EntityFetcher {
         do {
             try fetchedResultsController.performFetch()
         } catch {
-            presentOKAlert(title: "Unexpected error occured", message: "There was an error loading your information")
+            presentErrorMessage()
         }
     }
 }

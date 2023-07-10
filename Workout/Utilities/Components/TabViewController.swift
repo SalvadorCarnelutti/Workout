@@ -50,9 +50,8 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
             switch result {
             case .success:
                 self.setupTabs(managedObjectContext: self.coreDataManager.managedObjectContext)
-            case .failure(let error):
-                print("Unable to Add Persistent Store")
-                print("\(error), \(error.localizedDescription)")
+            case .failure:
+                presentErrorMessage()
             }
         }
     }
@@ -71,6 +70,10 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func presentErrorMessage() {
+        presentOKAlert(title: "Unexpected error occured", message: "There was an error loading your information")
     }
     
     private func setupViews() {
