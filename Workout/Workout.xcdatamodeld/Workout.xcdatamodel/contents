@@ -18,7 +18,7 @@
     <entity name="Workout" representedClassName="Workout" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workout" inverseEntity="Exercise"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Exercise" inverseName="workout" inverseEntity="Exercise"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="workout" inverseEntity="Session"/>
     </entity>
 </model>

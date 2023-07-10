@@ -18,7 +18,7 @@ protocol ExercisesViewToPresenterProtocol: UIViewController {
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
-    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     func didChangeExerciseCount()
 }
 
@@ -105,7 +105,7 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
         Array(0..<indexPath.row).map { exercise(at: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
     }
     
-    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // TODO: Remove prints
         var exercises = fetchedEntities
 //        print(exercises.map { "Start: \($0.name!): \($0.order) \n" })

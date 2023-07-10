@@ -19,7 +19,7 @@ protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
-    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     func didChangeExerciseCount()
 }
 
@@ -90,7 +90,7 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
         Array(0..<indexPath.row).map { exercise(at: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
     }
     
-    func move(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         var exercises = fetchedEntities
         
         let fromOffsets = IndexSet(integer: sourceIndexPath.row)
