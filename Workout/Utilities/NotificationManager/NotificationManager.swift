@@ -19,6 +19,22 @@ class NotificationManager {
 
     private init() {}
     
+    func updateNotificationSettings(enabled: Bool) {
+        enabled ? enableNotifications() : disableNotifications()
+    }
+    
+    func scheduleNotifications(for notifications: [UNNotificationRequest]) {
+        notifications.forEach { scheduleNotification(for: $0) }
+    }
+    
+    func removeNotifications(for notificationIdentifiers: [String]) {
+        notificationIdentifiers.forEach { removeNotification(for: $0) }
+    }
+    
+    func updateNotifications(for notifications: [UNNotificationRequest]) {
+        notifications.forEach { updateNotification(for: $0) }
+    }
+    
     private func removeAllNotifications() {
         notificationCenter.removeAllPendingNotificationRequests()
     }
@@ -32,39 +48,28 @@ class NotificationManager {
         removeAllNotifications()
     }
     
-    func updateNotificationSettings(enabled: Bool) {
-        enabled ? enableNotifications() : disableNotifications()
-    }
-    
-    func scheduleNotification(for notification: UNNotificationRequest) {
+    private func scheduleNotification(for notification: UNNotificationRequest) {
         guard areNotificationsEnabled else { return }
         
-        notificationCenter.add(notification) { (error) in
+        // TODO: Handle error properly
+        notificationCenter.add(notification) { error in
             if let error = error {
                 print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
         }
     }
     
-    func scheduleNotifications(for notifications: [UNNotificationRequest]) {
+    private func removeNotification(for notificationIdentifier: String) {
         guard areNotificationsEnabled else { return }
         
-        notifications.forEach { scheduleNotification(for: $0) }
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
     }
     
-    func updateNotification(for notification: UNNotificationRequest) {
+    private func updateNotification(for notification: UNNotificationRequest) {
         guard areNotificationsEnabled else { return }
         
         removeNotification(for: notification.identifier)
         scheduleNotification(for: notification)
-    }
-    
-    func removeNotification(for notificationIdentifier: String) {
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
-    }
-    
-    func removeNotifications(for notificationIdentifiers: [String]) {
-        notificationIdentifiers.forEach { removeNotification(for: $0) }
     }
 }
 

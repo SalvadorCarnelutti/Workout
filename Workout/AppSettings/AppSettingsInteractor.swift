@@ -32,7 +32,10 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     
     func updateNotificationSettings(enabled: Bool) {
         notificationManager.updateNotificationSettings(enabled: enabled)
-        if enabled { scheduleLocalNotifications() }
+        if enabled {
+            scheduleLocalNotifications()
+            setupNotificationHandling()
+        }
     }
     
     func scheduleLocalNotifications() {
@@ -49,6 +52,35 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     }
     
     func scheduleLocalNotifications(for workout: Workout) {
-        notificationManager.scheduleNotifications(for: workout.compactMappedSessions.map { SessionToNotificationMapper(session: $0).notificationRequest })
+        let notificationRequests = workout.compactMappedSessions.map { SessionToNotificationMapper(session: $0).notificationRequest }
+        notificationManager.scheduleNotifications(for: notificationRequests)
     }
+    
+    private func setupNotificationHandling() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(managedObjectContextObjectsDidChange),
+                                       name: Notification.Name.NSManagedObjectContextObjectsDidChange,
+                                       object: managedObjectContext)
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+            let notificationRequestsToSchedule = inserts.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
+            notificationManager.scheduleNotifications(for: notificationRequestsToSchedule)
+        }
+
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
+            let notificationRequestsToUpdate = updates.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
+            notificationManager.updateNotifications(for: notificationRequestsToUpdate)
+        }
+
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
+            let notificationRequestsToRemove = deletes.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationIdentifier }
+            notificationManager.removeNotifications(for: notificationRequestsToRemove)
+        }
+    }
+
 }

@@ -42,7 +42,7 @@ struct SessionToNotificationMapper {
         return notificationTrigger
     }
     
-    private var notificationIdentifier: String { session.uuidString ?? "" }
+    var notificationIdentifier: String { session.uuidString ?? "" }
     
     var notificationRequest: UNNotificationRequest {
         UNNotificationRequest(identifier: notificationIdentifier,
