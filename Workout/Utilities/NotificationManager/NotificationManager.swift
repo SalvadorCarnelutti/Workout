@@ -19,8 +19,9 @@ class NotificationManager {
 
     private init() {}
     
-    func updateNotificationSettings(enabled: Bool) {
-        enabled ? enableNotifications() : disableNotifications()
+    func toggleNotificationsSetting() {
+        areNotificationsEnabled.toggle()
+        areNotificationsEnabled ? enableNotifications() : disableNotifications()
     }
     
     func scheduleNotifications(for notifications: [UNNotificationRequest]) {
@@ -80,7 +81,7 @@ extension NotificationManager {
             switch notificationSettings.authorizationStatus {
             case .notDetermined:
                 self.requestAuthorization(completionHandler: { success in
-                    self.updateNotificationSettings(enabled: success)
+                    if success { self.toggleNotificationsSetting() }
                 })
             case .authorized:
                 self.enableNotifications()

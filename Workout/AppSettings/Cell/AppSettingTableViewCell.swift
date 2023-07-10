@@ -11,15 +11,11 @@ typealias SwitchValueChangedCallback = () -> ()
 
 final class AppSettingTableViewCell: UITableViewCell {
     var switchValueChangedCallback: SwitchValueChangedCallback?
-    var isOnImage: UIImage?
-    var isOffImage: UIImage?
 
-    private lazy var settingImageView: UIImageView = {
-        let imageView = UIImageView()
-        contentView.addSubview(imageView)
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 5.0
-        return imageView
+    private lazy var settingImageView: ToggleImageView = {
+        let toggleImageView = ToggleImageView()
+        contentView.addSubview(toggleImageView)
+        return toggleImageView
     }()
     
     private lazy var settingNameLabel: MultilineLabel = {
@@ -50,11 +46,11 @@ final class AppSettingTableViewCell: UITableViewCell {
         settingImageView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
             make.centerY.equalTo(settingNameLabel)
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(38)
         }
         settingNameLabel.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(15)
-            make.left.equalTo(settingImageView.snp.right).offset(8)
+            make.left.equalTo(settingImageView.snp.right).offset(18)
         }
         
         settingSwitch.snp.makeConstraints { make in
@@ -66,27 +62,17 @@ final class AppSettingTableViewCell: UITableViewCell {
     
     @objc private func switchValueChanged(_ sender: UISwitch) {
         switchValueChangedCallback?()
-        toggleImage()
-    }
-    
-    private func toggleImage() {
-        let animationDuration: TimeInterval = 0.3
-        UIView.animate(withDuration: animationDuration, animations: {
-            self.settingImageView.alpha = 0
-        }) { _ in
-            self.settingImageView.image = self.settingSwitch.isOn ? self.isOnImage : self.isOffImage
-            UIView.animate(withDuration: animationDuration) {
-                self.settingImageView.alpha = 1
-            }
-        }
+        settingImageView.toggle()
     }
     
     func configure(with appSetting: AppSetting) {
-        settingImageView.image = appSetting.displayImage
         settingNameLabel.text = appSetting.name
         settingSwitch.isOn = appSetting.isOn
         
-        isOnImage = appSetting.isOnImage
-        isOffImage = appSetting.isOffImage
+        settingImageView.configure(with: ToggleImageModel(asDefault: !appSetting.isOn,
+                                                          defaultImage: appSetting.toggleImageModel.defaultImage,
+                                                          defaultBackgroundColor: appSetting.toggleImageModel.defaultBackgroundColor,
+                                                          alternateImage: appSetting.toggleImageModel.alternateImage,
+                                                          alternateBackgroundColor: appSetting.toggleImageModel.alternateBackgroundColor))
     }
 }

@@ -12,15 +12,14 @@ import UIKit
 struct AppSetting {
     var isOn: Bool {
         didSet {
-            toggleAction(isOn)
+            toggleAction()
         }
     }
-    var isOffImage: UIImage
-    var isOnImage: UIImage
-    var name: String
-    var toggleAction: (Bool) -> ()
     
-    var displayImage: UIImage { isOn ? isOnImage : isOffImage }
+    let toggleImageModel: ToggleImageModel
+    var name: String
+    var toggleAction: () -> ()
+    
     mutating func toggle() { isOn.toggle() }
 }
 
@@ -38,16 +37,8 @@ final class AppSettingsPresenter: BaseViewController {
     var interactor: AppSettingsPresenterToInteractorProtocol!
     var router: AppSettingsPresenterToRouterProtocol!
     
-    private lazy var appSettings = [AppSetting(isOn: true,
-                                               isOffImage: .notificationsOff,
-                                               isOnImage: .notificationsOn,
-                                               name: "Notifications",
-                                               toggleAction: toggleNotificationsSetting),
-                                    AppSetting(isOn: false,
-                                               isOffImage: .darkModeOn,
-                                               isOnImage: .darkModeOff,
-                                               name: "Dark Mode",
-                                               toggleAction: toggleDarkMode)]
+    private lazy var appSettings = [notificationsAppSetting,
+                                    darkModeAppSetting]
     
     override func loadView() {
         super.loadView()
@@ -56,15 +47,41 @@ final class AppSettingsPresenter: BaseViewController {
         setupNavigationBar()
     }
     
+    private var notificationsAppSetting: AppSetting {
+        let areNotificationsEnabled = interactor.areNotificationsEnabled
+        
+        return AppSetting(isOn: areNotificationsEnabled,
+                          toggleImageModel: ToggleImageModel(asDefault: areNotificationsEnabled,
+                                                             defaultImage: .notificationsOff,
+                                                             defaultBackgroundColor: .systemRed,
+                                                             alternateImage: .notificationsOn,
+                                                             alternateBackgroundColor: .systemRed),
+                          name: "Notifications",
+                          toggleAction: toggleNotificationsSetting)
+    }
+    
+    private var darkModeAppSetting: AppSetting {
+        let isDarkModeEnabled = false
+        
+        return AppSetting(isOn: isDarkModeEnabled,
+                          toggleImageModel: ToggleImageModel(asDefault: isDarkModeEnabled,
+                                                             defaultImage: .darkModeOff,
+                                                             defaultBackgroundColor: .systemBlue,
+                                                             alternateImage: .darkModeOn,
+                                                             alternateBackgroundColor: .black.withAlphaComponent(0.8)),
+                          name: "Dark Mode",
+                          toggleAction: toggleDarkMode)
+    }
+    
     private func setupNavigationBar() {
         navigationItem.title = "Settings"
     }
     
-    private func toggleNotificationsSetting(_ isOn: Bool) {
-        interactor.updateNotificationSettings(enabled: isOn)
+    private func toggleNotificationsSetting() {
+        interactor.toggleNotificationsSetting()
     }
     
-    private func toggleDarkMode(_ isOn: Bool) {
+    private func toggleDarkMode() {
         
     }
 }

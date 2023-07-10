@@ -29,8 +29,8 @@ extension UIImage {
     static var ellipsis: UIImage { Self.unwrappedImage("ellipsis.bubble.fill") }
     static var settings: UIImage { Self.unwrappedImage("gear") }
     static var notifications: UIImage { Self.unwrappedImage("bell.square.fill").withTintColor(.systemRed, renderingMode: .alwaysOriginal) }
-    static var notificationsOff: UIImage { Self.unwrappedImage("bell.fill").withTintColor(.systemRed, renderingMode: .alwaysOriginal) }
-    static var notificationsOn: UIImage { Self.unwrappedImage("bell.badge.fill").withTintColor(.systemRed, renderingMode: .alwaysOriginal) }
-    static var darkModeOff: UIImage { Self.unwrappedImage("moon.fill").withTintColor(.black.withAlphaComponent(0.8), renderingMode: .alwaysOriginal) }
-    static var darkModeOn: UIImage { Self.unwrappedImage("sun.max.fill").withTintColor(.systemYellow.withAlphaComponent(0.8), renderingMode: .alwaysOriginal) }
+    static var notificationsOff: UIImage { Self.unwrappedImage("bell.fill").withTintColor(.white, renderingMode: .alwaysOriginal) }
+    static var notificationsOn: UIImage { Self.unwrappedImage("bell.badge.fill").withTintColor(.white, renderingMode: .alwaysOriginal) }
+    static var darkModeOff: UIImage { Self.unwrappedImage("sun.max.fill").withTintColor(.systemYellow, renderingMode: .alwaysOriginal) }
+    static var darkModeOn: UIImage { Self.unwrappedImage("moon.fill").withTintColor(.white, renderingMode: .alwaysOriginal) }
 }

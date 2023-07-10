@@ -12,8 +12,9 @@ import CoreData
 
 protocol AppSettingsPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
+    var areNotificationsEnabled: Bool { get }
     func requestNotificationsSettings()
-    func updateNotificationSettings(enabled: Bool)
+    func toggleNotificationsSetting()
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -26,19 +27,21 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
         self.managedObjectContext = managedObjectContext
     }
     
+    var areNotificationsEnabled: Bool { notificationManager.areNotificationsEnabled }
+    
     func requestNotificationsSettings() {
         notificationManager.requestNotificationsSettings()
     }
     
-    func updateNotificationSettings(enabled: Bool) {
-        notificationManager.updateNotificationSettings(enabled: enabled)
-        if enabled {
+    func toggleNotificationsSetting() {
+        notificationManager.toggleNotificationsSetting()
+        if areNotificationsEnabled {
             scheduleLocalNotifications()
-            setupNotificationHandling()
+            setupNotificationsHandling()
         }
     }
     
-    func scheduleLocalNotifications() {
+    private func scheduleLocalNotifications() {
         let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
         
         managedObjectContext.performAndWait {
@@ -51,12 +54,12 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
         }
     }
     
-    func scheduleLocalNotifications(for workout: Workout) {
+    private func scheduleLocalNotifications(for workout: Workout) {
         let notificationRequests = workout.compactMappedSessions.map { SessionToNotificationMapper(session: $0).notificationRequest }
         notificationManager.scheduleNotifications(for: notificationRequests)
     }
     
-    private func setupNotificationHandling() {
+    private func setupNotificationsHandling() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
                                        selector: #selector(managedObjectContextObjectsDidChange),
