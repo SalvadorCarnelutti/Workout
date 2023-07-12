@@ -13,7 +13,7 @@ class ActivityIndicator: UIView {
         static let CornerRadius: CGFloat = 16
         static let BackgroundLoadingViewColor: UIColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         static let MainContainerAlpha: CGFloat = 0.9
-        static let MainContainerColor: UIColor = .white
+        static let MainContainerColor: UIColor = .systemBackground
     }
     
     private lazy var mainContainer: UIView = {
@@ -31,7 +31,7 @@ class ActivityIndicator: UIView {
     private lazy var backgroundLoadingView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.clipsToBounds = true
         view.layer.cornerRadius = Constants.CornerRadius
         view.backgroundColor = Constants.BackgroundLoadingViewColor
@@ -43,7 +43,7 @@ class ActivityIndicator: UIView {
         let activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorView.style = .large
-        activityIndicatorView.color = .white
+        activityIndicatorView.color = .systemBackground
         activityIndicatorView.hidesWhenStopped = true
         
         return activityIndicatorView

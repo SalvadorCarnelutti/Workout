@@ -69,7 +69,7 @@ class BaseViewController: UIViewController, BaseViewProtocol {
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance // For iPhone small navigation bar in landscape.
-        navigationController?.navigationBar.tintColor = .black // For navigationBar button items
+        navigationController?.navigationBar.tintColor = .label // For navigationBar button items
     }
 }
 

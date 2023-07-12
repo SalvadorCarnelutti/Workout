@@ -13,21 +13,26 @@ import CoreData
 protocol AppSettingsPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
     var areNotificationsEnabled: Bool { get }
+    var isDarkModeEnabled: Bool { get }
     func requestNotificationsSettings()
     func toggleNotificationsSetting()
+    func toggleDarkModeSetting()
 }
 
 // MARK: - PresenterToInteractorProtocol
 final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
     let managedObjectContext: NSManagedObjectContext
-    let notificationManager = NotificationManager.shared
+    private let notificationManager = NotificationManager.shared
+    private let appearanceManager = AppearanceManager.shared
     
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
     }
     
     var areNotificationsEnabled: Bool { notificationManager.areNotificationsEnabled }
+    
+    var isDarkModeEnabled: Bool { appearanceManager.isDarkModeEnabled }
     
     func requestNotificationsSettings() {
         notificationManager.requestNotificationsSettings()
@@ -39,6 +44,10 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
             scheduleLocalNotifications()
             setupNotificationsHandling()
         }
+    }
+    
+    func toggleDarkModeSetting() {
+        appearanceManager.toggleDarkModeSetting()
     }
     
     private func scheduleLocalNotifications() {
@@ -85,5 +94,4 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
             notificationManager.removeNotifications(for: notificationRequestsToRemove)
         }
     }
-
 }

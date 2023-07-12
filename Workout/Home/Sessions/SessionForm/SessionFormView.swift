@@ -91,7 +91,7 @@ final class SessionFormView: UIView {
 // MARK: - PresenterToViewProtocol
 extension SessionFormView: SessionFormPresenterToViewProtocol {
     func loadView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupConstraints()
         presenter?.viewLoaded()
     }

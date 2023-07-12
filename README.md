@@ -1,8 +1,9 @@
 Some core screens:
 
 <p align = "center">
-<img src="README-images/Workouts.png" width="300"> <img src="README-images/Exercises.png" width="300">
+<img src="README-images/Workout-summary.png" width="300"> <img src="README-images/Exercises.png" width="300">
 <img src="README-images/Session-form.png" width="300"> <img src="README-images/Scheduled-sessions.png" width="300">
+<img src="README-images/Settings.png" width="300">
 </p>
 
 ## Table of contents
@@ -49,14 +50,12 @@ $ pod install
 
 ## Improvements
 There is some work to improve:
-
 * Disable being able to add sessions if there are no exercises set for a workout
 
 And there are other tech additions I would love to try:
 * Publish on the app store
 * Github Actions + Fastlane
 * GraphQL for downloading premade workouts
-* Dark mode
 
 ## Known issues
 The drag and drop behavior from the ExercisesTableView class it's not perfect as I just keep reloading the table view each time there is a move NSFetchedResultsChangeType. I wasn't able to find online any proper example for reordering items using CoreData (All the examples I tried behaved and updated the table view in weird ways).

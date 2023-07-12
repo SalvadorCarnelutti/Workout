@@ -61,14 +61,14 @@ final class AppSettingsPresenter: BaseViewController {
     }
     
     private var darkModeAppSetting: AppSetting {
-        let isDarkModeEnabled = false
+        let isDarkModeEnabled = interactor.isDarkModeEnabled
         
         return AppSetting(isOn: isDarkModeEnabled,
                           toggleImageModel: ToggleImageModel(asDefault: isDarkModeEnabled,
                                                              defaultImage: .darkModeOff,
                                                              defaultBackgroundColor: .systemBlue,
                                                              alternateImage: .darkModeOn,
-                                                             alternateBackgroundColor: .black.withAlphaComponent(0.8)),
+                                                             alternateBackgroundColor: .label),
                           name: "Dark Mode",
                           toggleAction: toggleDarkMode)
     }
@@ -82,7 +82,7 @@ final class AppSettingsPresenter: BaseViewController {
     }
     
     private func toggleDarkMode() {
-        
+        interactor.toggleDarkModeSetting()
     }
 }
 

@@ -101,6 +101,7 @@
 		B4FB81502A59E8670081F29C /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB814F2A59E8670081F29C /* NotificationManager.swift */; };
 		B4FB81522A5BA9C30081F29C /* SessionToNotificationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */; };
 		B4FB81542A5C905F0081F29C /* ToggleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81532A5C905F0081F29C /* ToggleImageView.swift */; };
+		B4FB81572A5F45F90081F29C /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81562A5F45F90081F29C /* AppearanceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -201,6 +202,7 @@
 		B4FB814F2A59E8670081F29C /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionToNotificationMapper.swift; sourceTree = "<group>"; };
 		B4FB81532A5C905F0081F29C /* ToggleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImageView.swift; sourceTree = "<group>"; };
+		B4FB81562A5F45F90081F29C /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.release.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -363,6 +365,7 @@
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B4FB81552A5F45EE0081F29C /* AppearanceManager */,
 				B4FB814E2A59E8490081F29C /* NotificationManager */,
 				B48B86F62A2D32B5007638C0 /* CoreData */,
 				B48B86F12A2BF76F007638C0 /* Components */,
@@ -559,6 +562,14 @@
 			path = NotificationManager;
 			sourceTree = "<group>";
 		};
+		B4FB81552A5F45EE0081F29C /* AppearanceManager */ = {
+			isa = PBXGroup;
+			children = (
+				B4FB81562A5F45F90081F29C /* AppearanceManager.swift */,
+			);
+			path = AppearanceManager;
+			sourceTree = "<group>";
+		};
 		EA77C3472D87BA35CD6BA8ED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +757,7 @@
 				B44CD5152A4B2FE30070ED15 /* ScheduledSessionFormConfigurator.swift in Sources */,
 				B43332462A57A9CD00A8F2DF /* UIViewController.swift in Sources */,
 				B4157A422A58747E0068B641 /* AppSettingsPresenter.swift in Sources */,
+				B4FB81572A5F45F90081F29C /* AppearanceManager.swift in Sources */,
 				B401E9182A48F83C00D5A678 /* ScheduledSessionsPresenter.swift in Sources */,
 				B4157A442A58747E0068B641 /* AppSettingsInteractor.swift in Sources */,
 				B401E91C2A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift in Sources */,

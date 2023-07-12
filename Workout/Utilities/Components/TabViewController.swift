@@ -10,6 +10,7 @@ import CoreData
 
 final class TabBarViewController: UITabBarController, BaseViewProtocol {
     let coreDataManager = CoreDataManager.shared
+    let appearanceManager = AppearanceManager.shared
     
     private struct Constraints {
         static let ActivityIndicatorSize: CGFloat = 80
@@ -21,9 +22,14 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
         return activityIndicator
     }()
     
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        appearanceManager.updateAppearanceMode()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupViews()
         setupConstraints()
         loadPersistentContainer()

@@ -10,6 +10,7 @@ import UIKit
 extension UIViewController {
     func clearContentUnavailableConfiguration() {
         contentUnavailableConfiguration = nil
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
     private func configureContentUnavailableConfiguration(config: UIContentUnavailableConfiguration,
@@ -22,6 +23,7 @@ extension UIViewController {
         newConfig.secondaryText = secondaryText
         newConfig.imageProperties.tintColor = .mainTheme
         contentUnavailableConfiguration = newConfig
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
     func configureEmptyContentUnavailableConfiguration(image: UIImage,

@@ -37,6 +37,10 @@ final class ShadowedRoundedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setForegroundcolor(_ color: UIColor) {
+        roundedForeground.backgroundColor = color
+    }
+    
     private func setupConstraints() {
         roundedForeground.snp.makeConstraints { make in
             make.edges.equalToSuperview()

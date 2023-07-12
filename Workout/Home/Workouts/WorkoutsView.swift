@@ -39,7 +39,7 @@ final class WorkoutsView: UIView {
 // MARK: - PresenterToViewProtocol
 extension WorkoutsView: WorkoutsPresenterToViewProtocol {
     func loadView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupConstraints()
         presenter?.viewLoaded()
     }

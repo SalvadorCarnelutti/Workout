@@ -39,7 +39,7 @@ final class SessionsView: UIView {
 // MARK: - PresenterToViewProtocol
 extension SessionsView: SessionsPresenterToViewProtocol {
     func loadView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupConstraints()
         presenter?.viewLoaded()
     }

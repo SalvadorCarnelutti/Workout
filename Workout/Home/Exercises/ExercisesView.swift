@@ -39,7 +39,7 @@ extension ExercisesView: ExercisesPresenterToViewProtocol {
     var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate { tableView }
     
     func loadView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupConstraints()
         presenter?.viewLoaded()
     }

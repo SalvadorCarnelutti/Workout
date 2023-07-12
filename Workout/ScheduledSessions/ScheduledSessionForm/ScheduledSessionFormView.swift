@@ -79,7 +79,7 @@ extension ScheduledSessionFormView: ScheduledSessionFormPresenterToViewProtocol 
     }
     
     func loadView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupConstraints()
         presenter?.viewLoaded()
     }

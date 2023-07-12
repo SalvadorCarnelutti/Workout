@@ -139,7 +139,7 @@ final class ExerciseFormView: UIView {
 // MARK: - PresenterToViewProtocol
 extension ExerciseFormView: ExerciseFormPresenterToViewProtocol {
     func loadView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupFormFields()
         setupConstraints()
         presenter?.viewLoaded()

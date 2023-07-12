@@ -10,11 +10,12 @@ import UIKit
 final class WorkoutSettingTableViewCell: UITableViewCell {
     private lazy var shadowedRoundedView: ShadowedRoundedView = {
         let shadowedRoundedView = ShadowedRoundedView(arrangedSubviews: [stripeAccesory,
-                                                          settingImageView,
-                                                          headerLabel,
-                                                          subheaderLabel,
-                                                          chevronImageView])
+                                                                         settingImageView,
+                                                                         headerLabel,
+                                                                         subheaderLabel,
+                                                                         chevronImageView])
         contentView.addSubview(shadowedRoundedView)
+        shadowedRoundedView.setForegroundcolor(.systemGray6)
         return shadowedRoundedView
     }()
     

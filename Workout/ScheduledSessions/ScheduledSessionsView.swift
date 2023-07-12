@@ -72,7 +72,7 @@ extension ScheduledSessionsView: ScheduledSessionsPresenterToViewProtocol {
     var selectedDayString: String { DayOfWeek.allCases[selectedWeekdayIndex].longDescription }
     
     func loadView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         setupConstraints()
         selectCurrentDay()
         presenter?.viewLoaded()
