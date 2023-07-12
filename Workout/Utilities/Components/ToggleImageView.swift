@@ -53,31 +53,26 @@ class ToggleImageView: UIImageView {
         self.alternateImage = toggleImageModel.alternateImage
         self.alternateBackgroundColor = toggleImageModel.alternateBackgroundColor
         
-        updateImage()
-        updateBackgroundColor()
+        updateImageView()
     }
     
     func toggle() {
         asDefault.toggle()
-        self.updateBackgroundColor()
-
-        let animationDuration: TimeInterval = 0.3
-        UIView.animate(withDuration: animationDuration, animations: {
-            self.imageView.alpha = 0
-        }) { _ in
-            self.updateImage()
-            UIView.animate(withDuration: animationDuration) {
-                self.imageView.alpha = 1
-            }
-        }
+        updateImageView()
     }
     
     private func commonInit() {
         setupConstraints()
     }
     
+    private func updateImageView() {
+        updateBackgroundColor()
+        updateImage()
+    }
+    
     private func updateImage() {
-        imageView.image = asDefault ? defaultImage : alternateImage
+        guard let transitionToImage: UIImage = asDefault ? defaultImage : alternateImage else { return }
+        imageView.setSymbolImage(transitionToImage, contentTransition: .replace)
     }
     
     private func updateBackgroundColor() {

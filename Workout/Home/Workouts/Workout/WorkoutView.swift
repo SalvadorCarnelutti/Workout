@@ -24,6 +24,7 @@ final class WorkoutView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         tableView.register(WorkoutSettingTableViewCell.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView

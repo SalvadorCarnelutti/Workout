@@ -41,7 +41,7 @@ final class ExerciseTableViewCell: UITableViewCell {
     private lazy var orderLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.textAlignment = .center
         label.textColor = .systemBlue
         
