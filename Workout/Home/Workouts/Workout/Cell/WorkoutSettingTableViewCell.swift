@@ -34,7 +34,7 @@ final class WorkoutSettingTableViewCell: UITableViewCell {
     private lazy var headerLabel: MultilineLabel = {
         let label = MultilineLabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 32, weight: .heavy)
+        label.font = .systemFont(ofSize: 30, weight: .bold)
         return label
     }()
     

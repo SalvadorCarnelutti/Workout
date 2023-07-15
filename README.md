@@ -24,8 +24,9 @@ This is a fitness application to schedule workout sessions, with the capabilitie
 - Schedule recurring days and time of the week to tackle on your workouts through sessions
 - Browse through all your available sessions set for any given day of the week
 - Enable local notifications for when workout sessions are going to start
+- Switch between light mode and dark mode display.
 
-It's a fun project that actually has a functional use for myself as I have some stretching routines, as well some home workouts as well and the application can help me be a little more organized.
+It's a fun project that actually has a functional use for myself as I have some stretching routines and some home workouts. The application can help me be a little more organized.
 	
 ## Technologies
 Project is created with:
@@ -51,6 +52,7 @@ $ pod install
 ## Improvements
 There is some work to improve:
 * Disable being able to add sessions if there are no exercises set for a workout
+* Could allow the user to decide how long before being notified for their scheduled sessions.
 
 And there are other tech additions I would love to try:
 * Publish on the app store

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ShadowedRoundedView: UIView {
+final class ShadowedRoundedView: PressableView {
     private static let cornerRadius: CGFloat = 4.0
     private static let shadowCornerRadius: CGFloat = 3.0
     
@@ -29,6 +29,7 @@ final class ShadowedRoundedView: UIView {
     
     init(arrangedSubviews: [UIView]) {
         super.init(frame: .zero)
+        pressableAnimator = ShrinkPressableAnimator()
         arrangedSubviews.forEach { roundedForeground.addSubview($0) }
         setupConstraints()
     }

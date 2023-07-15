@@ -22,7 +22,7 @@ final class AppSettingsView: UIView {
         addSubview(tableView)
         tableView.dataSource = self
         tableView.register(AppSettingTableViewCell.self)
-        tableView.isScrollEnabled = false
+        tableView.alwaysBounceVertical = false
         tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
