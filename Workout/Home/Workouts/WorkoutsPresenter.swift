@@ -78,6 +78,12 @@ final class WorkoutsPresenter: BaseViewController, EntityFetcher {
         setupNavigationBar()
     }
     
+    func handleNotificationTap(for identifier: String) {
+        guard let scheduledWorkout = fetchedEntities.first(where: { $0.compactMappedSessions.contains { $0.uuidString == identifier } }) else { return }
+        
+        router.handleNotificationTap(for: scheduledWorkout)
+    }
+    
     private func setupNavigationBar() {
         navigationItem.title = "Workouts"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,

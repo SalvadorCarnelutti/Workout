@@ -67,6 +67,10 @@ final class WorkoutPresenter: BaseViewController {
         setupNavigationBar()
     }
     
+    func handleNotificationTap(for workout: Workout) {
+        router.handleNotificationTap(for: workout)
+    }
+    
     private func setupNavigationBar() {
         navigationItem.title = "Workout"
     }

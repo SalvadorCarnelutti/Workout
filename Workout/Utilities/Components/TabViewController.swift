@@ -36,15 +36,37 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
     }
     
     private func setupTabs(managedObjectContext: NSManagedObjectContext) {
-        let firstTab = WorkoutsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
-        let secondTab = ScheduledSessionsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
-        let thirdTab = AppSettingsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
+        let workoutsTab = WorkoutsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
+        let scheduledSessionsTab = ScheduledSessionsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
+        let appSettingsTab = AppSettingsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
         
         viewControllers = [
-            getNavigationController(for: firstTab, title: "Workouts", image: .list),
-            getNavigationController(for: secondTab, title: "Scheduled", image: .calendar),
-            getNavigationController(for: thirdTab, title: "Settings", image: .settings)
+            getNavigationController(for: workoutsTab, title: "Workouts", image: .list),
+            getNavigationController(for: scheduledSessionsTab, title: "Scheduled", image: .calendar),
+            getNavigationController(for: appSettingsTab, title: "Settings", image: .settings)
         ]
+    }
+    
+    func selectWorkoutsTab() {
+        selectedIndex = 0
+    }
+    
+    func selectScheduledSessionsTab() {
+        selectedIndex = 1
+    }
+    
+    func selectAppSettingsTab() {
+        selectedIndex = 2
+    }
+    
+    func handleLocalNotificationTap(for identifier: String) {
+        guard let tabControllers = viewControllers,
+              let navigationController = tabControllers.first as? UINavigationController,
+              let workoutsPresenter = navigationController.viewControllers.first as? WorkoutsPresenter else { return }
+        
+        selectWorkoutsTab()
+        navigationController.popToViewController(workoutsPresenter, animated: false)
+        workoutsPresenter.handleNotificationTap(for: identifier)
     }
     
     private func loadPersistentContainer() {

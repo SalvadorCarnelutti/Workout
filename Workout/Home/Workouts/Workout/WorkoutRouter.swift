@@ -11,6 +11,7 @@ import UIKit
 protocol WorkoutPresenterToRouterProtocol: AnyObject {
     var presenter: WorkoutRouterToPresenterProtocol? { get set }
     func handleWorkoutSettingRouting(for workoutSetting: WorkoutSetting)
+    func handleNotificationTap(for workout: Workout)
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -37,6 +38,13 @@ final class WorkoutRouter: WorkoutPresenterToRouterProtocol {
         let editWorkoutFormViewController = WorkoutFormConfigurator.resolveEdit(for: presenter.workoutName, completionAction: presenter.editWorkoutName)
         editWorkoutFormViewController.modalPresentationStyle = .popover
         presenter.present(editWorkoutFormViewController, animated: true)
+    }
+    
+    func handleNotificationTap(for workout: Workout) {
+        guard let presenter = presenter else { return }
+        
+        let exercisesViewController = ExercisesConfigurator.resolveEdit(for: workout)
+        presenter.navigationController?.pushViewController(exercisesViewController, animated: false)
     }
     
     private func pushExercises(for workout: Workout) {

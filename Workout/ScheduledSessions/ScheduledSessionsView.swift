@@ -12,7 +12,7 @@ import CoreData
 protocol ScheduledSessionsPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
     var presenter: ScheduledSessionsViewToPresenterProtocol? { get set }
     var selectedWeekday: Int { get }
-    var selectedDayString: String { get }
+    var selectedWeekdayString: String { get }
     func loadView()
     func reloadData()
 }
@@ -69,7 +69,7 @@ final class ScheduledSessionsView: UIView {
 extension ScheduledSessionsView: ScheduledSessionsPresenterToViewProtocol {
     var selectedWeekday: Int { segmentedControl.selectedSegmentIndex.advanced(by: 1) }
     
-    var selectedDayString: String { DayOfWeek.allCases[selectedWeekdayIndex].longDescription }
+    var selectedWeekdayString: String { DayOfWeek.allCases[selectedWeekdayIndex].longDescription }
     
     func loadView() {
         backgroundColor = .systemBackground

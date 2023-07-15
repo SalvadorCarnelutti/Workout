@@ -63,7 +63,7 @@ final class ScheduledSessionsPresenter: BaseViewController, EntityFetcher {
     
     private func showEmptyState() {
         configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: "No sessions set for \(viewScheduledSessions.selectedDayString)",
+                                                      text: "No sessions set for \(viewScheduledSessions.selectedWeekdayString)",
                                                       secondaryText: "Start adding from the Workouts tab")
     }
     

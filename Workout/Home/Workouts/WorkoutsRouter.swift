@@ -13,6 +13,7 @@ protocol WorkoutsPresenterToRouterProtocol: AnyObject {
     var presenter: WorkoutsRouterToPresenterProtocol? { get set }
     func pushAddWorkout()
     func pushEditWorkout(for workout: Workout)
+    func handleNotificationTap(for workout: Workout)
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -33,5 +34,13 @@ final class WorkoutsRouter: WorkoutsPresenterToRouterProtocol {
         
         let editWorkoutViewController = WorkoutConfigurator.resolveEdit(for: workout)
         presenter.navigationController?.pushViewController(editWorkoutViewController, animated: true)
+    }
+    
+    func handleNotificationTap(for workout: Workout) {
+        guard let presenter = presenter else { return }
+        
+        let editWorkoutViewController = WorkoutConfigurator.resolveEdit(for: workout)
+        presenter.navigationController?.pushViewController(editWorkoutViewController, animated: false)
+        editWorkoutViewController.handleNotificationTap(for: workout)
     }
 }
