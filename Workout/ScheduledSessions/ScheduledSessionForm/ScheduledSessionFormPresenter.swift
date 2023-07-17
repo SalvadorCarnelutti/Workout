@@ -63,7 +63,6 @@ final class ScheduledSessionFormPresenter: BaseViewController, EntityFetcher {
     }
 }
 
-
 // MARK: - ViewToPresenterProtocol
 extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProtocol {
     var completionString: String { "Edit" }
@@ -105,7 +104,10 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
     }
     
     func didChangeExerciseCount() {
-        if isEmpty { navigationController?.popViewController(animated: true) }
+        if isEmpty {
+            interactor.emptySessions()
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 

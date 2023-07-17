@@ -36,7 +36,6 @@
 		B4157A452A58747E0068B641 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A402A58747E0068B641 /* AppSettingsView.swift */; };
 		B4157A462A58747E0068B641 /* AppSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */; };
 		B4157A482A58749C0068B641 /* AppSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A472A58749C0068B641 /* AppSettingTableViewCell.swift */; };
-		B41D31A62A606C3100E75F94 /* HightlightAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D31A32A606C3100E75F94 /* HightlightAnimator.swift */; };
 		B41D31A72A606C3100E75F94 /* ShrinkPressableAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D31A42A606C3100E75F94 /* ShrinkPressableAnimator.swift */; };
 		B41D31A82A606C3100E75F94 /* PressableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D31A52A606C3100E75F94 /* PressableView.swift */; };
 		B42BCB2A2A33E106006FCEDE /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42BCB292A33E106006FCEDE /* ActivityIndicator.swift */; };
@@ -138,7 +137,6 @@
 		B4157A402A58747E0068B641 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsConfigurator.swift; sourceTree = "<group>"; };
 		B4157A472A58749C0068B641 /* AppSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingTableViewCell.swift; sourceTree = "<group>"; };
-		B41D31A32A606C3100E75F94 /* HightlightAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HightlightAnimator.swift; sourceTree = "<group>"; };
 		B41D31A42A606C3100E75F94 /* ShrinkPressableAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShrinkPressableAnimator.swift; sourceTree = "<group>"; };
 		B41D31A52A606C3100E75F94 /* PressableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressableView.swift; sourceTree = "<group>"; };
 		B42BCB292A33E106006FCEDE /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 		B41D31A22A606C1B00E75F94 /* PressableView */ = {
 			isa = PBXGroup;
 			children = (
-				B41D31A32A606C3100E75F94 /* HightlightAnimator.swift */,
 				B41D31A52A606C3100E75F94 /* PressableView.swift */,
 				B41D31A42A606C3100E75F94 /* ShrinkPressableAnimator.swift */,
 			);
@@ -737,7 +734,6 @@
 				B48B86F02A2BF63D007638C0 /* ExerciseFormConfigurator.swift in Sources */,
 				B410BFDC2A32085E00899BBC /* WorkoutFormPresenter.swift in Sources */,
 				B401E91E2A48F91A00D5A678 /* Workout.swift in Sources */,
-				B41D31A62A606C3100E75F94 /* HightlightAnimator.swift in Sources */,
 				B4F4E6962A43B4EF00E91D7C /* SessionsInteractor.swift in Sources */,
 				B4F4E6A22A461CA600E91D7C /* SessionFormView.swift in Sources */,
 				B410BFE32A321D2D00899BBC /* WorkoutFormModels.swift in Sources */,
@@ -880,7 +876,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -934,7 +930,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

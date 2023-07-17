@@ -12,9 +12,11 @@ protocol WorkoutPresenterToViewProtocol: UIView {
     var presenter: WorkoutViewToPresenterProtocol? { get set }
     func loadView()
     func reloadData()
+    func denyTap(at indexPath: IndexPath)
 }
 
 final class WorkoutView: UIView {
+    private var isAnimating = false
     // MARK: - Properties
     weak var presenter: WorkoutViewToPresenterProtocol?
     
@@ -36,6 +38,31 @@ final class WorkoutView: UIView {
             make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
+    
+    private func shakeCell(_ cell: UITableViewCell) {
+        guard !isAnimating else {
+            return
+        }
+        
+        isAnimating = true
+        
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+        feedbackGenerator.prepare()
+        
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.values = [-5.0, 5.0, -2.0, 2.0, 0.0]
+        animation.duration = 0.3
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            feedbackGenerator.impactOccurred()
+            self.isAnimating = false
+        }
+        
+        cell.layer.add(animation, forKey: "shakeAnimation")
+        
+        CATransaction.commit()
+    }
 }
 
 // MARK: - PresenterToViewProtocol
@@ -47,6 +74,10 @@ extension WorkoutView: WorkoutPresenterToViewProtocol {
     
     func reloadData() {
         tableView.reloadData()
+    }
+    
+    func denyTap(at indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) { shakeCell(cell) }
     }
 }
 

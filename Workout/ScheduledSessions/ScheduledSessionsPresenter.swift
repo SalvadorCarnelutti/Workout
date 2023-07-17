@@ -45,8 +45,8 @@ final class ScheduledSessionsPresenter: BaseViewController, EntityFetcher {
     
     // Because NSFetchedResultsController only tracks changes to its non relationship attributes, we must consider Workout's exercises count and time duration updates
     // This could be really inefficient if we had to update large volumes of data in a table view, but for this app's usage it's fine
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
         viewScheduledSessions.reloadData()
     }
     

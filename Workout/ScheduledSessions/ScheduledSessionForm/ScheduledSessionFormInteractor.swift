@@ -22,6 +22,7 @@ protocol ScheduledSessionFormPresenterToInteractorProtocol: AnyObject {
     var workoutName: String { get }
     func editSessionCompletionAction(for sessionFormOutput: SessionFormOutput)
     func editExerciseCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput)
+    func emptySessions()
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -55,5 +56,9 @@ final class ScheduledSessionFormInteractor: ScheduledSessionFormPresenterToInter
     
     func editExerciseCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
         exercise.update(with: formOutput)
+    }
+    
+    func emptySessions() {
+        workout.emptySessions()
     }
 }

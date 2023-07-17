@@ -43,4 +43,6 @@ extension Workout {
     func update(with name: String) {
         self.name = name
     }
+    
+    func emptySessions() { compactMappedSessions.forEach { $0.delete() } }
 }

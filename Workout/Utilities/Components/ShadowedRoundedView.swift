@@ -12,11 +12,16 @@ final class ShadowedRoundedView: PressableView {
     private static let cornerRadius: CGFloat = 4.0
     private static let shadowCornerRadius: CGFloat = 3.0
     
+    override var backgroundColor: UIColor? {
+        get { roundedForeground.backgroundColor }
+        set { roundedForeground.backgroundColor = newValue }
+    }
+    
     private lazy var roundedForeground: UIView = {
         let roundedForeground = UIView()
         addSubview(roundedForeground)
         roundedForeground.layer.cornerRadius = Self.cornerRadius
-        roundedForeground.backgroundColor = .systemBackground
+        roundedForeground.backgroundColor = .clear
         roundedForeground.clipsToBounds = true
         return roundedForeground
     }()
@@ -30,16 +35,16 @@ final class ShadowedRoundedView: PressableView {
     init(arrangedSubviews: [UIView]) {
         super.init(frame: .zero)
         pressableAnimator = ShrinkPressableAnimator()
-        arrangedSubviews.forEach { roundedForeground.addSubview($0) }
+        arrangedSubviews.forEach { addSubviewToForeground($0) }
         setupConstraints()
+    }
+    
+    func addSubviewToForeground(_ view: UIView) {
+        roundedForeground.addSubview(view)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setForegroundcolor(_ color: UIColor) {
-        roundedForeground.backgroundColor = color
     }
     
     private func setupConstraints() {

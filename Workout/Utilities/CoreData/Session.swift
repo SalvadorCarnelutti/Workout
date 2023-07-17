@@ -13,7 +13,6 @@ extension Session {
     var workoutName: String? { workout?.name }
     var longFormattedTimedExercisesDurationString: String? { workout?.longFormattedTimedExercisesDurationString }
     
-    
     var formattedStartsAt: String {
         guard let startsAt = startsAt else { return "" }
         
@@ -34,5 +33,9 @@ extension Session {
     func update(with formOutput: SessionFormOutput) {
         day = Int16(formOutput.day)
         startsAt = formOutput.startsAt
+    }
+    
+    func delete() {
+        managedObjectContext?.delete(self)
     }
 }

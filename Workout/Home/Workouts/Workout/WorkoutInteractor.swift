@@ -16,7 +16,9 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
     var timedExercisesCount: Int { get }
     var timedExercisesDuration: String? { get }
     var sessionsCount: Int { get }
+    var areSessionsEnabled: Bool { get }
     func editWorkoutName(with newName: String)
+    func emptySessionsIfNeeded()
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -48,7 +50,15 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
         workout.sessionsCount
     }
     
+    var areSessionsEnabled: Bool { exercisesCount > 0 }
+    
     func editWorkoutName(with newName: String) {
         workout.update(with: newName)
+    }
+    
+    func emptySessionsIfNeeded() {
+        if exercisesCount == 0 && sessionsCount > 0 {
+            workout.emptySessions()
+        }
     }
 }

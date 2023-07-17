@@ -15,7 +15,7 @@ final class WorkoutSettingTableViewCell: UITableViewCell {
                                                                          subheaderLabel,
                                                                          chevronImageView])
         contentView.addSubview(shadowedRoundedView)
-        shadowedRoundedView.setForegroundcolor(.systemGray6)
+        shadowedRoundedView.backgroundColor = .systemGray6
         return shadowedRoundedView
     }()
     
@@ -50,6 +50,13 @@ final class WorkoutSettingTableViewCell: UITableViewCell {
         imageView.image = .rightChevron
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private lazy var disabledOverlay: UIView = {
+        let view = UIView()
+        shadowedRoundedView.addSubviewToForeground(view)
+        view.backgroundColor = .lightGray.withAlphaComponent(0.5)
+        return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -98,11 +105,21 @@ final class WorkoutSettingTableViewCell: UITableViewCell {
             make.right.equalToSuperview().inset(10)
             make.height.equalTo(30)
         }
+        
+        disabledOverlay.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     func configure(with workoutSetting: WorkoutSetting) {
         settingImageView.image = workoutSetting.image
         headerLabel.text = workoutSetting.name
         subheaderLabel.text = workoutSetting.description()
+        displayAs(enabled: workoutSetting.isEnabled)
+    }
+    
+    private func displayAs(enabled: Bool) {
+        disabledOverlay.isHidden = enabled
+        contentView.isUserInteractionEnabled = enabled
     }
 }

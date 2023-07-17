@@ -14,8 +14,10 @@ struct WorkoutSetting {
     let image: UIImage
     var name: String
     var description: () -> String
+    var isEnabled: Bool
     
     mutating func updateName(with newName: String) { name = newName }
+    mutating func updateIsEnabled(with newStatus: Bool) { isEnabled = newStatus }
 }
 
 enum WorkoutSettingEnum {
@@ -44,19 +46,24 @@ final class WorkoutPresenter: BaseViewController {
     private lazy var workoutSettings: [WorkoutSetting] = [WorkoutSetting(type: .editName,
                                                                          image: .edit,
                                                                          name: interactor.workoutName,
-                                                                         description: editNameDescription),
+                                                                         description: editNameDescription,
+                                                                         isEnabled: true),
                                                           WorkoutSetting(type: .exercises,
                                                                          image: .exercise,
                                                                          name: "Exercises",
-                                                                         description: exerciseDescription),
+                                                                         description: exerciseDescription,
+                                                                         isEnabled: true),
                                                           WorkoutSetting(type: .sessions,
                                                                          image: .time,
                                                                          name: "Sessions",
-                                                                         description: sessionDescription)]
+                                                                         description: sessionDescription,
+                                                                         isEnabled: interactor.areSessionsEnabled)]
     
     // workoutName can change as well as exercisesCount and sessionsCount
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        interactor.emptySessionsIfNeeded()
+        updateSessionsSettingEnabledStatus()
         viewWorkout.reloadData()
     }
     
@@ -69,6 +76,14 @@ final class WorkoutPresenter: BaseViewController {
     
     func handleNotificationTap(for workout: Workout) {
         router.handleNotificationTap(for: workout)
+    }
+    
+    private func updateWorkoutName(with newName: String) {
+        workoutSettings[0].updateName(with: newName)
+    }
+    
+    private func updateSessionsSettingEnabledStatus() {
+        workoutSettings[2].updateIsEnabled(with: interactor.areSessionsEnabled)
     }
     
     private func setupNavigationBar() {
@@ -115,15 +130,20 @@ extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     
     func workoutSetting(at indexPath: IndexPath) -> WorkoutSetting { workoutSettings[indexPath.row] }
     
-    // TODO: Disable add sessions when exercises count is 0 (Also remove sessions if exercises reach count 0)
-    func didSelectRow(at indexPath: IndexPath) { router.handleWorkoutSettingRouting(for: workoutSetting(at: indexPath)) }
+    func didSelectRow(at indexPath: IndexPath) {
+        if workoutSettings[indexPath.row].isEnabled {
+            router.handleWorkoutSettingRouting(for: workoutSetting(at: indexPath))
+        } else {
+            viewWorkout.denyTap(at: indexPath)
+        }
+    }
 }
 
 // MARK: - RouterToPresenterProtocol
 extension WorkoutPresenter: WorkoutRouterToPresenterProtocol {
     func editWorkoutName(with newName: String) {
         interactor.editWorkoutName(with: newName)
-        workoutSettings[0].updateName(with: newName)
+        updateWorkoutName(with: newName)
         viewWorkout.reloadData()
     }
     
