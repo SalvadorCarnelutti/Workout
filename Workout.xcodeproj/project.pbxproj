@@ -104,6 +104,7 @@
 		B4FB81522A5BA9C30081F29C /* SessionToNotificationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */; };
 		B4FB81542A5C905F0081F29C /* ToggleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81532A5C905F0081F29C /* ToggleImageView.swift */; };
 		B4FB81572A5F45F90081F29C /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81562A5F45F90081F29C /* AppearanceManager.swift */; };
+		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +208,7 @@
 		B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionToNotificationMapper.swift; sourceTree = "<group>"; };
 		B4FB81532A5C905F0081F29C /* ToggleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImageView.swift; sourceTree = "<group>"; };
 		B4FB81562A5F45F90081F29C /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
+		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.release.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -378,8 +380,9 @@
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B4FB81552A5F45EE0081F29C /* AppearanceManager */,
 				B4FB814E2A59E8490081F29C /* NotificationManager */,
+				B4FB81552A5F45EE0081F29C /* AppearanceManager */,
+				B4FCB0352A64E789001C1F59 /* HapticsManager */,
 				B48B86F62A2D32B5007638C0 /* CoreData */,
 				B48B86F12A2BF76F007638C0 /* Components */,
 				B48B86D42A2A6B5A007638C0 /* Extensions */,
@@ -584,6 +587,14 @@
 			path = AppearanceManager;
 			sourceTree = "<group>";
 		};
+		B4FCB0352A64E789001C1F59 /* HapticsManager */ = {
+			isa = PBXGroup;
+			children = (
+				B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */,
+			);
+			path = HapticsManager;
+			sourceTree = "<group>";
+		};
 		EA77C3472D87BA35CD6BA8ED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */,
 				B401E9062A47686C00D5A678 /* DaySelectionView.swift in Sources */,
 				B410BFE02A32085E00899BBC /* WorkoutFormConfigurator.swift in Sources */,
 				B48B86E12A2BEDDF007638C0 /* ExercisesPresenter.swift in Sources */,

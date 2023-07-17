@@ -14,9 +14,11 @@ protocol AppSettingsPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
     var areNotificationsEnabled: Bool { get }
     var isDarkModeEnabled: Bool { get }
+    var areHapticsEnabled: Bool { get }
     func requestNotificationsSettings()
     func toggleNotificationsSetting()
     func toggleDarkModeSetting()
+    func toggleHapticsSetting()
 }
 
 // MARK: - PresenterToInteractorProtocol
@@ -25,6 +27,7 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     let managedObjectContext: NSManagedObjectContext
     private let notificationManager = NotificationManager.shared
     private let appearanceManager = AppearanceManager.shared
+    private let hapticsManager = HapticsManager.shared
     
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
@@ -33,6 +36,8 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     var areNotificationsEnabled: Bool { notificationManager.areNotificationsEnabled }
     
     var isDarkModeEnabled: Bool { appearanceManager.isDarkModeEnabled }
+    
+    var areHapticsEnabled: Bool { hapticsManager.areHapticsEnabled }
     
     func requestNotificationsSettings() {
         notificationManager.requestNotificationsSettings()
@@ -48,6 +53,10 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     
     func toggleDarkModeSetting() {
         appearanceManager.toggleDarkModeSetting()
+    }
+    
+    func toggleHapticsSetting() {
+        hapticsManager.toggleHapticsSetting()
     }
     
     private func scheduleLocalNotifications() {

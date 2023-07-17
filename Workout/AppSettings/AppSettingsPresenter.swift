@@ -38,7 +38,8 @@ final class AppSettingsPresenter: BaseViewController {
     var router: AppSettingsPresenterToRouterProtocol!
     
     private lazy var appSettings = [notificationsAppSetting,
-                                    darkModeAppSetting]
+                                    darkModeAppSetting,
+                                    hapticsAppSetting]
     
     override func loadView() {
         super.loadView()
@@ -73,6 +74,19 @@ final class AppSettingsPresenter: BaseViewController {
                           toggleAction: toggleDarkMode)
     }
     
+    private var hapticsAppSetting: AppSetting {
+        let isHapticsEnabled = interactor.areHapticsEnabled
+        
+        return AppSetting(isOn: isHapticsEnabled,
+                          toggleImageModel: ToggleImageModel(asDefault: isHapticsEnabled,
+                                                             defaultImage: .hapticsOff,
+                                                             defaultBackgroundColor: .systemGreen,
+                                                             alternateImage: .hapticsOn,
+                                                             alternateBackgroundColor: .systemGreen),
+                          name: "Haptics",
+                          toggleAction: toggleHaptics)
+    }
+    
     private func setupNavigationBar() {
         navigationItem.title = "Settings"
     }
@@ -83,6 +97,10 @@ final class AppSettingsPresenter: BaseViewController {
     
     private func toggleDarkMode() {
         interactor.toggleDarkModeSetting()
+    }
+    
+    private func toggleHaptics() {
+        interactor.toggleHapticsSetting()
     }
 }
 

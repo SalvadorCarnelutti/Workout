@@ -28,6 +28,7 @@ enum WorkoutSettingEnum {
 
 protocol WorkoutViewToPresenterProtocol: UIViewController {
     var workoutSettingsCount: Int { get }
+    var areHapticsEnabled: Bool { get }
     func workoutSetting(at indexPath: IndexPath) -> WorkoutSetting
     func didSelectRow(at indexPath: IndexPath)
 }
@@ -127,6 +128,8 @@ final class WorkoutPresenter: BaseViewController {
 // MARK: - ViewToPresenterProtocol
 extension WorkoutPresenter: WorkoutViewToPresenterProtocol {
     var workoutSettingsCount: Int { workoutSettings.count }
+    
+    var areHapticsEnabled: Bool { interactor.areHapticsEnabled }
     
     func workoutSetting(at indexPath: IndexPath) -> WorkoutSetting { workoutSettings[indexPath.row] }
     

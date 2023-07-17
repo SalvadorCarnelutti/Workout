@@ -33,4 +33,6 @@ extension UIImage {
     static var notificationsOn: UIImage { Self.unwrappedImage("bell.badge.fill").withTintColor(.systemYellow, renderingMode: .alwaysOriginal) }
     static var darkModeOff: UIImage { Self.unwrappedImage("sun.max.fill").withTintColor(.systemYellow, renderingMode: .alwaysOriginal) }
     static var darkModeOn: UIImage { Self.unwrappedImage("moon.fill").withTintColor(.systemBackground, renderingMode: .alwaysOriginal) }
+    static var hapticsOff: UIImage { Self.unwrappedImage("iphone").withTintColor(.systemBackground, renderingMode: .alwaysOriginal) }
+    static var hapticsOn: UIImage { Self.unwrappedImage("iphone.radiowaves.left.and.right").withTintColor(.systemBackground, renderingMode: .alwaysOriginal) }
 }

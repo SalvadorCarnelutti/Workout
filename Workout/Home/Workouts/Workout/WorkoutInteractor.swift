@@ -17,6 +17,7 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
     var timedExercisesDuration: String? { get }
     var sessionsCount: Int { get }
     var areSessionsEnabled: Bool { get }
+    var areHapticsEnabled: Bool { get }
     func editWorkoutName(with newName: String)
     func emptySessionsIfNeeded()
 }
@@ -25,6 +26,7 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
 final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
     var workout: Workout
+    private let hapticsManager = HapticsManager.shared
     
     init(workout: Workout) {
         self.workout = workout
@@ -42,15 +44,13 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
         workout.timedExercisesCount
     }
     
-    var timedExercisesDuration: String? {
-        workout.longFormattedTimedExercisesDurationString
-    }
+    var timedExercisesDuration: String? { workout.longFormattedTimedExercisesDurationString }
     
-    var sessionsCount: Int {
-        workout.sessionsCount
-    }
+    var sessionsCount: Int { workout.sessionsCount }
     
     var areSessionsEnabled: Bool { exercisesCount > 0 }
+    
+    var areHapticsEnabled: Bool { hapticsManager.areHapticsEnabled }
     
     func editWorkoutName(with newName: String) {
         workout.update(with: newName)

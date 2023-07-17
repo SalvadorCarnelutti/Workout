@@ -40,7 +40,7 @@ final class WorkoutView: UIView {
     }
     
     private func shakeCell(_ cell: UITableViewCell) {
-        guard !isAnimating else {
+        guard let presenter = presenter, !isAnimating else {
             return
         }
         
@@ -55,7 +55,7 @@ final class WorkoutView: UIView {
         
         CATransaction.begin()
         CATransaction.setCompletionBlock {
-            feedbackGenerator.impactOccurred()
+            if presenter.areHapticsEnabled { feedbackGenerator.impactOccurred() }
             self.isAnimating = false
         }
         
