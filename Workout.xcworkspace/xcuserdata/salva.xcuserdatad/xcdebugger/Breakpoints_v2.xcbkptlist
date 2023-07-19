@@ -338,5 +338,116 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1833ED90-7E7D-43F5-9598-6EC0F824F0C5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Workout/AppSettings/AppSettingsInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "scheduleLocalNotifications(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1833ED90-7E7D-43F5-9598-6EC0F824F0C5 - 34fbff8b220b278e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Workout.AppSettingsInteractor.scheduleLocalNotifications(for: Workout.Workout) -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AppSettings/AppSettingsInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "1833ED90-7E7D-43F5-9598-6EC0F824F0C5 - 54514eb63c552404"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Workout.Session) -&gt; __C.UNNotificationRequest in Workout.AppSettingsInteractor.scheduleLocalNotifications(for: Workout.Workout) -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/AppSettings/AppSettingsInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9A061174-B5FE-443B-83BC-1F51A6C9F9EC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Workout/Utilities/Components/TabViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "managedObjectContextObjectsDidChange(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9A061174-B5FE-443B-83BC-1F51A6C9F9EC - 77cefa37c66c76b2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Workout.TabBarViewController.managedObjectContextObjectsDidChange(Foundation.Notification) -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/Utilities/Components/TabViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "596">
+               </Location>
+               <Location
+                  uuid = "9A061174-B5FE-443B-83BC-1F51A6C9F9EC - cc0026fa9ccdaf5e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.NSManagedObject) -&gt; Swift.Optional&lt;Workout.Session&gt; in Workout.TabBarViewController.managedObjectContextObjectsDidChange(Foundation.Notification) -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/Utilities/Components/TabViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "9A061174-B5FE-443B-83BC-1F51A6C9F9EC - e59d70f5e57cdfa6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Workout.Session) -&gt; __C.UNNotificationRequest in Workout.TabBarViewController.managedObjectContextObjectsDidChange(Foundation.Notification) -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/Utilities/Components/TabViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

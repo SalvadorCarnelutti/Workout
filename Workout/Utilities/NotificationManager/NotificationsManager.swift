@@ -1,14 +1,15 @@
 //
-//  NotificationManager.swift
+//  NotificationsManager.swift
 //  Workout
 //
 //  Created by Salvador on 7/8/23.
 //
 
 import UserNotifications
+import OSLog
 
-class NotificationManager {
-    static let shared = NotificationManager()
+class NotificationsManager {
+    static let shared = NotificationsManager()
     private let notificationCenter = UNUserNotificationCenter.current()
     private let notificationSettingsKey = "NotificationSettings"
     
@@ -25,68 +26,73 @@ class NotificationManager {
     }
     
     func scheduleNotifications(for notifications: [UNNotificationRequest]) {
+        Logger.notificationsManager.info("Scheduling \(notifications.count) new notifications")
         notifications.forEach { scheduleNotification(for: $0) }
     }
     
     func removeNotifications(for notificationIdentifiers: [String]) {
+        Logger.notificationsManager.info("Removing previous \(notificationIdentifiers.count) notifications")
         notificationIdentifiers.forEach { removeNotification(for: $0) }
     }
     
     func updateNotifications(for notifications: [UNNotificationRequest]) {
+        Logger.notificationsManager.info("Updating previous \(notifications.count) notifications")
         notifications.forEach { updateNotification(for: $0) }
     }
     
     private func removeAllNotifications() {
         notificationCenter.removeAllPendingNotificationRequests()
+        Logger.notificationsManager.info("All pending notifications removed")
     }
 
     private func enableNotifications() {
         areNotificationsEnabled = true
+        Logger.notificationsManager.info("User notifications setting turned on")
     }
     
     private func disableNotifications() {
         areNotificationsEnabled = false
+        Logger.notificationsManager.info("User notifications setting turned off")
         removeAllNotifications()
     }
     
-    private func scheduleNotification(for notification: UNNotificationRequest) {
+    func scheduleNotification(for notification: UNNotificationRequest) {
         guard areNotificationsEnabled else { return }
+        Logger.notificationsManager.info("Adding new notification of identifier \(notification.identifier)")
         
         // TODO: Handle error properly
         notificationCenter.add(notification) { error in
             if let error = error {
-                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
+                Logger.notificationsManager.error("Unable to add notification request of identifier \(notification.identifier): Error (\(error))")
+            } else {
+                Logger.notificationsManager.info("New notification of identifier \(notification.identifier), added successfully")
             }
         }
     }
     
-    private func removeNotification(for notificationIdentifier: String) {
+    func removeNotification(for notificationIdentifier: String) {
         guard areNotificationsEnabled else { return }
         
+        Logger.notificationsManager.info("Removing previous notification of identifier: \(notificationIdentifier)")
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
     }
     
-    private func updateNotification(for notification: UNNotificationRequest) {
+    func updateNotification(for notification: UNNotificationRequest) {
         guard areNotificationsEnabled else { return }
         
+        Logger.notificationsManager.info("Updating previous notification of identifier: \(notification.identifier)")
         removeNotification(for: notification.identifier)
         scheduleNotification(for: notification)
     }
 }
 
-extension NotificationManager {
+extension NotificationsManager {
     func requestNotificationsSettings() {
-        // Request Notification Settings
         notificationCenter.getNotificationSettings { notificationSettings in
-            switch notificationSettings.authorizationStatus {
-            case .notDetermined:
+            if case .notDetermined = notificationSettings.authorizationStatus {
                 self.requestAuthorization(completionHandler: { success in
-                    if success { self.toggleNotificationsSetting() }
+                    if success { self.enableNotifications() }
                 })
-            case .authorized:
-                self.enableNotifications()
-            default:
-                return
             }
         }
     }
@@ -96,7 +102,7 @@ extension NotificationManager {
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
             // TODO: Handle error handling
             if let error = error {
-                print("Request Authorization Failed (\(error), \(error.localizedDescription))")
+                print("Request authorization failed (\(error))")
             }
 
             completionHandler(success)

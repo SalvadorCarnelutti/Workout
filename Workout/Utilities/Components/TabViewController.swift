@@ -9,8 +9,9 @@ import UIKit
 import CoreData
 
 final class TabBarViewController: UITabBarController, BaseViewProtocol {
-    let coreDataManager = CoreDataManager.shared
-    let appearanceManager = AppearanceManager.shared
+    private let coreDataManager = CoreDataManager.shared
+    private let notificationsManager = NotificationsManager.shared
+    private let appearanceManager = AppearanceManager.shared
     
     private struct Constraints {
         static let ActivityIndicatorSize: CGFloat = 80
@@ -74,13 +75,42 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
         coreDataManager.loadPersistentContainer { [weak self] result in
             guard let self = self else { return }
             
-            self.hideLoader()
+            hideLoader()
             switch result {
             case .success:
-                self.setupTabs(managedObjectContext: self.coreDataManager.managedObjectContext)
+                let managedObjectContext = self.coreDataManager.managedObjectContext
+                setupTabs(managedObjectContext: managedObjectContext)
+                setupNotificationsHandling(managedObjectContext: managedObjectContext)
             case .failure:
                 presentErrorMessage()
             }
+        }
+    }
+    
+    private func setupNotificationsHandling(managedObjectContext: NSManagedObjectContext) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(managedObjectContextObjectsDidChange),
+                                       name: Notification.Name.NSManagedObjectContextObjectsDidChange,
+                                       object: managedObjectContext)
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+            let notificationRequestsToSchedule = inserts.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
+            notificationsManager.scheduleNotifications(for: notificationRequestsToSchedule)
+        }
+
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
+            let notificationRequestsToUpdate = updates.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
+            notificationsManager.updateNotifications(for: notificationRequestsToUpdate)
+        }
+
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
+            let notificationRequestsToRemove = deletes.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationIdentifier }
+            notificationsManager.removeNotifications(for: notificationRequestsToRemove)
         }
     }
     

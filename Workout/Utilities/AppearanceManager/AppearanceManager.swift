@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import OSLog
 
 enum AppearanceMode: String {
     case light
@@ -36,8 +37,10 @@ class AppearanceManager {
         switch selectedMode {
         case .light, .system:
             selectedMode = .dark
+            Logger.appearanceManager.info("Dark mode setting turned on")
         case .dark:
             selectedMode = .light
+            Logger.appearanceManager.info("Dark mode setting turned off")
         }
         
         updateAppearanceMode()
@@ -54,12 +57,15 @@ class AppearanceManager {
             case .light:
                 // Set the light appearance mode
                 window.overrideUserInterfaceStyle = .light
+                Logger.appearanceManager.info("App user interface style set to light mode")
             case .dark:
                 // Set the dark appearance mode
                 window.overrideUserInterfaceStyle = .dark
+                Logger.appearanceManager.info("App user interface style set to dark mode")
             case .system:
                 // Set the system appearance mode
                 window.overrideUserInterfaceStyle = .unspecified
+                Logger.appearanceManager.info("App user interface style set to unspecified mode")
             }
         }
     }

@@ -25,7 +25,7 @@ protocol AppSettingsPresenterToInteractorProtocol: AnyObject {
 final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     weak var presenter: BaseViewProtocol?
     let managedObjectContext: NSManagedObjectContext
-    private let notificationManager = NotificationManager.shared
+    private let notificationsManager = NotificationsManager.shared
     private let appearanceManager = AppearanceManager.shared
     private let hapticsManager = HapticsManager.shared
     
@@ -33,22 +33,19 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
         self.managedObjectContext = managedObjectContext
     }
     
-    var areNotificationsEnabled: Bool { notificationManager.areNotificationsEnabled }
+    var areNotificationsEnabled: Bool { notificationsManager.areNotificationsEnabled }
     
     var isDarkModeEnabled: Bool { appearanceManager.isDarkModeEnabled }
     
     var areHapticsEnabled: Bool { hapticsManager.areHapticsEnabled }
     
     func requestNotificationsSettings() {
-        notificationManager.requestNotificationsSettings()
+        notificationsManager.requestNotificationsSettings()
     }
     
     func toggleNotificationsSetting() {
-        notificationManager.toggleNotificationsSetting()
-        if areNotificationsEnabled {
-            scheduleLocalNotifications()
-            setupNotificationsHandling()
-        }
+        notificationsManager.toggleNotificationsSetting()
+        if areNotificationsEnabled { scheduleLocalNotifications() }
     }
     
     func toggleDarkModeSetting() {
@@ -65,7 +62,7 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
         managedObjectContext.performAndWait {
             do {
                 let workouts = try fetchRequest.execute()
-                workouts.forEach { scheduleLocalNotifications(for: $0) }
+                workouts.filter{ $0.sessionsCount > 0 }.forEach { scheduleLocalNotifications(for: $0) }
             } catch {
                 presenter?.presentErrorMessage()
             }
@@ -74,33 +71,6 @@ final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
     
     private func scheduleLocalNotifications(for workout: Workout) {
         let notificationRequests = workout.compactMappedSessions.map { SessionToNotificationMapper(session: $0).notificationRequest }
-        notificationManager.scheduleNotifications(for: notificationRequests)
-    }
-    
-    private func setupNotificationsHandling() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self,
-                                       selector: #selector(managedObjectContextObjectsDidChange),
-                                       name: Notification.Name.NSManagedObjectContextObjectsDidChange,
-                                       object: managedObjectContext)
-    }
-    
-    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
-        guard let userInfo = notification.userInfo else { return }
-
-        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-            let notificationRequestsToSchedule = inserts.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
-            notificationManager.scheduleNotifications(for: notificationRequestsToSchedule)
-        }
-
-        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
-            let notificationRequestsToUpdate = updates.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
-            notificationManager.updateNotifications(for: notificationRequestsToUpdate)
-        }
-
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
-            let notificationRequestsToRemove = deletes.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationIdentifier }
-            notificationManager.removeNotifications(for: notificationRequestsToRemove)
-        }
+        notificationsManager.scheduleNotifications(for: notificationRequests)
     }
 }

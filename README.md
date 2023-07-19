@@ -36,6 +36,7 @@ Project is created with:
 * SnapKit framework
 * CocoaPods dependency manager
 * WWDC 2023 UIContentUnavailableConfiguration
+* WWDC 2023 latest Logging iteration
 * WWDC 2021 UIButton.Configuration
 
 ## Design pattern chosen

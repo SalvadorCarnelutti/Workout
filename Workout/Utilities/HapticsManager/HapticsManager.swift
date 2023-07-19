@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 class HapticsManager {
     static let shared = HapticsManager()
@@ -20,5 +21,6 @@ class HapticsManager {
     
     func toggleHapticsSetting() {
         areHapticsEnabled.toggle()
+        Logger.hapticsManager.info("Haptics setting turned \(self.areHapticsEnabled ? "on" : "off")")
     }
 }
