@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import OSLog
 
 extension Exercise {
     var durationString: String? {
@@ -39,6 +40,7 @@ extension Exercise {
         sets = Int16(formOutput.sets)
         reps = Int16(formOutput.reps)
         self.workout = workout
+        Logger.coreData.info("New exercise \(self) added to managed object context")
     }
     
     func update(with formOutput: ExerciseFormOutput) {
@@ -46,5 +48,6 @@ extension Exercise {
         minutesDuration = Double(formOutput.minutesDuration ?? 0)
         sets = Int16(formOutput.sets)
         reps = Int16(formOutput.reps)
+        Logger.coreData.info("Exercise updated to \(self) in current managed object context")
     }
 }

@@ -8,6 +8,7 @@
 //
 import Foundation
 import CoreData
+import OSLog
 
 protocol WorkoutsPresenterToInteractorProtocol: AnyObject {
     var presenter: WorkoutsInteractorToPresenterProtocol? { get set }
@@ -26,6 +27,7 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
     
     func addCompletionAction(name: String) {
         let workout = Workout(context: managedObjectContext)
+        Logger.coreData.info("Adding new workout to managed object context")
         workout.setup(with: name)
         
         presenter?.workoutCreated(workout)

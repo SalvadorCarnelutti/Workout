@@ -108,8 +108,8 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
             notificationsManager.updateNotifications(for: notificationRequestsToUpdate)
         }
 
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
-            let notificationRequestsToRemove = deletes.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationIdentifier }
+        if let deletions = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
+            let notificationRequestsToRemove = deletions.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationIdentifier }
             notificationsManager.removeNotifications(for: notificationRequestsToRemove)
         }
     }

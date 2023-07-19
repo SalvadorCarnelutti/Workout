@@ -26,17 +26,20 @@ class NotificationsManager {
     }
     
     func scheduleNotifications(for notifications: [UNNotificationRequest]) {
+        // TODO: Update string according to count value
         Logger.notificationsManager.info("Scheduling \(notifications.count) new notifications")
         notifications.forEach { scheduleNotification(for: $0) }
     }
     
     func removeNotifications(for notificationIdentifiers: [String]) {
-        Logger.notificationsManager.info("Removing previous \(notificationIdentifiers.count) notifications")
+        // TODO: Update string according to count value
+        Logger.notificationsManager.info("Removing \(notificationIdentifiers.count) set notifications")
         notificationIdentifiers.forEach { removeNotification(for: $0) }
     }
     
     func updateNotifications(for notifications: [UNNotificationRequest]) {
-        Logger.notificationsManager.info("Updating previous \(notifications.count) notifications")
+        // TODO: Update string according to count value
+        Logger.notificationsManager.info("Updating \(notifications.count) set notifications")
         notifications.forEach { updateNotification(for: $0) }
     }
     
@@ -73,14 +76,14 @@ class NotificationsManager {
     func removeNotification(for notificationIdentifier: String) {
         guard areNotificationsEnabled else { return }
         
-        Logger.notificationsManager.info("Removing previous notification of identifier: \(notificationIdentifier)")
+        Logger.notificationsManager.info("Removing set notification of identifier: \(notificationIdentifier)")
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
     }
     
     func updateNotification(for notification: UNNotificationRequest) {
         guard areNotificationsEnabled else { return }
         
-        Logger.notificationsManager.info("Updating previous notification of identifier: \(notification.identifier)")
+        Logger.notificationsManager.info("Updating set notification of identifier: \(notification.identifier)")
         removeNotification(for: notification.identifier)
         scheduleNotification(for: notification)
     }
@@ -91,7 +94,12 @@ extension NotificationsManager {
         notificationCenter.getNotificationSettings { notificationSettings in
             if case .notDetermined = notificationSettings.authorizationStatus {
                 self.requestAuthorization(completionHandler: { success in
-                    if success { self.enableNotifications() }
+                    if success {
+                        self.enableNotifications()
+                        Logger.notificationsManager.info("User authorized notifications permission")
+                    } else {
+                        Logger.notificationsManager.info("User denied notifications permission")
+                    }
                 })
             }
         }

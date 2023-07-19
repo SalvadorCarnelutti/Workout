@@ -7,6 +7,7 @@
 //
 //
 import Foundation
+import OSLog
 
 protocol WorkoutPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
@@ -53,6 +54,7 @@ final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
     var areHapticsEnabled: Bool { hapticsManager.areHapticsEnabled }
     
     func editWorkoutName(with newName: String) {
+        Logger.coreData.info("Editing workout \(self.workout) in current managed object context")
         workout.update(with: newName)
     }
     

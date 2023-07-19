@@ -29,6 +29,8 @@ This is a fitness application to schedule workout sessions, with the capabilitie
 It's a fun project that actually has a functional use for myself as I have some stretching routines and some home workouts. The application can help me be a little more organized.
 	
 ## Technologies
+Xcode 15 was used for development of the application and the iOS Deployment is iOS 17.0 to make the most out of Apple's newest features.
+
 Project is created with:
 * VIPER design pattern
 * Core Data framework

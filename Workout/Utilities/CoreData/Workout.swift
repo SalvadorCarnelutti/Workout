@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import OSLog
 
 extension Workout {
     private var compactMappedExercises: [Exercise] { exercises?.compactMap { $0 as? Exercise } ?? [] }
@@ -38,10 +39,12 @@ extension Workout {
     func setup(with name: String) {
         uuid = UUID()
         self.name = name
+        Logger.coreData.info("New workout \(self) added to managed object context")
     }
     
-    func update(with name: String) {
-        self.name = name
+    func update(with newName: String) {
+        self.name = newName
+        Logger.coreData.info("Workout updated to \(self) in current managed object context")
     }
     
     func emptySessions() { compactMappedSessions.forEach { $0.delete() } }

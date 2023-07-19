@@ -7,6 +7,7 @@
 //
 //
 import CoreData
+import OSLog
 
 protocol SessionsPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
@@ -36,10 +37,12 @@ final class SessionsInteractor: SessionsPresenterToInteractorProtocol {
     
     func addCompletionAction(formOutput: SessionFormOutput) {
         let session = Session(context: managedObjectContext)
+        Logger.coreData.info("Adding new session to managed object context")
         session.setup(with: formOutput, for: workout)
     }
     
     func editCompletionAction(for session: Session, formOutput: SessionFormOutput) {
+        Logger.coreData.info("Editing session \(session) in current managed object context")
         session.update(with: formOutput)
     }
 }

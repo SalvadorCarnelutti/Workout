@@ -7,6 +7,7 @@
 //
 //
 import CoreData
+import OSLog
 
 protocol ExercisesPresenterToInteractorProtocol: AnyObject {
     var presenter: ExercisesInteractorToPresenterProtocol? { get set }
@@ -43,10 +44,12 @@ final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
         
         let exercise = Exercise(context: managedObjectContext)
         exercise.order = Int16(presenter.exercisesCount)
+        Logger.coreData.info("Adding new exercise to managed object context")
         exercise.setup(with: formOutput, for: workout)
     }
     
     func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
+        Logger.coreData.info("Editing exercise \(exercise) in current managed object context")
         exercise.update(with: formOutput)
     }
 }

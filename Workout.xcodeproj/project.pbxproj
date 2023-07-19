@@ -106,6 +106,7 @@
 		B4FB81572A5F45F90081F29C /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81562A5F45F90081F29C /* AppearanceManager.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
+		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -211,6 +212,7 @@
 		B4FB81562A5F45F90081F29C /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
 		EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.release.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -388,6 +390,7 @@
 				B48B86F62A2D32B5007638C0 /* CoreData */,
 				B48B86F12A2BF76F007638C0 /* Components */,
 				B48B86D42A2A6B5A007638C0 /* Extensions */,
+				B4FCB03A2A6826A4001C1F59 /* Protocols */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -598,6 +601,14 @@
 			path = HapticsManager;
 			sourceTree = "<group>";
 		};
+		B4FCB03A2A6826A4001C1F59 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		EA77C3472D87BA35CD6BA8ED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -798,6 +809,7 @@
 				B48B86D22A2A5D48007638C0 /* WorkoutsConfigurator.swift in Sources */,
 				B4157A432A58747E0068B641 /* AppSettingsRouter.swift in Sources */,
 				B4FB81502A59E8670081F29C /* NotificationsManager.swift in Sources */,
+				B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */,
 				B4B20EAC2A5631CF00314E1E /* UIColor.swift in Sources */,
 				B48B86FB2A2D34FC007638C0 /* ExerciseTableViewCell.swift in Sources */,
 				B401E90B2A47D1D000D5A678 /* Session.swift in Sources */,

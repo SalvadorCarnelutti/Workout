@@ -8,6 +8,7 @@
 //
 
 import CoreData
+import OSLog
 
 struct ScheduledSessionFormModel {
     let session: Session
@@ -55,6 +56,7 @@ final class ScheduledSessionFormInteractor: ScheduledSessionFormPresenterToInter
     }
     
     func editExerciseCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
+        Logger.coreData.info("Editing exercise \(exercise) in current managed object context")
         exercise.update(with: formOutput)
     }
     

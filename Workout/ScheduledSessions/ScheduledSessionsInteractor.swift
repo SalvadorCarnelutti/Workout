@@ -7,6 +7,7 @@
 //
 //
 import CoreData
+import OSLog
 
 protocol ScheduledSessionsPresenterToInteractorProtocol: AnyObject {
     var presenter: BaseViewProtocol? { get set }
@@ -24,6 +25,7 @@ final class ScheduledSessionsInteractor: ScheduledSessionsPresenterToInteractorP
     }
     
     func editCompletionAction(for session: Session, formOutput: SessionFormOutput) {
+        Logger.coreData.info("Editing session \(session) in current managed object context")
         session.update(with: formOutput)
     }
 }
