@@ -5,7 +5,7 @@
 //  Created by Salvador on 6/5/23.
 //
 
-import UIKit
+import Foundation
 
 extension String {
     var isNotEmpty: Bool {

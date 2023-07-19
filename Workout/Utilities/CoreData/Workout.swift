@@ -29,7 +29,9 @@ extension Workout {
     }
     
     var longFormattedTimedExercisesDurationString: String? {
-        Double(timedExercisesDuration).asLongFormattedDurationString
+        guard timedExercisesDuration > 0 else { return nil }
+        
+        return Double(timedExercisesDuration).asLongFormattedDurationString
     }
     
     var shortFormattedTimedExercisesDurationString: String? {

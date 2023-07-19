@@ -107,6 +107,7 @@
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
+		B4FCB0412A6861DA001C1F59 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0402A6861DA001C1F59 /* Array.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -213,6 +214,7 @@
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
+		B4FCB0402A6861DA001C1F59 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.release.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -405,6 +407,7 @@
 				B48B86D72A2A6C03007638C0 /* UITableViewCell.swift */,
 				B4A28E4C2A37826600FB74C3 /* UITableViewHeaderFooterView.swift */,
 				B410BFCF2A2E4EB200899BBC /* String.swift */,
+				B4FCB0402A6861DA001C1F59 /* Array.swift */,
 				B463343B2A5654C3007597B4 /* Double.swift */,
 				B401E9212A4937C500D5A678 /* Date.swift */,
 				B4FCB0382A6733D3001C1F59 /* Logger.swift */,
@@ -736,6 +739,7 @@
 				B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */,
 				B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */,
 				B401E9062A47686C00D5A678 /* DaySelectionView.swift in Sources */,
+				B4FCB0412A6861DA001C1F59 /* Array.swift in Sources */,
 				B410BFE02A32085E00899BBC /* WorkoutFormConfigurator.swift in Sources */,
 				B48B86E12A2BEDDF007638C0 /* ExercisesPresenter.swift in Sources */,
 				B48B86E42A2BEDDF007638C0 /* ExercisesView.swift in Sources */,

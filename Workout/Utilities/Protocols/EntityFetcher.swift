@@ -24,7 +24,7 @@ extension EntityFetcher {
     
     func deleteEntity(at indexPath: IndexPath) {
         let entity = entity(at: indexPath)
-        Logger.coreData.info("Deleting \(entity.self) \(entity) from current managed object context")
+        Logger.coreData.info("Deleting \(String(describing: type(of: entity)).lowercased()) \(entity) from current managed object context")
         entity.managedObjectContext?.delete(entity)
     }
     

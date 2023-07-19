@@ -100,17 +100,17 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
 
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
             let notificationRequestsToSchedule = inserts.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
-            notificationsManager.scheduleNotifications(for: notificationRequestsToSchedule)
+            if notificationRequestsToSchedule.isNotEmpty { notificationsManager.scheduleNotifications(for: notificationRequestsToSchedule) }
         }
 
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
             let notificationRequestsToUpdate = updates.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationRequest }
-            notificationsManager.updateNotifications(for: notificationRequestsToUpdate)
+            if notificationRequestsToUpdate.isNotEmpty { notificationsManager.updateNotifications(for: notificationRequestsToUpdate) }
         }
 
         if let deletions = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
             let notificationRequestsToRemove = deletions.compactMap { $0 as? Session }.map { SessionToNotificationMapper(session: $0).notificationIdentifier }
-            notificationsManager.removeNotifications(for: notificationRequestsToRemove)
+            if notificationRequestsToRemove.isNotEmpty { notificationsManager.removeNotifications(for: notificationRequestsToRemove) }
         }
     }
     

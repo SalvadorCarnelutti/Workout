@@ -268,10 +268,42 @@
             filePath = "Workout/Home/Workouts/WorkoutsPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "handleNotificationTap(for:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8075C158-0CFE-4931-8872-877622751E3C - c2c100106e1e6a94"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Workout.WorkoutsPresenter.handleNotificationTap(for: Swift.String) -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/Home/Workouts/WorkoutsPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "540">
+               </Location>
+               <Location
+                  uuid = "8075C158-0CFE-4931-8872-877622751E3C - c2c100106e1e6a94"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Workout.WorkoutsPresenter.handleNotificationTap(for: Swift.String) -&gt; ()"
+                  moduleName = "Workout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/salva/Desktop/Workout/Workout/Home/Workouts/WorkoutsPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "528">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -384,22 +416,6 @@
                   offsetFromSymbolStart = "224">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E183D7EB-B60E-4E79-9545-947A3AD530E4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Workout/ScheduledSessions/ScheduledSessionsPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "editCompletionAction(for:formOutput:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
