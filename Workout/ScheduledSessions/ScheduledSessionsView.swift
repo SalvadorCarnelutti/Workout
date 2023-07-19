@@ -47,7 +47,7 @@ final class ScheduledSessionsView: UIView {
     }
     
     private func selectCurrentDay() {
-        segmentedControl.selectedSegmentIndex = Date.weekdayIndex
+        segmentedControl.selectedSegmentIndex = Date.currentWeekdayIndex
     }
     
     private func setupConstraints() {

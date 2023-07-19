@@ -19,27 +19,22 @@ import Foundation
  */
 
 extension Date {
-    static var weekday: Int {
+    static var currentWeekday: Int {
         let calendar = Calendar.current
         let today = Date()
 
         return calendar.component(.weekday, from: today)
     }
     
-    static var weekdayIndex: Int {
+    static var currentWeekdayIndex: Int {
         let calendar = Calendar.current
         let today = Date()
 
         let weekday = calendar.component(.weekday, from: today)
 
-        // Adjust the weekday value to be in the range 0-6
-//        let adjustedWeekday = (weekday - calendar.firstWeekday + 7) % 7
+        // Adjust the currentWeekday value to be in the range 0-6
         let adjustedWeekday = (weekday - 1 + 7) % 7
         return adjustedWeekday
-    }
-    
-    static var firstWeekday: Int {
-        Calendar.current.firstWeekday
     }
     
     func formatAs(_ format: String) -> Date? {

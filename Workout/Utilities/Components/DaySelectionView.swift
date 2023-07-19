@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import OSLog
 
 enum DaySelectionViewStyle {
     case normal
@@ -37,6 +38,12 @@ final class DaySelectionView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func selectCurrentDay() {
+        Logger.daySelectionView.info("Selecting current day \(DayOfWeek(rawValue: Date.currentWeekday)!.longDescription) as day of week")
+        let currentDayButton = dayButtons[Date.currentWeekdayIndex]
+        currentDayButton.sendActions(for: .touchUpInside)
     }
     
     func selectDayOfWeek(_ dayOfWeek: DayOfWeek) {
@@ -73,14 +80,8 @@ final class DaySelectionView: UIView {
         return dayButton
     }
     
-    private func selectCurrentDay() {
-        let currentDayButton = dayButtons[Date.weekdayIndex]
-        currentDayButton.sendActions(for: .touchUpInside)
-    }
-    
     private func setupViews() {
         dayButtons.forEach { stackView.addArrangedSubview($0) }
-        selectCurrentDay()
         setupConstraints()
     }
     
@@ -92,10 +93,14 @@ final class DaySelectionView: UIView {
     
     @objc private func dayButtonTapped(_ sender: UIButton) {
         guard sender.tag != selectedDay?.rawValue else { return }
+        
+        Logger.daySelectionView.info("Selecting \(DayOfWeek(rawValue: sender.tag)!.longDescription) day of week")
 
         selectedDay = DayOfWeek(rawValue: sender.tag)
         for button in dayButtons {
             button.isSelected = button.tag == sender.tag
         }
+        
+        Logger.daySelectionView.info("Selected \(self.selectedDay!.longDescription) as day of week")
     }
 }

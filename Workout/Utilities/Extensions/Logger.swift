@@ -14,4 +14,5 @@ extension Logger {
     static let notificationsManager = Logger(subsystem: subsystem, category: "userNotifications")
     static let appearanceManager = Logger(subsystem: subsystem, category: "appearanceManager")
     static let hapticsManager = Logger(subsystem: subsystem, category: "hapticsManager")
+    static let daySelectionView = Logger(subsystem: subsystem, category: "daySelectionView")
 }

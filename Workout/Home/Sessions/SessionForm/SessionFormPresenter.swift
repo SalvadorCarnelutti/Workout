@@ -45,6 +45,8 @@ extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
     func viewLoaded() {
         if let sessionFormInput = interactor.formInput {
             viewSessionForm.fillSessionFields(with: sessionFormInput)
+        } else {
+            viewSessionForm.setDefaultDisplay()
         }
     }
         

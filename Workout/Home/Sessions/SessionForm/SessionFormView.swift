@@ -12,6 +12,7 @@ import SnapKit
 protocol SessionFormPresenterToViewProtocol: UIView {
     var presenter: SessionFormViewToPresenterProtocol? { get set }
     func loadView()
+    func setDefaultDisplay()
     func fillSessionFields(with sessionFormInput: SessionFormInput)
 }
 
@@ -94,6 +95,10 @@ extension SessionFormView: SessionFormPresenterToViewProtocol {
         backgroundColor = .systemBackground
         setupConstraints()
         presenter?.viewLoaded()
+    }
+    
+    func setDefaultDisplay() {
+        daySelectionView.selectCurrentDay()
     }
     
     func fillSessionFields(with sessionFormInput: SessionFormInput) {
