@@ -39,6 +39,8 @@ extension Session {
     }
     
     func delete() {
+        Logger.coreData.info("Deleting session \(self) from current managed object context")
         managedObjectContext?.delete(self)
+        Logger.coreData.info("Deleted session from current managed object context")
     }
 }
