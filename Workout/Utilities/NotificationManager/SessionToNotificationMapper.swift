@@ -16,9 +16,9 @@ struct SessionToNotificationMapper {
         let notificationContent = UNMutableNotificationContent()
         
         notificationContent.title = session.workoutName ?? ""
-        notificationContent.subtitle = "Your session is about to begin"
+        notificationContent.subtitle = String(localized: "Your session is about to begin")
         if let longFormattedTimedExercisesDurationString = session.longFormattedTimedExercisesDurationString {
-            notificationContent.body = "You'll need at least \(longFormattedTimedExercisesDurationString) to complete this workout"
+            notificationContent.body = String(localized: "You'll need at least \(longFormattedTimedExercisesDurationString) to complete this workout")
         }
         
         return notificationContent

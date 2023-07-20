@@ -11,6 +11,7 @@ import SnapKit
 protocol ValidatedTextFieldDelegate: AnyObject {
     func onValidChange(newValue: Bool)
 }
+
 class ValidatedFormField: UIView {
     // MARK: - Properties
     private let errorColor: UIColor = UIColor.red.withAlphaComponent(0.65)
@@ -23,8 +24,8 @@ class ValidatedFormField: UIView {
         return textField
     }()
     
-    private lazy var errorMessageLabel: UILabel = {
-        let label = UILabel()
+    private lazy var errorMessageLabel: MultilineLabel = {
+        let label = MultilineLabel()
         addSubview(label)
         label.textColor = errorColor
         label.text = errorMessage
@@ -85,11 +86,12 @@ class ValidatedFormField: UIView {
     
     private func setupConstraints() {
         validatedTextField.snp.makeConstraints { make in
-            make.left.top.right.equalToSuperview()
+            make.top.horizontalEdges.equalToSuperview()
         }
         
         errorMessageLabel.snp.makeConstraints { make in
             make.top.equalTo(validatedTextField.snp.bottom).offset(2)
+            make.horizontalEdges.equalTo(validatedTextField)
             make.bottom.equalToSuperview().inset(5)
         }
     }

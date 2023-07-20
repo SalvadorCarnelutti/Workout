@@ -42,9 +42,9 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
         let appSettingsTab = AppSettingsConfigurator.resolveFor(managedObjectContext: managedObjectContext)
         
         viewControllers = [
-            getNavigationController(for: workoutsTab, title: "Workouts", image: .list),
-            getNavigationController(for: scheduledSessionsTab, title: "Scheduled", image: .calendar),
-            getNavigationController(for: appSettingsTab, title: "Settings", image: .settings)
+            getNavigationController(for: workoutsTab, title: String(localized: "Workouts"), image: .list),
+            getNavigationController(for: scheduledSessionsTab, title: String(localized: "Scheduled"), image: .calendar),
+            getNavigationController(for: appSettingsTab, title: String(localized: "Settings"), image: .settings)
         ]
     }
     
@@ -131,7 +131,8 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
     }
     
     func presentErrorMessage() {
-        presentOKAlert(title: "Unexpected error occured", message: "There was an error loading your information")
+        presentOKAlert(title: String(localized: "Unexpected error occured"),
+                       message: String(localized: "There was an error loading your information"))
     }
     
     private func setupViews() {

@@ -22,7 +22,7 @@ class StackView: UIStackView {
     private func commonInit() {
         spacing = 10
         alignment = .fill
-        distribution = .fillEqually
+        distribution = .fill
     }
 }
 

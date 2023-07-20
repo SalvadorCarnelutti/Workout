@@ -61,7 +61,7 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
             return
         }
         
-        timeDurationLabel.text = "• Timed exercises: \(timedExercisesDurationString)"
+        timeDurationLabel.text = "• \(String(localized: "Timed exercises: \(timedExercisesDurationString)"))"
         timeDurationLabel.isHidden = false
     }
     
@@ -71,7 +71,7 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
         
         workoutNameLabel.text = "\(workoutName):"
         startsAtLabel.text = "• \(session.formattedStartsAt)"
-        exerciseCountLabel.text = "• \("exercises_set".localizedWithFormat(workout.exercisesCount))"
+        exerciseCountLabel.text = "• \("exerciseSet".localizedWithFormat(workout.exercisesCount))"
         configureTimeDurationLabel(with: workout)
     }
 }

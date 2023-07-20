@@ -58,13 +58,13 @@ final class ScheduledSessionsPresenter: BaseViewController, EntityFetcher {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Scheduled Sessions"
+        navigationItem.title = String(localized: "Scheduled Sessions")
     }
     
     private func showEmptyState() {
         configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: "No sessions set for \(viewScheduledSessions.selectedWeekdayString)",
-                                                      secondaryText: "Start adding from the Workouts tab")
+                                                      text: String(localized: "No sessions set for \(viewScheduledSessions.selectedWeekdayString)"),
+                                                      secondaryText: String(localized: "Start adding from the Workouts tab"))
     }
     
     private func updateContentUnavailableConfiguration() {

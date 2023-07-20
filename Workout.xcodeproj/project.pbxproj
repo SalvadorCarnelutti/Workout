@@ -82,7 +82,6 @@
 		B4B10AD12A2127BF00017AA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B10AD02A2127BF00017AA3 /* Assets.xcassets */; };
 		B4B10AD42A2127BF00017AA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B10AD22A2127BF00017AA3 /* LaunchScreen.storyboard */; };
 		B4B10ADD2A212C1700017AA3 /* Workout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4B10ADB2A212C1700017AA3 /* Workout.xcdatamodeld */; };
-		B4B20EA82A5329C900314E1E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B20EAA2A5329C900314E1E /* Localizable.stringsdict */; };
 		B4B20EAC2A5631CF00314E1E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B20EAB2A5631CF00314E1E /* UIColor.swift */; };
 		B4F4E6862A42675A00E91D7C /* WorkoutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E6812A42675A00E91D7C /* WorkoutPresenter.swift */; };
 		B4F4E6872A42675A00E91D7C /* WorkoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E6822A42675A00E91D7C /* WorkoutRouter.swift */; };
@@ -108,6 +107,7 @@
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
 		B4FCB0412A6861DA001C1F59 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0402A6861DA001C1F59 /* Array.swift */; };
+		B4FCB0432A68BF51001C1F59 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B4FCB0422A68BF51001C1F59 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,7 +189,6 @@
 		B4B10AD32A2127BF00017AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4B10AD52A2127BF00017AA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4B10ADC2A212C1700017AA3 /* Workout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Workout.xcdatamodel; sourceTree = "<group>"; };
-		B4B20EA92A5329C900314E1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4B20EAB2A5631CF00314E1E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = /Users/salva/Desktop/Workout/Workout/Utilities/Extensions/UIColor.swift; sourceTree = "<absolute>"; };
 		B4F4E6812A42675A00E91D7C /* WorkoutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPresenter.swift; sourceTree = "<group>"; };
 		B4F4E6822A42675A00E91D7C /* WorkoutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRouter.swift; sourceTree = "<group>"; };
@@ -215,6 +214,7 @@
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
 		B4FCB0402A6861DA001C1F59 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		B4FCB0422A68BF51001C1F59 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		EE388AD70767F45B2D7F6698 /* Pods-Workout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workout.release.xcconfig"; path = "Target Support Files/Pods-Workout/Pods-Workout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -507,7 +507,7 @@
 				B48B86D32A2A6B53007638C0 /* Utilities */,
 				B4B10AC72A2127BF00017AA3 /* AppDelegate.swift */,
 				B4B10AC92A2127BF00017AA3 /* SceneDelegate.swift */,
-				B4B20EAA2A5329C900314E1E /* Localizable.stringsdict */,
+				B4FCB0422A68BF51001C1F59 /* Localizable.xcstrings */,
 				B4B10ADB2A212C1700017AA3 /* Workout.xcdatamodeld */,
 				B4B10AD02A2127BF00017AA3 /* Assets.xcassets */,
 				B4B10AD22A2127BF00017AA3 /* LaunchScreen.storyboard */,
@@ -665,6 +665,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = B4B10ABB2A2127BF00017AA3;
 			productRefGroup = B4B10AC52A2127BF00017AA3 /* Products */;
@@ -683,7 +684,7 @@
 			files = (
 				B4B10AD42A2127BF00017AA3 /* LaunchScreen.storyboard in Resources */,
 				B4B10AD12A2127BF00017AA3 /* Assets.xcassets in Resources */,
-				B4B20EA82A5329C900314E1E /* Localizable.stringsdict in Resources */,
+				B4FCB0432A68BF51001C1F59 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,14 +846,6 @@
 				B4B10AD32A2127BF00017AA3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		B4B20EAA2A5329C900314E1E /* Localizable.stringsdict */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B4B20EA92A5329C900314E1E /* en */,
-			);
-			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

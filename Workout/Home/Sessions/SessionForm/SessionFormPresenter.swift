@@ -34,12 +34,10 @@ final class SessionFormPresenter: BaseViewController {
 
 // MARK: - ViewToPresenterProtocol
 extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
-    var headerString: String {
-        "Session"
-    }
+    var headerString: String { String(localized: "Session") }
     
     var completionString: String {
-        interactor.formStyle == .add ? "Add" : "Edit"
+        interactor.formStyle == .add ? String(localized: "Add") : String(localized: "Edit")
     }
     
     func viewLoaded() {

@@ -57,7 +57,7 @@ final class WorkoutsPresenter: BaseViewController, EntityFetcher {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Workouts"
+        navigationItem.title = String(localized: "Workouts")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
                                                             image: UIImage.add,
                                                             target: self,
@@ -70,8 +70,8 @@ final class WorkoutsPresenter: BaseViewController, EntityFetcher {
     
     private func showEmptyState() {
         configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: "No workouts at the moment",
-                                                      secondaryText: "Start adding on the top-right")
+                                                      text: String(localized: "No workouts at the moment"),
+                                                      secondaryText: String(localized: "Start adding on the top-right"))
     }
     
     private func updateContentUnavailableConfiguration() {

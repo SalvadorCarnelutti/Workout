@@ -51,12 +51,12 @@ final class WorkoutPresenter: BaseViewController {
                                                                          isEnabled: true),
                                                           WorkoutSetting(type: .exercises,
                                                                          image: .exercise,
-                                                                         name: "Exercises",
+                                                                         name: String(localized: "Exercises"),
                                                                          description: exerciseDescription,
                                                                          isEnabled: true),
                                                           WorkoutSetting(type: .sessions,
                                                                          image: .time,
-                                                                         name: "Sessions",
+                                                                         name: String(localized: "Sessions"),
                                                                          description: sessionDescription,
                                                                          isEnabled: interactor.areSessionsEnabled)]
     
@@ -88,12 +88,10 @@ final class WorkoutPresenter: BaseViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Workout"
+        navigationItem.title = String(localized: "Workout")
     }
     
-    private func editNameDescription() -> String {
-        "Edit workout name"
-    }
+    private func editNameDescription() -> String { String(localized: "Edit workout name") }
     
     private func exerciseDescription() -> String {
         let exercisesCount = interactor.exercisesCount
@@ -102,11 +100,11 @@ final class WorkoutPresenter: BaseViewController {
                 
         switch (exercisesCount, timedExercisesCount) {
         case (0, _):
-            return "Start adding exercises"
+            return String(localized: "Start adding exercises")
         case(_, 0):
-            return "exercises_set".localizedWithFormat(exercisesCount)
+            return String(localized: "\(exercisesCount) set")
         default:
-            return "exercises_set_description".localizedWithFormat(exercisesCount, timedExercisesCount, timedExercisesDuration!)
+            return String(localized: "\(exercisesCount) set, where \(timedExercisesCount) timed for \(timedExercisesDuration!)")
         }
     }
     
@@ -116,11 +114,12 @@ final class WorkoutPresenter: BaseViewController {
 
         switch (exercisesCount, sessionsCount) {
         case(0, _):
-            return "Add at least one exercise"
+            return String(localized: "Add at least one exercise")
         case (_, 0):
-            return "Start adding sessions"
+            return String(localized: "Start adding sessions")
         default:
-            return "sessions_set".localizedWithFormat(sessionsCount)
+            // TODO: Change to sessions verbiage
+            return String(localized: "\(sessionsCount) set")
         }
     }
 }

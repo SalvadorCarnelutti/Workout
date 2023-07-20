@@ -36,20 +36,18 @@ final class WorkoutFormPresenter: BaseViewController {
 extension WorkoutFormPresenter: WorkoutFormViewToPresenterProtocol {
     var nameEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.nameValidationBlock,
-                         errorMessage: "Name can't be empty",
-                         placeholder: "Name")
+                         errorMessage: String(localized: "Name can't be empty"),
+                         placeholder: String(localized: "Name"))
     }
     
     var isButtonEnabled: Bool {
         interactor.formStyle == .edit
     }
     
-    var headerString: String {
-        "Workout"
-    }
+    var headerString: String { String(localized: "Workout") }
     
     var completionString: String {
-        interactor.formStyle == .add ? "Add" : "Edit"
+        interactor.formStyle == .add ? String(localized: "Add") : String(localized: "Edit")
     }
     
     func viewLoaded() {

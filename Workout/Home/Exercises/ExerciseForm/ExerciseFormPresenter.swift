@@ -41,38 +41,36 @@ final class ExerciseFormPresenter: BaseViewController {
 extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
     var nameEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.nameValidationBlock,
-                         errorMessage: "Name can't be empty",
-                         placeholder: "Name")
+                         errorMessage: String(localized: "Name can't be empty"),
+                         placeholder: String(localized: "Name"))
     }
     
     var durationEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.durationValidationBlock,
-                         errorMessage: "Duration must be positive",
-                         placeholder: "Minutes duration (Optional)")
+                         errorMessage: String(localized: "Duration must be positive"),
+                         placeholder: String(localized: "Minutes duration (Optional)"))
     }
     
     var setsEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.setsValidationBlock,
-                         errorMessage: "Set must be not empty and positive",
-                         placeholder: "Set count")
+                         errorMessage: String(localized: "Set must be not empty and positive"),
+                         placeholder: String(localized: "Set count"))
     }
     
     var repsEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.repsValidationBlock,
-                         errorMessage: "Rep must be not empty and positive",
-                         placeholder: "Rep count")
+                         errorMessage: String(localized: "Rep must be not empty and positive"),
+                         placeholder: String(localized: "Rep count"))
     }
     
     var isCompletionButtonEnabled: Bool {
         interactor.formStyle == .edit
     }
     
-    var headerString: String {
-        "Exercise"
-    }
+    var headerString: String { String(localized: "Exercise") }
     
     var completionButtonString: String {
-        interactor.formStyle == .add ? "Add" : "Edit"
+        interactor.formStyle == .add ? String(localized: "Add") : String(localized: "Edit")
     }
     
     func viewLoaded() {

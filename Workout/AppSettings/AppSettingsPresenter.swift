@@ -57,7 +57,7 @@ final class AppSettingsPresenter: BaseViewController {
                                                              defaultBackgroundColor: .systemRed,
                                                              alternateImage: .notificationsOn,
                                                              alternateBackgroundColor: .systemRed),
-                          name: "Notifications",
+                          name: String(localized: "Notifications"),
                           toggleAction: toggleNotificationsSetting)
     }
     
@@ -70,7 +70,7 @@ final class AppSettingsPresenter: BaseViewController {
                                                              defaultBackgroundColor: .systemBlue,
                                                              alternateImage: .darkModeOn,
                                                              alternateBackgroundColor: .label),
-                          name: "Dark Mode",
+                          name: String(localized: "Dark Mode"),
                           toggleAction: toggleDarkMode)
     }
     
@@ -83,12 +83,12 @@ final class AppSettingsPresenter: BaseViewController {
                                                              defaultBackgroundColor: .systemGreen,
                                                              alternateImage: .hapticsOn,
                                                              alternateBackgroundColor: .systemGreen),
-                          name: "Haptics",
+                          name: String(localized: "Haptics"),
                           toggleAction: toggleHaptics)
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Settings"
+        navigationItem.title = String(localized: "Settings")
     }
     
     private func toggleNotificationsSetting() {
