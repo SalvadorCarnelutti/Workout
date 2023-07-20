@@ -102,7 +102,7 @@ final class WorkoutPresenter: BaseViewController {
         case (0, _):
             return String(localized: "Start adding exercises")
         case(_, 0):
-            return String(localized: "\(exercisesCount) set")
+            return "exercisesSet".localizedWithFormat(exercisesCount)
         default:
             return String(localized: "\(exercisesCount) set, where \(timedExercisesCount) timed for \(timedExercisesDuration!)")
         }
@@ -118,8 +118,7 @@ final class WorkoutPresenter: BaseViewController {
         case (_, 0):
             return String(localized: "Start adding sessions")
         default:
-            // TODO: Change to sessions verbiage
-            return String(localized: "\(sessionsCount) set")
+            return "sessionsSet".localizedWithFormat(sessionsCount)
         }
     }
 }

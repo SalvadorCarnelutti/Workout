@@ -35,57 +35,57 @@ enum DayOfWeek: Int, CaseIterable {
     var longDescription: String {
         switch self {
         case .sunday:
-            return "Sunday"
+            return String(localized: "Sunday")
         case .monday:
-            return "Monday"
+            return String(localized: "Monday")
         case .tuesday:
-            return "Tuesday"
+            return String(localized: "Tuesday")
         case .wednesday:
-            return "Wednesday"
+            return String(localized: "Wednesday")
         case .thursday:
-            return "Thursday"
+            return String(localized: "Thursday")
         case .friday:
-            return "Friday"
+            return String(localized: "Friday")
         case .saturday:
-            return "Saturday"
+            return String(localized: "Saturday")
         }
     }
     
     var shortDescription: String {
         switch self {
         case .sunday:
-            return "Sun"
+            return String(localized: "Sun")
         case .monday:
-            return "Mon"
+            return String(localized: "Mon")
         case .tuesday:
-            return "Tue"
+            return String(localized: "Tue")
         case .wednesday:
-            return "Wed"
+            return String(localized: "Wed")
         case .thursday:
-            return "Thu"
+            return String(localized: "Thu")
         case .friday:
-            return "Fri"
+            return String(localized: "Fri")
         case .saturday:
-            return "Sat"
+            return String(localized: "Sat")
         }
     }
     
     var compactDescription: String {
         switch self {
         case .sunday:
-            return "S"
+            return String(localized: "compactSunday")
         case .monday:
-            return "M"
+            return String(localized: "compactMonday")
         case .tuesday:
-            return "T"
+            return String(localized: "compactTuesday")
         case .wednesday:
-            return "W"
+            return String(localized: "compactWednesday")
         case .thursday:
-            return "T"
+            return String(localized: "compactThursday")
         case .friday:
-            return "F"
+            return String(localized: "compactFriday")
         case .saturday:
-            return "S"
+            return String(localized: "compactSaturday")
         }
     }
 }
@@ -144,8 +144,8 @@ final class SessionsPresenter: BaseViewController, EntityFetcher {
     
     private func showEmptyState() {
         configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: "No sessions at the moment",
-                                                      secondaryText: "Start adding on the top-right")
+                                                      text: String(localized: "No sessions at the moment"),
+                                                      secondaryText: String(localized: "Start adding on the top-right"))
     }
     
     private func updateContentUnavailableConfiguration() {

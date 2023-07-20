@@ -71,7 +71,7 @@ final class ScheduledSessionTableViewCell: UITableViewCell {
         
         workoutNameLabel.text = "\(workoutName):"
         startsAtLabel.text = "• \(session.formattedStartsAt)"
-        exerciseCountLabel.text = "• \("exerciseSet".localizedWithFormat(workout.exercisesCount))"
+        exerciseCountLabel.text = "• \("exercisesSet".localizedWithFormat(workout.exercisesCount))"
         configureTimeDurationLabel(with: workout)
     }
 }

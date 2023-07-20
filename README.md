@@ -24,7 +24,8 @@ This is a fitness application to schedule workout sessions, with the capabilitie
 - Schedule recurring days and time of the week to tackle on your workouts through sessions
 - Browse through all your available sessions set for any given day of the week
 - Enable local notifications for when workout sessions are going to start
-- Switch between light mode and dark mode display.
+- Switch between light mode and dark mode display
+- Display system's language appropiately (There is currently English and Spanish support)
 
 It's a fun project that actually has a functional use for myself as I have some stretching routines and some home workouts. The application can help me be a little more organized.
 	
@@ -37,8 +38,9 @@ Project is created with:
 * UserNotifications framework
 * SnapKit framework
 * CocoaPods dependency manager
+* WWDC 2023 String Catalogs
 * WWDC 2023 UIContentUnavailableConfiguration
-* WWDC 2023 latest Logging iteration
+* WWDC 2023 latest iteration of Logging
 * WWDC 2021 UIButton.Configuration
 
 ## Design pattern chosen
