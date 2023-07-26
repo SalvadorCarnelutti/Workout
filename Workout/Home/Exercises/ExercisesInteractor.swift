@@ -10,7 +10,7 @@ import CoreData
 import OSLog
 
 protocol ExercisesPresenterToInteractorProtocol: AnyObject {
-    var presenter: ExercisesInteractorToPresenterProtocol? { get set }
+    var presenter: ExercisesInteractorToPresenterProtocol! { get set }
     var workout: Workout { get }
     var managedObjectContext: NSManagedObjectContext { get }
     var workoutName: String { get }
@@ -20,7 +20,7 @@ protocol ExercisesPresenterToInteractorProtocol: AnyObject {
 
 // MARK: - PresenterToInteractorProtocol
 final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
-    weak var presenter: ExercisesInteractorToPresenterProtocol?
+    weak var presenter: ExercisesInteractorToPresenterProtocol!
     let workout: Workout
     
     init(workout: Workout) {
@@ -31,9 +31,7 @@ final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
         workout = Workout(context: managedObjectContext)
     }
     
-    var managedObjectContext: NSManagedObjectContext {
-        workout.managedObjectContext ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    }
+    var managedObjectContext: NSManagedObjectContext { workout.managedObjectContext ?? NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType) }
     
     var workoutName: String {
         workout.name ?? ""

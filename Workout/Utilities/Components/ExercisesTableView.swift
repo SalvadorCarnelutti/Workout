@@ -28,7 +28,6 @@ final class ExercisesTableView: UITableView {
     }
     
     private func commonInit() {
-        dragInteractionEnabled = true
         register(ExerciseTableViewCell.self)
         estimatedRowHeight = UITableView.automaticDimension
     }

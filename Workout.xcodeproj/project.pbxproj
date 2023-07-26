@@ -65,7 +65,6 @@
 		B48B86E12A2BEDDF007638C0 /* ExercisesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86DC2A2BEDDF007638C0 /* ExercisesPresenter.swift */; };
 		B48B86E22A2BEDDF007638C0 /* ExercisesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86DD2A2BEDDF007638C0 /* ExercisesRouter.swift */; };
 		B48B86E32A2BEDDF007638C0 /* ExercisesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86DE2A2BEDDF007638C0 /* ExercisesInteractor.swift */; };
-		B48B86E42A2BEDDF007638C0 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86DF2A2BEDDF007638C0 /* ExercisesView.swift */; };
 		B48B86E52A2BEDDF007638C0 /* ExercisesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86E02A2BEDDF007638C0 /* ExercisesConfigurator.swift */; };
 		B48B86EC2A2BF63D007638C0 /* ExerciseFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86E72A2BF63D007638C0 /* ExerciseFormPresenter.swift */; };
 		B48B86ED2A2BF63D007638C0 /* ExerciseFormRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86E82A2BF63D007638C0 /* ExerciseFormRouter.swift */; };
@@ -103,6 +102,7 @@
 		B4FB81522A5BA9C30081F29C /* SessionToNotificationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */; };
 		B4FB81542A5C905F0081F29C /* ToggleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81532A5C905F0081F29C /* ToggleImageView.swift */; };
 		B4FB81572A5F45F90081F29C /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81562A5F45F90081F29C /* AppearanceManager.swift */; };
+		B4FBA6AF2A71C91E00849D6E /* ExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6AE2A71C91E00849D6E /* ExercisesViewController.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
@@ -187,7 +187,6 @@
 		B48B86DC2A2BEDDF007638C0 /* ExercisesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesPresenter.swift; sourceTree = "<group>"; };
 		B48B86DD2A2BEDDF007638C0 /* ExercisesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesRouter.swift; sourceTree = "<group>"; };
 		B48B86DE2A2BEDDF007638C0 /* ExercisesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesInteractor.swift; sourceTree = "<group>"; };
-		B48B86DF2A2BEDDF007638C0 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		B48B86E02A2BEDDF007638C0 /* ExercisesConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesConfigurator.swift; sourceTree = "<group>"; };
 		B48B86E72A2BF63D007638C0 /* ExerciseFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormPresenter.swift; sourceTree = "<group>"; };
 		B48B86E82A2BF63D007638C0 /* ExerciseFormRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormRouter.swift; sourceTree = "<group>"; };
@@ -227,6 +226,7 @@
 		B4FB81512A5BA9C30081F29C /* SessionToNotificationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionToNotificationMapper.swift; sourceTree = "<group>"; };
 		B4FB81532A5C905F0081F29C /* ToggleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImageView.swift; sourceTree = "<group>"; };
 		B4FB81562A5F45F90081F29C /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
+		B4FBA6AE2A71C91E00849D6E /* ExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesViewController.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
@@ -450,12 +450,11 @@
 		B48B86DB2A2BED8D007638C0 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
+				B4FBA6AD2A71C90A00849D6E /* View */,
 				B48B86E62A2BF628007638C0 /* ExerciseForm */,
-				B48B86F92A2D34F0007638C0 /* Cell */,
 				B48B86DC2A2BEDDF007638C0 /* ExercisesPresenter.swift */,
 				B48B86DD2A2BEDDF007638C0 /* ExercisesRouter.swift */,
 				B48B86DE2A2BEDDF007638C0 /* ExercisesInteractor.swift */,
-				B48B86DF2A2BEDDF007638C0 /* ExercisesView.swift */,
 				B48B86E02A2BEDDF007638C0 /* ExercisesConfigurator.swift */,
 			);
 			path = Exercises;
@@ -628,6 +627,15 @@
 				B4FB81562A5F45F90081F29C /* AppearanceManager.swift */,
 			);
 			path = AppearanceManager;
+			sourceTree = "<group>";
+		};
+		B4FBA6AD2A71C90A00849D6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B48B86F92A2D34F0007638C0 /* Cell */,
+				B4FBA6AE2A71C91E00849D6E /* ExercisesViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B4FCB0352A64E789001C1F59 /* HapticsManager */ = {
@@ -869,7 +877,6 @@
 				B4FCB0412A6861DA001C1F59 /* Array.swift in Sources */,
 				B410BFE02A32085E00899BBC /* WorkoutFormConfigurator.swift in Sources */,
 				B48B86E12A2BEDDF007638C0 /* ExercisesPresenter.swift in Sources */,
-				B48B86E42A2BEDDF007638C0 /* ExercisesView.swift in Sources */,
 				B440C5D22A328DA0008154CE /* ValidationEntity.swift in Sources */,
 				B4F4E6862A42675A00E91D7C /* WorkoutPresenter.swift in Sources */,
 				B440C5CE2A32851B008154CE /* ValidatedFormField.swift in Sources */,
@@ -937,6 +944,7 @@
 				B48B86F32A2BF77E007638C0 /* ValidatedTextField.swift in Sources */,
 				B4F4E6892A42675A00E91D7C /* WorkoutView.swift in Sources */,
 				B4FCB0722A6C3A2D001C1F59 /* BaseRouter.swift in Sources */,
+				B4FBA6AF2A71C91E00849D6E /* ExercisesViewController.swift in Sources */,
 				B44CD50A2A49F3030070ED15 /* ScheduledSessionTableViewCell.swift in Sources */,
 				B48B86D22A2A5D48007638C0 /* WorkoutsConfigurator.swift in Sources */,
 				B4157A432A58747E0068B641 /* AppSettingsRouter.swift in Sources */,

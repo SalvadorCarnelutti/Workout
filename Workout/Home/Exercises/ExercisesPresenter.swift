@@ -11,30 +11,34 @@ import UIKit
 import CoreData
 import SwiftUI
 
-protocol ExercisesViewToPresenterProtocol: UIViewController {
+protocol ExercisesViewToPresenterProtocol: AnyObject {
+    var view: ExercisesPresenterToViewProtocol! { get set }
+    var workoutName: String { get }
     var exercisesCount: Int { get }
     func viewLoaded()
+    func addExerciseTapped()
     func exercise(at indexPath: IndexPath) -> Exercise
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
     func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
-    func didChangeExerciseCount()
 }
 
-protocol ExercisesRouterToPresenterProtocol: UIViewController {
+protocol ExercisesRouterToPresenterProtocol: AnyObject {
     func addCompletionAction(formOutput: ExerciseFormOutput)
     func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput)
 }
 
-protocol ExercisesInteractorToPresenterProtocol: BaseViewProtocol {
+protocol ExercisesInteractorToPresenterProtocol: AnyObject {
     var exercisesCount: Int { get }
 }
 
-final class ExercisesPresenter: BaseViewController, EntityFetcher {
-    var viewExercises: ExercisesPresenterToViewProtocol!
-    var interactor: ExercisesPresenterToInteractorProtocol!
-    var router: ExercisesPresenterToRouterProtocol!
+typealias ExercisesPresenterProtocol = ExercisesViewToPresenterProtocol & ExercisesRouterToPresenterProtocol & ExercisesInteractorToPresenterProtocol
+
+final class ExercisesPresenter: EntityFetcher, ExercisesPresenterProtocol {
+    weak var view: ExercisesPresenterToViewProtocol!
+    let interactor: ExercisesPresenterToInteractorProtocol
+    let router: ExercisesPresenterToRouterProtocol
     
     lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
@@ -49,46 +53,27 @@ final class ExercisesPresenter: BaseViewController, EntityFetcher {
         return fetchedResultsController
     }()
     
-    override func loadView() {
-        super.loadView()
-        view = viewExercises
-        viewExercises.loadView()
-        setupNavigationBar()
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.title = interactor.workoutName
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
-                                                            image: UIImage.add,
-                                                            target: self,
-                                                            action: #selector(addExerciseTapped))
-    }
-    
-    @objc private func addExerciseTapped() {
-        router.presentAddExerciseForm()
-    }
-    
-    private func showEmptyState() {
-        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: String(localized: "No exercises at the moment"),
-                                                      secondaryText: String(localized: "Start adding on the top-right"))
-    }
-    
-    private func updateContentUnavailableConfiguration() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
-        })
+    init(interactor: ExercisesPresenterToInteractorProtocol, router: ExercisesPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        interactor.presenter = self
+        router.presenter = self
     }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
+extension ExercisesPresenter {
+    var workoutName: String { interactor.workoutName }
     var exercisesCount: Int { entitiesCount }
     
     func viewLoaded() {
-        setFetchedResultsControllerDelegate(viewExercises.fetchedResultsControllerDelegate)
+        setFetchedResultsControllerDelegate(view.fetchedResultsControllerDelegate)
         fetchEntities()
-        updateContentUnavailableConfiguration()
+    }
+    
+    func addExerciseTapped() {
+        router.presentAddExerciseForm()
     }
     
     func exercise(at indexPath: IndexPath) -> Exercise { entity(at: indexPath) }
@@ -106,10 +91,7 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
     }
     
     func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // TODO: Remove prints
         var exercises = fetchedEntities
-//        print(exercises.map { "Start: \($0.name!): \($0.order) \n" })
-//        print("From: \(sourceIndexPath.row) to \(destinationIndexPath.row)")
         
         let fromOffsets = IndexSet(integer: sourceIndexPath.row)
         var toOffset = destinationIndexPath.row
@@ -117,24 +99,17 @@ extension ExercisesPresenter: ExercisesViewToPresenterProtocol {
         
         exercises.move(fromOffsets: fromOffsets, toOffset: toOffset)
         
-//        print(exercises.map { "Before: \($0.name!): \($0.order) \n" })
         for (i, exercise) in exercises.enumerated() {
             exercise.order = Int16(exercises.count - i) - 1
         }
-        
-//        print(exercises.map { "End: \($0.name!): \($0.order) \n" })
-    }
-    
-    func didChangeExerciseCount() {
-        updateContentUnavailableConfiguration()
     }
 }
 
 // MARK: - InteractorToPresenterProtocol
-extension ExercisesPresenter: ExercisesInteractorToPresenterProtocol {}
+extension ExercisesPresenter {}
 
 // MARK: - RouterToPresenterProtocol
-extension ExercisesPresenter: ExercisesRouterToPresenterProtocol {
+extension ExercisesPresenter {
     func addCompletionAction(formOutput: ExerciseFormOutput) {
         interactor.addCompletionAction(formOutput: formOutput)
     }
