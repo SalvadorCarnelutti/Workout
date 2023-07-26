@@ -27,11 +27,6 @@ final class WorkoutsViewController: BaseTableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewIsAppearing(_ animated: Bool) {
-        super.viewIsAppearing(animated)
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -83,6 +78,7 @@ final class WorkoutsViewController: BaseTableViewController {
 // MARK: - PresenterToViewProtocol
 extension WorkoutsViewController: WorkoutsPresenterToViewProtocol {}
 
+// MARK: - UITableViewDelegate
 extension WorkoutsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { presenter.workoutsCount }
     
@@ -98,6 +94,7 @@ extension WorkoutsViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension WorkoutsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didSelectRow(at: indexPath)
@@ -110,6 +107,7 @@ extension WorkoutsViewController {
     }
 }
 
+// MARK: - NSFetchedResultsControllerDelegate
 extension WorkoutsViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
