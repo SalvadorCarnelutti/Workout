@@ -63,7 +63,7 @@ final class TabBarViewController: UITabBarController, BaseViewProtocol {
     func handleLocalNotificationTap(for identifier: String) {
         guard let tabControllers = viewControllers,
               let navigationController = tabControllers.first as? UINavigationController,
-              let workoutsPresenter = navigationController.viewControllers.first as? WorkoutsPresenter else { return }
+              let workoutsPresenter = navigationController.viewControllers.first as? WorkoutsViewController else { return }
         
         selectWorkoutsTab()
         navigationController.popToViewController(workoutsPresenter, animated: false)

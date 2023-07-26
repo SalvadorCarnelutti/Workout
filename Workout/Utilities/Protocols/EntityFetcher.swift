@@ -8,7 +8,7 @@
 import CoreData
 import OSLog
 
-protocol EntityFetcher: BaseViewController {
+protocol EntityFetcher: AnyObject {
     associatedtype Entity: NSManagedObject
     
     var fetchedResultsController: NSFetchedResultsController<Entity> { get set }
@@ -33,7 +33,33 @@ extension EntityFetcher {
         do {
             try fetchedResultsController.performFetch()
         } catch {
-            presentErrorMessage()
+//            presentErrorMessage()
         }
     }
 }
+
+//import CoreData
+//
+//class CustomFetchedResultsController<T: NSFetchRequestResult>: NSObject, NSFetchedResultsControllerDelegate {
+//    private let fetchedResultsController: NSFetchedResultsController<T>
+//    
+//    init(fetchRequest: NSFetchRequest<T>, managedObjectContext: NSManagedObjectContext) {
+//        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+//        super.init()
+//        fetchedResultsController.delegate = self
+//        
+//        // Perform initial fetch
+//        do {
+//            try fetchedResultsController.performFetch()
+//        } catch {
+//            // Handle fetch error
+//            print("Error performing fetch: \(error.localizedDescription)")
+//        }
+//    }
+//    
+//    // Add additional methods or convenience functions here
+//    
+//    // MARK: - NSFetchedResultsControllerDelegate methods
+//    
+//    // Implement delegate methods here if needed
+//}

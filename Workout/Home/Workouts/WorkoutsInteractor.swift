@@ -11,14 +11,14 @@ import CoreData
 import OSLog
 
 protocol WorkoutsPresenterToInteractorProtocol: AnyObject {
-    var presenter: WorkoutsInteractorToPresenterProtocol? { get set }
+    var presenter: WorkoutsInteractorToPresenterProtocol! { get set }
     var managedObjectContext: NSManagedObjectContext { get }
     func addCompletionAction(name: String)
 }
 
 // MARK: - PresenterToInteractorProtocol
 final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
-    weak var presenter: WorkoutsInteractorToPresenterProtocol?
+    var presenter: WorkoutsInteractorToPresenterProtocol!
     let managedObjectContext: NSManagedObjectContext
     
     init(managedObjectContext: NSManagedObjectContext) {
@@ -30,6 +30,6 @@ final class WorkoutsInteractor: WorkoutsPresenterToInteractorProtocol {
         Logger.coreData.info("Adding new workout to managed object context")
         workout.setup(with: name)
         
-        presenter?.workoutCreated(workout)
+        presenter.workoutCreated(workout)
     }
 }

@@ -33,12 +33,13 @@ extension Exercise {
         Int(order) + 1
     }
     
-    func setup(with formOutput: ExerciseFormOutput, for workout: Workout) {
+    func setup(with formOutput: ExerciseFormOutput, order: Int, for workout: Workout) {
         uuid = UUID()
         name = formOutput.name
         minutesDuration = Double(formOutput.minutesDuration ?? 0)
         sets = Int16(formOutput.sets)
         reps = Int16(formOutput.reps)
+        self.order = Int16(order)
         self.workout = workout
         Logger.coreData.info("New exercise \(self) added to managed object context")
     }

@@ -9,38 +9,32 @@
 import UIKit
 import CoreData
 
-protocol WorkoutsPresenterToRouterProtocol: AnyObject {
-    var presenter: WorkoutsRouterToPresenterProtocol? { get set }
+protocol WorkoutsPresenterToRouterProtocol: BaseRouter {
+    var presenter: WorkoutsRouterToPresenterProtocol! { get set }
     func pushAddWorkout()
     func pushEditWorkout(for workout: Workout)
     func handleNotificationTap(for workout: Workout)
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class WorkoutsRouter: WorkoutsPresenterToRouterProtocol {
+final class WorkoutsRouter: BaseRouter, WorkoutsPresenterToRouterProtocol {
     // MARK: - Properties
-    weak var presenter: WorkoutsRouterToPresenterProtocol?
+    weak var presenter: WorkoutsRouterToPresenterProtocol!
     
     func pushAddWorkout() {
-        guard let presenter = presenter else { return }
-        
         let addWorkoutViewController = WorkoutFormConfigurator.resolveAdd(completionAction: presenter.addCompletionAction)
         addWorkoutViewController.modalPresentationStyle = .popover
-        presenter.present(addWorkoutViewController, animated: true)
+        navigationController?.present(addWorkoutViewController, animated: true)
     }
 
     func pushEditWorkout(for workout: Workout) {
-        guard let presenter = presenter else { return }
-        
         let editWorkoutViewController = WorkoutConfigurator.resolveEdit(for: workout)
-        presenter.navigationController?.pushViewController(editWorkoutViewController, animated: true)
+        navigationController?.pushViewController(editWorkoutViewController, animated: true)
     }
     
     func handleNotificationTap(for workout: Workout) {
-        guard let presenter = presenter else { return }
-        
         let editWorkoutViewController = WorkoutConfigurator.resolveEdit(for: workout)
-        presenter.navigationController?.pushViewController(editWorkoutViewController, animated: false)
+        navigationController?.pushViewController(editWorkoutViewController, animated: false)
         editWorkoutViewController.handleNotificationTap(for: workout)
     }
 }

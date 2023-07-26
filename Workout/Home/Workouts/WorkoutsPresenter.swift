@@ -10,27 +10,39 @@
 import UIKit
 import CoreData
 
-protocol WorkoutsViewToPresenterProtocol: UIViewController {
+protocol WorkoutsViewToPresenterProtocol: AnyObject {
+    var view: WorkoutsPresenterToViewProtocol! { get set }
     var workoutsCount: Int { get }
     func viewLoaded()
+    func addWorkoutTapped()
     func workout(at indexPath: IndexPath) -> Workout
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
-    func didChangeWorkoutCount()
+    func handleNotificationTap(for identifier: String)
 }
 
-protocol WorkoutsInteractorToPresenterProtocol: BaseViewProtocol {
+protocol WorkoutsInteractorToPresenterProtocol: AnyObject {
     func workoutCreated(_ workout: Workout)
 }
 
-protocol WorkoutsRouterToPresenterProtocol: UIViewController {
+protocol WorkoutsRouterToPresenterProtocol: AnyObject {
     func addCompletionAction(name: String)
 }
 
-final class WorkoutsPresenter: BaseViewController, EntityFetcher {
-    var viewWorkout: WorkoutsPresenterToViewProtocol!
-    var interactor: WorkoutsPresenterToInteractorProtocol!
-    var router: WorkoutsPresenterToRouterProtocol!
+typealias WorkoutsPresenterProtocol = WorkoutsViewToPresenterProtocol & WorkoutsInteractorToPresenterProtocol & WorkoutsRouterToPresenterProtocol
+
+final class WorkoutsPresenter: EntityFetcher, WorkoutsPresenterProtocol {
+    weak var view: WorkoutsPresenterToViewProtocol!
+    let interactor: WorkoutsPresenterToInteractorProtocol
+    let router: WorkoutsPresenterToRouterProtocol
+    
+    init(interactor: WorkoutsPresenterToInteractorProtocol, router: WorkoutsPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        interactor.presenter = self
+        router.presenter = self
+    }
     
     lazy var fetchedResultsController: NSFetchedResultsController<Workout> = {
         let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
@@ -43,59 +55,27 @@ final class WorkoutsPresenter: BaseViewController, EntityFetcher {
         return fetchedResultsController
     }()
     
-    override func loadView() {
-        super.loadView()
-        view = viewWorkout
-        viewWorkout.loadView()
-        setupNavigationBar()
-    }
-    
     func handleNotificationTap(for identifier: String) {
         guard let scheduledWorkout = fetchedEntities.first(where: { $0.compactMappedSessions.contains { $0.uuidString == identifier } }) else { return }
         
         router.handleNotificationTap(for: scheduledWorkout)
     }
     
-    private func setupNavigationBar() {
-        navigationItem.title = String(localized: "Workouts")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
-                                                            image: UIImage.add,
-                                                            target: self,
-                                                            action: #selector(addWorkoutTapped))
-    }
-    
-    @objc private func addWorkoutTapped() {
+    func addWorkoutTapped() {
         router.pushAddWorkout()
-    }
-    
-    private func showEmptyState() {
-        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: String(localized: "No workouts at the moment"),
-                                                      secondaryText: String(localized: "Start adding on the top-right"))
-    }
-    
-    private func updateContentUnavailableConfiguration() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
-        })
     }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
-    var workoutsCount: Int {
-        fetchedResultsController.fetchedObjects?.count ?? 0
-    }
+extension WorkoutsPresenter {
+    var workoutsCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
     func viewLoaded() {
-        setFetchedResultsControllerDelegate(viewWorkout)
+        setFetchedResultsControllerDelegate(view)
         fetchEntities()
-        updateContentUnavailableConfiguration()
     }
     
-    func workout(at indexPath: IndexPath) -> Workout {
-        entity(at: indexPath)
-    }
+    func workout(at indexPath: IndexPath) -> Workout { entity(at: indexPath) }
     
     func deleteRow(at indexPath: IndexPath) {
         deleteEntity(at: indexPath)
@@ -105,21 +85,17 @@ extension WorkoutsPresenter: WorkoutsViewToPresenterProtocol {
         let workout = workout(at: indexPath)
         router.pushEditWorkout(for: workout)
     }
-    
-    func didChangeWorkoutCount() {
-        updateContentUnavailableConfiguration()
-    }
 }
 
 // MARK: - InteractorToPresenterProtocol
-extension WorkoutsPresenter: WorkoutsInteractorToPresenterProtocol {
+extension WorkoutsPresenter {
     func workoutCreated(_ workout: Workout) {
         router.pushEditWorkout(for: workout)
     }
 }
 
 // MARK: - RouterToPresenterProtocol
-extension WorkoutsPresenter: WorkoutsRouterToPresenterProtocol {
+extension WorkoutsPresenter {
     func addCompletionAction(name: String) {
         interactor.addCompletionAction(name: name)
     }
