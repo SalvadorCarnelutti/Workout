@@ -91,7 +91,6 @@
 		B4F4E6942A43B4EF00E91D7C /* SessionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E68F2A43B4EE00E91D7C /* SessionsPresenter.swift */; };
 		B4F4E6952A43B4EF00E91D7C /* SessionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E6902A43B4EE00E91D7C /* SessionsRouter.swift */; };
 		B4F4E6962A43B4EF00E91D7C /* SessionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E6912A43B4EE00E91D7C /* SessionsInteractor.swift */; };
-		B4F4E6972A43B4EF00E91D7C /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E6922A43B4EF00E91D7C /* SessionsView.swift */; };
 		B4F4E6982A43B4EF00E91D7C /* SessionsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E6932A43B4EF00E91D7C /* SessionsConfigurator.swift */; };
 		B4F4E69F2A461CA600E91D7C /* SessionFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E69A2A461CA600E91D7C /* SessionFormPresenter.swift */; };
 		B4F4E6A02A461CA600E91D7C /* SessionFormRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4E69B2A461CA600E91D7C /* SessionFormRouter.swift */; };
@@ -104,6 +103,7 @@
 		B4FB81572A5F45F90081F29C /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB81562A5F45F90081F29C /* AppearanceManager.swift */; };
 		B4FBA6AF2A71C91E00849D6E /* ExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6AE2A71C91E00849D6E /* ExercisesViewController.swift */; };
 		B4FBA6B22A71DDE500849D6E /* ExerciseFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6B12A71DDE500849D6E /* ExerciseFormViewController.swift */; };
+		B4FBA6B52A72B31500849D6E /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6B42A72B31500849D6E /* SessionsViewController.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
@@ -216,7 +216,6 @@
 		B4F4E68F2A43B4EE00E91D7C /* SessionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsPresenter.swift; sourceTree = "<group>"; };
 		B4F4E6902A43B4EE00E91D7C /* SessionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsRouter.swift; sourceTree = "<group>"; };
 		B4F4E6912A43B4EE00E91D7C /* SessionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsInteractor.swift; sourceTree = "<group>"; };
-		B4F4E6922A43B4EF00E91D7C /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
 		B4F4E6932A43B4EF00E91D7C /* SessionsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsConfigurator.swift; sourceTree = "<group>"; };
 		B4F4E69A2A461CA600E91D7C /* SessionFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFormPresenter.swift; sourceTree = "<group>"; };
 		B4F4E69B2A461CA600E91D7C /* SessionFormRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFormRouter.swift; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		B4FB81562A5F45F90081F29C /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		B4FBA6AE2A71C91E00849D6E /* ExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesViewController.swift; sourceTree = "<group>"; };
 		B4FBA6B12A71DDE500849D6E /* ExerciseFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormViewController.swift; sourceTree = "<group>"; };
+		B4FBA6B42A72B31500849D6E /* SessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
@@ -452,8 +452,8 @@
 		B48B86DB2A2BED8D007638C0 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
-				B4FBA6AD2A71C90A00849D6E /* View */,
 				B48B86E62A2BF628007638C0 /* ExerciseForm */,
+				B4FBA6AD2A71C90A00849D6E /* View */,
 				B48B86DC2A2BEDDF007638C0 /* ExercisesPresenter.swift */,
 				B48B86DD2A2BEDDF007638C0 /* ExercisesRouter.swift */,
 				B48B86DE2A2BEDDF007638C0 /* ExercisesInteractor.swift */,
@@ -590,12 +590,12 @@
 		B4F4E68E2A43B4D500E91D7C /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
+				B4FBA6B32A72B2EE00849D6E /* View */,
 				B4F4E6992A461C9700E91D7C /* SessionForm */,
 				B401E90C2A47D6AA00D5A678 /* Cell */,
 				B4F4E68F2A43B4EE00E91D7C /* SessionsPresenter.swift */,
 				B4F4E6902A43B4EE00E91D7C /* SessionsRouter.swift */,
 				B4F4E6912A43B4EE00E91D7C /* SessionsInteractor.swift */,
-				B4F4E6922A43B4EF00E91D7C /* SessionsView.swift */,
 				B4F4E6932A43B4EF00E91D7C /* SessionsConfigurator.swift */,
 			);
 			path = Sessions;
@@ -645,6 +645,14 @@
 			children = (
 				B4FBA6B12A71DDE500849D6E /* ExerciseFormViewController.swift */,
 				B48B86EA2A2BF63D007638C0 /* ExerciseFormView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B4FBA6B32A72B2EE00849D6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B4FBA6B42A72B31500849D6E /* SessionsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -899,7 +907,6 @@
 				B4F4E6982A43B4EF00E91D7C /* SessionsConfigurator.swift in Sources */,
 				B48B86DA2A2A6E17007638C0 /* UIImage.swift in Sources */,
 				B44CD5172A4B48B60070ED15 /* ExercisesTableView.swift in Sources */,
-				B4F4E6972A43B4EF00E91D7C /* SessionsView.swift in Sources */,
 				B4F4E6A12A461CA600E91D7C /* SessionFormInteractor.swift in Sources */,
 				B4F4E68D2A426C0C00E91D7C /* WorkoutSettingTableViewCell.swift in Sources */,
 				B401E91B2A48F83C00D5A678 /* ScheduledSessionsView.swift in Sources */,
@@ -974,6 +981,7 @@
 				B41D31A82A606C3100E75F94 /* PressableView.swift in Sources */,
 				B41D31A72A606C3100E75F94 /* ShrinkPressableAnimator.swift in Sources */,
 				B4F4E6952A43B4EF00E91D7C /* SessionsRouter.swift in Sources */,
+				B4FBA6B52A72B31500849D6E /* SessionsViewController.swift in Sources */,
 				B44CD5142A4B2FE30070ED15 /* ScheduledSessionFormView.swift in Sources */,
 				B4F4E69F2A461CA600E91D7C /* SessionFormPresenter.swift in Sources */,
 				B4FCB0702A6C38FA001C1F59 /* WorkoutsViewController.swift in Sources */,

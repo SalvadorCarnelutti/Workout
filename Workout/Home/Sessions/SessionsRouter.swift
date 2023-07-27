@@ -9,32 +9,31 @@
 import UIKit
 
 protocol SessionsPresenterToRouterProtocol: AnyObject {
-    var presenter: SessionsRouterToPresenterProtocol? { get set }
+    var presenter: SessionsRouterToPresenterProtocol! { get set }
     func presentAddSessionForm()
     func presentEditSessionForm(for session: Session)
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class SessionsRouter: SessionsPresenterToRouterProtocol {
+final class SessionsRouter: BaseRouter, SessionsPresenterToRouterProtocol {
     // MARK: - Properties
-    weak var presenter: SessionsRouterToPresenterProtocol?
+    weak var presenter: SessionsRouterToPresenterProtocol!
     
     func presentAddSessionForm() {
-        guard let presenter = presenter else { return }
-        
         let addSessionFormViewController = SessionFormConfigurator.resolveAdd(completionAction: presenter.addCompletionAction)
         addSessionFormViewController.modalPresentationStyle = .popover
-        presenter.present(addSessionFormViewController, animated: true)
+        navigationController?.present(addSessionFormViewController, animated: true)
     }
     
     func presentEditSessionForm(for session: Session) {
-        guard let presenter = presenter else { return }
         
         let editSessionFormViewController = SessionFormConfigurator.resolveEdit(for: session) { [weak self] formOutput in
-            self?.presenter?.editCompletionAction(for: session, formOutput: formOutput)
+            guard let presenter = self?.presenter else { return }
+            
+            presenter.editCompletionAction(for: session, formOutput: formOutput)
         }
         
         editSessionFormViewController.modalPresentationStyle = .popover
-        presenter.present(editSessionFormViewController, animated: true)
+        navigationController?.present(editSessionFormViewController, animated: true)
     }
 }

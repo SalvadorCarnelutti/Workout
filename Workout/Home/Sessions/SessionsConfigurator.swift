@@ -9,31 +9,15 @@
 import Foundation
 
 final class SessionsConfigurator {
-    static func injectDependencies(view: SessionsPresenterToViewProtocol,
-                                   interactor: SessionsPresenterToInteractorProtocol,
-                                   presenter: SessionsPresenter,
-                                   router: SessionsRouter) {
-        presenter.interactor = interactor
-        interactor.presenter = presenter
-
-        view.presenter = presenter
-        presenter.viewSessions = view
-        
-        router.presenter = presenter
-        presenter.router = router
-    }
-    
-    static func resolve(for workout: Workout) -> SessionsPresenter {
-        let presenter = SessionsPresenter()
-        let view = SessionsView()
+    static func resolve(for workout: Workout) -> SessionsViewController {
         let interactor = SessionsInteractor(workout: workout)
         let router = SessionsRouter()
+        
+        let presenter = SessionsPresenter(interactor: interactor, router: router)
+        
+        let view = SessionsViewController(presenter: presenter)
+        router.navigation = { view.navigationController }
 
-        Self.injectDependencies(view: view,
-                                interactor: interactor,
-                                presenter: presenter,
-                                router: router)
-
-        return presenter
+        return view
     }
 }

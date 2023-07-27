@@ -1,21 +1,23 @@
 //
-//  ExercisesViewController.swift
+//  SessionsViewController.swift
 //  Workout
 //
-//  Created by Salvador on 7/26/23.
+//  Created by Salvador on 7/27/23.
 //
 
 import UIKit
 import CoreData
 
-protocol ExercisesPresenterToViewProtocol: NSFetchedResultsControllerDelegate {
-    var presenter: ExercisesViewToPresenterProtocol! { get }
+protocol SessionsPresenterToViewProtocol: NSFetchedResultsControllerDelegate {
+    var presenter: SessionsViewToPresenterProtocol { get }
+    func loadView()
 }
 
-final class ExercisesViewController: BaseTableViewController, NSFetchedResultsControllerDelegate {
-    let presenter: ExercisesViewToPresenterProtocol!
+final class SessionsViewController: BaseTableViewController {
+    // MARK: - Properties
+    let presenter: SessionsViewToPresenterProtocol
     
-    init(presenter: ExercisesViewToPresenterProtocol) {
+    init(presenter: SessionsViewToPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         
@@ -34,22 +36,21 @@ final class ExercisesViewController: BaseTableViewController, NSFetchedResultsCo
     }
     
     private func configureTableView() {
-        tableView.register(ExerciseTableViewCell.self)
+        tableView.register(SessionTableViewCell.self)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.alwaysBounceVertical = false
-        tableView.dragDelegate = self
     }
     
-    @objc private func addExerciseTapped() {
-        presenter.addExerciseTapped()
+    @objc private func addSessionTapped() {
+        presenter.addSessionTapped()
     }
-
+    
     private func setupNavigationBar() {
         navigationItem.title = presenter.workoutName
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
                                                             image: UIImage.add,
                                                             target: self,
-                                                            action: #selector(addExerciseTapped))
+                                                            action: #selector(addSessionTapped))
     }
     
     private func setupViews() {
@@ -60,46 +61,40 @@ final class ExercisesViewController: BaseTableViewController, NSFetchedResultsCo
     
     private func showEmptyState() {
         configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: String(localized: "No exercises at the moment"),
+                                                      text: String(localized: "No sessions at the moment"),
                                                       secondaryText: String(localized: "Start adding on the top-right"))
     }
     
     private func updateContentUnavailableConfiguration() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.presenter.exercisesCount == 0 ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
+            self.presenter.sessionsCount == 0 ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
         })
     }
 }
 
 // MARK: - PresenterToViewProtocol
-extension ExercisesViewController: ExercisesPresenterToViewProtocol {}
+extension SessionsViewController: SessionsPresenterToViewProtocol {}
 
 // MARK: - UITableViewDelegate
-extension ExercisesViewController {
+extension SessionsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.exercisesCount
+        presenter.sessionsCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseTableViewCell.identifier, for: indexPath) as? ExerciseTableViewCell else {
-            ExerciseTableViewCell.assertCellFailure()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SessionTableViewCell.identifier, for: indexPath) as? SessionTableViewCell else {
+            SessionTableViewCell.assertCellFailure()
             return UITableViewCell()
         }
         
-        let exercise = presenter.exercise(at: indexPath)
-        cell.configure(with: exercise)
+        let session = presenter.session(at: indexPath)
+        cell.configure(with: session)
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard sourceIndexPath != destinationIndexPath else { return }
-        
-        presenter.moveRow(at: sourceIndexPath, to: destinationIndexPath)
     }
 }
 
 // MARK: - UITableViewDataSource
-extension ExercisesViewController {
+extension SessionsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didSelectRow(at: indexPath)
     }
@@ -110,20 +105,7 @@ extension ExercisesViewController {
 }
 
 // MARK: - UITableViewDragDelegate
-extension ExercisesViewController: UITableViewDragDelegate {
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard let presenter = presenter else {
-            return []
-        }
-        
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = presenter.exercise(at: indexPath)
-        return [dragItem]
-    }
-}
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension ExercisesViewController {
+extension SessionsViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
@@ -142,7 +124,6 @@ extension ExercisesViewController {
                     at indexPath: IndexPath?,
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?) {
-        
         switch (type) {
         // On add and remove operations, only the added/removed object is reported.
         case .insert:
@@ -153,13 +134,12 @@ extension ExercisesViewController {
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                presenter.didDeleteRow(at: indexPath)
                 updateContentUnavailableConfiguration()
             }
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
-            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ExerciseTableViewCell {
-                cell.configure(with: presenter.exercise(at: indexPath))
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? SessionTableViewCell {
+                cell.configure(with: presenter.session(at: indexPath))
             }
         // A move is reported when the changed attribute on the object is one of the sort descriptors used in the fetch request.
         // An update of the object is assumed in this case, but no separate update message is sent to the delegate.
@@ -171,9 +151,6 @@ extension ExercisesViewController {
             if let newIndexPath = newIndexPath {
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
-            
-            // Moving might also require to update other cells in the tableView
-            tableView.reloadData()
         default:
             return
         }

@@ -90,24 +90,36 @@ enum DayOfWeek: Int, CaseIterable {
     }
 }
 
-protocol SessionsViewToPresenterProtocol: UIViewController {
+protocol SessionsViewToPresenterProtocol: AnyObject {
+    var view: SessionsPresenterToViewProtocol! { get set }
+    var workoutName: String { get }
     var sessionsCount: Int { get }
     func viewLoaded()
+    func addSessionTapped()
     func session(at indexPath: IndexPath) -> Session
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
-    func didChangeSessionCount()
 }
 
-protocol SessionsRouterToPresenterProtocol: UIViewController {
+
+protocol SessionsRouterToPresenterProtocol: AnyObject {
     func addCompletionAction(formOutput: SessionFormOutput)
     func editCompletionAction(for exercise: Session, formOutput: SessionFormOutput)
 }
 
-final class SessionsPresenter: BaseViewController, EntityFetcher {
-    var viewSessions: SessionsPresenterToViewProtocol!
-    var interactor: SessionsPresenterToInteractorProtocol!
-    var router: SessionsPresenterToRouterProtocol!
+typealias SessionsPresenterProtocol = SessionsViewToPresenterProtocol & SessionsRouterToPresenterProtocol
+
+final class SessionsPresenter: SessionsPresenterProtocol, EntityFetcher {
+    weak var view: SessionsPresenterToViewProtocol!
+    let interactor: SessionsPresenterToInteractorProtocol
+    let router: SessionsPresenterToRouterProtocol
+    
+    init(interactor: SessionsPresenterToInteractorProtocol, router: SessionsPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        router.presenter = self
+    }
     
     lazy var fetchedResultsController: NSFetchedResultsController<Session> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
@@ -122,70 +134,32 @@ final class SessionsPresenter: BaseViewController, EntityFetcher {
         
         return fetchedResultsController
     }()
-    
-    override func loadView() {
-        super.loadView()
-        view = viewSessions
-        viewSessions.loadView()
-        setupNavigationBar()
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.title = interactor.workoutName
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
-                                                            image: UIImage.add,
-                                                            target: self,
-                                                            action: #selector(addSessionTapped))
-    }
-    
-    @objc private func addSessionTapped() {
-        router.presentAddSessionForm()
-    }
-    
-    private func showEmptyState() {
-        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: String(localized: "No sessions at the moment"),
-                                                      secondaryText: String(localized: "Start adding on the top-right"))
-    }
-    
-    private func updateContentUnavailableConfiguration() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
-        })
-    }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension SessionsPresenter: SessionsViewToPresenterProtocol {
-    var sessionsCount: Int {
-        entitiesCount
-    }
+extension SessionsPresenter {
+    var workoutName: String { interactor.workoutName }
+    
+    var sessionsCount: Int { entitiesCount }
     
     func viewLoaded() {
-        setFetchedResultsControllerDelegate(viewSessions)
+        setFetchedResultsControllerDelegate(view)
         fetchEntities()
-        updateContentUnavailableConfiguration()
     }
     
-    func session(at indexPath: IndexPath) -> Session {
-        entity(at: indexPath)
-    }
+    func addSessionTapped() { router.presentAddSessionForm() }
     
-    func deleteRow(at indexPath: IndexPath) {
-        deleteEntity(at: indexPath)
-    }
+    func session(at indexPath: IndexPath) -> Session { entity(at: indexPath) }
+    
+    func deleteRow(at indexPath: IndexPath) { deleteEntity(at: indexPath) }
     
     func didSelectRow(at indexPath: IndexPath) {
         router.presentEditSessionForm(for: session(at: indexPath))
     }
-    
-    func didChangeSessionCount() {
-        updateContentUnavailableConfiguration()
-    }
 }
 
 // MARK: - RouterToPresenterProtocol
-extension SessionsPresenter: SessionsRouterToPresenterProtocol {
+extension SessionsPresenter {
     func addCompletionAction(formOutput: SessionFormOutput) {
         interactor.addCompletionAction(formOutput: formOutput)
     }

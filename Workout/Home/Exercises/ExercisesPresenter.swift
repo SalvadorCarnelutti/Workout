@@ -68,7 +68,7 @@ extension ExercisesPresenter {
     var exercisesCount: Int { entitiesCount }
     
     func viewLoaded() {
-        setFetchedResultsControllerDelegate(view.fetchedResultsControllerDelegate)
+        setFetchedResultsControllerDelegate(view)
         fetchEntities()
     }
     

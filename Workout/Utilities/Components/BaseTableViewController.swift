@@ -63,6 +63,8 @@ class BaseTableViewController: UITableViewController, BaseViewProtocol {
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance // For iPhone small navigation bar in landscape.
         navigationController?.navigationBar.tintColor = .label // For navigationBar button items
+        
+        navigationController?.navigationBar.isTranslucent = false // Scroll views stop at navigation bar
     }
 }
 

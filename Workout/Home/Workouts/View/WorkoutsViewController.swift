@@ -48,8 +48,6 @@ final class WorkoutsViewController: BaseTableViewController {
                                                             image: UIImage.add,
                                                             target: self,
                                                             action: #selector(addWorkoutTapped))
-        
-        navigationController?.navigationBar.isTranslucent = false
     }
     
     private func configureTableView() {
