@@ -9,31 +9,35 @@
 
 import UIKit
 
-protocol SessionFormViewToPresenterProtocol: UIViewController {
+protocol SessionFormViewToPresenterProtocol: AnyObject {
+    var view: SessionFormPresenterToViewProtocol! { get set }
     var headerString: String { get }
     var completionString: String { get }
     func viewLoaded()
     func completionButtonTapped(for formOutput: SessionFormOutput)
 }
 
-protocol SessionFormRouterToPresenterProtocol: UIViewController {
+protocol SessionFormRouterToPresenterProtocol: AnyObject {
     func completionAction(for formOutput: SessionFormOutput)
 }
 
-final class SessionFormPresenter: BaseViewController {
-    var viewSessionForm: SessionFormPresenterToViewProtocol!
-    var interactor: SessionFormPresenterToInteractorProtocol!
-    var router: SessionFormPresenterToRouterProtocol!
+typealias SessionFormPresenterProtocol = SessionFormViewToPresenterProtocol & SessionFormRouterToPresenterProtocol
+
+final class SessionFormPresenter: SessionFormPresenterProtocol {
+    weak var view: SessionFormPresenterToViewProtocol!
+    let interactor: SessionFormPresenterToInteractorProtocol
+    let router: SessionFormPresenterToRouterProtocol
     
-    override func loadView() {
-        super.loadView()
-        view = viewSessionForm
-        viewSessionForm.loadView()
+    init(interactor: SessionFormPresenterToInteractorProtocol, router: SessionFormPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        router.presenter = self
     }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
+extension SessionFormPresenter {
     var headerString: String { String(localized: "Session") }
     
     var completionString: String {
@@ -42,9 +46,9 @@ extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
     
     func viewLoaded() {
         if let sessionFormInput = interactor.formInput {
-            viewSessionForm.fillSessionFields(with: sessionFormInput)
+            view.fillSessionFields(with: sessionFormInput)
         } else {
-            viewSessionForm.setDefaultDisplay()
+            view.setDefaultDisplay()
         }
     }
         
@@ -54,7 +58,7 @@ extension SessionFormPresenter: SessionFormViewToPresenterProtocol {
 }
 
 // MARK: - RouterToPresenterProtocol
-extension SessionFormPresenter: SessionFormRouterToPresenterProtocol {
+extension SessionFormPresenter {
     func completionAction(for formOutput: SessionFormOutput) {
         interactor.completionAction(formOutput)
     }

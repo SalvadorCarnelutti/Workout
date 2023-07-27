@@ -104,6 +104,8 @@
 		B4FBA6AF2A71C91E00849D6E /* ExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6AE2A71C91E00849D6E /* ExercisesViewController.swift */; };
 		B4FBA6B22A71DDE500849D6E /* ExerciseFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6B12A71DDE500849D6E /* ExerciseFormViewController.swift */; };
 		B4FBA6B52A72B31500849D6E /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6B42A72B31500849D6E /* SessionsViewController.swift */; };
+		B4FBA6B82A72BBC200849D6E /* DayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6B72A72BBC200849D6E /* DayOfWeek.swift */; };
+		B4FBA6BB2A72BBF900849D6E /* SessionFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6BA2A72BBF900849D6E /* SessionFormViewController.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
@@ -229,6 +231,8 @@
 		B4FBA6AE2A71C91E00849D6E /* ExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesViewController.swift; sourceTree = "<group>"; };
 		B4FBA6B12A71DDE500849D6E /* ExerciseFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormViewController.swift; sourceTree = "<group>"; };
 		B4FBA6B42A72B31500849D6E /* SessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
+		B4FBA6B72A72BBC200849D6E /* DayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeek.swift; sourceTree = "<group>"; };
+		B4FBA6BA2A72BBF900849D6E /* SessionFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFormViewController.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 		B48B86D32A2A6B53007638C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B4FBA6B62A72BBBD00849D6E /* Enums */,
 				B4FB814E2A59E8490081F29C /* NotificationManager */,
 				B4FB81552A5F45EE0081F29C /* AppearanceManager */,
 				B4FCB0352A64E789001C1F59 /* HapticsManager */,
@@ -590,9 +595,8 @@
 		B4F4E68E2A43B4D500E91D7C /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
-				B4FBA6B32A72B2EE00849D6E /* View */,
 				B4F4E6992A461C9700E91D7C /* SessionForm */,
-				B401E90C2A47D6AA00D5A678 /* Cell */,
+				B4FBA6B32A72B2EE00849D6E /* View */,
 				B4F4E68F2A43B4EE00E91D7C /* SessionsPresenter.swift */,
 				B4F4E6902A43B4EE00E91D7C /* SessionsRouter.swift */,
 				B4F4E6912A43B4EE00E91D7C /* SessionsInteractor.swift */,
@@ -605,10 +609,10 @@
 			isa = PBXGroup;
 			children = (
 				B401E9072A4773C700D5A678 /* Models */,
+				B4FBA6B92A72BBE600849D6E /* View */,
 				B4F4E69A2A461CA600E91D7C /* SessionFormPresenter.swift */,
 				B4F4E69B2A461CA600E91D7C /* SessionFormRouter.swift */,
 				B4F4E69C2A461CA600E91D7C /* SessionFormInteractor.swift */,
-				B4F4E69D2A461CA600E91D7C /* SessionFormView.swift */,
 				B4F4E69E2A461CA600E91D7C /* SessionFormConfigurator.swift */,
 			);
 			path = SessionForm;
@@ -652,7 +656,25 @@
 		B4FBA6B32A72B2EE00849D6E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B401E90C2A47D6AA00D5A678 /* Cell */,
 				B4FBA6B42A72B31500849D6E /* SessionsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B4FBA6B62A72BBBD00849D6E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				B4FBA6B72A72BBC200849D6E /* DayOfWeek.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		B4FBA6B92A72BBE600849D6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B4FBA6BA2A72BBF900849D6E /* SessionFormViewController.swift */,
+				B4F4E69D2A461CA600E91D7C /* SessionFormView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -909,6 +931,7 @@
 				B44CD5172A4B48B60070ED15 /* ExercisesTableView.swift in Sources */,
 				B4F4E6A12A461CA600E91D7C /* SessionFormInteractor.swift in Sources */,
 				B4F4E68D2A426C0C00E91D7C /* WorkoutSettingTableViewCell.swift in Sources */,
+				B4FBA6BB2A72BBF900849D6E /* SessionFormViewController.swift in Sources */,
 				B401E91B2A48F83C00D5A678 /* ScheduledSessionsView.swift in Sources */,
 				B463343C2A5654C3007597B4 /* Double.swift in Sources */,
 				B42BCB2C2A33E2BE006FCEDE /* BaseViewController.swift in Sources */,
@@ -969,6 +992,7 @@
 				B4157A432A58747E0068B641 /* AppSettingsRouter.swift in Sources */,
 				B4FB81502A59E8670081F29C /* NotificationsManager.swift in Sources */,
 				B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */,
+				B4FBA6B82A72BBC200849D6E /* DayOfWeek.swift in Sources */,
 				B4B20EAC2A5631CF00314E1E /* UIColor.swift in Sources */,
 				B48B86FB2A2D34FC007638C0 /* ExerciseTableViewCell.swift in Sources */,
 				B401E90B2A47D1D000D5A678 /* Session.swift in Sources */,

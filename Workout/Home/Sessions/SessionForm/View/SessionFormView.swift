@@ -9,22 +9,22 @@
 import UIKit
 import SnapKit
 
-protocol SessionFormPresenterToViewProtocol: UIView {
-    var presenter: SessionFormViewToPresenterProtocol? { get set }
-    func loadView()
-    func setDefaultDisplay()
-    func fillSessionFields(with sessionFormInput: SessionFormInput)
+protocol SessionFormViewDelegate: AnyObject {
+    var headerString: String { get }
+    var completionString: String { get }
+    func viewLoaded()
+    func completionButtonTapped(for formOutput: SessionFormOutput)
 }
 
 final class SessionFormView: UIView {
     // MARK: - Properties
-    weak var presenter: SessionFormViewToPresenterProtocol?
+    weak var delegate: SessionFormViewDelegate?
     
     private lazy var headerLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
         label.textAlignment = .center
-        label.text = presenter?.headerString
+        label.text = delegate?.headerString
         label.font = .systemFont(ofSize: 32, weight: .heavy)
         return label
     }()
@@ -49,7 +49,7 @@ final class SessionFormView: UIView {
     private lazy var completionButton: StyledButton = {
         let button = StyledButton()
         addSubview(button)
-        button.setTitle(presenter?.completionString, for: .normal)
+        button.setTitle(delegate?.completionString, for: .normal)
         button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
         return button
     }()
@@ -85,16 +85,16 @@ final class SessionFormView: UIView {
         let formOutput = SessionFormOutput(day: selectedDay,
                                            startsAt: startsAt)
         
-        presenter?.completionButtonTapped(for: formOutput)
+        delegate?.completionButtonTapped(for: formOutput)
     }
 }
 
 // MARK: - PresenterToViewProtocol
-extension SessionFormView: SessionFormPresenterToViewProtocol {
+extension SessionFormView {
     func loadView() {
         backgroundColor = .systemBackground
         setupConstraints()
-        presenter?.viewLoaded()
+        delegate?.viewLoaded()
     }
     
     func setDefaultDisplay() {

@@ -31,6 +31,10 @@ final class ExerciseFormViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         view = exerciseFormView
+        setupViews()
+    }
+    
+    private func setupViews() {
         exerciseFormView.delegate = self
         exerciseFormView.loadView()
     }
@@ -59,7 +63,9 @@ extension ExerciseFormViewController: ExerciseFormViewDelegate {
     
     var completionButtonString: String { presenter.completionButtonString }
     
-    func completionButtonTapped(for formOutput: ExerciseFormOutput) { presenter.completionButtonTapped(for: formOutput) }
+    func completionButtonTapped(for formOutput: ExerciseFormOutput) {
+        presenter.completionButtonTapped(for: formOutput)
+    }
     
     func viewLoaded() { presenter.viewLoaded() }
 }

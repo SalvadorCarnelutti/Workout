@@ -14,12 +14,12 @@ protocol SessionFormPresenterToRouterProtocol: AnyObject {
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class SessionFormRouter: SessionFormPresenterToRouterProtocol {
+final class SessionFormRouter: BaseRouter, SessionFormPresenterToRouterProtocol {
     // MARK: - Properties
     weak var presenter: SessionFormRouterToPresenterProtocol?
     
     func dismissView(formOutput: SessionFormOutput) {
-        presenter?.dismiss(animated: true) { [weak presenter] in
+        presentingViewController?.dismiss(animated: true) { [weak presenter] in
             presenter?.completionAction(for: formOutput)
         }
     }
