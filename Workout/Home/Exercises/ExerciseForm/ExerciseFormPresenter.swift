@@ -9,7 +9,8 @@
 
 import UIKit
 
-protocol ExerciseFormViewToPresenterProtocol: UIViewController {
+protocol ExerciseFormViewToPresenterProtocol: AnyObject {
+    var view: ExerciseFormPresenterToViewProtocol! { get set }
     var nameEntity: ValidationEntity { get }
     var durationEntity: ValidationEntity { get }
     var setsEntity: ValidationEntity { get }
@@ -21,24 +22,27 @@ protocol ExerciseFormViewToPresenterProtocol: UIViewController {
     func completionButtonTapped(for formOutput: ExerciseFormOutput)
 }
 
-protocol ExerciseFormRouterToPresenterProtocol: UIViewController {
+protocol ExerciseFormRouterToPresenterProtocol: AnyObject {
     func completionAction(for formOutput: ExerciseFormOutput)
 }
 
-final class ExerciseFormPresenter: BaseViewController {
-    var viewExerciseForm: ExerciseFormPresenterToViewProtocol!
-    var interactor: ExerciseFormPresenterToInteractorProtocol!
-    var router: ExerciseFormPresenterToRouterProtocol!
+typealias ExerciseFormPresenterProtocol = ExerciseFormViewToPresenterProtocol & ExerciseFormRouterToPresenterProtocol
+
+final class ExerciseFormPresenter: ExerciseFormPresenterProtocol {
+    weak var view: ExerciseFormPresenterToViewProtocol!
+    let interactor: ExerciseFormPresenterToInteractorProtocol
+    let router: ExerciseFormPresenterToRouterProtocol
     
-    override func loadView() {
-        super.loadView()
-        view = viewExerciseForm
-        viewExerciseForm.loadView()
+    init(interactor: ExerciseFormPresenterToInteractorProtocol, router: ExerciseFormPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        router.presenter = self
     }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
+extension ExerciseFormPresenter {
     var nameEntity: ValidationEntity {
         ValidationEntity(validationBlock: interactor.nameValidationBlock,
                          errorMessage: String(localized: "Name can't be empty"),
@@ -75,7 +79,7 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
     
     func viewLoaded() {
         if let exerciseFormInput = interactor.formInput {
-            viewExerciseForm.fillFormFields(formInput: exerciseFormInput)
+            view.fillFormFields(formInput: exerciseFormInput)
         }
     }
     
@@ -85,7 +89,7 @@ extension ExerciseFormPresenter: ExerciseFormViewToPresenterProtocol {
 }
 
 // MARK: - RouterToPresenterProtocol
-extension ExerciseFormPresenter: ExerciseFormRouterToPresenterProtocol {
+extension ExerciseFormPresenter {
     func completionAction(for formOutput: ExerciseFormOutput) {
         interactor.completionAction(formOutput)
     }

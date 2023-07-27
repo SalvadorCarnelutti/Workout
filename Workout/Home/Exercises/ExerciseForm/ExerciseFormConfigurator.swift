@@ -9,50 +9,31 @@
 import Foundation
 
 final class ExerciseFormConfigurator {
-    static func injectDependencies(view: ExerciseFormPresenterToViewProtocol,
-                                   interactor: ExerciseFormPresenterToInteractorProtocol,
-                                   presenter: ExerciseFormPresenter,
-                                   router: ExerciseFormRouter) {
-        presenter.interactor = interactor
-        interactor.presenter = presenter
-
-        view.presenter = presenter
-        presenter.viewExerciseForm = view
-        
-        router.presenter = presenter
-        presenter.router = router
-    }
-    
-    static func resolveAdd(completionAction: @escaping (ExerciseFormOutput) -> ()) -> ExerciseFormPresenter {
+    static func resolveAdd(completionAction: @escaping (ExerciseFormOutput) -> ()) -> ExerciseFormViewController {
         let formModel = ExerciseFormModel(formInput: nil, formStyle: .add, completionAction: completionAction)
         
-        let presenter = ExerciseFormPresenter()
-        let view = ExerciseFormView()
         let interactor = ExerciseFormInteractor(formModel: formModel)
         let router = ExerciseFormRouter()
+        
+        let presenter = ExerciseFormPresenter(interactor: interactor, router: router)
+        
+        let view = ExerciseFormViewController(presenter: presenter)
+        router.presentation = { view }
 
-        Self.injectDependencies(view: view,
-                                interactor: interactor,
-                                presenter: presenter,
-                                router: router)
-
-        return presenter
+        return view
     }
     
-    static func resolveEdit(for exercise: Exercise, completionAction: @escaping (ExerciseFormOutput) -> ()) -> ExerciseFormPresenter {
+    static func resolveEdit(for exercise: Exercise, completionAction: @escaping (ExerciseFormOutput) -> ()) -> ExerciseFormViewController {
         let formModel = ExerciseFormModel(formInput: ExerciseFormInput(exercise: exercise), formStyle: .edit, completionAction: completionAction)
-        
-        let presenter = ExerciseFormPresenter()
-        let view = ExerciseFormView()
+
         let interactor = ExerciseFormInteractor(formModel: formModel)
         let router = ExerciseFormRouter()
+        
+        let presenter = ExerciseFormPresenter(interactor: interactor, router: router)
+        
+        let view = ExerciseFormViewController(presenter: presenter)
+        router.presentation = { view }
 
-        Self.injectDependencies(view: view,
-                                interactor: interactor,
-                                presenter: presenter,
-                                router: router)
-
-        return presenter
+        return view
     }
-
 }

@@ -14,12 +14,12 @@ protocol ExerciseFormPresenterToRouterProtocol: AnyObject {
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class ExerciseFormRouter: ExerciseFormPresenterToRouterProtocol {
+final class ExerciseFormRouter: BaseRouter, ExerciseFormPresenterToRouterProtocol {
     // MARK: - Properties
     weak var presenter: ExerciseFormRouterToPresenterProtocol?
     
     func dismissView(formOutput: ExerciseFormOutput) {
-        presenter?.dismiss(animated: true) { [weak presenter] in
+        presentingViewController?.dismiss(animated: true) { [weak presenter] in
             presenter?.completionAction(for: formOutput)
         }
     }

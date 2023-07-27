@@ -7,17 +7,22 @@
 //
 //
 import UIKit
-import SnapKit
 
-protocol ExerciseFormPresenterToViewProtocol: UIView {
-    var presenter: ExerciseFormViewToPresenterProtocol? { get set }
-    func loadView()
-    func fillFormFields(formInput: ExerciseFormInput)
+protocol ExerciseFormViewDelegate: AnyObject {
+    var nameEntity: ValidationEntity { get }
+    var durationEntity: ValidationEntity { get }
+    var setsEntity: ValidationEntity { get }
+    var repsEntity: ValidationEntity { get }
+    var isCompletionButtonEnabled: Bool { get }
+    var headerString: String { get }
+    var completionButtonString: String { get }
+    func completionButtonTapped(for formOutput: ExerciseFormOutput)
+    func viewLoaded()
 }
 
 final class ExerciseFormView: UIView {
     // MARK: - Properties
-    weak var presenter: ExerciseFormViewToPresenterProtocol?
+    weak var delegate: ExerciseFormViewDelegate?
     private var requiredFormFields = [ValidatedFormField]()
     private var optionalFormFields = [ValidatedFormField]()
     
@@ -31,7 +36,7 @@ final class ExerciseFormView: UIView {
         let label = MultilineLabel()
         addSubview(label)
         label.textAlignment = .center
-        label.text = presenter?.headerString
+        label.text = delegate?.headerString
         label.font = .systemFont(ofSize: 32, weight: .heavy)
         return label
     }()
@@ -66,8 +71,8 @@ final class ExerciseFormView: UIView {
     private lazy var completionButton: StyledButton = {
         let button = StyledButton()
         addSubview(button)
-        button.isEnabled = presenter?.isCompletionButtonEnabled ?? false
-        button.setTitle(presenter?.completionButtonString, for: .normal)
+        button.isEnabled = delegate?.isCompletionButtonEnabled ?? false
+        button.setTitle(delegate?.completionButtonString, for: .normal)
         button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
         return button
     }()
@@ -103,21 +108,21 @@ final class ExerciseFormView: UIView {
                                             sets: sets,
                                             reps: reps)
         
-        presenter?.completionButtonTapped(for: formOutput)
+        delegate?.completionButtonTapped(for: formOutput)
     }
     
     private func setupFormFields() {
-        guard let presenter = presenter else { return }
+        guard let delegate = delegate else { return }
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange),
                                                name: UITextField.textDidChangeNotification,
                                                object: nil)
         
-        nameFormField.configure(with: presenter.nameEntity)
-        minutesDurationFormField.configure(with: presenter.durationEntity)
-        setsFormField.configure(with: presenter.setsEntity)
-        repsFormField.configure(with: presenter.repsEntity)
+        nameFormField.configure(with: delegate.nameEntity)
+        minutesDurationFormField.configure(with: delegate.durationEntity)
+        setsFormField.configure(with: delegate.setsEntity)
+        repsFormField.configure(with: delegate.repsEntity)
         
         requiredFormFields = [nameFormField,
                               setsFormField,
@@ -136,13 +141,12 @@ final class ExerciseFormView: UIView {
     }
 }
 
-// MARK: - PresenterToViewProtocol
-extension ExerciseFormView: ExerciseFormPresenterToViewProtocol {
+extension ExerciseFormView {
     func loadView() {
         backgroundColor = .systemBackground
         setupFormFields()
         setupConstraints()
-        presenter?.viewLoaded()
+        delegate?.viewLoaded()
     }
     
     func fillFormFields(formInput: ExerciseFormInput) {
