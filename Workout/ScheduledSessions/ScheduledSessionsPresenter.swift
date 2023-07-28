@@ -14,7 +14,7 @@ protocol ScheduledSessionsViewToPresenterProtocol: AnyObject {
     var view: ScheduledSessionsPresenterToViewProtocol! { get set }
     var sessionsCount: Int { get }
     func viewLoaded()
-    func didSelectDay(at: Int)
+    func didSelect(day: Int)
     func session(at indexPath: IndexPath) -> Session
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
@@ -60,7 +60,7 @@ extension ScheduledSessionsPresenter {
         fetchEntities()
     }
     
-    func didSelectDay(at day: Int) {
+    func didSelect(day: Int) {
         let predicate = NSPredicate(format: "day == %@", NSNumber(value: day))
         setFetchRequestPredicate(predicate)
         fetchEntities()

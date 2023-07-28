@@ -38,8 +38,6 @@ final class ExercisesInteractor: ExercisesPresenterToInteractorProtocol {
     }
     
     func addCompletionAction(formOutput: ExerciseFormOutput) {
-        guard let presenter = presenter else { return }
-        
         let exercise = Exercise(context: managedObjectContext)
         let exerciseOrder = presenter.exercisesCount
         Logger.coreData.info("Adding new exercise to managed object context")

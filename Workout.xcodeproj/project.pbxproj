@@ -52,7 +52,6 @@
 		B44CD5132A4B2FE30070ED15 /* ScheduledSessionFormInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44CD50E2A4B2FE30070ED15 /* ScheduledSessionFormInteractor.swift */; };
 		B44CD5142A4B2FE30070ED15 /* ScheduledSessionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44CD50F2A4B2FE30070ED15 /* ScheduledSessionFormView.swift */; };
 		B44CD5152A4B2FE30070ED15 /* ScheduledSessionFormConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44CD5102A4B2FE30070ED15 /* ScheduledSessionFormConfigurator.swift */; };
-		B44CD5172A4B48B60070ED15 /* ExercisesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44CD5162A4B48B60070ED15 /* ExercisesTableView.swift */; };
 		B463343A2A5634C9007597B4 /* ShadowedRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46334392A5634C9007597B4 /* ShadowedRoundedView.swift */; };
 		B463343C2A5654C3007597B4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463343B2A5654C3007597B4 /* Double.swift */; };
 		B48B86CE2A2A5D48007638C0 /* WorkoutsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */; };
@@ -109,6 +108,7 @@
 		B4FBA6C12A7374DC00849D6E /* WorkoutSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C02A7374DC00849D6E /* WorkoutSettingsViewController.swift */; };
 		B4FBA6C42A740A6300849D6E /* WorkoutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C32A740A6300849D6E /* WorkoutModels.swift */; };
 		B4FBA6C72A74133400849D6E /* ScheduledSessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */; };
+		B4FBA6CA2A74219100849D6E /* ScheduledSessionFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C92A74219100849D6E /* ScheduledSessionFormViewController.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
@@ -180,7 +180,6 @@
 		B44CD50E2A4B2FE30070ED15 /* ScheduledSessionFormInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionFormInteractor.swift; sourceTree = "<group>"; };
 		B44CD50F2A4B2FE30070ED15 /* ScheduledSessionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionFormView.swift; sourceTree = "<group>"; };
 		B44CD5102A4B2FE30070ED15 /* ScheduledSessionFormConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionFormConfigurator.swift; sourceTree = "<group>"; };
-		B44CD5162A4B48B60070ED15 /* ExercisesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableView.swift; sourceTree = "<group>"; };
 		B46334392A5634C9007597B4 /* ShadowedRoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowedRoundedView.swift; sourceTree = "<group>"; };
 		B463343B2A5654C3007597B4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		B48B86C92A2A5D48007638C0 /* WorkoutsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsPresenter.swift; sourceTree = "<group>"; };
@@ -239,6 +238,7 @@
 		B4FBA6C02A7374DC00849D6E /* WorkoutSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSettingsViewController.swift; sourceTree = "<group>"; };
 		B4FBA6C32A740A6300849D6E /* WorkoutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModels.swift; sourceTree = "<group>"; };
 		B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionsViewController.swift; sourceTree = "<group>"; };
+		B4FBA6C92A74219100849D6E /* ScheduledSessionFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionFormViewController.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
@@ -417,10 +417,10 @@
 		B44CD50B2A4B2F740070ED15 /* ScheduledSessionForm */ = {
 			isa = PBXGroup;
 			children = (
+				B4FBA6C82A74218100849D6E /* View */,
 				B44CD50C2A4B2FE30070ED15 /* ScheduledSessionFormPresenter.swift */,
 				B44CD50D2A4B2FE30070ED15 /* ScheduledSessionFormRouter.swift */,
 				B44CD50E2A4B2FE30070ED15 /* ScheduledSessionFormInteractor.swift */,
-				B44CD50F2A4B2FE30070ED15 /* ScheduledSessionFormView.swift */,
 				B44CD5102A4B2FE30070ED15 /* ScheduledSessionFormConfigurator.swift */,
 			);
 			path = ScheduledSessionForm;
@@ -499,7 +499,6 @@
 				B48B86F42A2D326F007638C0 /* MultilineLabel.swift */,
 				B440C5C62A3221AC008154CE /* StackView.swift */,
 				B401E90F2A48F5C200D5A678 /* TabViewController.swift */,
-				B44CD5162A4B48B60070ED15 /* ExercisesTableView.swift */,
 				B4FB81532A5C905F0081F29C /* ToggleImageView.swift */,
 			);
 			path = Components;
@@ -716,6 +715,15 @@
 				B44CD5082A49F2F70070ED15 /* Cell */,
 				B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */,
 				B401E9162A48F83C00D5A678 /* ScheduledSessionsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B4FBA6C82A74218100849D6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B4FBA6C92A74219100849D6E /* ScheduledSessionFormViewController.swift */,
+				B44CD50F2A4B2FE30070ED15 /* ScheduledSessionFormView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -969,7 +977,6 @@
 				B410BFD32A2E8EDF00899BBC /* ExerciseFormModels.swift in Sources */,
 				B4F4E6982A43B4EF00E91D7C /* SessionsConfigurator.swift in Sources */,
 				B48B86DA2A2A6E17007638C0 /* UIImage.swift in Sources */,
-				B44CD5172A4B48B60070ED15 /* ExercisesTableView.swift in Sources */,
 				B4F4E6A12A461CA600E91D7C /* SessionFormInteractor.swift in Sources */,
 				B4F4E68D2A426C0C00E91D7C /* WorkoutSettingTableViewCell.swift in Sources */,
 				B4FBA6BB2A72BBF900849D6E /* SessionFormViewController.swift in Sources */,
@@ -1016,6 +1023,7 @@
 				B48B86EE2A2BF63D007638C0 /* ExerciseFormInteractor.swift in Sources */,
 				B48B86E32A2BEDDF007638C0 /* ExercisesInteractor.swift in Sources */,
 				B4F4E68A2A42675A00E91D7C /* WorkoutSettingsConfigurator.swift in Sources */,
+				B4FBA6CA2A74219100849D6E /* ScheduledSessionFormViewController.swift in Sources */,
 				B48B86F82A2D32BE007638C0 /* Exercise.swift in Sources */,
 				B44CD5152A4B2FE30070ED15 /* ScheduledSessionFormConfigurator.swift in Sources */,
 				B43332462A57A9CD00A8F2DF /* UIViewController.swift in Sources */,

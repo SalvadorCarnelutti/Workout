@@ -10,7 +10,7 @@ import CoreData
 
 protocol ExercisesPresenterToViewProtocol: NSFetchedResultsControllerDelegate {}
 
-final class ExercisesViewController: BaseTableViewController, NSFetchedResultsControllerDelegate {
+final class ExercisesViewController: BaseTableViewController {
     let presenter: ExercisesViewToPresenterProtocol
     
     init(presenter: ExercisesViewToPresenterProtocol) {
@@ -117,7 +117,7 @@ extension ExercisesViewController: UITableViewDragDelegate {
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-extension ExercisesViewController {
+extension ExercisesViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }

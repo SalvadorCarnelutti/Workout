@@ -11,7 +11,9 @@ import UIKit
 import CoreData
 import SwiftUI
 
-protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
+protocol ScheduledSessionFormViewToPresenterProtocol: AnyObject {
+    var view: ScheduledSessionFormPresenterToViewProtocol! { get set }
+    var workoutName: String { get }
     var exercisesCount: Int { get }
     var completionString: String { get }
     func viewLoaded()
@@ -20,17 +22,19 @@ protocol ScheduledSessionFormViewToPresenterProtocol: UIViewController {
     func didSelectRow(at indexPath: IndexPath)
     func didDeleteRow(at indexPath: IndexPath)
     func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
-    func didChangeExerciseCount()
+    func editSessionCompletionAction(for sessionFormOutput: SessionFormOutput)
 }
 
-protocol ScheduledSessionFormRouterToPresenterProtocol: UIViewController {
+protocol ScheduledSessionFormRouterToPresenterProtocol: AnyObject {
     func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput)
 }
 
-final class ScheduledSessionFormPresenter: BaseViewController, EntityFetcher {
-    var viewScheduledSessionForm: ScheduledSessionFormPresenterToViewProtocol!
-    var interactor: ScheduledSessionFormPresenterToInteractorProtocol!
-    var router: ScheduledSessionFormPresenterToRouterProtocol!
+typealias ScheduledSessionFormPresenterProtocol = ScheduledSessionFormViewToPresenterProtocol & ScheduledSessionFormRouterToPresenterProtocol
+
+final class ScheduledSessionFormPresenter: ScheduledSessionFormPresenterProtocol, EntityFetcher {
+    weak var view: ScheduledSessionFormPresenterToViewProtocol!
+    let interactor: ScheduledSessionFormPresenterToInteractorProtocol
+    let router: ScheduledSessionFormPresenterToRouterProtocol
     
     lazy var fetchedResultsController: NSFetchedResultsController<Exercise> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
@@ -45,33 +49,35 @@ final class ScheduledSessionFormPresenter: BaseViewController, EntityFetcher {
         return fetchedResultsController
     }()
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        guard let sessionFormOutput = viewScheduledSessionForm.sessionFormOutput else { return }
-        interactor.editSessionCompletionAction(for: sessionFormOutput)
+    init(interactor: ScheduledSessionFormPresenterToInteractorProtocol, router: ScheduledSessionFormPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        router.presenter = self
     }
     
-    override func loadView() {
-        super.loadView()
-        view = viewScheduledSessionForm
-        setupNavigationBar()
-        viewScheduledSessionForm.loadView()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupNavigationBar() {
-        navigationItem.title = interactor.workoutName
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        guard let sessionFormOutput = viewScheduledSessionForm.sessionFormOutput else { return }
+//        interactor.editSessionCompletionAction(for: sessionFormOutput)
+//    }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProtocol {
-    var completionString: String { "Edit" }
+extension ScheduledSessionFormPresenter {
+    var workoutName: String { interactor.workoutName }
+    
+    var completionString: String { String(localized: "Edit") }
     
     var exercisesCount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
     
     func viewLoaded() {
-        viewScheduledSessionForm.fillSessionFields(with: interactor.formInput)
-        setFetchedResultsControllerDelegate(viewScheduledSessionForm.fetchedResultsControllerDelegate)
+        view.fillSessionFields(with: interactor.formInput)
+        setFetchedResultsControllerDelegate(view.fetchedResultsControllerDelegate)
         fetchEntities()
     }
     
@@ -87,6 +93,7 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
     
     func didDeleteRow(at indexPath: IndexPath) {
         Array(0..<indexPath.row).map { exercise(at: IndexPath(row: $0, section: 0)) }.forEach { $0.order -= 1 }
+        didChangeExerciseCount()
     }
     
     func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -106,13 +113,17 @@ extension ScheduledSessionFormPresenter: ScheduledSessionFormViewToPresenterProt
     func didChangeExerciseCount() {
         if isEmpty {
             interactor.emptySessions()
-            navigationController?.popViewController(animated: true)
+            router.popViewController()
         }
+    }
+    
+    func editSessionCompletionAction(for sessionFormOutput: SessionFormOutput) {
+        interactor.editSessionCompletionAction(for: sessionFormOutput)
     }
 }
 
 // MARK: - RouterToPresenterProtocol
-extension ScheduledSessionFormPresenter: ScheduledSessionFormRouterToPresenterProtocol {
+extension ScheduledSessionFormPresenter {
     func editCompletionAction(for exercise: Exercise, formOutput: ExerciseFormOutput) {
         interactor.editExerciseCompletionAction(for: exercise, formOutput: formOutput)
     }

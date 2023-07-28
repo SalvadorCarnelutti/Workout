@@ -92,12 +92,12 @@ extension ScheduledSessionsView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduledSessionTableViewCell.identifier, for: indexPath) as? ScheduledSessionTableViewCell,
-        let presenter = delegate else {
+        let delegate = delegate else {
             ScheduledSessionTableViewCell.assertCellFailure()
             return UITableViewCell()
         }
         
-        let session = presenter.session(at: indexPath)
+        let session = delegate.session(at: indexPath)
         cell.configure(with: session)
         return cell
     }
@@ -110,9 +110,9 @@ extension ScheduledSessionsView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let presenter = delegate, editingStyle == .delete else { return }
+        guard let delegate = delegate, editingStyle == .delete else { return }
         
-        presenter.deleteRow(at: indexPath)
+        delegate.deleteRow(at: indexPath)
     }
 }
 

@@ -31,10 +31,6 @@ final class ScheduledSessionsViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupNavigationBar() {
-        navigationItem.title = String(localized: "Scheduled Sessions")
-    }
-    
     // Because NSFetchedResultsController only tracks changes to its non relationship attributes, we must consider Workout's exercises count and time duration updates
     // This could be really inefficient if we had to update large volumes of data in a table view, but for this app's usage it's fine
     override func viewIsAppearing(_ animated: Bool) {
@@ -48,7 +44,12 @@ final class ScheduledSessionsViewController: BaseViewController {
         setupViews()
     }
     
+    private func setupNavigationBar() {
+        navigationItem.title = String(localized: "Scheduled Sessions")
+    }
+    
     private func setupViews() {
+        setupNavigationBar()
         scheduledSessionsView.delegate = self
         scheduledSessionsView.loadView()
     }
@@ -92,7 +93,8 @@ extension ScheduledSessionsViewController: ScheduledSessionsViewDelegate {
         updateContentUnavailableConfiguration()
     }
     
-    func didSelectDay(at: Int) { presenter.didSelectDay(at: at) }
+    // TODO: Change for appropiate wording
+    func didSelectDay(at: Int) { presenter.didSelect(day: at) }
     
     func session(at indexPath: IndexPath) -> Session { presenter.session(at: indexPath) }
     

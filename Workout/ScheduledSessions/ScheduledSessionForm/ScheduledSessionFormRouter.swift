@@ -9,23 +9,26 @@
 import UIKit
 
 protocol ScheduledSessionFormPresenterToRouterProtocol: AnyObject {
-    var presenter: ScheduledSessionFormRouterToPresenterProtocol? { get set }
+    var presenter: ScheduledSessionFormRouterToPresenterProtocol! { get set }
     func presentEditExerciseForm(for exercise: Exercise)
+    func popViewController()
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class ScheduledSessionFormRouter: ScheduledSessionFormPresenterToRouterProtocol {
+final class ScheduledSessionFormRouter: BaseRouter, ScheduledSessionFormPresenterToRouterProtocol {
     // MARK: - Properties
-    weak var presenter: ScheduledSessionFormRouterToPresenterProtocol?
+    weak var presenter: ScheduledSessionFormRouterToPresenterProtocol!
     
-    func presentEditExerciseForm(for exercise: Exercise) {
-        guard let presenter = presenter else { return }
-        
-        let editExerciseFormViewController = ExerciseFormConfigurator.resolveEdit(for: exercise) { [weak self] formOutput in
-            self?.presenter?.editCompletionAction(for: exercise, formOutput: formOutput)
+    func presentEditExerciseForm(for exercise: Exercise) {        
+        let editExerciseFormViewController = ExerciseFormConfigurator.resolveEdit(for: exercise) { [weak presenter] formOutput in
+            presenter?.editCompletionAction(for: exercise, formOutput: formOutput)
         }
         
         editExerciseFormViewController.modalPresentationStyle = .popover
-        presenter.present(editExerciseFormViewController, animated: true)
+        navigationController?.present(editExerciseFormViewController, animated: true)
+    }
+    
+    func popViewController() {
+        navigationController?.popViewController(animated: true)
     }
 }
