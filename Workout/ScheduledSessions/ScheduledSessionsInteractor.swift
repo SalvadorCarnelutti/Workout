@@ -10,14 +10,12 @@ import CoreData
 import OSLog
 
 protocol ScheduledSessionsPresenterToInteractorProtocol: AnyObject {
-    var presenter: BaseViewProtocol? { get set }
     var managedObjectContext: NSManagedObjectContext { get }
     func editCompletionAction(for exercise: Session, formOutput: SessionFormOutput)
 }
 
 // MARK: - PresenterToInteractorProtocol
 final class ScheduledSessionsInteractor: ScheduledSessionsPresenterToInteractorProtocol {
-    weak var presenter: BaseViewProtocol?
     let managedObjectContext: NSManagedObjectContext
     
     init(managedObjectContext: NSManagedObjectContext) {

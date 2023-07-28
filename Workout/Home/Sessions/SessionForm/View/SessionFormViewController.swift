@@ -40,6 +40,7 @@ final class SessionFormViewController: BaseViewController {
     }
 }
 
+// MARK: - PresenterToViewProtocol
 extension SessionFormViewController: SessionFormPresenterToViewProtocol {
     func setDefaultDisplay() {
         sessionFormView.setDefaultDisplay()

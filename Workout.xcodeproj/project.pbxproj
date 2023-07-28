@@ -108,6 +108,7 @@
 		B4FBA6BE2A7368CD00849D6E /* WorkoutFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6BD2A7368CD00849D6E /* WorkoutFormViewController.swift */; };
 		B4FBA6C12A7374DC00849D6E /* WorkoutSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C02A7374DC00849D6E /* WorkoutSettingsViewController.swift */; };
 		B4FBA6C42A740A6300849D6E /* WorkoutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C32A740A6300849D6E /* WorkoutModels.swift */; };
+		B4FBA6C72A74133400849D6E /* ScheduledSessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
@@ -237,6 +238,7 @@
 		B4FBA6BD2A7368CD00849D6E /* WorkoutFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFormViewController.swift; sourceTree = "<group>"; };
 		B4FBA6C02A7374DC00849D6E /* WorkoutSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSettingsViewController.swift; sourceTree = "<group>"; };
 		B4FBA6C32A740A6300849D6E /* WorkoutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModels.swift; sourceTree = "<group>"; };
+		B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionsViewController.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
@@ -310,11 +312,10 @@
 			isa = PBXGroup;
 			children = (
 				B44CD50B2A4B2F740070ED15 /* ScheduledSessionForm */,
-				B44CD5082A49F2F70070ED15 /* Cell */,
+				B4FBA6C52A74131E00849D6E /* View */,
 				B401E9132A48F83C00D5A678 /* ScheduledSessionsPresenter.swift */,
 				B401E9142A48F83C00D5A678 /* ScheduledSessionsRouter.swift */,
 				B401E9152A48F83C00D5A678 /* ScheduledSessionsInteractor.swift */,
-				B401E9162A48F83C00D5A678 /* ScheduledSessionsView.swift */,
 				B401E9172A48F83C00D5A678 /* ScheduledSessionsConfigurator.swift */,
 			);
 			path = ScheduledSessions;
@@ -709,6 +710,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		B4FBA6C52A74131E00849D6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B44CD5082A49F2F70070ED15 /* Cell */,
+				B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */,
+				B401E9162A48F83C00D5A678 /* ScheduledSessionsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B4FCB0352A64E789001C1F59 /* HapticsManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1030,6 +1041,7 @@
 				B4F4E6872A42675A00E91D7C /* WorkoutSettingsRouter.swift in Sources */,
 				B48B86E52A2BEDDF007638C0 /* ExercisesConfigurator.swift in Sources */,
 				B401E9092A4773E200D5A678 /* SessionFormModels.swift in Sources */,
+				B4FBA6C72A74133400849D6E /* ScheduledSessionsViewController.swift in Sources */,
 				B401E91A2A48F83C00D5A678 /* ScheduledSessionsInteractor.swift in Sources */,
 				B42BCB2A2A33E106006FCEDE /* ActivityIndicator.swift in Sources */,
 				B4B10ADD2A212C1700017AA3 /* Workout.xcdatamodeld in Sources */,

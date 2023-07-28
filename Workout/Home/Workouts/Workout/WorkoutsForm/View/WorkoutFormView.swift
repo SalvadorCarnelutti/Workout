@@ -68,14 +68,14 @@ final class WorkoutFormView: UIView {
     }
     
     private func setupFormField() {
-        guard let presenter = delegate else { return }
+        guard let delegate = delegate else { return }
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange),
                                                name: UITextField.textDidChangeNotification,
                                                object: nil)
         
-        nameFormField.configure(with: presenter.nameEntity)
+        nameFormField.configure(with: delegate.nameEntity)
     }
     
     @objc private func textDidChange(_ notification: Notification) {

@@ -9,17 +9,19 @@
 import UIKit
 import CoreData
 
-protocol ScheduledSessionsPresenterToViewProtocol: UIView, NSFetchedResultsControllerDelegate {
-    var presenter: ScheduledSessionsViewToPresenterProtocol? { get set }
-    var selectedWeekday: Int { get }
-    var selectedWeekdayString: String { get }
-    func loadView()
-    func reloadData()
+protocol ScheduledSessionsViewDelegate: AnyObject {
+    var sessionsCount: Int { get }
+    func viewLoaded()
+    func didSelectDay(at: Int)
+    func session(at indexPath: IndexPath) -> Session
+    func deleteRow(at indexPath: IndexPath)
+    func didSelectRow(at indexPath: IndexPath)
+    func didChangeSessionCount()
 }
 
 final class ScheduledSessionsView: UIView {
     // MARK: - Properties
-    weak var presenter: ScheduledSessionsViewToPresenterProtocol?
+    weak var delegate: ScheduledSessionsViewDelegate?
     
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: DayOfWeek.allCases.map { $0.shortDescription })
@@ -43,7 +45,7 @@ final class ScheduledSessionsView: UIView {
     }
     
     private func updateTableViewDataSource() {
-        presenter?.didSelectDay(at: selectedWeekday)
+        delegate?.didSelectDay(at: selectedWeekday)
     }
     
     private func selectCurrentDay() {
@@ -65,8 +67,7 @@ final class ScheduledSessionsView: UIView {
     private var selectedWeekdayIndex: Int { segmentedControl.selectedSegmentIndex }
 }
 
-// MARK: - PresenterToViewProtocol
-extension ScheduledSessionsView: ScheduledSessionsPresenterToViewProtocol {
+extension ScheduledSessionsView {
     var selectedWeekday: Int { segmentedControl.selectedSegmentIndex.advanced(by: 1) }
     
     var selectedWeekdayString: String { DayOfWeek.allCases[selectedWeekdayIndex].longDescription }
@@ -75,7 +76,7 @@ extension ScheduledSessionsView: ScheduledSessionsPresenterToViewProtocol {
         backgroundColor = .systemBackground
         setupConstraints()
         selectCurrentDay()
-        presenter?.viewLoaded()
+        delegate?.viewLoaded()
     }
     
     func reloadData() {
@@ -83,14 +84,15 @@ extension ScheduledSessionsView: ScheduledSessionsPresenterToViewProtocol {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ScheduledSessionsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter?.sessionsCount ?? 0
+        delegate?.sessionsCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduledSessionTableViewCell.identifier, for: indexPath) as? ScheduledSessionTableViewCell,
-        let presenter = presenter else {
+        let presenter = delegate else {
             ScheduledSessionTableViewCell.assertCellFailure()
             return UITableViewCell()
         }
@@ -101,13 +103,14 @@ extension ScheduledSessionsView: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ScheduledSessionsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectRow(at: indexPath)
+        delegate?.didSelectRow(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let presenter = presenter, editingStyle == .delete else { return }
+        guard let presenter = delegate, editingStyle == .delete else { return }
         
         presenter.deleteRow(at: indexPath)
     }
@@ -132,24 +135,24 @@ extension ScheduledSessionsView: NSFetchedResultsControllerDelegate {
                     at indexPath: IndexPath?,
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?) {
-        guard let presenter = presenter else { return }
+        guard let delegate = delegate else { return }
         
         switch (type) {
         // On add and remove operations, only the added/removed object is reported.
         case .insert:
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
-                presenter.didChangeSessionCount()
+                delegate.didChangeSessionCount()
             }
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                presenter.didChangeSessionCount()
+                delegate.didChangeSessionCount()
             }
         // An update is reported when an object’s state changes, but the changed attributes aren’t part of the sort keys.
         case .update:
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? ScheduledSessionTableViewCell {
-                cell.configure(with: presenter.session(at: indexPath))
+                cell.configure(with: delegate.session(at: indexPath))
             }
         // A move is reported when the changed attribute on the object is one of the sort descriptors used in the fetch request.
         // An update of the object is assumed in this case, but no separate update message is sent to the delegate.

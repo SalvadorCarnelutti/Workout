@@ -10,27 +10,29 @@
 import UIKit
 import CoreData
 
-protocol ScheduledSessionsViewToPresenterProtocol: UIViewController {
+protocol ScheduledSessionsViewToPresenterProtocol: AnyObject {
+    var view: ScheduledSessionsPresenterToViewProtocol! { get set }
     var sessionsCount: Int { get }
     func viewLoaded()
     func didSelectDay(at: Int)
     func session(at indexPath: IndexPath) -> Session
     func deleteRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
-    func didChangeSessionCount()
 }
 
-protocol ScheduledSessionsRouterToPresenterProtocol: UIViewController {
+protocol ScheduledSessionsRouterToPresenterProtocol: AnyObject {
     func editCompletionAction(for exercise: Session, formOutput: SessionFormOutput)
 }
 
-final class ScheduledSessionsPresenter: BaseViewController, EntityFetcher {
-    var viewScheduledSessions: ScheduledSessionsPresenterToViewProtocol!
-    var interactor: ScheduledSessionsPresenterToInteractorProtocol!
-    var router: ScheduledSessionsPresenterToRouterProtocol!
+typealias ScheduledSessionsPresenterProtocol = ScheduledSessionsViewToPresenterProtocol & ScheduledSessionsRouterToPresenterProtocol
+
+final class ScheduledSessionsPresenter: ScheduledSessionsPresenterProtocol, EntityFetcher {
+    weak var view: ScheduledSessionsPresenterToViewProtocol!
+    let interactor: ScheduledSessionsPresenterToInteractorProtocol
+    let router: ScheduledSessionsPresenterToRouterProtocol
     
     lazy var fetchedResultsController: NSFetchedResultsController<Session> = {
-        let predicate = NSPredicate(format: "day == %@", NSNumber(value: self.viewScheduledSessions.selectedWeekday))
+        let predicate = NSPredicate(format: "day == %@", NSNumber(value: self.view.selectedWeekday))
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Session.day, ascending: true),
@@ -43,76 +45,39 @@ final class ScheduledSessionsPresenter: BaseViewController, EntityFetcher {
         return fetchedResultsController
     }()
     
-    // Because NSFetchedResultsController only tracks changes to its non relationship attributes, we must consider Workout's exercises count and time duration updates
-    // This could be really inefficient if we had to update large volumes of data in a table view, but for this app's usage it's fine
-    override func viewIsAppearing(_ animated: Bool) {
-        super.viewIsAppearing(animated)
-        viewScheduledSessions.reloadData()
-    }
-    
-    override func loadView() {
-        super.loadView()
-        view = viewScheduledSessions
-        viewScheduledSessions.loadView()
-        setupNavigationBar()
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.title = String(localized: "Scheduled Sessions")
-    }
-    
-    private func showEmptyState() {
-        configureEmptyContentUnavailableConfiguration(image: .ellipsis,
-                                                      text: String(localized: "No sessions set for \(viewScheduledSessions.selectedWeekdayString)"),
-                                                      secondaryText: String(localized: "Start adding from the Workouts tab"))
-    }
-    
-    private func updateContentUnavailableConfiguration() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.isEmpty ? self.showEmptyState() : self.clearContentUnavailableConfiguration()
-        })
+    init(interactor: ScheduledSessionsPresenterToInteractorProtocol, router: ScheduledSessionsPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
     }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension ScheduledSessionsPresenter: ScheduledSessionsViewToPresenterProtocol {
-    var sessionsCount: Int {
-        entitiesCount
-    }
+extension ScheduledSessionsPresenter {
+    var sessionsCount: Int { entitiesCount }
     
     func viewLoaded() {
-        setFetchedResultsControllerDelegate(viewScheduledSessions)
+        setFetchedResultsControllerDelegate(view.fetchedResultsControllerDelegate)
         fetchEntities()
-        updateContentUnavailableConfiguration()
     }
     
     func didSelectDay(at day: Int) {
         let predicate = NSPredicate(format: "day == %@", NSNumber(value: day))
         setFetchRequestPredicate(predicate)
         fetchEntities()
-        viewScheduledSessions.reloadData()
-        updateContentUnavailableConfiguration()
+        view.reloadData()
     }
     
-    func session(at indexPath: IndexPath) -> Session {
-        entity(at: indexPath)
-    }
+    func session(at indexPath: IndexPath) -> Session { entity(at: indexPath) }
     
-    func deleteRow(at indexPath: IndexPath) {
-        deleteEntity(at: indexPath)
-    }
+    func deleteRow(at indexPath: IndexPath) { deleteEntity(at: indexPath) }
     
     func didSelectRow(at indexPath: IndexPath) {
         router.pushEditSessionForm(for: session(at: indexPath))
     }
-    
-    func didChangeSessionCount() {
-        updateContentUnavailableConfiguration()
-    }
 }
 
 // MARK: - RouterToPresenterProtocol
-extension ScheduledSessionsPresenter: ScheduledSessionsRouterToPresenterProtocol {
+extension ScheduledSessionsPresenter {
     func editCompletionAction(for exercise: Session, formOutput: SessionFormOutput) {
         interactor.editCompletionAction(for: exercise, formOutput: formOutput)
     }

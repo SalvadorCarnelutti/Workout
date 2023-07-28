@@ -242,53 +242,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B1735D8B-D620-4931-BDD4-C9558A03253E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Workout/ScheduledSessions/ScheduledSessionsInteractor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "editCompletionAction(for:formOutput:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B1735D8B-D620-4931-BDD4-C9558A03253E - 793c50b2224df85"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Workout.ScheduledSessionsInteractor.editCompletionAction(for: Workout.Session, formOutput: Workout.SessionFormOutput) -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/ScheduledSessions/ScheduledSessionsInteractor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  uuid = "B1735D8B-D620-4931-BDD4-C9558A03253E - 793c50b2224df85"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Workout.ScheduledSessionsInteractor.editCompletionAction(for: Workout.Session, formOutput: Workout.SessionFormOutput) -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/ScheduledSessions/ScheduledSessionsInteractor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "224">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

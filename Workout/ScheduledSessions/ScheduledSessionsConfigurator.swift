@@ -9,31 +9,15 @@
 import CoreData
 
 final class ScheduledSessionsConfigurator {
-    static func injectDependencies(view: ScheduledSessionsPresenterToViewProtocol,
-                                   interactor: ScheduledSessionsPresenterToInteractorProtocol,
-                                   presenter: ScheduledSessionsPresenter,
-                                   router: ScheduledSessionsRouter) {
-        presenter.interactor = interactor
-        interactor.presenter = presenter
-
-        view.presenter = presenter
-        presenter.viewScheduledSessions = view
-        
-        router.presenter = presenter
-        presenter.router = router
-    }
-    
-    static func resolveFor(managedObjectContext: NSManagedObjectContext) -> ScheduledSessionsPresenter {
-        let presenter = ScheduledSessionsPresenter()
-        let view = ScheduledSessionsView()
+    static func resolveFor(managedObjectContext: NSManagedObjectContext) -> ScheduledSessionsViewController {
         let interactor = ScheduledSessionsInteractor(managedObjectContext: managedObjectContext)
         let router = ScheduledSessionsRouter()
+        
+        let presenter = ScheduledSessionsPresenter(interactor: interactor, router: router)
+        
+        let view = ScheduledSessionsViewController(presenter: presenter)
+        router.navigation = { view.navigationController }
 
-        Self.injectDependencies(view: view,
-                                interactor: interactor,
-                                presenter: presenter,
-                                router: router)
-
-        return presenter
+        return view
     }
 }

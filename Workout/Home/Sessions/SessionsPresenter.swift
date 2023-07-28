@@ -34,13 +34,6 @@ final class SessionsPresenter: SessionsPresenterProtocol, EntityFetcher {
     let interactor: SessionsPresenterToInteractorProtocol
     let router: SessionsPresenterToRouterProtocol
     
-    init(interactor: SessionsPresenterToInteractorProtocol, router: SessionsPresenterToRouterProtocol) {
-        self.interactor = interactor
-        self.router = router
-        
-        router.presenter = self
-    }
-    
     lazy var fetchedResultsController: NSFetchedResultsController<Session> = {
         let predicate = NSPredicate(format: "workout == %@", self.interactor.workout)
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
@@ -54,6 +47,13 @@ final class SessionsPresenter: SessionsPresenterProtocol, EntityFetcher {
         
         return fetchedResultsController
     }()
+    
+    init(interactor: SessionsPresenterToInteractorProtocol, router: SessionsPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        router.presenter = self
+    }
 }
 
 // MARK: - ViewToPresenterProtocol
