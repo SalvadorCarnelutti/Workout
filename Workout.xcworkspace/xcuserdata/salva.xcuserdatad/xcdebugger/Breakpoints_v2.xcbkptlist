@@ -245,54 +245,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A94ECCFA-157C-4943-8AD5-15032424595B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Workout/Home/Workouts/Workout/WorkoutRouter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "handleNotificationTap(for:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A94ECCFA-157C-4943-8AD5-15032424595B - 1c16c93875338084"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Workout.WorkoutRouter.handleNotificationTap(for: Workout.Workout) -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/Home/Workouts/Workout/WorkoutRouter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  uuid = "A94ECCFA-157C-4943-8AD5-15032424595B - 1c16c93875338084"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Workout.WorkoutRouter.handleNotificationTap(for: Workout.Workout) -&gt; ()"
-                  moduleName = "Workout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/salva/Desktop/Workout/Workout/Home/Workouts/Workout/WorkoutRouter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "364">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B1735D8B-D620-4931-BDD4-C9558A03253E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"

@@ -26,11 +26,8 @@ final class SessionsRouter: BaseRouter, SessionsPresenterToRouterProtocol {
     }
     
     func presentEditSessionForm(for session: Session) {
-        
-        let editSessionFormViewController = SessionFormConfigurator.resolveEdit(for: session) { [weak self] formOutput in
-            guard let presenter = self?.presenter else { return }
-            
-            presenter.editCompletionAction(for: session, formOutput: formOutput)
+        let editSessionFormViewController = SessionFormConfigurator.resolveEdit(for: session) { [weak presenter] formOutput in
+            presenter?.editCompletionAction(for: session, formOutput: formOutput)
         }
         
         editSessionFormViewController.modalPresentationStyle = .popover

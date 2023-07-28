@@ -9,7 +9,6 @@
 import Foundation
 
 protocol WorkoutFormPresenterToInteractorProtocol: AnyObject {
-    var presenter: BaseViewProtocol? { get set }
     var formInput: String? { get }
     var formStyle: FormStyle { get }
     var nameValidationBlock: ((String) -> Bool) { get }
@@ -18,7 +17,6 @@ protocol WorkoutFormPresenterToInteractorProtocol: AnyObject {
 
 // MARK: - PresenterToInteractorProtocol
 final class WorkoutFormInteractor: WorkoutFormPresenterToInteractorProtocol {
-    weak var presenter: BaseViewProtocol?
     private let formModel: WorkoutFormModel
     
     init(formModel: WorkoutFormModel) {

@@ -9,50 +9,31 @@
 import Foundation
 
 final class WorkoutFormConfigurator {
-    static func injectDependencies(view: WorkoutsFormPresenterToViewProtocol,
-                                   interactor: WorkoutFormPresenterToInteractorProtocol,
-                                   presenter: WorkoutFormPresenter,
-                                   router: WorkoutFormRouter) {
-        presenter.interactor = interactor
-        interactor.presenter = presenter
-
-        view.presenter = presenter
-        presenter.viewWorkoutsForm = view
-        
-        router.presenter = presenter
-        presenter.router = router
-    }
-    
-    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
+    static func resolveAdd(completionAction: @escaping ((String) -> Void)) -> WorkoutFormViewController {
         let formModel = WorkoutFormModel(formInput: nil, formStyle: .add, completionAction: completionAction)
         
-        let presenter = WorkoutFormPresenter()
-        let view = WorkoutFormView()
         let interactor = WorkoutFormInteractor(formModel: formModel)
         let router = WorkoutFormRouter()
+        
+        let presenter = WorkoutFormPresenter(interactor: interactor, router: router)
+        
+        let view = WorkoutFormViewController(presenter: presenter)
+        router.presentation = { view }
 
-        Self.injectDependencies(view: view,
-                                interactor: interactor,
-                                presenter: presenter,
-                                router: router)
-
-        return presenter
+        return view
     }
     
-    static func resolveEdit(for workoutName: String, completionAction: @escaping ((String) -> Void)) -> WorkoutFormPresenter {
-        // TOPDO: Change formInput
+    static func resolveEdit(for workoutName: String, completionAction: @escaping ((String) -> Void)) -> WorkoutFormViewController {
         let formModel = WorkoutFormModel(formInput: workoutName, formStyle: .edit, completionAction: completionAction)
         
-        let presenter = WorkoutFormPresenter()
-        let view = WorkoutFormView()
         let interactor = WorkoutFormInteractor(formModel: formModel)
         let router = WorkoutFormRouter()
+        
+        let presenter = WorkoutFormPresenter(interactor: interactor, router: router)
+        
+        let view = WorkoutFormViewController(presenter: presenter)
+        router.presentation = { view }
 
-        Self.injectDependencies(view: view,
-                                interactor: interactor,
-                                presenter: presenter,
-                                router: router)
-
-        return presenter
+        return view
     }
 }

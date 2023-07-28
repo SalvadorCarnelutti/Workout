@@ -8,21 +8,24 @@
 //
 import UIKit
 
-protocol WorkoutsFormPresenterToViewProtocol: UIView {
-    var presenter: WorkoutFormViewToPresenterProtocol? { get set }
-    func loadView()
-    func fillFormField(formInput: String)
+protocol WorkoutFormViewDelegate: AnyObject {
+    var nameEntity: ValidationEntity { get }
+    var isButtonEnabled: Bool { get }
+    var headerString: String { get }
+    var completionString: String { get }
+    func viewLoaded()
+    func completionButtonTapped(for string: String)
 }
 
 final class WorkoutFormView: UIView {
     // MARK: - Properties
-    weak var presenter: WorkoutFormViewToPresenterProtocol?
+    weak var delegate: WorkoutFormViewDelegate?
     
     private lazy var headerLabel: MultilineLabel = {
         let label = MultilineLabel()
         addSubview(label)
         label.textAlignment = .center
-        label.text = presenter?.headerString
+        label.text = delegate?.headerString
         label.font = .systemFont(ofSize: 32, weight: .heavy)
         return label
     }()
@@ -36,8 +39,8 @@ final class WorkoutFormView: UIView {
     private lazy var completionButton: StyledButton = {
         let button = StyledButton()
         addSubview(button)
-        button.isEnabled = presenter?.isButtonEnabled ?? false
-        button.setTitle(presenter?.completionString, for: .normal)
+        button.isEnabled = delegate?.isButtonEnabled ?? false
+        button.setTitle(delegate?.completionString, for: .normal)
         button.addTarget(self, action: #selector(completionActionTapped), for: .touchUpInside)
         return button
     }()
@@ -61,11 +64,11 @@ final class WorkoutFormView: UIView {
     }
     
     @objc private func completionActionTapped() {
-        presenter?.completionAction(for: nameFormField.unwrappedText)
+        delegate?.completionButtonTapped(for: nameFormField.unwrappedText)
     }
     
     private func setupFormField() {
-        guard let presenter = presenter else { return }
+        guard let presenter = delegate else { return }
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange),
@@ -80,13 +83,12 @@ final class WorkoutFormView: UIView {
     }
 }
 
-// MARK: - PresenterToViewProtocol
-extension WorkoutFormView: WorkoutsFormPresenterToViewProtocol {
+extension WorkoutFormView {
     func loadView() {
         backgroundColor = .systemBackground
         setupFormField()
         setupConstraints()
-        presenter?.viewLoaded()
+        delegate?.viewLoaded()
     }
     
     func fillFormField(formInput: String) {
