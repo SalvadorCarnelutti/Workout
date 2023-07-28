@@ -1,6 +1,6 @@
 ////
 ////  
-//  WorkoutRouter.swift
+//  WorkoutSettingsRouter.swift
 //  Workout
 //
 //  Created by Salvador on 6/20/23.
@@ -8,16 +8,16 @@
 ////
 import UIKit
 
-protocol WorkoutPresenterToRouterProtocol: AnyObject {
-    var presenter: WorkoutRouterToPresenterProtocol? { get set }
+protocol WorkoutSettingsPresenterToRouterProtocol: AnyObject {
+    var presenter: WorkoutSettingsRouterToPresenterProtocol? { get set }
     func handleWorkoutSettingRouting(for workoutSetting: WorkoutSetting)
     func handleNotificationTap(for workout: Workout)
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class WorkoutRouter: WorkoutPresenterToRouterProtocol {
+final class WorkoutSettingsRouter: BaseRouter, WorkoutSettingsPresenterToRouterProtocol {
     // MARK: - Properties
-    weak var presenter: WorkoutRouterToPresenterProtocol?
+    weak var presenter: WorkoutSettingsRouterToPresenterProtocol?
     
     func handleWorkoutSettingRouting(for workoutSetting: WorkoutSetting) {
         guard let workout = presenter?.workout else { return }
@@ -37,27 +37,21 @@ final class WorkoutRouter: WorkoutPresenterToRouterProtocol {
         
         let editWorkoutFormViewController = WorkoutFormConfigurator.resolveEdit(for: presenter.workoutName, completionAction: presenter.editWorkoutName)
         editWorkoutFormViewController.modalPresentationStyle = .popover
-        presenter.present(editWorkoutFormViewController, animated: true)
+        presentingViewController?.present(editWorkoutFormViewController, animated: true)
     }
     
     func handleNotificationTap(for workout: Workout) {
-        guard let presenter = presenter else { return }
-        
         let exercisesViewController = ExercisesConfigurator.resolveEdit(for: workout)
-        presenter.navigationController?.pushViewController(exercisesViewController, animated: false)
+        navigationController?.pushViewController(exercisesViewController, animated: false)
     }
     
     private func pushExercises(for workout: Workout) {
-        guard let presenter = presenter else { return }
-        
         let exercisesViewController = ExercisesConfigurator.resolveEdit(for: workout)
-        presenter.navigationController?.pushViewController(exercisesViewController, animated: true)
+        navigationController?.pushViewController(exercisesViewController, animated: true)
     }
     
     private func pushSessions(for workout: Workout) {
-        guard let presenter = presenter else { return }
-
         let sessionsViewController = SessionsConfigurator.resolve(for: workout)
-        presenter.navigationController?.pushViewController(sessionsViewController, animated: true)
+        navigationController?.pushViewController(sessionsViewController, animated: true)
     }
 }

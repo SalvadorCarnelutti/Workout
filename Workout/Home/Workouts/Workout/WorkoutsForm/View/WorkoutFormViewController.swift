@@ -8,7 +8,6 @@
 import UIKit
 
 protocol WorkoutsFormPresenterToViewProtocol: AnyObject {
-    var presenter: WorkoutFormViewToPresenterProtocol { get }
     func loadView()
     func fillFormField(formInput: String)
 }

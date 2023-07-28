@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 
 protocol SessionsPresenterToViewProtocol: NSFetchedResultsControllerDelegate {
-    var presenter: SessionsViewToPresenterProtocol { get }
     func loadView()
 }
 

@@ -28,12 +28,12 @@ final class WorkoutsRouter: BaseRouter, WorkoutsPresenterToRouterProtocol {
     }
 
     func pushEditWorkout(for workout: Workout) {
-        let editWorkoutViewController = WorkoutConfigurator.resolveEdit(for: workout)
+        let editWorkoutViewController = WorkoutSettingsConfigurator.resolveEdit(for: workout)
         navigationController?.pushViewController(editWorkoutViewController, animated: true)
     }
     
     func handleNotificationTap(for workout: Workout) {
-        let editWorkoutViewController = WorkoutConfigurator.resolveEdit(for: workout)
+        let editWorkoutViewController = WorkoutSettingsConfigurator.resolveEdit(for: workout)
         navigationController?.pushViewController(editWorkoutViewController, animated: false)
         editWorkoutViewController.handleNotificationTap(for: workout)
     }

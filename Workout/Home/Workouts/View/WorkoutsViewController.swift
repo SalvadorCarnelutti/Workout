@@ -8,9 +8,7 @@
 import UIKit
 import CoreData
 
-protocol WorkoutsPresenterToViewProtocol: NSFetchedResultsControllerDelegate {
-    var presenter: WorkoutsViewToPresenterProtocol { get }
-}
+protocol WorkoutsPresenterToViewProtocol: NSFetchedResultsControllerDelegate {}
 
 final class WorkoutsViewController: BaseTableViewController {
     // MARK: - Properties

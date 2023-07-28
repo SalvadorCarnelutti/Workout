@@ -8,7 +8,6 @@
 import UIKit
 
 protocol SessionFormPresenterToViewProtocol: AnyObject {
-    var presenter: SessionFormViewToPresenterProtocol { get }
     func loadView()
     func setDefaultDisplay()
     func fillSessionFields(with sessionFormInput: SessionFormInput)

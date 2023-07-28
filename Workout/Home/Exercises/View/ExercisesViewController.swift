@@ -8,12 +8,10 @@
 import UIKit
 import CoreData
 
-protocol ExercisesPresenterToViewProtocol: NSFetchedResultsControllerDelegate {
-    var presenter: ExercisesViewToPresenterProtocol! { get }
-}
+protocol ExercisesPresenterToViewProtocol: NSFetchedResultsControllerDelegate {}
 
 final class ExercisesViewController: BaseTableViewController, NSFetchedResultsControllerDelegate {
-    let presenter: ExercisesViewToPresenterProtocol!
+    let presenter: ExercisesViewToPresenterProtocol
     
     init(presenter: ExercisesViewToPresenterProtocol) {
         self.presenter = presenter
@@ -112,10 +110,6 @@ extension ExercisesViewController {
 // MARK: - UITableViewDragDelegate
 extension ExercisesViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard let presenter = presenter else {
-            return []
-        }
-        
         let dragItem = UIDragItem(itemProvider: NSItemProvider())
         dragItem.localObject = presenter.exercise(at: indexPath)
         return [dragItem]

@@ -1,6 +1,6 @@
 //
 //  
-//  WorkoutInteractor.swift
+//  WorkoutSettingsInteractor.swift
 //  Workout
 //
 //  Created by Salvador on 6/20/23.
@@ -9,9 +9,8 @@
 import Foundation
 import OSLog
 
-protocol WorkoutPresenterToInteractorProtocol: AnyObject {
-    var presenter: BaseViewProtocol? { get set }
-    var workout: Workout { get set }
+protocol WorkoutSettingsPresenterToInteractorProtocol: AnyObject {
+    var workout: Workout { get }
     var workoutName: String { get }
     var exercisesCount: Int { get }
     var timedExercisesCount: Int { get }
@@ -24,26 +23,19 @@ protocol WorkoutPresenterToInteractorProtocol: AnyObject {
 }
 
 // MARK: - PresenterToInteractorProtocol
-final class WorkoutInteractor: WorkoutPresenterToInteractorProtocol {
-    weak var presenter: BaseViewProtocol?
-    var workout: Workout
+final class WorkoutSettingsInteractor: WorkoutSettingsPresenterToInteractorProtocol {
+    let workout: Workout
     private let hapticsManager = HapticsManager.shared
     
     init(workout: Workout) {
         self.workout = workout
     }
     
-    var workoutName: String {
-        workout.name ?? ""
-    }
+    var workoutName: String { workout.name ?? "" }
     
-    var exercisesCount: Int {
-        workout.exercisesCount
-    }
+    var exercisesCount: Int { workout.exercisesCount }
     
-    var timedExercisesCount: Int {
-        workout.timedExercisesCount
-    }
+    var timedExercisesCount: Int { workout.timedExercisesCount }
     
     var timedExercisesDuration: String? { workout.longFormattedTimedExercisesDurationString }
     

@@ -8,7 +8,6 @@
 import UIKit
 
 protocol ExerciseFormPresenterToViewProtocol: AnyObject {
-    var presenter: ExerciseFormViewToPresenterProtocol { get }
     func fillFormFields(formInput: ExerciseFormInput)
 }
 
