@@ -18,7 +18,7 @@ final class ExerciseFormConfigurator {
         let presenter = ExerciseFormPresenter(interactor: interactor, router: router)
         
         let view = ExerciseFormViewController(presenter: presenter)
-        router.presentation = { view }
+        router.navigation = { view }
 
         return view
     }
@@ -32,7 +32,7 @@ final class ExerciseFormConfigurator {
         let presenter = ExerciseFormPresenter(interactor: interactor, router: router)
         
         let view = ExerciseFormViewController(presenter: presenter)
-        router.presentation = { view }
+        router.navigation = { view }
 
         return view
     }

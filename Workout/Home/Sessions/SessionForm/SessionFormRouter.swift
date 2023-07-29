@@ -19,7 +19,7 @@ final class SessionFormRouter: BaseRouter, SessionFormPresenterToRouterProtocol 
     weak var presenter: SessionFormRouterToPresenterProtocol?
     
     func dismissView(formOutput: SessionFormOutput) {
-        presentingViewController?.dismiss(animated: true) { [weak presenter] in
+        presentedViewController?.dismiss(animated: true) { [weak presenter] in
             presenter?.completionAction(for: formOutput)
         }
     }

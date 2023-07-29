@@ -16,7 +16,7 @@ final class WorkoutsConfigurator {
         let presenter = WorkoutsPresenter(interactor: interactor, router: router)
         
         let view = WorkoutsViewController(presenter: presenter)
-        router.navigation = { view.navigationController }
+        router.navigation = { view }
 
         return view
     }

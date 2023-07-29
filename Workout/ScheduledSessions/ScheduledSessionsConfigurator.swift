@@ -16,7 +16,7 @@ final class ScheduledSessionsConfigurator {
         let presenter = ScheduledSessionsPresenter(interactor: interactor, router: router)
         
         let view = ScheduledSessionsViewController(presenter: presenter)
-        router.navigation = { view.navigationController }
+        router.navigation = { view }
 
         return view
     }

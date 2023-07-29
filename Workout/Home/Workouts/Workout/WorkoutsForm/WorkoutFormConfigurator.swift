@@ -18,7 +18,7 @@ final class WorkoutFormConfigurator {
         let presenter = WorkoutFormPresenter(interactor: interactor, router: router)
         
         let view = WorkoutFormViewController(presenter: presenter)
-        router.presentation = { view }
+        router.navigation = { view }
 
         return view
     }
@@ -32,7 +32,7 @@ final class WorkoutFormConfigurator {
         let presenter = WorkoutFormPresenter(interactor: interactor, router: router)
         
         let view = WorkoutFormViewController(presenter: presenter)
-        router.presentation = { view }
+        router.navigation = { view }
 
         return view
     }

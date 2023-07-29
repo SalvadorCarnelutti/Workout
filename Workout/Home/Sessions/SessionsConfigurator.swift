@@ -16,7 +16,7 @@ final class SessionsConfigurator {
         let presenter = SessionsPresenter(interactor: interactor, router: router)
         
         let view = SessionsViewController(presenter: presenter)
-        router.navigation = { view.navigationController }
+        router.navigation = { view }
 
         return view
     }

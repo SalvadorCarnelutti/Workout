@@ -37,7 +37,7 @@ final class WorkoutSettingsRouter: BaseRouter, WorkoutSettingsPresenterToRouterP
         
         let editWorkoutFormViewController = WorkoutFormConfigurator.resolveEdit(for: presenter.workoutName, completionAction: presenter.editWorkoutName)
         editWorkoutFormViewController.modalPresentationStyle = .popover
-        presentingViewController?.present(editWorkoutFormViewController, animated: true)
+        presentedViewController?.present(editWorkoutFormViewController, animated: true)
     }
     
     func handleNotificationTap(for workout: Workout) {

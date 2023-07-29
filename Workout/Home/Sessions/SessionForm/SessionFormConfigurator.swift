@@ -18,7 +18,7 @@ final class SessionFormConfigurator {
         let presenter = SessionFormPresenter(interactor: interactor, router: router)
         
         let view = SessionFormViewController(presenter: presenter)
-        router.presentation = { view }
+        router.navigation = { view }
         
         return view
     }
@@ -34,7 +34,7 @@ final class SessionFormConfigurator {
         let presenter = SessionFormPresenter(interactor: interactor, router: router)
         
         let view = SessionFormViewController(presenter: presenter)
-        router.presentation = { view }
+        router.navigation = { view }
         
         return view
     }

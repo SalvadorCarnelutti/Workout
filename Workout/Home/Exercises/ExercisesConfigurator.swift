@@ -16,7 +16,7 @@ final class ExercisesConfigurator {
         let presenter = ExercisesPresenter(interactor: interactor, router: router)
         
         let view = ExercisesViewController(presenter: presenter)
-        router.navigation = { view.navigationController }
+        router.navigation = { view }
 
         return view
     }

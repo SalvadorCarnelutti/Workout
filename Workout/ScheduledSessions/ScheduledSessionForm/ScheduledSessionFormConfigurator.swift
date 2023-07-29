@@ -19,7 +19,7 @@ final class ScheduledSessionFormConfigurator {
         let presenter = ScheduledSessionFormPresenter(interactor: interactor, router: router)
         
         let view = ScheduledSessionFormViewController(presenter: presenter)
-        router.navigation = { view.navigationController }
+        router.navigation = { view }
         
         return view
     }

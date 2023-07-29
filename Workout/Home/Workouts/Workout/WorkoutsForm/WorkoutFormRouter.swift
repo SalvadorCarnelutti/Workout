@@ -19,7 +19,7 @@ final class WorkoutFormRouter: BaseRouter, WorkoutFormPresenterToRouterProtocol 
     weak var presenter: WorkoutFormRouterToPresenterProtocol?
     
     func dismissView(newName: String) {
-        presentingViewController?.dismiss(animated: true) { [weak presenter] in
+        presentedViewController?.dismiss(animated: true) { [weak presenter] in
             presenter?.completionAction(for: newName)
         }
     }
