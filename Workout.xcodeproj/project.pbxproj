@@ -33,7 +33,6 @@
 		B4157A422A58747E0068B641 /* AppSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A3D2A58747E0068B641 /* AppSettingsPresenter.swift */; };
 		B4157A432A58747E0068B641 /* AppSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A3E2A58747E0068B641 /* AppSettingsRouter.swift */; };
 		B4157A442A58747E0068B641 /* AppSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A3F2A58747E0068B641 /* AppSettingsInteractor.swift */; };
-		B4157A452A58747E0068B641 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A402A58747E0068B641 /* AppSettingsView.swift */; };
 		B4157A462A58747E0068B641 /* AppSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */; };
 		B4157A482A58749C0068B641 /* AppSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4157A472A58749C0068B641 /* AppSettingTableViewCell.swift */; };
 		B419A2382A706C0B004F41C4 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B419A2372A706C0B004F41C4 /* BaseTableViewController.swift */; };
@@ -109,6 +108,8 @@
 		B4FBA6C42A740A6300849D6E /* WorkoutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C32A740A6300849D6E /* WorkoutModels.swift */; };
 		B4FBA6C72A74133400849D6E /* ScheduledSessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */; };
 		B4FBA6CA2A74219100849D6E /* ScheduledSessionFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C92A74219100849D6E /* ScheduledSessionFormViewController.swift */; };
+		B4FBA6CD2A74A7D600849D6E /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6CC2A74A7D600849D6E /* AppSettingsViewController.swift */; };
+		B4FBA6D02A74ACEE00849D6E /* AppSettingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6CF2A74ACEE00849D6E /* AppSettingModels.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
@@ -161,7 +162,6 @@
 		B4157A3D2A58747E0068B641 /* AppSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsPresenter.swift; sourceTree = "<group>"; };
 		B4157A3E2A58747E0068B641 /* AppSettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsRouter.swift; sourceTree = "<group>"; };
 		B4157A3F2A58747E0068B641 /* AppSettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsInteractor.swift; sourceTree = "<group>"; };
-		B4157A402A58747E0068B641 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsConfigurator.swift; sourceTree = "<group>"; };
 		B4157A472A58749C0068B641 /* AppSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingTableViewCell.swift; sourceTree = "<group>"; };
 		B419A2372A706C0B004F41C4 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +239,8 @@
 		B4FBA6C32A740A6300849D6E /* WorkoutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModels.swift; sourceTree = "<group>"; };
 		B4FBA6C62A74133400849D6E /* ScheduledSessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionsViewController.swift; sourceTree = "<group>"; };
 		B4FBA6C92A74219100849D6E /* ScheduledSessionFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionFormViewController.swift; sourceTree = "<group>"; };
+		B4FBA6CC2A74A7D600849D6E /* AppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewController.swift; sourceTree = "<group>"; };
+		B4FBA6CF2A74ACEE00849D6E /* AppSettingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingModels.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
@@ -353,11 +355,11 @@
 		B4157A3C2A5874490068B641 /* AppSettings */ = {
 			isa = PBXGroup;
 			children = (
-				B4157A492A5876480068B641 /* Cell */,
+				B4FBA6CE2A74ACE400849D6E /* Models */,
+				B4FBA6CB2A74A7BF00849D6E /* View */,
 				B4157A3D2A58747E0068B641 /* AppSettingsPresenter.swift */,
 				B4157A3E2A58747E0068B641 /* AppSettingsRouter.swift */,
 				B4157A3F2A58747E0068B641 /* AppSettingsInteractor.swift */,
-				B4157A402A58747E0068B641 /* AppSettingsView.swift */,
 				B4157A412A58747E0068B641 /* AppSettingsConfigurator.swift */,
 			);
 			path = AppSettings;
@@ -728,6 +730,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B4FBA6CB2A74A7BF00849D6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B4157A492A5876480068B641 /* Cell */,
+				B4FBA6CC2A74A7D600849D6E /* AppSettingsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B4FBA6CE2A74ACE400849D6E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B4FBA6CF2A74ACEE00849D6E /* AppSettingModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B4FCB0352A64E789001C1F59 /* HapticsManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -961,11 +980,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4FBA6D02A74ACEE00849D6E /* AppSettingModels.swift in Sources */,
 				B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */,
 				B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */,
 				B401E9062A47686C00D5A678 /* DaySelectionView.swift in Sources */,
 				B4FCB0412A6861DA001C1F59 /* Array.swift in Sources */,
 				B410BFE02A32085E00899BBC /* WorkoutFormConfigurator.swift in Sources */,
+				B4FBA6CD2A74A7D600849D6E /* AppSettingsViewController.swift in Sources */,
 				B48B86E12A2BEDDF007638C0 /* ExercisesPresenter.swift in Sources */,
 				B440C5D22A328DA0008154CE /* ValidationEntity.swift in Sources */,
 				B4F4E6862A42675A00E91D7C /* WorkoutSettingsPresenter.swift in Sources */,
@@ -1017,7 +1038,6 @@
 				B4F4E6A02A461CA600E91D7C /* SessionFormRouter.swift in Sources */,
 				B401E9222A4937C500D5A678 /* Date.swift in Sources */,
 				B48B86EF2A2BF63D007638C0 /* ExerciseFormView.swift in Sources */,
-				B4157A452A58747E0068B641 /* AppSettingsView.swift in Sources */,
 				B48B86D62A2A6B67007638C0 /* UITableView.swift in Sources */,
 				B44CD5122A4B2FE30070ED15 /* ScheduledSessionFormRouter.swift in Sources */,
 				B48B86EE2A2BF63D007638C0 /* ExerciseFormInteractor.swift in Sources */,

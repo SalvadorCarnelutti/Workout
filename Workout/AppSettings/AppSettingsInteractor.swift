@@ -11,7 +11,7 @@ import UserNotifications
 import CoreData
 
 protocol AppSettingsPresenterToInteractorProtocol: AnyObject {
-    var presenter: BaseViewProtocol? { get set }
+    var presenter: AppSettingsInteractorToPresenterProtocol? { get set }
     var areNotificationsEnabled: Bool { get }
     var isDarkModeEnabled: Bool { get }
     var areHapticsEnabled: Bool { get }
@@ -23,7 +23,7 @@ protocol AppSettingsPresenterToInteractorProtocol: AnyObject {
 
 // MARK: - PresenterToInteractorProtocol
 final class AppSettingsInteractor: AppSettingsPresenterToInteractorProtocol {
-    weak var presenter: BaseViewProtocol?
+    weak var presenter: AppSettingsInteractorToPresenterProtocol?
     let managedObjectContext: NSManagedObjectContext
     private let notificationsManager = NotificationsManager.shared
     private let appearanceManager = AppearanceManager.shared

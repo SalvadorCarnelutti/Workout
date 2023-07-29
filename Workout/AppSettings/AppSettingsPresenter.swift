@@ -7,45 +7,38 @@
 //
 //
 
-import UIKit
+import Foundation
 
-struct AppSetting {
-    var isOn: Bool {
-        didSet {
-            toggleAction()
-        }
-    }
-    
-    let toggleImageModel: ToggleImageModel
-    var name: String
-    var toggleAction: () -> ()
-    
-    mutating func toggle() { isOn.toggle() }
-}
-
-protocol AppSettingsViewToPresenterProtocol: UIViewController {
+protocol AppSettingsViewToPresenterProtocol: AnyObject {
+    var view: AppSettingsPresenterToViewProtocol! { get set }
     var appSettingCount: Int { get }
     func viewLoaded()
     func appSetting(at indexPath: IndexPath) -> AppSetting
     func didSwitchValue(at indexPath: IndexPath)
 }
 
-protocol AppSettingsRouterToPresenterProtocol: UIViewController {}
+protocol AppSettingsInteractorToPresenterProtocol: AnyObject {
+    func presentErrorMessage()
+}
 
-final class AppSettingsPresenter: BaseViewController {
-    var viewAppSettings: AppSettingsPresenterToViewProtocol!
-    var interactor: AppSettingsPresenterToInteractorProtocol!
-    var router: AppSettingsPresenterToRouterProtocol!
+protocol AppSettingsRouterToPresenterProtocol: AnyObject {}
+
+typealias AppSettingsProtocol = AppSettingsViewToPresenterProtocol & AppSettingsInteractorToPresenterProtocol & AppSettingsRouterToPresenterProtocol
+
+final class AppSettingsPresenter: AppSettingsProtocol {
+    weak var view: AppSettingsPresenterToViewProtocol!
+    let interactor: AppSettingsPresenterToInteractorProtocol
+    let router: AppSettingsPresenterToRouterProtocol
     
     private lazy var appSettings = [notificationsAppSetting,
                                     darkModeAppSetting,
                                     hapticsAppSetting]
     
-    override func loadView() {
-        super.loadView()
-        view = viewAppSettings
-        viewAppSettings.loadView()
-        setupNavigationBar()
+    init(interactor: AppSettingsPresenterToInteractorProtocol, router: AppSettingsPresenterToRouterProtocol) {
+        self.interactor = interactor
+        self.router = router
+        
+        interactor.presenter = self
     }
     
     private var notificationsAppSetting: AppSetting {
@@ -87,25 +80,15 @@ final class AppSettingsPresenter: BaseViewController {
                           toggleAction: toggleHaptics)
     }
     
-    private func setupNavigationBar() {
-        navigationItem.title = String(localized: "Settings")
-    }
+    private func toggleNotificationsSetting() { interactor.toggleNotificationsSetting() }
     
-    private func toggleNotificationsSetting() {
-        interactor.toggleNotificationsSetting()
-    }
+    private func toggleDarkMode() { interactor.toggleDarkModeSetting() }
     
-    private func toggleDarkMode() {
-        interactor.toggleDarkModeSetting()
-    }
-    
-    private func toggleHaptics() {
-        interactor.toggleHapticsSetting()
-    }
+    private func toggleHaptics() { interactor.toggleHapticsSetting() }
 }
 
 // MARK: - ViewToPresenterProtocol
-extension AppSettingsPresenter: AppSettingsViewToPresenterProtocol {
+extension AppSettingsPresenter {
     var appSettingCount: Int { appSettings.count }
     
     func viewLoaded() { interactor.requestNotificationsSettings() }
@@ -115,5 +98,12 @@ extension AppSettingsPresenter: AppSettingsViewToPresenterProtocol {
     func didSwitchValue(at indexPath: IndexPath) { appSettings[indexPath.row].toggle() }
 }
 
+// MARK: - InteractorToPresenterProtocol
+extension AppSettingsPresenter {
+    func presentErrorMessage() {
+        view.presentErrorMessage()
+    }
+}
+
 // MARK: - RouterToPresenterProtocol
-extension AppSettingsPresenter: AppSettingsRouterToPresenterProtocol {}
+extension AppSettingsPresenter {}

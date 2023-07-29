@@ -8,12 +8,7 @@
 ////
 import UIKit
 
-protocol AppSettingsPresenterToRouterProtocol: AnyObject {
-    var presenter: AppSettingsRouterToPresenterProtocol? { get set }
-}
+protocol AppSettingsPresenterToRouterProtocol: AnyObject {}
 
 // MARK: - PresenterToInteractorProtocol
-final class AppSettingsRouter: AppSettingsPresenterToRouterProtocol {
-    // MARK: - Properties
-    weak var presenter: AppSettingsRouterToPresenterProtocol?
-}
+final class AppSettingsRouter: BaseRouter, AppSettingsPresenterToRouterProtocol {}

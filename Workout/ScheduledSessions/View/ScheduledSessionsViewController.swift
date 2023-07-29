@@ -70,13 +70,10 @@ final class ScheduledSessionsViewController: BaseViewController {
 // MARK: - PresenterToViewProtocol
 extension ScheduledSessionsViewController: ScheduledSessionsPresenterToViewProtocol {
     var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate { scheduledSessionsView }
-    var selectedWeekday: Int {
-        scheduledSessionsView.selectedWeekday
-    }
     
-    var selectedWeekdayString: String {
-        scheduledSessionsView.selectedWeekdayString
-    }
+    var selectedWeekday: Int { scheduledSessionsView.selectedWeekday }
+    
+    var selectedWeekdayString: String { scheduledSessionsView.selectedWeekdayString }
     
     func reloadData() {
         scheduledSessionsView.reloadData()
