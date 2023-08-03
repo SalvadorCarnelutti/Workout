@@ -35,7 +35,9 @@ extension Workout {
     }
     
     var shortFormattedTimedExercisesDurationString: String? {
-        Double(timedExercisesDuration).asShortFormattedDurationString
+        guard timedExercisesDuration > 0 else { return nil }
+        
+        return Double(timedExercisesDuration).asShortFormattedDurationString
     }
     
     func setup(with name: String) {

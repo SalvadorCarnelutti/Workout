@@ -129,17 +129,30 @@ final class ExerciseTest: XCTestCase {
                        order: mockOrder,
                        for: workout)
         
-        XCTAssertNotNil(exercise.uuid)
-        XCTAssertEqual(exercise.name, mock.name)
+        let uuid = exercise.uuid
+        let order = exercise.order
+        
+        let newName = "Leg raises"
+        let newSets = 4
+        let newReps = 8
+        let newExerciseFormOutput = ExerciseFormOutput(name: newName,
+                                                       minutesDuration: nil,
+                                                       sets: newSets,
+                                                       reps: newReps)
+        
+        exercise.update(with: newExerciseFormOutput)
+        
+        XCTAssertEqual(exercise.uuid, uuid)
+        XCTAssertEqual(exercise.name, newName)
         XCTAssertEqual(exercise.minutesDuration, 0)
-        XCTAssertEqual(exercise.sets, Int16(mock.sets))
-        XCTAssertEqual(exercise.reps, Int16(mock.reps))
-        XCTAssertEqual(exercise.order, Int16(mockOrder))
+        XCTAssertEqual(exercise.sets, Int16(newSets))
+        XCTAssertEqual(exercise.reps, Int16(newReps))
+        XCTAssertEqual(exercise.order, order)
         XCTAssertNotNil(exercise.workout)
     }
     
     func testUpdateWithDuration() throws {
-        let mock = ExerciseFormOutput.getDurationMock()
+        let mock = ExerciseFormOutput.getMock()
         let mockOrder = 2
         
         let exercise = Exercise(context: managedObjectContext)
@@ -149,12 +162,26 @@ final class ExerciseTest: XCTestCase {
                        order: mockOrder,
                        for: workout)
         
-        XCTAssertNotNil(exercise.uuid)
-        XCTAssertEqual(exercise.name, mock.name)
-        XCTAssertEqual(exercise.minutesDuration, Double(8))
-        XCTAssertEqual(exercise.sets, Int16(mock.sets))
-        XCTAssertEqual(exercise.reps, Int16(mock.reps))
-        XCTAssertEqual(exercise.order, Int16(mockOrder))
+        let uuid = exercise.uuid
+        let order = exercise.order
+        
+        let newName = "Leg raises"
+        let newMinutesDuration = 10
+        let newSets = 4
+        let newReps = 8
+        let newExerciseFormOutput = ExerciseFormOutput(name: newName,
+                                                       minutesDuration: newMinutesDuration,
+                                                       sets: newSets,
+                                                       reps: newReps)
+        
+        exercise.update(with: newExerciseFormOutput)
+        
+        XCTAssertEqual(exercise.uuid, uuid)
+        XCTAssertEqual(exercise.name, newName)
+        XCTAssertEqual(exercise.minutesDuration, Double(newMinutesDuration))
+        XCTAssertEqual(exercise.sets, Int16(newSets))
+        XCTAssertEqual(exercise.reps, Int16(newReps))
+        XCTAssertEqual(exercise.order, order)
         XCTAssertNotNil(exercise.workout)
     }
 }

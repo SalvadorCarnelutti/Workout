@@ -110,6 +110,7 @@
 		B4FBA6CA2A74219100849D6E /* ScheduledSessionFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6C92A74219100849D6E /* ScheduledSessionFormViewController.swift */; };
 		B4FBA6CD2A74A7D600849D6E /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6CC2A74A7D600849D6E /* AppSettingsViewController.swift */; };
 		B4FBA6D02A74ACEE00849D6E /* AppSettingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6CF2A74ACEE00849D6E /* AppSettingModels.swift */; };
+		B4FBA6D22A7B50A800849D6E /* SessionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBA6D12A7B50A800849D6E /* SessionTest.swift */; };
 		B4FCB0372A64E79A001C1F59 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */; };
 		B4FCB0392A6733D3001C1F59 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB0382A6733D3001C1F59 /* Logger.swift */; };
 		B4FCB03C2A6826C1001C1F59 /* EntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */; };
@@ -241,6 +242,7 @@
 		B4FBA6C92A74219100849D6E /* ScheduledSessionFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionFormViewController.swift; sourceTree = "<group>"; };
 		B4FBA6CC2A74A7D600849D6E /* AppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewController.swift; sourceTree = "<group>"; };
 		B4FBA6CF2A74ACEE00849D6E /* AppSettingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingModels.swift; sourceTree = "<group>"; };
+		B4FBA6D12A7B50A800849D6E /* SessionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTest.swift; sourceTree = "<group>"; };
 		B4FCB0362A64E79A001C1F59 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B4FCB0382A6733D3001C1F59 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B4FCB03B2A6826C1001C1F59 /* EntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFetcher.swift; sourceTree = "<group>"; };
@@ -812,6 +814,7 @@
 			children = (
 				B4FCB06A2A6AF181001C1F59 /* WorkoutTest.swift */,
 				B4FCB06C2A6AF3C2001C1F59 /* ExerciseTest.swift */,
+				B4FBA6D12A7B50A800849D6E /* SessionTest.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1097,6 +1100,7 @@
 				B4FCB0682A6AF0BF001C1F59 /* XCTest.swift in Sources */,
 				B4FCB05B2A6ADE52001C1F59 /* WorkoutTests.swift in Sources */,
 				B4FCB06B2A6AF181001C1F59 /* WorkoutTest.swift in Sources */,
+				B4FBA6D22A7B50A800849D6E /* SessionTest.swift in Sources */,
 				B4FCB06D2A6AF3C2001C1F59 /* ExerciseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
